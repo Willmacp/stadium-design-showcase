@@ -29,7 +29,7 @@
   .brand-wrap{display:flex; align-items:center; gap:12px}
   .brand-wrap img{height:36px; width:auto; border-radius:4px}
   .brand-title{font-weight:700; letter-spacing:.3px; color:var(--brand-ink); cursor:pointer}
-  .brand-title:active{opacity:.8}
+  .brand-title:active{opacity:.85}
   .spacer{flex:1}
   .nav{ display:flex; gap:10px; align-items:center; }
   .nav > .menu{ position:relative; }
@@ -69,7 +69,7 @@
     border-bottom:1px solid var(--border); background:#ffffffc7; backdrop-filter:saturate(1.2) blur(3px);
   }
   .toolbar .title{font-weight:800; letter-spacing:.2px; cursor:pointer}
-  .toolbar .title:active{opacity:.8}
+  .toolbar .title:active{opacity:.85}
   .toolbar .pill{
     background:#eef5fb; color:#2d3a44; padding:6px 10px; border-radius:999px; font-size:12px;
   }
@@ -211,10 +211,10 @@
 </div>
 
 <script>
-  // ------------------ CONFIG ------------------
-  const CACHE_BUST = '?v=6'; // bump to force reloads
+  // -------- CONFIG (increment to refresh cache) --------
+  const CACHE_BUST = '?v=7';
 
-  // Display Boards list
+  // -------- Display Boards (39) --------
   const DISPLAY_BOARD_FILES = [
     // Set 1
     "assets/boards/boards1_01.jpg","assets/boards/boards1_02.jpg","assets/boards/boards1_03.jpg",
@@ -230,7 +230,7 @@
     "assets/boards/boards3_07.jpg","assets/boards/boards3_08.jpg","assets/boards/boards3_09.jpg"
   ];
 
-  // Your 9 YouTube links (converted to embed URLs)
+  // -------- Videos (9) — your links --------
   const YT_LINKS = [
     "https://youtu.be/Zx76BnLkNlY",
     "https://youtu.be/KcSXlcSaL_8",
@@ -243,7 +243,7 @@
     "https://youtu.be/zM63SF3_8fI"
   ];
 
-  // MPDC social links (replace # with real URLs)
+  // -------- MPDC Socials (replace #) --------
   const SOCIALS = [
     {label:"Facebook", href:"#"},
     {label:"Instagram", href:"#"},
@@ -251,14 +251,14 @@
     {label:"YouTube", href:"#"}
   ];
 
-  // Plans — grouped (fill in images later)
+  // -------- Plans (grouped; fill in images later) --------
   const PLANS_GROUPS = [
     { title: "Bowl & Roof", desc: "Key sections and details for main bowl and roof structure.", images: [] },
     { title: "Back-of-House (BOH)", desc: "Service corridors, loading dock, plant areas, and BOH circulation.", images: [] },
     { title: "Public Concourse & Entries", desc: "Entry sequences, concourses, amenities, and egress paths.", images: [] }
   ];
 
-  // ---------------- HELPERS ----------------
+  // -------- Helpers --------
   const toEmbed = (u) => {
     try{
       const url = new URL(u);
@@ -293,7 +293,7 @@
   }
   function chunk(arr, size){ const out=[]; for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i,i+size)); return out; }
 
-  // Build plans pages (4 per page)
+  // -------- Build Plans pages (4 per page) --------
   const PLANS_PAGES = [];
   PLANS_GROUPS.forEach((g, gi)=>{
     const pages = chunk(g.images, 4);
@@ -306,7 +306,7 @@
     }
   });
 
-  // Build full book
+  // -------- Build full book (Cover → Boards → Videos → Plans → Links) --------
   const PAGES = [
     { type:"cover", title:"STADIUM DESIGN SHOWCASE", subtitle:"31 Oct – 5 Nov · The Goods Shed, Hobart" },
     ...DISPLAY_BOARD_FILES.map((src,i)=>({type:"image", src, caption:`Display Board ${i+1}`})),
@@ -318,14 +318,14 @@
     ]}
   ];
 
-  // Index helpers
+  // Index helpers (absolute indices)
   const coverIndex = 0;
   const boardsStart = 1;
   const videosStart = boardsStart + DISPLAY_BOARD_FILES.length;
   const plansStart  = videosStart + YT_LINKS.length;
   const linksIndex  = plansStart + PLANS_PAGES.length;
 
-  // ---------------- RENDER CORE ----------------
+  // -------- Render core --------
   let i = 0;
   const inner = document.getElementById('inner');
   const ind = document.getElementById('ind');
@@ -424,7 +424,7 @@
   document.getElementById('next').onclick = ()=>{ next(); scrollTopSmooth(); };
   document.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
 
-  // -------------- MENUS --------------
+  // -------- Menus --------
   const menuBoards = document.getElementById('menuBoards');
   const boardsList = document.getElementById('boardsList');
   const menuVideos = document.getElementById('menuVideos');
@@ -453,43 +453,28 @@
   menuVideos.querySelector('button').addEventListener('click', openMenu(menuVideos));
   menuPlans.querySelector('button').addEventListener('click', openMenu(menuPlans));
 
-  // Build Display Boards dropdown
+  // Boards dropdown (Display Board 1 … 39)
   boardsList.innerHTML = '';
   DISPLAY_BOARD_FILES.forEach((src, idx)=>{
     const a = document.createElement('a');
     a.href = '#';
     a.textContent = `Display Board ${idx+1}`;
-    a.onclick = (ev)=>{ ev.preventDefault(); i = 1 + idx; render(); menuBoards.classList.remove('open'); scrollTopSmooth(); };
+    a.onclick = (ev)=>{ ev.preventDefault(); i = boardsStart + idx; render(); menuBoards.classList.remove('open'); scrollTopSmooth(); };
     boardsList.appendChild(a);
   });
 
-  // Build Videos dropdown
+  // Videos dropdown (Video 1 … 9)
   videosList.innerHTML = '';
   YT_LINKS.forEach((u, ix)=>{
     const a = document.createElement('a');
     a.href = '#';
     a.textContent = `Video ${ix+1}`;
-    a.onclick = (ev)=>{ ev.preventDefault(); i = 1 + DISPLAY_BOARD_FILES.length + ix; render(); menuVideos.classList.remove('open'); scrollTopSmooth(); };
+    a.onclick = (ev)=>{ ev.preventDefault(); i = videosStart + ix; render(); menuVideos.classList.remove('open'); scrollTopSmooth(); };
     videosList.appendChild(a);
   });
 
   // Plans dropdown — one entry per group
   plansList.innerHTML = '';
-  const PLANS_PAGES = [];
-  function rebuildPlansPages(){
-    PLANS_PAGES.length = 0;
-    PLANS_GROUPS.forEach((g, gi)=>{
-      const pages = chunk(g.images, 4);
-      if(pages.length===0){
-        PLANS_PAGES.push({type:'plansGrid', g:gi, p:0, pagesInGroup:1, title:g.title, desc:g.desc, items:[]});
-      } else {
-        pages.forEach((items, pi)=>{
-          PLANS_PAGES.push({type:'plansGrid', g:gi, p:pi, pagesInGroup:pages.length, title:g.title, desc:g.desc, items});
-        });
-      }
-    });
-  }
-  // initial plans pages were already in PAGES; we just need menu entries:
   PLANS_GROUPS.forEach((g, gi)=>{
     const a = document.createElement('a');
     a.href = '#';
@@ -497,11 +482,11 @@
     a.onclick = (ev)=>{
       ev.preventDefault();
       // find absolute index of first page of this group
-      const startOfPlans = 1 + DISPLAY_BOARD_FILES.length + YT_LINKS.length;
-      let abs = startOfPlans;
-      for (let k = 0, found = false, offset = 0; k < PLANS_GROUPS.length && !found; k++){
+      const startOfPlans = videosStart + YT_LINKS.length; // redundant but safe
+      let abs = plansStart; let offset = 0;
+      for (let k = 0; k < PLANS_GROUPS.length; k++){
         const pagesCount = Math.max(1, Math.ceil((PLANS_GROUPS[k].images||[]).length / 4));
-        if (k === gi){ abs = startOfPlans + offset; found = true; }
+        if (k === gi){ abs = plansStart + offset; break; }
         else { offset += pagesCount; }
       }
       i = abs; render(); menuPlans.classList.remove('open'); scrollTopSmooth();
@@ -511,10 +496,14 @@
 
   // Links menu item
   jumpLinks.addEventListener('click',(e)=>{
-    e.preventDefault(); i = (1 + DISPLAY_BOARD_FILES.length + YT_LINKS.length + PLANS_GROUPS.reduce((n,g)=> n + Math.max(1, Math.ceil((g.images||[]).length/4)), 0)); render(); scrollTopSmooth();
+    e.preventDefault();
+    const plansPageCount = PLANS_GROUPS
+      .map(g => Math.max(1, Math.ceil((g.images||[]).length / 4)))
+      .reduce((a,b)=>a+b,0);
+    i = plansStart + plansPageCount; render(); scrollTopSmooth();
   });
 
-  // -------------- LIGHTBOX --------------
+  // -------- Lightbox --------
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbPrev = document.getElementById('lbPrev');
@@ -540,12 +529,12 @@
   lbClose.onclick = ()=> lb.classList.remove('open');
   lb.addEventListener('click', (e)=>{ if(e.target===lb) lb.classList.remove('open'); });
 
-  // -------------- HOME NAV (titles clickable) --------------
-  function goHome(){ i = 0; render(); scrollTopSmooth(); }
+  // -------- Home (titles clickable) --------
+  function goHome(){ i = coverIndex; render(); scrollTopSmooth(); }
   document.getElementById('homeBrand').addEventListener('click', goHome);
   document.getElementById('homeTitle').addEventListener('click', goHome);
 
-  // -------------- INIT --------------
+  // -------- Init --------
   function initCover(){
     inner.classList.add('cover');
     inner.innerHTML = `
