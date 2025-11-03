@@ -14,6 +14,7 @@
   }
   html,body{margin:0;height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--brand-ink)}
   body{background:linear-gradient(180deg,var(--bg) 0,#f2f6fa 280px,#f7fafc 280px)}
+
   /* Header / Nav */
   header{
     position:sticky; top:0; z-index:1000;
@@ -27,34 +28,35 @@
   }
   .brand-wrap{display:flex; align-items:center; gap:12px}
   .brand-wrap img{height:36px; width:auto; border-radius:4px}
-  .brand-title{font-weight:700; letter-spacing:.3px; color:var(--brand-ink)}
+  .brand-title{font-weight:700; letter-spacing:.3px; color:var(--brand-ink); cursor:pointer}
+  .brand-title:active{opacity:.8}
   .spacer{flex:1}
-  .nav{
-    display:flex; gap:10px; align-items:center;
-  }
+  .nav{ display:flex; gap:10px; align-items:center; }
   .nav > .menu{ position:relative; }
   .menu > button, .menu > a{
     appearance:none; border:1px solid var(--border);
     background:#fff; color:var(--brand-ink);
-    border-radius:10px; padding:8px 12px; cursor:pointer;
+    border-radius:10px; padding:10px 14px; cursor:pointer;
     font-weight:600;
     box-shadow:0 1px 4px rgba(0,0,0,.04);
+    touch-action:manipulation;
   }
   .menu > button:hover, .menu > a:hover{border-color:#d8e5ef}
   .dropdown{
     position:absolute; top:44px; left:0;
     background:#fff; border:1px solid var(--border);
     border-radius:12px; box-shadow:0 10px 26px rgba(0,0,0,.12);
-    min-width:260px; display:none; max-height:60vh; overflow:auto;
+    min-width:260px; max-width:92vw; display:none; max-height:60vh; overflow:auto;
   }
   .menu.open .dropdown{display:block}
   .dropdown h4{
     margin:10px 12px 6px; font-size:13px; color:#486072; text-transform:uppercase; letter-spacing:.6px;
   }
   .dropdown a{
-    display:block; padding:8px 12px; text-decoration:none; color:#1f2d36; border-radius:8px; margin:4px 8px;
+    display:block; padding:10px 12px; text-decoration:none; color:#1f2d36; border-radius:8px; margin:4px 8px;
   }
   .dropdown a:hover{background:#f2f7fb}
+
   .wrap{max-width:1200px; margin:0 auto; padding:16px}
   .book{
     background:var(--page); border-radius:14px;
@@ -66,7 +68,8 @@
     display:flex; gap:10px; align-items:center; padding:12px;
     border-bottom:1px solid var(--border); background:#ffffffc7; backdrop-filter:saturate(1.2) blur(3px);
   }
-  .toolbar .title{font-weight:800; letter-spacing:.2px}
+  .toolbar .title{font-weight:800; letter-spacing:.2px; cursor:pointer}
+  .toolbar .title:active{opacity:.8}
   .toolbar .pill{
     background:#eef5fb; color:#2d3a44; padding:6px 10px; border-radius:999px; font-size:12px;
   }
@@ -83,31 +86,32 @@
     display:inline-block; background:#eef5fb; color:#1e6aa8;
     padding:6px 10px; border-radius:999px; font-weight:700; margin-bottom:12px; letter-spacing:.3px;
   }
-  h1{margin:8px 0 6px; font-size:36px} .sub{color:var(--muted); font-size:16px}
+  h1{margin:8px 0 6px; font-size:36px}
+  .sub{color:var(--muted); font-size:16px}
   figure{margin:0} figure img{width:100%; height:auto; border-radius:10px}
   figcaption{margin-top:8px; color:#2d3a44; font-size:14px}
   iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:10px;}
   .navbtn{
     position:absolute; top:50%; transform:translateY(-50%);
     background:#fff; border:1px solid var(--border); border-radius:10px;
-    padding:10px 12px; cursor:pointer; font-weight:700;
-    box-shadow:0 6px 16px rgba(0,0,0,.08);
+    padding:12px 14px; cursor:pointer; font-weight:700;
+    box-shadow:0 6px 16px rgba(0,0,0,.08); touch-action:manipulation;
   }
   #prev{left:12px} #next{right:12px}
   .hint{font-size:12px; color:#6a7b88; margin-top:6px}
   footer{color:#6f8aa0; padding:18px; text-align:center}
-  @media (max-width:760px){ h1{font-size:28px} }
 
   /* Plans grid & lightbox */
   .plans-head{margin:0 0 8px; font-size:22px}
   .plans-sub{margin:0 0 14px; color:#5a6b78}
   .plans-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
   @media(min-width:900px){ .plans-grid{grid-template-columns:repeat(4,1fr);} }
+  @media(max-width:520px){ .plans-grid{grid-template-columns:1fr;} }
   .thumb{border:1px solid var(--border); border-radius:10px; overflow:hidden; cursor:pointer; background:#fff}
   .thumb img{width:100%; height:auto; display:block}
   .thumb span{display:block; padding:6px 8px; font-size:12px; color:#2b3a46;}
-  .plans-pager{display:flex; align-items:center; gap:8px; margin-top:14px}
-  .btn-min{appearance:none; border:1px solid var(--border); background:#fff; padding:6px 10px; border-radius:8px; cursor:pointer}
+  .plans-pager{display:flex; align-items:center; gap:8px; margin-top:14px; flex-wrap:wrap}
+  .btn-min{appearance:none; border:1px solid var(--border); background:#fff; padding:10px 12px; border-radius:8px; cursor:pointer; touch-action:manipulation}
   .min-muted{font-size:12px; color:#6b7c8a}
 
   .lightbox{
@@ -120,10 +124,28 @@
   .lb-prev,.lb-next,.lb-close{
     position:absolute; top:50%; transform:translateY(-50%); background:#fff; border:1px solid var(--border);
     border-radius:10px; padding:10px 12px; cursor:pointer; font-weight:700; box-shadow:0 6px 16px rgba(0,0,0,.25);
+    touch-action:manipulation;
   }
   .lb-prev{left:-4rem} .lb-next{right:-4rem}
   .lb-close{top:-3rem; right:0; transform:none}
   @media(max-width:900px){ .lb-prev{left:0.5rem} .lb-next{right:0.5rem} .lb-close{right:0.5rem} }
+
+  /* Mobile tuning */
+  @media (max-width:860px){
+    .dropdown{right:0; left:auto; width:min(92vw, 360px)}
+    .nav{gap:8px}
+    .menu > button, .menu > a{padding:10px 12px}
+    .navbtn{padding:10px 12px}
+    h1{font-size:30px}
+  }
+  @media (max-width:520px){
+    .head-inner{gap:10px}
+    .brand-title{font-size:14px}
+    .toolbar{padding:10px}
+    .page{padding:14px}
+    .navbtn{top:auto; bottom:10px; transform:none}
+    #prev{left:10px} #next{right:10px}
+  }
 </style>
 </head>
 <body>
@@ -131,7 +153,7 @@
   <div class="head-inner">
     <div class="brand-wrap">
       <img src="assets/mpdc-logo.png" alt="MPDC" onerror="this.style.display='none'">
-      <div class="brand-title">Macquarie Point Development Corporation</div>
+      <div class="brand-title" id="homeBrand">Macquarie Point Development Corporation</div>
     </div>
     <div class="spacer"></div>
     <nav class="nav">
@@ -164,14 +186,14 @@
 <div class="wrap">
   <div class="book">
     <div class="toolbar">
-      <div class="title">Stadium Design Showcase — Digital Book</div>
+      <div class="title" id="homeTitle">Stadium Design Showcase — Digital Book</div>
       <div class="spacer"></div>
       <span class="pill" id="ind">Page 1 / 1</span>
     </div>
     <div class="paper">
       <div class="page"><div class="inner cover" id="inner"></div></div>
-      <button class="navbtn" id="prev">‹ Prev</button>
-      <button class="navbtn" id="next">Next ›</button>
+      <button class="navbtn" id="prev" aria-label="Previous page">‹ Prev</button>
+      <button class="navbtn" id="next" aria-label="Next page">Next ›</button>
     </div>
   </div>
 </div>
@@ -179,20 +201,20 @@
 <footer>© 2025 Macquarie Point Development Corporation</footer>
 
 <!-- Lightbox -->
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
   <div class="lb-inner">
     <img id="lbImg" alt="">
-    <button class="lb-prev" id="lbPrev">‹</button>
-    <button class="lb-next" id="lbNext">›</button>
-    <button class="lb-close" id="lbClose">✕</button>
+    <button class="lb-prev" id="lbPrev" aria-label="Previous image">‹</button>
+    <button class="lb-next" id="lbNext" aria-label="Next image">›</button>
+    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
   </div>
 </div>
 
 <script>
   // ------------------ CONFIG ------------------
-  const CACHE_BUST = '?v=5'; // bump this to force reloads on Netlify
+  const CACHE_BUST = '?v=6'; // bump to force reloads
 
-  // Display Boards list (already live in your repo)
+  // Display Boards list
   const DISPLAY_BOARD_FILES = [
     // Set 1
     "assets/boards/boards1_01.jpg","assets/boards/boards1_02.jpg","assets/boards/boards1_03.jpg",
@@ -221,7 +243,7 @@
     "https://youtu.be/zM63SF3_8fI"
   ];
 
-  // MPDC social links (TODO: replace # with real URLs)
+  // MPDC social links (replace # with real URLs)
   const SOCIALS = [
     {label:"Facebook", href:"#"},
     {label:"Instagram", href:"#"},
@@ -229,31 +251,11 @@
     {label:"YouTube", href:"#"}
   ];
 
-  // PLANS — group your plan images here (4 per page UI)
-  // Put the real filenames in each group's images array:
+  // Plans — grouped (fill in images later)
   const PLANS_GROUPS = [
-    {
-      title: "Bowl & Roof",
-      desc: "Key sections and details for main bowl and roof structure.",
-      images: [
-        // "assets/plans/bowl_01.jpg","assets/plans/bowl_02.jpg","assets/plans/bowl_03.jpg","assets/plans/bowl_04.jpg",
-        // "assets/plans/bowl_05.jpg","assets/plans/bowl_06.jpg","assets/plans/bowl_07.jpg","assets/plans/bowl_08.jpg"
-      ]
-    },
-    {
-      title: "Back-of-House (BOH)",
-      desc: "Service corridors, loading dock, plant areas, and BOH circulation.",
-      images: [
-        // "assets/plans/boh_01.jpg","assets/plans/boh_02.jpg","assets/plans/boh_03.jpg","assets/plans/boh_04.jpg"
-      ]
-    },
-    {
-      title: "Public Concourse & Entries",
-      desc: "Entry sequences, concourses, amenities, and egress paths.",
-      images: [
-        // "assets/plans/concourse_01.jpg","assets/plans/concourse_02.jpg","assets/plans/concourse_03.jpg","assets/plans/concourse_04.jpg"
-      ]
-    }
+    { title: "Bowl & Roof", desc: "Key sections and details for main bowl and roof structure.", images: [] },
+    { title: "Back-of-House (BOH)", desc: "Service corridors, loading dock, plant areas, and BOH circulation.", images: [] },
+    { title: "Public Concourse & Entries", desc: "Entry sequences, concourses, amenities, and egress paths.", images: [] }
   ];
 
   // ---------------- HELPERS ----------------
@@ -289,13 +291,13 @@
     if (rep) return rep;
     return img;
   }
-
-  // Build plans pages (chunk each group into pages of 4)
   function chunk(arr, size){ const out=[]; for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i,i+size)); return out; }
-  const PLANS_PAGES = []; // each item: { type:'plansGrid', g: groupIndex, p: pageIndex, pagesInGroup, title, desc, items:[srcs] }
+
+  // Build plans pages (4 per page)
+  const PLANS_PAGES = [];
   PLANS_GROUPS.forEach((g, gi)=>{
     const pages = chunk(g.images, 4);
-    if(pages.length===0){ // still create an empty stub page
+    if(pages.length===0){
       PLANS_PAGES.push({type:'plansGrid', g:gi, p:0, pagesInGroup:1, title:g.title, desc:g.desc, items:[]});
     } else {
       pages.forEach((items, pi)=>{
@@ -327,6 +329,8 @@
   let i = 0;
   const inner = document.getElementById('inner');
   const ind = document.getElementById('ind');
+
+  function scrollTopSmooth(){ try{ window.scrollTo({top:0, behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); } }
 
   function render(){
     const p = PAGES[i]; inner.className = 'inner'; inner.innerHTML = '';
@@ -361,20 +365,15 @@
     }
 
     if(p.type==='plansGrid'){
-      // Header + explainer
       const h = document.createElement('h2'); h.className='plans-head'; h.textContent = p.title;
       const d = document.createElement('p'); d.className='plans-sub'; d.textContent = p.desc||'';
       inner.appendChild(h); inner.appendChild(d);
 
-      // Grid
       const grid = document.createElement('div'); grid.className='plans-grid';
       p.items.forEach((src, idx)=>{
         const wrap = document.createElement('div'); wrap.className='thumb';
-        const img = robustImg(src);
-        const label = document.createElement('span');
-        // derive friendly label from filename
-        const name = src.split('/').pop();
-        label.textContent = name.replace(/\.[^.]+$/,'');
+        const img = robustImg(src); img.alt = 'Plan preview';
+        const label = document.createElement('span'); label.textContent = src.split('/').pop().replace(/\.[^.]+$/,'');
         wrap.appendChild(img); wrap.appendChild(label);
         wrap.onclick = ()=> openLightbox(p.g, p.items, idx);
         grid.appendChild(wrap);
@@ -388,19 +387,17 @@
         inner.appendChild(grid);
       }
 
-      // Pager within group
       const pager = document.createElement('div'); pager.className='plans-pager';
       const bPrev = document.createElement('button'); bPrev.className='btn-min'; bPrev.textContent='‹ Prev Page';
       const bNext = document.createElement('button'); bNext.className='btn-min'; bNext.textContent='Next Page ›';
       const info = document.createElement('span'); info.className='min-muted';
       info.textContent = `Page ${p.p+1} of ${p.pagesInGroup} in “${p.title}”`;
 
-      // compute the absolute index of first page of this group
       const groupFirstAbs = plansStart + PLANS_PAGES.findIndex(pp => pp.g===p.g && pp.p===0);
       bPrev.disabled = (p.p===0);
       bNext.disabled = (p.p===p.pagesInGroup-1);
-      bPrev.onclick = ()=>{ if(p.p>0){ i = groupFirstAbs + (p.p-1); render(); } };
-      bNext.onclick = ()=>{ if(p.p<p.pagesInGroup-1){ i = groupFirstAbs + (p.p+1); render(); } };
+      bPrev.onclick = ()=>{ if(p.p>0){ i = groupFirstAbs + (p.p-1); render(); scrollTopSmooth(); } };
+      bNext.onclick = ()=>{ if(p.p<p.pagesInGroup-1){ i = groupFirstAbs + (p.p+1); render(); scrollTopSmooth(); } };
 
       pager.appendChild(bPrev); pager.appendChild(info); pager.appendChild(bNext);
       inner.appendChild(pager);
@@ -423,19 +420,16 @@
 
   function prev(){ if(i>0){ i--; render(); } }
   function next(){ if(i<PAGES.length-1){ i++; render(); } }
-  document.getElementById('prev').onclick = prev;
-  document.getElementById('next').onclick = next;
+  document.getElementById('prev').onclick = ()=>{ prev(); scrollTopSmooth(); };
+  document.getElementById('next').onclick = ()=>{ next(); scrollTopSmooth(); };
   document.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
 
   // -------------- MENUS --------------
   const menuBoards = document.getElementById('menuBoards');
-  const ddBoards = document.getElementById('ddBoards');
   const boardsList = document.getElementById('boardsList');
   const menuVideos = document.getElementById('menuVideos');
-  const ddVideos = document.getElementById('ddVideos');
   const videosList = document.getElementById('videosList');
   const menuPlans = document.getElementById('menuPlans');
-  const ddPlans = document.getElementById('ddPlans');
   const plansList = document.getElementById('plansList');
   const jumpLinks = document.getElementById('jumpLinks');
 
@@ -450,24 +444,14 @@
   }
   document.addEventListener('click', closeMenus);
 
-  menuBoards.querySelector('button').addEventListener('click', (e)=>{
+  const openMenu = (menuToOpen) => (e)=>{
     e.stopPropagation();
-    menuBoards.classList.toggle('open');
-    menuVideos.classList.remove('open');
-    menuPlans.classList.remove('open');
-  });
-  menuVideos.querySelector('button').addEventListener('click', (e)=>{
-    e.stopPropagation();
-    menuVideos.classList.toggle('open');
-    menuBoards.classList.remove('open');
-    menuPlans.classList.remove('open');
-  });
-  menuPlans.querySelector('button').addEventListener('click', (e)=>{
-    e.stopPropagation();
-    menuPlans.classList.toggle('open');
-    menuBoards.classList.remove('open');
-    menuVideos.classList.remove('open');
-  });
+    [menuBoards, menuVideos, menuPlans].forEach(m => { if(m !== menuToOpen) m.classList.remove('open'); });
+    menuToOpen.classList.toggle('open');
+  };
+  menuBoards.querySelector('button').addEventListener('click', openMenu(menuBoards));
+  menuVideos.querySelector('button').addEventListener('click', openMenu(menuVideos));
+  menuPlans.querySelector('button').addEventListener('click', openMenu(menuPlans));
 
   // Build Display Boards dropdown
   boardsList.innerHTML = '';
@@ -475,7 +459,7 @@
     const a = document.createElement('a');
     a.href = '#';
     a.textContent = `Display Board ${idx+1}`;
-    a.onclick = (ev)=>{ ev.preventDefault(); i = boardsStart + idx; render(); menuBoards.classList.remove('open'); };
+    a.onclick = (ev)=>{ ev.preventDefault(); i = 1 + idx; render(); menuBoards.classList.remove('open'); scrollTopSmooth(); };
     boardsList.appendChild(a);
   });
 
@@ -485,12 +469,27 @@
     const a = document.createElement('a');
     a.href = '#';
     a.textContent = `Video ${ix+1}`;
-    a.onclick = (ev)=>{ ev.preventDefault(); i = videosStart + ix; render(); menuVideos.classList.remove('open'); };
+    a.onclick = (ev)=>{ ev.preventDefault(); i = 1 + DISPLAY_BOARD_FILES.length + ix; render(); menuVideos.classList.remove('open'); scrollTopSmooth(); };
     videosList.appendChild(a);
   });
 
-  // Build Plans dropdown — one entry per group
+  // Plans dropdown — one entry per group
   plansList.innerHTML = '';
+  const PLANS_PAGES = [];
+  function rebuildPlansPages(){
+    PLANS_PAGES.length = 0;
+    PLANS_GROUPS.forEach((g, gi)=>{
+      const pages = chunk(g.images, 4);
+      if(pages.length===0){
+        PLANS_PAGES.push({type:'plansGrid', g:gi, p:0, pagesInGroup:1, title:g.title, desc:g.desc, items:[]});
+      } else {
+        pages.forEach((items, pi)=>{
+          PLANS_PAGES.push({type:'plansGrid', g:gi, p:pi, pagesInGroup:pages.length, title:g.title, desc:g.desc, items});
+        });
+      }
+    });
+  }
+  // initial plans pages were already in PAGES; we just need menu entries:
   PLANS_GROUPS.forEach((g, gi)=>{
     const a = document.createElement('a');
     a.href = '#';
@@ -498,16 +497,21 @@
     a.onclick = (ev)=>{
       ev.preventDefault();
       // find absolute index of first page of this group
-      const abs = plansStart + PLANS_PAGES.findIndex(pp => pp.g===gi && pp.p===0);
-      i = abs >= plansStart ? abs : plansStart;
-      render(); menuPlans.classList.remove('open');
+      const startOfPlans = 1 + DISPLAY_BOARD_FILES.length + YT_LINKS.length;
+      let abs = startOfPlans;
+      for (let k = 0, found = false, offset = 0; k < PLANS_GROUPS.length && !found; k++){
+        const pagesCount = Math.max(1, Math.ceil((PLANS_GROUPS[k].images||[]).length / 4));
+        if (k === gi){ abs = startOfPlans + offset; found = true; }
+        else { offset += pagesCount; }
+      }
+      i = abs; render(); menuPlans.classList.remove('open'); scrollTopSmooth();
     };
     plansList.appendChild(a);
   });
 
   // Links menu item
   jumpLinks.addEventListener('click',(e)=>{
-    e.preventDefault(); i = linksIndex; render();
+    e.preventDefault(); i = (1 + DISPLAY_BOARD_FILES.length + YT_LINKS.length + PLANS_GROUPS.reduce((n,g)=> n + Math.max(1, Math.ceil((g.images||[]).length/4)), 0)); render(); scrollTopSmooth();
   });
 
   // -------------- LIGHTBOX --------------
@@ -536,6 +540,11 @@
   lbClose.onclick = ()=> lb.classList.remove('open');
   lb.addEventListener('click', (e)=>{ if(e.target===lb) lb.classList.remove('open'); });
 
+  // -------------- HOME NAV (titles clickable) --------------
+  function goHome(){ i = 0; render(); scrollTopSmooth(); }
+  document.getElementById('homeBrand').addEventListener('click', goHome);
+  document.getElementById('homeTitle').addEventListener('click', goHome);
+
   // -------------- INIT --------------
   function initCover(){
     inner.classList.add('cover');
@@ -554,7 +563,8 @@
   paper.addEventListener('touchend', e=>{
     if(startX==null) return;
     const dx=e.changedTouches[0].screenX-startX;
-    if(dx<-40) next(); if(dx>40) prev();
+    if(dx<-40) next();
+    if(dx>40) prev();
     startX=null;
   }, {passive:true});
 </script>
