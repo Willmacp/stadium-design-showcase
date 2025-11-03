@@ -336,7 +336,7 @@
 </div>
 
 <script>
-  const CACHE_BUST = '?v=13';
+  const CACHE_BUST = '?v=14';
 
   // ---- DISPLAY BOARDS: exactly your 25 files ----
   const DISPLAY_BOARD_FILES = [
@@ -383,6 +383,20 @@
     "https://youtu.be/zM63SF3_8fI"
   ];
 
+  // Short, menu-friendly labels for each video
+  // (You can tweak these to match your exact YouTube titles)
+  const VIDEO_LABELS = [
+    "Stadium overview",
+    "Gate 2 & function room",      // from "Gate 2, featuring our Function Room"
+    "Bowl & roof animation",
+    "Matchday experience",
+    "Mac Point remediation",
+    "Site & context",
+    "Transport & access",
+    "Community facilities",
+    "Project timeline"
+  ];
+
   // ---- Socials / links ----
   const SOCIALS = [
     {label:"Facebook", href:"#"},
@@ -418,7 +432,11 @@
   const PAGES = [
     {type:"cover",title:"STADIUM DESIGN SHOWCASE",subtitle:"31 Oct – 5 Nov · The Goods Shed, Hobart"},
     ...DISPLAY_BOARD_FILES.map((src,i)=>({type:"image",src,caption:`Display Board ${i+1}`})),
-    ...YT_LINKS.map((u,ix)=>({type:"youtube",title:`Video ${ix+1}`,url:toEmbed(u)})),
+    ...YT_LINKS.map((u,ix)=>({
+      type:"youtube",
+      title: VIDEO_LABELS[ix] || `Video ${ix+1}`,
+      url: toEmbed(u)
+    })),
     ...PLANS_PAGES,
     {type:"links",items:[
       {text:"FAQ: Stadium — Find out more",href:"https://www.macpoint.com/stadium-find-out-more"},
@@ -581,11 +599,13 @@
     boardsList.appendChild(a);
   });
 
-  // Videos dropdown
+  // Videos dropdown, using short labels
   videosList.innerHTML='';
   YT_LINKS.forEach((u,ix)=>{
     const a=document.createElement('a');
-    a.href='#'; a.textContent=`Video ${ix+1}`;
+    a.href='#';
+    const label = VIDEO_LABELS[ix] || `Video ${ix+1}`;
+    a.textContent = label;
     a.onclick=ev=>{ev.preventDefault(); i=videosStart+ix; render(); menuVideos.classList.remove('open'); scrollTopSmooth();};
     videosList.appendChild(a);
   });
