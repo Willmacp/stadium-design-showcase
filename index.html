@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stadium Design Showcase — Digital Book</title>
+<style>
+  :root { --bg:#0a2433; --ink:#0e1a22; --page:#fff; --muted:#5a6b78; --accent:#c8a86b; }
+  html,body{margin:0;height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+  body{background:linear-gradient(180deg,#0a2433 0,#153447 240px,#e8eef3 240px)}
+  header{max-width:1200px;margin:0 auto;padding:14px;color:#eaf4fb;display:flex;gap:10px;align-items:center}
+  header .brand{font-weight:700;letter-spacing:.3px} header .spacer{flex:1}
+  header .btn{background:#fff;color:#0a2433;border-radius:8px;text-decoration:none;padding:8px 12px}
+  .wrap{max-width:1200px;margin:0 auto;padding:16px}
+  .book{background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.15);min-height:calc(100vh - 240px);position:relative;overflow:hidden}
+  .toolbar{display:flex;gap:10px;align-items:center;padding:10px;border-bottom:1px solid #e3e8ec}
+  .toolbar .spacer{flex:1}
+  .paper{min-height:calc(100vh - 240px - 52px);display:grid;place-items:center;background:#fff}
+  .page{max-width:1000px;width:100%;padding:16px}
+  .inner{border:1px solid #e7edf2;border-radius:10px;padding:18px}
+  .inner.cover{text-align:center;padding:40px;background:radial-gradient(1100px 450px at 70% 10%, rgba(200,168,107,.18), rgba(255,255,255,0)),#fff}
+  h1{margin:0 0 8px} .sub{color:#5a6b78}
+  figure{margin:0} figure img{width:100%;height:auto;border-radius:8px} figcaption{margin-top:8px;color:#2d3a44;font-size:14px}
+  .navbtn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.95);border:1px solid #dfe7ec;border-radius:10px;padding:10px 12px;cursor:pointer}
+  #prev{left:12px} #next{right:12px}
+  .toc{position:absolute;top:52px;right:12px;width:320px;max-height:calc(100% - 64px);overflow:auto;border:1px solid #e2e9ee;background:#fff;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.1);display:none}
+  .toc.active{display:block} .toc h3{margin:10px;font-size:16px} .toc ul{list-style:none;margin:0 0 10px;padding:0 10px 10px;display:grid;gap:6px}
+  .toc a{display:block;padding:8px 10px;border-radius:8px;background:#f6f8fa;color:#1f2d36;text-decoration:none} .toc a:hover{background:#eef3f6}
+  .hint{font-size:12px;color:#6a7b88;margin-top:6px}
+  footer{text-align:center;color:#cfe0ea;padding:14px}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Macquarie Point Development Corporation</div>
+  <div class="spacer"></div>
+  <a class="btn" href="https://www.macpoint.com" target="_blank" rel="noopener">macpoint.com</a>
+</header>
+
+<div class="wrap">
+  <div class="book">
+    <div class="toolbar">
+      <strong>Stadium Design Showcase — Digital Book</strong>
+      <div class="spacer"></div>
+      <span id="ind">Page 1 / 1</span>
+      <button id="tocbtn">Contents ▾</button>
+    </div>
+    <div class="paper">
+      <div class="page"><div class="inner" id="inner"></div></div>
+      <button class="navbtn" id="prev">‹ Prev</button>
+      <button class="navbtn" id="next">Next ›</button>
+      <div class="toc" id="toc"></div>
+    </div>
+  </div>
+</div>
+
+<footer>© 2025 Macquarie Point Development Corporation</footer>
+
+<script>
+  // 1) LIST YOUR BOARD IMAGES HERE IF YOU WANT CUSTOM ORDER/TITLES
+  //    (or let the auto-scan fill it in below)
+  const MANUAL_BOARDS = []; // e.g. ["assets/boards/boards1_01.jpg", ...]
+
+  // 2) BASIC PAGE SETUP
+  const PAGES = [
+    { type:"cover", title:"STADIUM DESIGN SHOWCASE", subtitle:"31 Oct – 5 Nov · The Goods Shed, Hobart" },
+    // Boards get inserted below...
+    // Then 6 video pages:
+    { type:"video", poster:"assets/videos/video01.jpg", src:"assets/videos/video01.mp4", caption:"Video 1" },
+    { type:"video", poster:"assets/videos/video02.jpg", src:"assets/videos/video02.mp4", caption:"Video 2" },
+    { type:"video", poster:"assets/videos/video03.jpg", src:"assets/videos/video03.mp4", caption:"Video 3" },
+    { type:"video", poster:"assets/videos/video04.jpg", src:"assets/videos/video04.mp4", caption:"Video 4" },
+    { type:"video", poster:"assets/videos/video05.jpg", src:"assets/videos/video05.mp4", caption:"Video 5" },
+    { type:"video", poster:"assets/videos/video06.jpg", src:"assets/videos/video06.mp4", caption:"Video 6" },
+    // Plans and links:
+    { type:"plans", caption:"Architectural Plans" },
+    { type:"links", items:[
+      { text:"FAQ: Stadium — Find out more", href:"https://www.macpoint.com/stadium-find-out-more" },
+      { text:"Mac Point website", href:"https://www.macpoint.com" },
+      { text:"Media Toolkit", href:"https://www.macpoint.com/mediatoolkit" }
+    ]}
+  ];
+
+  // 3) AUTO-SCAN BOARDS FOLDER
+  //    (Static hosting can’t list directories, so add board filenames here if MANUAL_BOARDS is empty.)
+  //    If you already know the filenames, set them above in MANUAL_BOARDS instead.
+  const DEFAULT_BOARD_FILES = [
+    // Add your board file names here if needed:
+    // "assets/boards/boards1_01.jpg","assets/boards/boards1_02.jpg","assets/boards/boards1_03.jpg"
+  ];
+
+  const boards = (MANUAL_BOARDS.length ? MANUAL_BOARDS : DEFAULT_BOARD_FILES);
+  const cover = PAGES.shift();
+  const tail = PAGES.splice(0);
+
+  const pages = [cover, ...boards.map((src, idx) => ({ type:"image", src, caption:`Board ${idx+1}` })), ...tail];
+
+  // --- RENDERING LOGIC ---
+  let i = 0;
+  const inner = document.getElementById('inner');
+  const ind = document.getElementById('ind');
+  const toc = document.getElementById('toc');
+  const tocbtn = document.getElementById('tocbtn');
+
+  function render() {
+    const p = pages[i]; inner.className = 'inner'; inner.innerHTML = '';
+    if (!p) return;
+    if (p.type === 'cover') {
+      inner.classList.add('cover');
+      inner.innerHTML = `<h1>${p.title}</h1><div class="sub">${p.subtitle}</div><div class="hint" style="margin-top:14px">Use ← / → keys, Next/Prev, or Contents.</div>`;
+    }
+    if (p.type === 'image') {
+      const f = document.createElement('figure');
+      const img = document.createElement('img'); img.src = p.src; img.alt = p.caption||'Board';
+      const cap = document.createElement('figcaption'); cap.textContent = p.caption||'';
+      f.appendChild(img); f.appendChild(cap); inner.appendChild(f);
+    }
+    if (p.type === 'video') {
+      const wrap = document.createElement('div');
+      const video = document.createElement('video'); video.controls = true; video.poster = p.poster||'';
+      const src = document.createElement('source'); src.src = p.src; src.type = 'video/mp4'; video.appendChild(src);
+      video.onerror = ()=>{ wrap.innerHTML = `<img src="${p.poster||''}" alt="Video placeholder">`; };
+      wrap.appendChild(video); inner.appendChild(wrap);
+      const hint = document.createElement('div'); hint.className='hint'; hint.textContent = p.caption||''; inner.appendChild(hint);
+    }
+    if (p.type === 'plans') {
+      inner.innerHTML = '<h2>Architectural Plans</h2><p class="sub">Add plan images to <code>assets/plans/</code> and list them in <code>assets/plans.json</code>.</p>';
+    }
+    if (p.type === 'links') {
+      inner.innerHTML = '<h2>Links & Further Information</h2>';
+      const ul = document.createElement('ul');
+      (p.items||[]).forEach(it=>{ const li=document.createElement('li'); li.innerHTML = `<a href="${it.href}" target="_blank" rel="noopener">${it.text}</a>`; ul.appendChild(li)});
+      inner.appendChild(ul);
+    }
+    ind.textContent = `Page ${i+1} / ${pages.length}`;
+    document.getElementById('prev').disabled = (i===0);
+    document.getElementById('next').disabled = (i===pages.length-1);
+  }
+  function prev(){ if (i>0){ i--; render(); } }
+  function next(){ if (i<pages.length-1){ i++; render(); } }
+  document.getElementById('prev').onclick = prev;
+  document.getElementById('next').onclick = next;
+  document.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+
+  // TOC
+  function buildTOC(){
+    const div = document.createElement('div'); div.innerHTML = '<h3>Contents</h3>';
+    const ul = document.createElement('ul');
+    pages.forEach((p, idx)=>{
+      const a = document.createElement('a');
+      const label = p.type==='image' ? (p.caption||('Board '+idx)) : p.type==='cover' ? 'Cover' : p.type==='video' ? (p.caption||('Video '+idx)) : (p.type[0].toUpperCase()+p.type.slice(1));
+      a.textContent = label; a.href='#'; a.onclick=(ev)=>{ev.preventDefault(); i=idx; render(); toc.classList.remove('active');};
+      const li = document.createElement('li'); li.appendChild(a); ul.appendChild(li);
+    });
+    div.appendChild(ul); toc.appendChild(div);
+  }
+  document.getElementById('tocbtn').onclick = ()=> toc.classList.toggle('active');
+
+  buildTOC(); render();
+  // Touch swipe
+  let startX=null; const paper=document.querySelector('.paper');
+  paper.addEventListener('touchstart', e=>{startX=e.changedTouches[0].screenX;}, {passive:true});
+  paper.addEventListener('touchend', e=>{ if(startX==null) return; const dx=e.changedTouches[0].screenX-startX; if(dx<-40) next(); if(dx>40) prev(); startX=null; }, {passive:true});
+</script>
+</body></html>
