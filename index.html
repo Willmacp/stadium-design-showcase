@@ -4,85 +4,196 @@
 <title>Stadium Design Showcase — Digital Book</title>
 <style>
   :root{
-    --bg:#e9f2f9; --brand:#1e6aa8; --brand-ink:#0c2d45; --accent:#c8a86b;
-    --page:#ffffff; --muted:#5a6b78; --border:#e4ecf3;
+    --bg:#e9f2f9;
+    --brand:#5f809b;      /* your blue */
+    --brand-ink:#0c2d45;
+    --accent:#c8a86b;
+    --page:#ffffff;
+    --muted:#5a6b78;
+    --border:#e4ecf3;
   }
   html,body{margin:0;height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--brand-ink)}
-  body{background:linear-gradient(180deg,var(--bg) 0,#f2f6fa 280px,#f7fafc 280px)}
-  header{position:sticky; top:0; z-index:1000; background:linear-gradient(180deg,#fff 0,#f6fbff 100%);
-    border-bottom:1px solid var(--border); box-shadow:0 2px 12px rgba(0,0,0,.06)}
-  .head-inner{max-width:1200px; margin:0 auto; padding:10px 14px; display:flex; align-items:center; gap:14px}
+  body{
+    background:linear-gradient(180deg,var(--bg) 0,#f2f6fa 280px,#f7fafc 280px);
+  }
+
+  header{
+    position:sticky; top:0; z-index:1000;
+    background:linear-gradient(180deg,#ffffff 0,#f6fbff 60%,#edf3f8 100%);
+    border-bottom:1px solid var(--border);
+    box-shadow:0 2px 12px rgba(0,0,0,.06);
+  }
+  .head-inner{
+    max-width:1200px; margin:0 auto; padding:10px 14px;
+    display:flex; align-items:center; gap:14px;
+  }
   .brand-wrap{display:flex; align-items:center; gap:12px}
   .brand-wrap img{height:36px; width:auto; border-radius:4px}
   .brand-title{font-weight:700; letter-spacing:.3px; color:var(--brand-ink); cursor:pointer}
   .brand-title:active{opacity:.85}
   .spacer{flex:1}
+
   .nav{ display:flex; gap:10px; align-items:center; }
   .nav > .menu{ position:relative; }
-  .menu > button, .menu > a{appearance:none; border:1px solid var(--border); background:#fff; color:#1f2d36;
-    border-radius:10px; padding:10px 14px; cursor:pointer; font-weight:600; box-shadow:0 1px 4px rgba(0,0,0,.04)}
-  .menu > button:hover, .menu > a:hover{border-color:#d8e5ef}
-  .dropdown{position:absolute; top:44px; left:0; background:#fff; border:1px solid var(--border);
-    border-radius:12px; box-shadow:0 10px 26px rgba(0,0,0,.12); min-width:260px; max-width:92vw; display:none;
-    max-height:60vh; overflow:auto}
+
+  .menu > button, .menu > a{
+    appearance:none; border:1px solid var(--border);
+    background:#fff; color:#1f2d36;
+    border-radius:10px; padding:10px 14px; cursor:pointer;
+    font-weight:600;
+    box-shadow:0 1px 4px rgba(0,0,0,.04);
+  }
+  .menu > button:hover, .menu > a:hover{
+    border-color:var(--brand);
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+  }
+
+  .dropdown{
+    position:absolute; top:44px;
+    right:0; left:auto;  /* keep inside viewport on narrow screens */
+    background:#fff; border:1px solid var(--border);
+    border-radius:12px; box-shadow:0 10px 26px rgba(0,0,0,.12);
+    min-width:220px; max-width:min(92vw, 340px);
+    display:none; max-height:60vh; overflow:auto;
+  }
   .menu.open .dropdown{display:block}
-  .dropdown h4{margin:10px 12px 6px; font-size:13px; color:#486072; text-transform:uppercase; letter-spacing:.6px}
-  .dropdown a{display:block; padding:10px 12px; text-decoration:none; color:#1f2d36; border-radius:8px; margin:4px 8px}
+  .dropdown h4{
+    margin:10px 12px 6px; font-size:13px; color:#486072;
+    text-transform:uppercase; letter-spacing:.6px;
+  }
+  .dropdown a{
+    display:block; padding:10px 12px; text-decoration:none;
+    color:#1f2d36; border-radius:8px; margin:4px 8px;
+  }
   .dropdown a:hover{background:#f2f7fb}
 
   .wrap{max-width:1200px; margin:0 auto; padding:16px}
-  .book{background:var(--page); border-radius:14px; box-shadow:0 14px 34px rgba(16,40,60,.12);
-    min-height:calc(100vh - 300px); position:relative; overflow:hidden; border:1px solid var(--border)}
-  .toolbar{display:flex; gap:10px; align-items:center; padding:12px; border-bottom:1px solid var(--border);
-    background:#ffffffc7; backdrop-filter:saturate(1.2) blur(3px)}
+  .book{
+    background:var(--page); border-radius:14px;
+    box-shadow:0 14px 34px rgba(16,40,60,.12);
+    min-height:calc(100vh - 300px);
+    position:relative; overflow:hidden; border:1px solid var(--border);
+  }
+  .toolbar{
+    display:flex; gap:10px; align-items:center; padding:12px;
+    border-bottom:1px solid var(--border);
+    background:#ffffffc7; backdrop-filter:saturate(1.2) blur(3px);
+  }
   .toolbar .title{font-weight:800; letter-spacing:.2px; cursor:pointer}
   .toolbar .title:active{opacity:.85}
-  .toolbar .pill{background:#eef5fb; color:#2d3a44; padding:6px 10px; border-radius:999px; font-size:12px}
+  .toolbar .pill{
+    background:#eef5fb; color:#2d3a44;
+    padding:6px 10px; border-radius:999px; font-size:12px;
+    border:1px solid #d8e5ef;
+  }
+
   .paper{min-height:calc(100vh - 300px - 56px); display:grid; place-items:center; background:#fff}
   .page{max-width:1000px; width:100%; padding:18px}
   .inner{border:1px solid var(--border); border-radius:12px; padding:20px}
   .inner.cover{
-    background:radial-gradient(900px 400px at 70% 10%, rgba(200,168,107,.14), rgba(255,255,255,0)),
-               linear-gradient(180deg,#ffffff 0,#fbfdff 100%);
-    text-align:center; padding:48px 22px
+    background:
+      radial-gradient(900px 400px at 70% 10%, rgba(200,168,107,.14), rgba(255,255,255,0)),
+      linear-gradient(180deg,#ffffff 0,#fbfdff 100%);
+    text-align:center; padding:48px 22px;
   }
-  .cover .kicker{display:inline-block; background:#eef5fb; color:#1e6aa8; padding:6px 10px; border-radius:999px;
-    font-weight:700; margin-bottom:12px; letter-spacing:.3px}
+  .cover .kicker{
+    display:inline-block;
+    background:#e0e8f0;
+    color:var(--brand);
+    padding:6px 10px; border-radius:999px;
+    font-weight:700; margin-bottom:12px; letter-spacing:.3px;
+  }
   h1{margin:8px 0 6px; font-size:36px}
-  .sub{color:#5a6b78; font-size:16px}
-  figure{margin:0} figure img{width:100%; height:auto; border-radius:10px}
+  .sub{color:var(--muted); font-size:16px}
+
+  figure{margin:0}
+  figure img{width:100%; height:auto; border-radius:10px}
   figcaption{margin-top:8px; color:#2d3a44; font-size:14px}
   iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:10px;}
-  .navbtn{position:absolute; top:50%; transform:translateY(-50%); background:#fff; border:1px solid var(--border);
-    border-radius:10px; padding:12px 14px; cursor:pointer; font-weight:700; box-shadow:0 6px 16px rgba(0,0,0,.08)}
+
+  .navbtn{
+    position:absolute; top:50%; transform:translateY(-50%);
+    background:#fff; border:1px solid var(--border); border-radius:10px;
+    padding:12px 14px; cursor:pointer; font-weight:700;
+    box-shadow:0 6px 16px rgba(0,0,0,.08);
+  }
   #prev{left:12px} #next{right:12px}
+  .navbtn:hover{border-color:var(--brand);}
+
   .hint{font-size:12px; color:#6a7b88; margin-top:6px}
   footer{color:#6f8aa0; padding:18px; text-align:center}
 
+  /* Plans grid & lightbox */
   .plans-head{margin:0 0 8px; font-size:22px}
   .plans-sub{margin:0 0 14px; color:#5a6b78}
   .plans-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
   @media(min-width:900px){ .plans-grid{grid-template-columns:repeat(4,1fr);} }
   @media(max-width:520px){ .plans-grid{grid-template-columns:1fr;} }
-  .thumb{border:1px solid var(--border); border-radius:10px; overflow:hidden; cursor:pointer; background:#fff}
+  .thumb{
+    border:1px solid var(--border);
+    border-radius:10px; overflow:hidden; cursor:pointer; background:#fff;
+    box-shadow:0 1px 4px rgba(0,0,0,.04);
+  }
   .thumb img{width:100%; height:auto; display:block}
   .thumb span{display:block; padding:6px 8px; font-size:12px; color:#2b3a46;}
+  .thumb:hover{border-color:var(--brand);}
+
   .plans-pager{display:flex; align-items:center; gap:8px; margin-top:14px; flex-wrap:wrap}
-  .btn-min{appearance:none; border:1px solid var(--border); background:#fff; padding:10px 12px; border-radius:8px; cursor:pointer}
+  .btn-min{
+    appearance:none; border:1px solid var(--border); background:#fff;
+    padding:8px 12px; border-radius:8px; cursor:pointer;
+    font-size:12px;
+  }
+  .btn-min:hover{border-color:var(--brand);}
   .min-muted{font-size:12px; color:#6b7c8a}
 
-  .lightbox{position:fixed; inset:0; background:rgba(10,20,30,.85); display:none; align-items:center; justify-content:center; z-index:2000}
+  .lightbox{
+    position:fixed; inset:0; background:rgba(10,20,30,.85);
+    display:none; align-items:center; justify-content:center; z-index:2000;
+  }
   .lightbox.open{display:flex}
   .lb-inner{max-width:92vw; max-height:88vh; position:relative}
   .lb-inner img{max-width:92vw; max-height:88vh; border-radius:10px; display:block}
-  .lb-prev,.lb-next,.lb-close{position:absolute; top:50%; transform:translateY(-50%); background:#fff; border:1px solid var(--border);
-    border-radius:10px; padding:10px 12px; cursor:pointer; font-weight:700; box-shadow:0 6px 16px rgba(0,0,0,.25)}
+  .lb-prev,.lb-next,.lb-close{
+    position:absolute; top:50%; transform:translateY(-50%);
+    background:#fff; border:1px solid var(--border);
+    border-radius:10px; padding:10px 12px; cursor:pointer; font-weight:700;
+    box-shadow:0 6px 16px rgba(0,0,0,.25);
+  }
   .lb-prev{left:-4rem} .lb-next{right:-4rem}
   .lb-close{top:-3rem; right:0; transform:none}
   @media(max-width:900px){ .lb-prev{left:0.5rem} .lb-next{right:0.5rem} .lb-close{right:0.5rem} }
 
+  /* Links page styling */
+  .links-intro{margin-bottom:10px; color:#4a5b68;}
+  .links-list{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    margin:10px 0 18px;
+  }
+  @media(min-width:720px){
+    .links-list{grid-template-columns:repeat(2, minmax(0,1fr));}
+  }
+  .link-card{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:#f7fafc;
+    text-decoration:none;
+    color:var(--brand-ink);
+    box-shadow:0 1px 4px rgba(0,0,0,.04);
+    font-size:14px;
+  }
+  .link-card:hover{
+    border-color:var(--brand);
+    background:#eef4f8;
+  }
+  .link-title{flex:1; margin-right:8px;}
+  .link-arrow{font-size:16px; opacity:.6;}
+
   @media (max-width:860px){
-    .dropdown{right:0; left:auto; width:min(92vw, 360px)}
     .nav{gap:8px}
     .menu > button, .menu > a{padding:10px 12px}
     .navbtn{padding:10px 12px}
@@ -147,7 +258,7 @@
           <h1>STADIUM DESIGN SHOWCASE</h1>
           <div class="sub">31 Oct – 5 Nov · The Goods Shed, Hobart</div>
           <div class="hint" style="margin-top:14px">
-            Detecting Display Boards… <a href="#" id="skipDetect">(skip)</a>
+            Detecting Display Boards… <a href="#" id="skipDetect">skip</a>
           </div>
         </div>
       </div>
@@ -170,17 +281,18 @@
 </div>
 
 <script>
-  const CACHE_BUST = '?v=9';
+  const CACHE_BUST = '?v=10';
 
-  // YouTube links
   const YT_LINKS = [
     "https://youtu.be/Zx76BnLkNlY","https://youtu.be/KcSXlcSaL_8","https://youtu.be/zskCZeWZ-xo",
     "https://youtu.be/nJqy5tg7z_o","https://youtu.be/mJzHTXnSrb8","https://youtu.be/waWApjh_snA",
     "https://youtu.be/84pkAhplxIY","https://youtu.be/NSc6u8vX-cQ","https://youtu.be/zM63SF3_8fI"
   ];
   const SOCIALS = [
-    {label:"Facebook", href:"#"}, {label:"Instagram", href:"#"},
-    {label:"LinkedIn", href:"#"}, {label:"YouTube", href:"#"}
+    {label:"Facebook", href:"#"},
+    {label:"Instagram", href:"#"},
+    {label:"LinkedIn", href:"#"},
+    {label:"YouTube", href:"#"}
   ];
   const PLANS_GROUPS = [
     { title: "Bowl & Roof", desc: "Key sections and details for main bowl and roof structure.", images: [] },
@@ -191,313 +303,306 @@
   const chunk=(a,s)=>{const o=[]; for(let i=0;i<a.length;i+=s)o.push(a.slice(i,i+s)); return o; };
   const pad2 = n => (n<10?'0'+n:''+n);
 
-  // --- Fast, parallel board detection with sane caps ---
+  // Detection config
   const BOARD_BASES = ["assets/boards/boards1_","assets/boards/boards2_","assets/boards/boards3_"];
-  const BOARD_RANGE = 25;              // try up to 25 per set
+  const BOARD_RANGE = 25;
   const EXTENSIONS = ['.jpg','.JPG','.jpeg','.JPEG'];
-  const PER_IMAGE_TIMEOUT = 900;       // ms
-  const GLOBAL_DETECTION_TIMEOUT = 3500; // ms hard cap
+  const PER_IMAGE_TIMEOUT = 900;
+  const GLOBAL_DETECTION_TIMEOUT = 3500;
 
   function probeUrl(url){
     return new Promise(resolve=>{
       const img = new Image();
-      let settled = false;
-      const t = setTimeout(()=>{ if(!settled){ settled = true; img.src=''; resolve(null); } }, PER_IMAGE_TIMEOUT);
-      img.onload = ()=>{ if(!settled){ settled=true; clearTimeout(t); resolve(url); } };
-      img.onerror = ()=>{ if(!settled){ settled=true; clearTimeout(t); resolve(null); } };
-      img.src = url + CACHE_BUST;
+      let settled=false;
+      const t=setTimeout(()=>{ if(!settled){ settled=true; img.src=''; resolve(null);} },PER_IMAGE_TIMEOUT);
+      img.onload=()=>{ if(!settled){ settled=true; clearTimeout(t); resolve(url);} };
+      img.onerror=()=>{ if(!settled){ settled=true; clearTimeout(t); resolve(null);} };
+      img.src=url+CACHE_BUST;
     });
   }
-  function probeOne(base, n){
-    // fire all extensions at once and take the first that loads
-    const attempts = EXTENSIONS.map(ext => probeUrl(base + pad2(n) + ext));
+  function probeOne(base,n){
+    const attempts = EXTENSIONS.map(ext=>probeUrl(base+pad2(n)+ext));
     return Promise.any(attempts).catch(()=>null);
   }
   async function detectBoardsFast(){
-    const candidates = [];
+    const candidates=[];
     BOARD_BASES.forEach(base=>{
-      for(let n=1;n<=BOARD_RANGE;n++){ candidates.push(probeOne(base, n)); }
+      for(let n=1;n<=BOARD_RANGE;n++){ candidates.push(probeOne(base,n)); }
     });
-    const globalAbort = new Promise(resolve=> setTimeout(()=>resolve('ABORT'), GLOBAL_DETECTION_TIMEOUT));
-    const results = await Promise.race([
-      Promise.all(candidates),
-      globalAbort
-    ]);
-    if(results==='ABORT'){
-      return null; // signal to use fallback
-    }
+    const globalAbort=new Promise(resolve=>setTimeout(()=>resolve('ABORT'),GLOBAL_DETECTION_TIMEOUT));
+    const results=await Promise.race([Promise.all(candidates),globalAbort]);
+    if(results==='ABORT') return null;
     return results.filter(Boolean);
   }
-
-  // Fallback to a safe 25 boards (10 + 10 + 5)
   function fallbackBoards(){
-    const arr = [];
+    const arr=[];
     for(let n=1;n<=10;n++) arr.push(`assets/boards/boards1_${pad2(n)}.jpg`);
     for(let n=1;n<=10;n++) arr.push(`assets/boards/boards2_${pad2(n)}.jpg`);
     for(let n=1;n<=5;n++)  arr.push(`assets/boards/boards3_${pad2(n)}.jpg`);
     return arr;
   }
 
-  // Allow user to skip detection
-  document.getElementById('skipDetect').addEventListener('click', (e)=>{
+  document.getElementById('skipDetect').addEventListener('click',e=>{
     e.preventDefault();
     buildBook(fallbackBoards());
   });
 
-  // Kick off detection
   (async function init(){
     let detected = await detectBoardsFast();
-    if(!detected || detected.length===0){
-      detected = fallbackBoards();
-    }
+    if(!detected || detected.length===0) detected = fallbackBoards();
     buildBook(detected);
   })();
 
-  // ---------------- Build the book ----------------
   function buildBook(DISPLAY_BOARD_FILES){
-    const PLANS_PAGES = [];
-    PLANS_GROUPS.forEach((g, gi)=>{
-      const pages = chunk(g.images, 4);
+    const PLANS_PAGES=[];
+    PLANS_GROUPS.forEach((g,gi)=>{
+      const pages=chunk(g.images,4);
       if(pages.length===0){
-        PLANS_PAGES.push({type:'plansGrid', g:gi, p:0, pagesInGroup:1, title:g.title, desc:g.desc, items:[]});
-      } else {
-        pages.forEach((items, pi)=>{
-          PLANS_PAGES.push({type:'plansGrid', g:gi, p:pi, pagesInGroup:pages.length, title:g.title, desc:g.desc, items});
+        PLANS_PAGES.push({type:'plansGrid',g:gi,p:0,pagesInGroup:1,title:g.title,desc:g.desc,items:[]});
+      }else{
+        pages.forEach((items,pi)=>{
+          PLANS_PAGES.push({type:'plansGrid',g:gi,p:pi,pagesInGroup:pages.length,title:g.title,desc:g.desc,items});
         });
       }
     });
 
-    const PAGES = [
-      { type:"cover", title:"STADIUM DESIGN SHOWCASE", subtitle:"31 Oct – 5 Nov · The Goods Shed, Hobart" },
-      ...DISPLAY_BOARD_FILES.map((src,i)=>({type:"image", src, caption:`Display Board ${i+1}`})),
-      ...YT_LINKS.map((u,ix)=>({type:"youtube", title:`Video ${ix+1}`, url: toEmbed(u)})),
+    const PAGES=[
+      {type:"cover",title:"STADIUM DESIGN SHOWCASE",subtitle:"31 Oct – 5 Nov · The Goods Shed, Hobart"},
+      ...DISPLAY_BOARD_FILES.map((src,i)=>({type:"image",src,caption:`Display Board ${i+1}`})),
+      ...YT_LINKS.map((u,ix)=>({type:"youtube",title:`Video ${ix+1}`,url:toEmbed(u)})),
       ...PLANS_PAGES,
-      { type:"links", items:[
-        { text:"FAQ: Stadium — Find out more", href:"https://www.macpoint.com/stadium-find-out-more" },
-        { text:"Mac Point website", href:"https://www.macpoint.com" }
+      {type:"links",items:[
+        {text:"FAQ: Stadium — Find out more",href:"https://www.macpoint.com/stadium-find-out-more"},
+        {text:"Mac Point website",href:"https://www.macpoint.com"}
       ]}
     ];
 
-    const coverIndex = 0;
-    const boardsStart = 1;
-    const videosStart = boardsStart + DISPLAY_BOARD_FILES.length;
-    const plansStart  = videosStart + YT_LINKS.length;
+    const coverIndex=0;
+    const boardsStart=1;
+    const videosStart=boardsStart+DISPLAY_BOARD_FILES.length;
+    const plansStart=videosStart+YT_LINKS.length;
 
-    let i = 0;
-    const inner = document.getElementById('inner');
-    const ind = document.getElementById('ind');
-
-    const robustImg = (src)=>{ const im=new Image(); im.src = src + CACHE_BUST; return im; };
-    const scrollTopSmooth = ()=>{ try{ window.scrollTo({top:0, behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); } };
+    let i=0;
+    const inner=document.getElementById('inner');
+    const ind=document.getElementById('ind');
+    const robustImg=src=>{const im=new Image(); im.src=src+CACHE_BUST; return im;};
+    const scrollTopSmooth=()=>{try{window.scrollTo({top:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}};
 
     function render(){
-      const p = PAGES[i]; inner.className = 'inner'; inner.innerHTML = '';
+      const p=PAGES[i]; inner.className='inner'; inner.innerHTML='';
       if(!p) return;
 
       if(p.type==='cover'){
         inner.classList.add('cover');
-        inner.innerHTML = `
+        inner.innerHTML=`
           <div class="kicker">Macquarie Point Development Corporation</div>
           <h1>${p.title}</h1>
           <div class="sub">${p.subtitle}</div>
           <div class="hint" style="margin-top:14px">Use ← / → keys, Next/Prev, or the menu to jump anywhere.</div>
         `;
-        ind.textContent = `Page ${i+1} / ${PAGES.length}`;
+        ind.textContent=`Page ${i+1} / ${PAGES.length}`;
         return;
       }
 
       if(p.type==='image'){
-        const f = document.createElement('figure');
-        const imgEl = robustImg(p.src);
-        imgEl.alt = p.caption || 'Display Board';
-        const cap = document.createElement('figcaption'); cap.textContent = p.caption || '';
+        const f=document.createElement('figure');
+        const imgEl=robustImg(p.src);
+        imgEl.alt=p.caption||'Display Board';
+        const cap=document.createElement('figcaption'); cap.textContent=p.caption||'';
         f.appendChild(imgEl); f.appendChild(cap); inner.appendChild(f);
       }
 
       if(p.type==='youtube'){
-        const iframe = document.createElement('iframe');
-        iframe.src = p.url;
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        const iframe=document.createElement('iframe');
+        iframe.src=p.url;
+        iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
         inner.appendChild(iframe);
-        const caption = document.createElement('div'); caption.className='hint'; caption.textContent = p.title; inner.appendChild(caption);
+        const caption=document.createElement('div'); caption.className='hint'; caption.textContent=p.title; inner.appendChild(caption);
       }
 
       if(p.type==='plansGrid'){
-        const h = document.createElement('h2'); h.className='plans-head'; h.textContent = p.title;
-        const d = document.createElement('p'); d.className='plans-sub'; d.textContent = p.desc||'';
+        const h=document.createElement('h2'); h.className='plans-head'; h.textContent=p.title;
+        const d=document.createElement('p'); d.className='plans-sub'; d.textContent=p.desc||'';
         inner.appendChild(h); inner.appendChild(d);
 
-        const grid = document.createElement('div'); grid.className='plans-grid';
-        p.items.forEach((src, idx)=>{
-          const wrap = document.createElement('div'); wrap.className='thumb';
-          const img = robustImg(src); img.alt = 'Plan preview';
-          const label = document.createElement('span'); label.textContent = src.split('/').pop().replace(/\.[^.]+$/,'');
+        const grid=document.createElement('div'); grid.className='plans-grid';
+        p.items.forEach((src,idx)=>{
+          const wrap=document.createElement('div'); wrap.className='thumb';
+          const img=robustImg(src); img.alt='Plan preview';
+          const label=document.createElement('span'); label.textContent=src.split('/').pop().replace(/\.[^.]+$/,'');
           wrap.appendChild(img); wrap.appendChild(label);
-          wrap.onclick = ()=> openLightbox(p.g, p.items, idx);
+          wrap.onclick=()=>openLightbox(p.g,p.items,idx);
           grid.appendChild(wrap);
         });
         if(p.items.length===0){
-          const empty = document.createElement('div');
+          const empty=document.createElement('div');
           empty.className='min-muted';
-          empty.textContent = 'No plan images added yet. Add files to assets/plans/ and list them under this group.';
+          empty.textContent='No plan images added yet. Add files to assets/plans/ and list them under this group.';
           inner.appendChild(empty);
-        } else {
+        }else{
           inner.appendChild(grid);
         }
 
-        const pager = document.createElement('div'); pager.className='plans-pager';
-        const bPrev = document.createElement('button'); bPrev.className='btn-min'; bPrev.textContent='‹ Prev Page';
-        const bNext = document.createElement('button'); bNext.className='btn-min'; bNext.textContent='Next Page ›';
-        const info = document.createElement('span'); info.className='min-muted';
-        info.textContent = `Page ${p.p+1} of ${p.pagesInGroup} in “${p.title}”`;
+        const pager=document.createElement('div'); pager.className='plans-pager';
+        const bPrev=document.createElement('button'); bPrev.className='btn-min'; bPrev.textContent='‹ Prev Page';
+        const bNext=document.createElement('button'); bNext.className='btn-min'; bNext.textContent='Next Page ›';
+        const info=document.createElement('span'); info.className='min-muted';
+        info.textContent=`Page ${p.p+1} of ${p.pagesInGroup} in “${p.title}”`;
 
-        const groupFirstAbs = plansStart + PLANS_PAGES.findIndex(pp => pp.g===p.g && pp.p===0);
-        bPrev.disabled = (p.p===0);
-        bNext.disabled = (p.p===p.pagesInGroup-1);
-        bPrev.onclick = ()=>{ if(p.p>0){ i = groupFirstAbs + (p.p-1); render(); scrollTopSmooth(); } };
-        bNext.onclick = ()=>{ if(p.p<p.pagesInGroup-1){ i = groupFirstAbs + (p.p+1); render(); scrollTopSmooth(); } };
+        const groupFirstAbs=plansStart+PLANS_PAGES.findIndex(pp=>pp.g===p.g&&pp.p===0);
+        bPrev.disabled=(p.p===0);
+        bNext.disabled=(p.p===p.pagesInGroup-1);
+        bPrev.onclick=()=>{if(p.p>0){i=groupFirstAbs+(p.p-1);render();scrollTopSmooth();}};
+        bNext.onclick=()=>{if(p.p<p.pagesInGroup-1){i=groupFirstAbs+(p.p+1);render();scrollTopSmooth();}};
 
         pager.appendChild(bPrev); pager.appendChild(info); pager.appendChild(bNext);
         inner.appendChild(pager);
       }
 
       if(p.type==='links'){
-        let html = '<h2>Links & Further Information</h2><ul>';
-        (p.items||[]).forEach(it => { html += `<li><a href="${it.href}" target="_blank" rel="noopener">${it.text}</a></li>`; });
-        html += '</ul>';
-        html += '<h3>MPDC Socials</h3><ul>';
-        SOCIALS.forEach(s => { html += `<li><a href="${s.href}" target="_blank" rel="noopener">${s.label}</a></li>`; });
-        html += '</ul>';
+        let html = `
+          <h2>Links & Further Information</h2>
+          <p class="links-intro">Explore more about the Macquarie Point Stadium project and keep up to date with MPDC channels.</p>
+          <div class="links-list">
+        `;
+        (p.items||[]).forEach(it=>{
+          html += `
+            <a class="link-card" href="${it.href}" target="_blank" rel="noopener">
+              <span class="link-title">${it.text}</span>
+              <span class="link-arrow">↗</span>
+            </a>
+          `;
+        });
+        html += `</div>`;
+        html += `<h3>MPDC Socials</h3><div class="links-list">`;
+        SOCIALS.forEach(s=>{
+          html += `
+            <a class="link-card" href="${s.href}" target="_blank" rel="noopener">
+              <span class="link-title">${s.label}</span>
+              <span class="link-arrow">↗</span>
+            </a>
+          `;
+        });
+        html += `</div>`;
         inner.innerHTML = html;
       }
 
-      ind.textContent = `Page ${i+1} / ${PAGES.length}`;
-      document.getElementById('prev').disabled = (i===0);
-      document.getElementById('next').disabled = (i===PAGES.length-1);
+      ind.textContent=`Page ${i+1} / ${PAGES.length}`;
+      document.getElementById('prev').disabled=(i===0);
+      document.getElementById('next').disabled=(i===PAGES.length-1);
     }
 
     function prev(){ if(i>0){ i--; render(); } }
     function next(){ if(i<PAGES.length-1){ i++; render(); } }
-    document.getElementById('prev').onclick = ()=>{ prev(); scrollTopSmooth(); };
-    document.getElementById('next').onclick = ()=>{ next(); scrollTopSmooth(); };
-    document.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+    document.getElementById('prev').onclick=()=>{prev();scrollTopSmooth();};
+    document.getElementById('next').onclick=()=>{next();scrollTopSmooth();};
+    document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')prev(); if(e.key==='ArrowRight')next();});
 
-    // Menus
-    const menuBoards = document.getElementById('menuBoards');
-    const boardsList = document.getElementById('boardsList');
-    const menuVideos = document.getElementById('menuVideos');
-    const videosList = document.getElementById('videosList');
-    const menuPlans = document.getElementById('menuPlans');
-    const plansList = document.getElementById('plansList');
-    const jumpLinks = document.getElementById('jumpLinks');
+    const menuBoards=document.getElementById('menuBoards');
+    const boardsList=document.getElementById('boardsList');
+    const menuVideos=document.getElementById('menuVideos');
+    const videosList=document.getElementById('videosList');
+    const menuPlans=document.getElementById('menuPlans');
+    const plansList=document.getElementById('plansList');
+    const jumpLinks=document.getElementById('jumpLinks');
 
     function closeMenus(e){
       if(!e) return;
-      const m1 = e.target.closest('#menuBoards');
-      const m2 = e.target.closest('#menuVideos');
-      const m3 = e.target.closest('#menuPlans');
+      const m1=e.target.closest('#menuBoards');
+      const m2=e.target.closest('#menuVideos');
+      const m3=e.target.closest('#menuPlans');
       if(!m1) menuBoards.classList.remove('open');
       if(!m2) menuVideos.classList.remove('open');
       if(!m3) menuPlans.classList.remove('open');
     }
-    document.addEventListener('click', closeMenus);
+    document.addEventListener('click',closeMenus);
 
-    const openMenu = (menuToOpen) => (e)=>{
+    const openMenu=menuToOpen=>e=>{
       e.stopPropagation();
-      [menuBoards, menuVideos, menuPlans].forEach(m => { if(m !== menuToOpen) m.classList.remove('open'); });
+      [menuBoards,menuVideos,menuPlans].forEach(m=>{if(m!==menuToOpen)m.classList.remove('open');});
       menuToOpen.classList.toggle('open');
     };
-    menuBoards.querySelector('button').addEventListener('click', openMenu(menuBoards));
-    menuVideos.querySelector('button').addEventListener('click', openMenu(menuVideos));
-    menuPlans.querySelector('button').addEventListener('click', openMenu(menuPlans));
+    menuBoards.querySelector('button').addEventListener('click',openMenu(menuBoards));
+    menuVideos.querySelector('button').addEventListener('click',openMenu(menuVideos));
+    menuPlans.querySelector('button').addEventListener('click',openMenu(menuPlans));
 
-    // Boards dropdown (from detected/fallback files)
-    boardsList.innerHTML = '';
-    DISPLAY_BOARD_FILES.forEach((src, idx)=>{
-      const a = document.createElement('a');
-      a.href = '#';
-      a.textContent = `Display Board ${idx+1}`;
-      a.onclick = (ev)=>{ ev.preventDefault(); i = boardsStart + idx; render(); menuBoards.classList.remove('open'); scrollTopSmooth(); };
+    boardsList.innerHTML='';
+    DISPLAY_BOARD_FILES.forEach((src,idx)=>{
+      const a=document.createElement('a');
+      a.href='#'; a.textContent=`Display Board ${idx+1}`;
+      a.onclick=ev=>{ev.preventDefault(); i=boardsStart+idx; render(); menuBoards.classList.remove('open'); scrollTopSmooth();};
       boardsList.appendChild(a);
     });
 
-    // Videos dropdown
-    videosList.innerHTML = '';
-    YT_LINKS.forEach((u, ix)=>{
-      const a = document.createElement('a');
-      a.href = '#';
-      a.textContent = `Video ${ix+1}`;
-      a.onclick = (ev)=>{ ev.preventDefault(); i = videosStart + ix; render(); menuVideos.classList.remove('open'); scrollTopSmooth(); };
+    videosList.innerHTML='';
+    YT_LINKS.forEach((u,ix)=>{
+      const a=document.createElement('a');
+      a.href='#'; a.textContent=`Video ${ix+1}`;
+      a.onclick=ev=>{ev.preventDefault(); i=videosStart+ix; render(); menuVideos.classList.remove('open'); scrollTopSmooth();};
       videosList.appendChild(a);
     });
 
-    // Plans dropdown — one entry per group
-    plansList.innerHTML = '';
-    PLANS_GROUPS.forEach((g, gi)=>{
-      const a = document.createElement('a');
-      a.href = '#';
-      a.textContent = g.title;
-      a.onclick = (ev)=>{
+    plansList.innerHTML='';
+    PLANS_GROUPS.forEach((g,gi)=>{
+      const a=document.createElement('a');
+      a.href='#'; a.textContent=g.title;
+      a.onclick=ev=>{
         ev.preventDefault();
-        let abs = videosStart + YT_LINKS.length; let offset = 0;
-        for (let k = 0; k < PLANS_GROUPS.length; k++){
-          const pagesCount = Math.max(1, Math.ceil((PLANS_GROUPS[k].images||[]).length / 4));
-          if (k === gi){ abs = (videosStart + YT_LINKS.length) + offset; break; }
-          else { offset += pagesCount; }
+        let abs=videosStart+YT_LINKS.length, offset=0;
+        for(let k=0;k<PLANS_GROUPS.length;k++){
+          const pagesCount=Math.max(1,Math.ceil((PLANS_GROUPS[k].images||[]).length/4));
+          if(k===gi){ abs=(videosStart+YT_LINKS.length)+offset; break; }
+          else offset+=pagesCount;
         }
-        i = abs; render(); menuPlans.classList.remove('open'); scrollTopSmooth();
+        i=abs; render(); menuPlans.classList.remove('open'); scrollTopSmooth();
       };
       plansList.appendChild(a);
     });
 
-    // Links menu item
-    jumpLinks.addEventListener('click',(e)=>{
+    jumpLinks.addEventListener('click',e=>{
       e.preventDefault();
-      const plansPageCount = PLANS_GROUPS
-        .map(g => Math.max(1, Math.ceil((g.images||[]).length / 4)))
+      const plansPageCount=PLANS_GROUPS
+        .map(g=>Math.max(1,Math.ceil((g.images||[]).length/4)))
         .reduce((a,b)=>a+b,0);
-      i = (videosStart + YT_LINKS.length) + plansPageCount; render(); scrollTopSmooth();
+      i=(videosStart+YT_LINKS.length)+plansPageCount; render(); scrollTopSmooth();
     });
 
-    // Lightbox
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lbImg');
-    const lbPrev = document.getElementById('lbPrev');
-    const lbNext = document.getElementById('lbNext');
-    const lbClose = document.getElementById('lbClose');
+    const lb=document.getElementById('lightbox');
+    const lbImg=document.getElementById('lbImg');
+    const lbPrev=document.getElementById('lbPrev');
+    const lbNext=document.getElementById('lbNext');
+    const lbClose=document.getElementById('lbClose');
 
-    let lbGroupImages = [];
-    let lbIndex = 0;
-    function openLightbox(groupIndex, images, startIdx){
-      lbGroupImages = images; lbIndex = startIdx; showLb(); lb.classList.add('open');
+    let lbGroupImages=[]; let lbIndex=0;
+    function openLightbox(groupIndex,images,startIdx){
+      lbGroupImages=images; lbIndex=startIdx; showLb(); lb.classList.add('open');
     }
     function showLb(){
-      const src = lbGroupImages[lbIndex];
-      const img = new Image();
-      img.onload = ()=>{ lbImg.src = src + CACHE_BUST; };
-      img.src = src + CACHE_BUST;
+      const src=lbGroupImages[lbIndex];
+      const img=new Image();
+      img.onload=()=>{lbImg.src=src+CACHE_BUST;};
+      img.src=src+CACHE_BUST;
     }
-    lbPrev.onclick = ()=>{ if(lbIndex>0){ lbIndex--; showLb(); } };
-    lbNext.onclick = ()=>{ if(lbIndex < lbGroupImages.length-1){ lbIndex++; showLb(); } };
-    lbClose.onclick = ()=> lb.classList.remove('open');
-    lb.addEventListener('click', (e)=>{ if(e.target===lb) lb.classList.remove('open'); });
+    lbPrev.onclick=()=>{if(lbIndex>0){lbIndex--;showLb();}};
+    lbNext.onclick=()=>{if(lbIndex<lbGroupImages.length-1){lbIndex++;showLb();}};
+    lbClose.onclick=()=>lb.classList.remove('open');
+    lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('open');});
 
-    // Home clicks
-    const goHome = ()=>{ i = coverIndex; render(); scrollTopSmooth(); };
-    document.getElementById('homeBrand').addEventListener('click', goHome);
-    document.getElementById('homeTitle').addEventListener('click', goHome);
+    const goHome=()=>{i=coverIndex;render();scrollTopSmooth();};
+    document.getElementById('homeBrand').addEventListener('click',goHome);
+    document.getElementById('homeTitle').addEventListener('click',goHome);
 
-    // Initial render + touch swipe
     render();
+
     let startX=null; const paper=document.querySelector('.paper');
-    paper.addEventListener('touchstart', e=>{startX=e.changedTouches[0].screenX;}, {passive:true});
-    paper.addEventListener('touchend', e=>{
-      if(startX==null) return;
+    paper.addEventListener('touchstart',e=>{startX=e.changedTouches[0].screenX;},{passive:true});
+    paper.addEventListener('touchend',e=>{
+      if(startX==null)return;
       const dx=e.changedTouches[0].screenX-startX;
-      if(dx<-40) next();
-      if(dx>40) prev();
+      if(dx<-40)next();
+      if(dx>40)prev();
       startX=null;
-    }, {passive:true});
+    },{passive:true});
   }
 </script>
 </body></html>
