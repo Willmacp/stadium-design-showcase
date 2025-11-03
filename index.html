@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Stadium Design Showcase — Digital Book</title>
+<title>Stadium Design Showcase — Digital Handbook</title>
 <style>
   :root{
     --bg:#e9f2f9;
@@ -36,24 +36,29 @@
   .nav{ display:flex; gap:10px; align-items:center; }
   .nav > .menu{ position:relative; }
 
+  /* Primary button style (top nav and Links) */
   .menu > button,
   .menu > a{
     appearance:none;
-    border:1px solid var(--border);
-    background:#fff;
-    color:#1f2d36;
-    border-radius:10px;
-    padding:10px 14px;
+    border:1px solid var(--brand);
+    background:#ffffff;
+    color:var(--brand);
+    border-radius:999px;
+    padding:9px 16px;
     cursor:pointer;
-    font-weight:500;            /* not super bold */
-    text-decoration:none;       /* no underline */
-    text-transform:none;        /* no caps */
+    font-weight:500;
+    font-size:14px;
+    text-decoration:none;
+    text-transform:none;
     box-shadow:0 1px 4px rgba(0,0,0,.04);
+    transition:border-color .15s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
   }
   .menu > button:hover,
   .menu > a:hover{
     border-color:var(--brand);
-    box-shadow:0 2px 6px rgba(0,0,0,.08);
+    background:var(--brand);
+    color:#ffffff;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
   }
 
   .dropdown{
@@ -98,12 +103,15 @@
   }
   .toolbar .title:active{opacity:.85}
   .toolbar .pill{
-    background:#eef5fb;
-    color:#2d3a44;
-    padding:4px 10px;
+    background:#e5ecf3;
+    color:var(--brand);
+    padding:4px 12px;
     border-radius:999px;
     font-size:11px;
     border:1px solid var(--brand);
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
   }
 
   .paper{min-height:calc(100vh - 300px - 56px); display:grid; place-items:center; background:#fff}
@@ -130,14 +138,26 @@
   figcaption{margin-top:8px; color:#2d3a44; font-size:14px}
   iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:10px;}
 
+  /* Next / Prev buttons */
   .navbtn{
     position:absolute; top:50%; transform:translateY(-50%);
-    background:#fff; border:1px solid var(--border); border-radius:10px;
-    padding:12px 14px; cursor:pointer; font-weight:700;
+    background:#ffffff;
+    border:1px solid var(--brand);
+    border-radius:999px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:13px;
+    color:var(--brand);
     box-shadow:0 6px 16px rgba(0,0,0,.08);
+    transition:border-color .15s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
   }
   #prev{left:12px} #next{right:12px}
-  .navbtn:hover{border-color:var(--brand);}
+  .navbtn:hover{
+    background:var(--brand);
+    color:#ffffff;
+    box-shadow:0 8px 20px rgba(0,0,0,.16);
+  }
 
   .hint{font-size:12px; color:#6a7b88; margin-top:6px}
   footer{color:#6f8aa0; padding:18px; text-align:center}
@@ -159,11 +179,15 @@
 
   .plans-pager{display:flex; align-items:center; gap:8px; margin-top:14px; flex-wrap:wrap}
   .btn-min{
-    appearance:none; border:1px solid var(--border); background:#fff;
-    padding:8px 12px; border-radius:8px; cursor:pointer;
-    font-size:12px;
+    appearance:none; border:1px solid var(--brand); background:#ffffff;
+    padding:6px 10px; border-radius:999px; cursor:pointer;
+    font-size:11px; color:var(--brand);
+    transition:border-color .15s ease, background .15s ease, color .15s ease;
   }
-  .btn-min:hover{border-color:var(--brand);}
+  .btn-min:hover{
+    background:var(--brand);
+    color:#ffffff;
+  }
   .min-muted{font-size:12px; color:#6b7c8a}
 
   .lightbox{
@@ -175,12 +199,20 @@
   .lb-inner img{max-width:92vw; max-height:88vh; border-radius:10px; display:block}
   .lb-prev,.lb-next,.lb-close{
     position:absolute; top:50%; transform:translateY(-50%);
-    background:#fff; border:1px solid var(--border);
-    border-radius:10px; padding:10px 12px; cursor:pointer; font-weight:700;
+    background:#ffffff;
+    border:1px solid var(--brand);
+    border-radius:999px;
+    padding:8px 10px; cursor:pointer; font-weight:700;
     box-shadow:0 6px 16px rgba(0,0,0,.25);
+    color:var(--brand);
+    transition:border-color .15s ease, background .15s ease, color .15s ease;
   }
   .lb-prev{left:-4rem} .lb-next{right:-4rem}
   .lb-close{top:-3rem; right:0; transform:none}
+  .lb-prev:hover,.lb-next:hover,.lb-close:hover{
+    background:var(--brand);
+    color:#ffffff;
+  }
   @media(max-width:900px){
     .lb-prev{left:0.5rem} .lb-next{right:0.5rem} .lb-close{right:0.5rem}
   }
@@ -216,8 +248,8 @@
 
   @media (max-width:860px){
     .nav{gap:8px}
-    .menu > button, .menu > a{padding:10px 12px}
-    .navbtn{padding:10px 12px}
+    .menu > button, .menu > a{padding:9px 14px}
+    .navbtn{padding:9px 13px}
     h1{font-size:30px}
   }
   @media (max-width:520px){
@@ -270,9 +302,9 @@
 <div class="wrap">
   <div class="book">
     <div class="toolbar">
-      <div class="title" id="homeTitle">Stadium Design Showcase — Digital Book</div>
+      <div class="title" id="homeTitle">Stadium Design Showcase — Digital Handbook</div>
       <div class="spacer"></div>
-      <span class="pill" id="ind">Page 1 / 1</span>
+      <span class="pill" id="ind">PAGE 1 OF 1</span>
     </div>
     <div class="paper">
       <div class="page">
@@ -304,7 +336,7 @@
 </div>
 
 <script>
-  const CACHE_BUST = '?v=12';
+  const CACHE_BUST = '?v=13';
 
   // ---- DISPLAY BOARDS: exactly your 25 files ----
   const DISPLAY_BOARD_FILES = [
@@ -406,6 +438,10 @@
   const robustImg = (src)=>{ const im=new Image(); im.src = src + CACHE_BUST; return im; };
   const scrollTopSmooth = ()=>{ try{ window.scrollTo({top:0, behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); } };
 
+  function updateIndicator(){
+    ind.textContent = `PAGE ${i+1} OF ${PAGES.length}`;
+  }
+
   function render(){
     const p=PAGES[i]; inner.className='inner'; inner.innerHTML='';
     if(!p) return;
@@ -418,27 +454,19 @@
         <div class="sub">${p.subtitle}</div>
         <div class="hint" style="margin-top:14px">Use ← / → keys, Next/Prev, or the menus to navigate.</div>
       `;
-      ind.textContent = `Page ${i+1} / ${PAGES.length}`;
-      return;
-    }
-
-    if(p.type==='image'){
+    } else if(p.type==='image'){
       const f=document.createElement('figure');
       const imgEl=robustImg(p.src);
       imgEl.alt=p.caption||'Display Board';
       const cap=document.createElement('figcaption'); cap.textContent=p.caption||'';
       f.appendChild(imgEl); f.appendChild(cap); inner.appendChild(f);
-    }
-
-    if(p.type==='youtube'){
+    } else if(p.type==='youtube'){
       const iframe=document.createElement('iframe');
       iframe.src=p.url;
       iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
       inner.appendChild(iframe);
       const caption=document.createElement('div'); caption.className='hint'; caption.textContent=p.title; inner.appendChild(caption);
-    }
-
-    if(p.type==='plansGrid'){
+    } else if(p.type==='plansGrid'){
       const h=document.createElement('h2'); h.className='plans-head'; h.textContent=p.title;
       const d=document.createElement('p'); d.className='plans-sub'; d.textContent=p.desc||'';
       inner.appendChild(h); inner.appendChild(d);
@@ -475,9 +503,7 @@
 
       pager.appendChild(bPrev); pager.appendChild(info); pager.appendChild(bNext);
       inner.appendChild(pager);
-    }
-
-    if(p.type==='links'){
+    } else if(p.type==='links'){
       let html = `
         <h2>Links & Further Information</h2>
         <p class="links-intro">Explore more about the Macquarie Point Stadium project and keep up to date with MPDC channels.</p>
@@ -505,16 +531,16 @@
       inner.innerHTML = html;
     }
 
-    ind.textContent=`Page ${i+1} / ${PAGES.length}`;
+    updateIndicator();
     document.getElementById('prev').disabled=(i===0);
     document.getElementById('next').disabled=(i===PAGES.length-1);
   }
 
-  function prev(){ if(i>0){ i--; render(); } }
-  function next(){ if(i<PAGES.length-1){ i++; render(); } }
+  function prev(){ if(i>0){ i--; render(); scrollTopSmooth(); } }
+  function next(){ if(i<PAGES.length-1){ i++; render(); scrollTopSmooth(); } }
 
-  document.getElementById('prev').onclick=()=>{prev();scrollTopSmooth();};
-  document.getElementById('next').onclick=()=>{next();scrollTopSmooth();};
+  document.getElementById('prev').onclick=prev;
+  document.getElementById('next').onclick=next;
   document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')prev(); if(e.key==='ArrowRight')next();});
 
   // Menus
