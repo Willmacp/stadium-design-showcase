@@ -56,32 +56,23 @@
 <footer>© 2025 Macquarie Point Development Corporation</footer>
 
 <script>
-  // 🖼️ 1) Your board image files
-  // These match the ones you downloaded (no need to rename)
+  // 🖼️ All display boards (1–3 series)
   const DEFAULT_BOARD_FILES = [
-    "assets/boards/boards1_01.jpg",
-    "assets/boards/boards1_02.jpg",
-    "assets/boards/boards1_03.jpg",
-    "assets/boards/boards1_04.jpg",
-    "assets/boards/boards1_05.jpg",
-    "assets/boards/boards1_06.jpg",
-    "assets/boards/boards1_07.jpg",
-    "assets/boards/boards1_08.jpg",
-    "assets/boards/boards1_09.jpg",
-    "assets/boards/boards1_10.jpg",
-    "assets/boards/boards2_01.jpg",
-    "assets/boards/boards2_02.jpg",
-    "assets/boards/boards2_03.jpg",
-    "assets/boards/boards2_04.jpg",
-    "assets/boards/boards2_05.jpg",
-    "assets/boards/boards2_06.jpg",
-    "assets/boards/boards2_07.jpg",
-    "assets/boards/boards2_08.jpg",
-    "assets/boards/boards2_09.jpg",
-    "assets/boards/boards2_10.jpg"
+    // --- Set 1 ---
+    "assets/boards/boards1_01.jpg","assets/boards/boards1_02.jpg","assets/boards/boards1_03.jpg",
+    "assets/boards/boards1_04.jpg","assets/boards/boards1_05.jpg","assets/boards/boards1_06.jpg",
+    "assets/boards/boards1_07.jpg","assets/boards/boards1_08.jpg","assets/boards/boards1_09.jpg","assets/boards/boards1_10.jpg",
+    // --- Set 2 ---
+    "assets/boards/boards2_01.jpg","assets/boards/boards2_02.jpg","assets/boards/boards2_03.jpg",
+    "assets/boards/boards2_04.jpg","assets/boards/boards2_05.jpg","assets/boards/boards2_06.jpg",
+    "assets/boards/boards2_07.jpg","assets/boards/boards2_08.jpg","assets/boards/boards2_09.jpg","assets/boards/boards2_10.jpg",
+    // --- Set 3 (new, from Open House Boards) ---
+    "assets/boards/boards3_01.jpg","assets/boards/boards3_02.jpg","assets/boards/boards3_03.jpg",
+    "assets/boards/boards3_04.jpg","assets/boards/boards3_05.jpg","assets/boards/boards3_06.jpg",
+    "assets/boards/boards3_07.jpg","assets/boards/boards3_08.jpg","assets/boards/boards3_09.jpg"
   ];
 
-  // 🎬 2) Example YouTube videos (replace URLs with your own later)
+  // 🎬 YouTube videos (placeholders or real links)
   const YOUTUBE_VIDEOS = [
     { title: "Player Facilities (Brendon Gale)", url: "https://www.youtube.com/embed/XHOmBV4js_E" },
     { title: "Stadium Design Overview", url: "https://www.youtube.com/embed/eX2qFMC8cFo" },
@@ -90,7 +81,7 @@
     { title: "AFL Tasmania Future Showcase", url: "https://www.youtube.com/embed/tgbNymZ7vqY" }
   ];
 
-  // 📖 3) Book structure
+  // 📖 Book structure
   const PAGES = [
     { type:"cover", title:"STADIUM DESIGN SHOWCASE", subtitle:"31 Oct – 5 Nov · The Goods Shed, Hobart" },
     ...DEFAULT_BOARD_FILES.map((src, i) => ({ type:"image", src, caption:`Display Board ${i+1}` })),
@@ -121,13 +112,9 @@
     if (p.type === 'image') {
       const f = document.createElement('figure');
       const img = document.createElement('img');
-      img.src = p.src;
-      img.alt = p.caption || 'Display Board';
-      const cap = document.createElement('figcaption');
-      cap.textContent = p.caption || '';
-      f.appendChild(img);
-      f.appendChild(cap);
-      inner.appendChild(f);
+      img.src = p.src; img.alt = p.caption||'Display Board';
+      const cap = document.createElement('figcaption'); cap.textContent = p.caption||'';
+      f.appendChild(img); f.appendChild(cap); inner.appendChild(f);
     }
 
     if (p.type === 'youtube') {
@@ -135,10 +122,7 @@
       iframe.src = p.url;
       iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
       inner.appendChild(iframe);
-      const caption = document.createElement('div');
-      caption.className = 'hint';
-      caption.textContent = p.title;
-      inner.appendChild(caption);
+      const caption = document.createElement('div'); caption.className = 'hint'; caption.textContent = p.title; inner.appendChild(caption);
     }
 
     if (p.type === 'plans') {
@@ -148,15 +132,15 @@
     if (p.type === 'links') {
       inner.innerHTML = '<h2>Links & Further Information</h2>';
       const ul = document.createElement('ul');
-      (p.items || []).forEach(it => {
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="${it.href}" target="_blank" rel="noopener">${it.text}</a>`;
+      (p.items||[]).forEach(it=>{
+        const li=document.createElement('li');
+        li.innerHTML=`<a href="${it.href}" target="_blank" rel="noopener">${it.text}</a>`;
         ul.appendChild(li);
       });
       inner.appendChild(ul);
     }
 
-    ind.textContent = `Page ${i + 1} / ${PAGES.length}`;
+    ind.textContent = `Page ${i+1} / ${PAGES.length}`;
   }
 
   function prev(){ if (i>0){ i--; render(); } }
@@ -166,8 +150,7 @@
   document.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
 
   function buildTOC(){
-    const div = document.createElement('div');
-    div.innerHTML = '<h3>Contents</h3>';
+    const div = document.createElement('div'); div.innerHTML = '<h3>Contents</h3>';
     const ul = document.createElement('ul');
     PAGES.forEach((p, idx)=>{
       const a = document.createElement('a');
@@ -175,28 +158,23 @@
                     p.type==='cover' ? 'Cover' :
                     p.type==='youtube' ? p.title :
                     (p.type[0].toUpperCase()+p.type.slice(1));
-      a.textContent = label;
-      a.href='#';
+      a.textContent = label; a.href='#';
       a.onclick=(ev)=>{ev.preventDefault(); i=idx; render(); toc.classList.remove('active');};
-      const li = document.createElement('li');
-      li.appendChild(a);
-      ul.appendChild(li);
+      const li=document.createElement('li'); li.appendChild(a); ul.appendChild(li);
     });
-    div.appendChild(ul);
-    toc.appendChild(div);
+    div.appendChild(ul); toc.appendChild(div);
   }
 
   document.getElementById('tocbtn').onclick = ()=> toc.classList.toggle('active');
   buildTOC(); render();
 
-  // Touch swipe navigation
+  // Swipe navigation
   let startX=null; const paper=document.querySelector('.paper');
   paper.addEventListener('touchstart', e=>{startX=e.changedTouches[0].screenX;}, {passive:true});
   paper.addEventListener('touchend', e=>{
     if(startX==null) return;
     const dx=e.changedTouches[0].screenX-startX;
-    if(dx<-40) next();
-    if(dx>40) prev();
+    if(dx<-40) next(); if(dx>40) prev();
     startX=null;
   }, {passive:true});
 </script>
