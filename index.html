@@ -19,6 +19,7 @@
   .inner.cover{text-align:center;padding:40px;background:radial-gradient(1100px 450px at 70% 10%, rgba(200,168,107,.18), rgba(255,255,255,0)),#fff}
   h1{margin:0 0 8px} .sub{color:#5a6b78}
   figure{margin:0} figure img{width:100%;height:auto;border-radius:8px} figcaption{margin-top:8px;color:#2d3a44;font-size:14px}
+  iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:8px;}
   .navbtn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.95);border:1px solid #dfe7ec;border-radius:10px;padding:10px 12px;cursor:pointer}
   #prev{left:12px} #next{right:12px}
   .toc{position:absolute;top:52px;right:12px;width:320px;max-height:calc(100% - 64px);overflow:auto;border:1px solid #e2e9ee;background:#fff;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.1);display:none}
@@ -55,22 +56,45 @@
 <footer>© 2025 Macquarie Point Development Corporation</footer>
 
 <script>
-  // 1) LIST YOUR BOARD IMAGES HERE IF YOU WANT CUSTOM ORDER/TITLES
-  //    (or let the auto-scan fill it in below)
-  const MANUAL_BOARDS = []; // e.g. ["assets/boards/boards1_01.jpg", ...]
+  // 🖼️ 1) Your board image files
+  // These match the ones you downloaded (no need to rename)
+  const DEFAULT_BOARD_FILES = [
+    "assets/boards/boards1_01.jpg",
+    "assets/boards/boards1_02.jpg",
+    "assets/boards/boards1_03.jpg",
+    "assets/boards/boards1_04.jpg",
+    "assets/boards/boards1_05.jpg",
+    "assets/boards/boards1_06.jpg",
+    "assets/boards/boards1_07.jpg",
+    "assets/boards/boards1_08.jpg",
+    "assets/boards/boards1_09.jpg",
+    "assets/boards/boards1_10.jpg",
+    "assets/boards/boards2_01.jpg",
+    "assets/boards/boards2_02.jpg",
+    "assets/boards/boards2_03.jpg",
+    "assets/boards/boards2_04.jpg",
+    "assets/boards/boards2_05.jpg",
+    "assets/boards/boards2_06.jpg",
+    "assets/boards/boards2_07.jpg",
+    "assets/boards/boards2_08.jpg",
+    "assets/boards/boards2_09.jpg",
+    "assets/boards/boards2_10.jpg"
+  ];
 
-  // 2) BASIC PAGE SETUP
+  // 🎬 2) Example YouTube videos (replace URLs with your own later)
+  const YOUTUBE_VIDEOS = [
+    { title: "Player Facilities (Brendon Gale)", url: "https://www.youtube.com/embed/XHOmBV4js_E" },
+    { title: "Stadium Design Overview", url: "https://www.youtube.com/embed/eX2qFMC8cFo" },
+    { title: "Sustainability & Site Preparation", url: "https://www.youtube.com/embed/zpOULjyy-n8" },
+    { title: "Mac Point Precinct Vision", url: "https://www.youtube.com/embed/ysz5S6PUM-U" },
+    { title: "AFL Tasmania Future Showcase", url: "https://www.youtube.com/embed/tgbNymZ7vqY" }
+  ];
+
+  // 📖 3) Book structure
   const PAGES = [
     { type:"cover", title:"STADIUM DESIGN SHOWCASE", subtitle:"31 Oct – 5 Nov · The Goods Shed, Hobart" },
-    // Boards get inserted below...
-    // Then 6 video pages:
-    { type:"video", poster:"assets/videos/video01.jpg", src:"assets/videos/video01.mp4", caption:"Video 1" },
-    { type:"video", poster:"assets/videos/video02.jpg", src:"assets/videos/video02.mp4", caption:"Video 2" },
-    { type:"video", poster:"assets/videos/video03.jpg", src:"assets/videos/video03.mp4", caption:"Video 3" },
-    { type:"video", poster:"assets/videos/video04.jpg", src:"assets/videos/video04.mp4", caption:"Video 4" },
-    { type:"video", poster:"assets/videos/video05.jpg", src:"assets/videos/video05.mp4", caption:"Video 5" },
-    { type:"video", poster:"assets/videos/video06.jpg", src:"assets/videos/video06.mp4", caption:"Video 6" },
-    // Plans and links:
+    ...DEFAULT_BOARD_FILES.map((src, i) => ({ type:"image", src, caption:`Display Board ${i+1}` })),
+    ...YOUTUBE_VIDEOS.map(v => ({ type:"youtube", title:v.title, url:v.url })),
     { type:"plans", caption:"Architectural Plans" },
     { type:"links", items:[
       { text:"FAQ: Stadium — Find out more", href:"https://www.macpoint.com/stadium-find-out-more" },
@@ -79,21 +103,6 @@
     ]}
   ];
 
-  // 3) AUTO-SCAN BOARDS FOLDER
-  //    (Static hosting can’t list directories, so add board filenames here if MANUAL_BOARDS is empty.)
-  //    If you already know the filenames, set them above in MANUAL_BOARDS instead.
-  const DEFAULT_BOARD_FILES = [
-    // Add your board file names here if needed:
-    // "assets/boards/boards1_01.jpg","assets/boards/boards1_02.jpg","assets/boards/boards1_03.jpg"
-  ];
-
-  const boards = (MANUAL_BOARDS.length ? MANUAL_BOARDS : DEFAULT_BOARD_FILES);
-  const cover = PAGES.shift();
-  const tail = PAGES.splice(0);
-
-  const pages = [cover, ...boards.map((src, idx) => ({ type:"image", src, caption:`Board ${idx+1}` })), ...tail];
-
-  // --- RENDERING LOGIC ---
   let i = 0;
   const inner = document.getElementById('inner');
   const ind = document.getElementById('ind');
@@ -101,63 +110,94 @@
   const tocbtn = document.getElementById('tocbtn');
 
   function render() {
-    const p = pages[i]; inner.className = 'inner'; inner.innerHTML = '';
+    const p = PAGES[i]; inner.className = 'inner'; inner.innerHTML = '';
     if (!p) return;
+
     if (p.type === 'cover') {
       inner.classList.add('cover');
       inner.innerHTML = `<h1>${p.title}</h1><div class="sub">${p.subtitle}</div><div class="hint" style="margin-top:14px">Use ← / → keys, Next/Prev, or Contents.</div>`;
     }
+
     if (p.type === 'image') {
       const f = document.createElement('figure');
-      const img = document.createElement('img'); img.src = p.src; img.alt = p.caption||'Board';
-      const cap = document.createElement('figcaption'); cap.textContent = p.caption||'';
-      f.appendChild(img); f.appendChild(cap); inner.appendChild(f);
+      const img = document.createElement('img');
+      img.src = p.src;
+      img.alt = p.caption || 'Display Board';
+      const cap = document.createElement('figcaption');
+      cap.textContent = p.caption || '';
+      f.appendChild(img);
+      f.appendChild(cap);
+      inner.appendChild(f);
     }
-    if (p.type === 'video') {
-      const wrap = document.createElement('div');
-      const video = document.createElement('video'); video.controls = true; video.poster = p.poster||'';
-      const src = document.createElement('source'); src.src = p.src; src.type = 'video/mp4'; video.appendChild(src);
-      video.onerror = ()=>{ wrap.innerHTML = `<img src="${p.poster||''}" alt="Video placeholder">`; };
-      wrap.appendChild(video); inner.appendChild(wrap);
-      const hint = document.createElement('div'); hint.className='hint'; hint.textContent = p.caption||''; inner.appendChild(hint);
+
+    if (p.type === 'youtube') {
+      const iframe = document.createElement('iframe');
+      iframe.src = p.url;
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      inner.appendChild(iframe);
+      const caption = document.createElement('div');
+      caption.className = 'hint';
+      caption.textContent = p.title;
+      inner.appendChild(caption);
     }
+
     if (p.type === 'plans') {
       inner.innerHTML = '<h2>Architectural Plans</h2><p class="sub">Add plan images to <code>assets/plans/</code> and list them in <code>assets/plans.json</code>.</p>';
     }
+
     if (p.type === 'links') {
       inner.innerHTML = '<h2>Links & Further Information</h2>';
       const ul = document.createElement('ul');
-      (p.items||[]).forEach(it=>{ const li=document.createElement('li'); li.innerHTML = `<a href="${it.href}" target="_blank" rel="noopener">${it.text}</a>`; ul.appendChild(li)});
+      (p.items || []).forEach(it => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${it.href}" target="_blank" rel="noopener">${it.text}</a>`;
+        ul.appendChild(li);
+      });
       inner.appendChild(ul);
     }
-    ind.textContent = `Page ${i+1} / ${pages.length}`;
-    document.getElementById('prev').disabled = (i===0);
-    document.getElementById('next').disabled = (i===pages.length-1);
+
+    ind.textContent = `Page ${i + 1} / ${PAGES.length}`;
   }
+
   function prev(){ if (i>0){ i--; render(); } }
-  function next(){ if (i<pages.length-1){ i++; render(); } }
+  function next(){ if (i<PAGES.length-1){ i++; render(); } }
   document.getElementById('prev').onclick = prev;
   document.getElementById('next').onclick = next;
   document.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
 
-  // TOC
   function buildTOC(){
-    const div = document.createElement('div'); div.innerHTML = '<h3>Contents</h3>';
+    const div = document.createElement('div');
+    div.innerHTML = '<h3>Contents</h3>';
     const ul = document.createElement('ul');
-    pages.forEach((p, idx)=>{
+    PAGES.forEach((p, idx)=>{
       const a = document.createElement('a');
-      const label = p.type==='image' ? (p.caption||('Board '+idx)) : p.type==='cover' ? 'Cover' : p.type==='video' ? (p.caption||('Video '+idx)) : (p.type[0].toUpperCase()+p.type.slice(1));
-      a.textContent = label; a.href='#'; a.onclick=(ev)=>{ev.preventDefault(); i=idx; render(); toc.classList.remove('active');};
-      const li = document.createElement('li'); li.appendChild(a); ul.appendChild(li);
+      const label = p.type==='image' ? (p.caption||('Board '+idx)) :
+                    p.type==='cover' ? 'Cover' :
+                    p.type==='youtube' ? p.title :
+                    (p.type[0].toUpperCase()+p.type.slice(1));
+      a.textContent = label;
+      a.href='#';
+      a.onclick=(ev)=>{ev.preventDefault(); i=idx; render(); toc.classList.remove('active');};
+      const li = document.createElement('li');
+      li.appendChild(a);
+      ul.appendChild(li);
     });
-    div.appendChild(ul); toc.appendChild(div);
+    div.appendChild(ul);
+    toc.appendChild(div);
   }
-  document.getElementById('tocbtn').onclick = ()=> toc.classList.toggle('active');
 
+  document.getElementById('tocbtn').onclick = ()=> toc.classList.toggle('active');
   buildTOC(); render();
-  // Touch swipe
+
+  // Touch swipe navigation
   let startX=null; const paper=document.querySelector('.paper');
   paper.addEventListener('touchstart', e=>{startX=e.changedTouches[0].screenX;}, {passive:true});
-  paper.addEventListener('touchend', e=>{ if(startX==null) return; const dx=e.changedTouches[0].screenX-startX; if(dx<-40) next(); if(dx>40) prev(); startX=null; }, {passive:true});
+  paper.addEventListener('touchend', e=>{
+    if(startX==null) return;
+    const dx=e.changedTouches[0].screenX-startX;
+    if(dx<-40) next();
+    if(dx>40) prev();
+    startX=null;
+  }, {passive:true});
 </script>
 </body></html>
