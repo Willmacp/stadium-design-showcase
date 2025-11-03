@@ -4,28 +4,14 @@
 <title>Stadium Design Showcase — Digital Book</title>
 <style>
   :root{
-    --bg:#e9f2f9;         /* lighter blue backdrop */
-    --brand:#1e6aa8;      /* MPDC-ish blue (lighter) */
-    --brand-ink:#0c2d45;  /* dark ink */
-    --accent:#c8a86b;     /* gold accent */
-    --page:#ffffff;
-    --muted:#5a6b78;
-    --border:#e4ecf3;
+    --bg:#e9f2f9; --brand:#1e6aa8; --brand-ink:#0c2d45; --accent:#c8a86b;
+    --page:#ffffff; --muted:#5a6b78; --border:#e4ecf3;
   }
   html,body{margin:0;height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--brand-ink)}
   body{background:linear-gradient(180deg,var(--bg) 0,#f2f6fa 280px,#f7fafc 280px)}
-
-  /* Header / Nav */
-  header{
-    position:sticky; top:0; z-index:1000;
-    background:linear-gradient(180deg,#ffffff 0,#f6fbff 100%);
-    border-bottom:1px solid var(--border);
-    box-shadow:0 2px 12px rgba(0,0,0,.06);
-  }
-  .head-inner{
-    max-width:1200px; margin:0 auto; padding:10px 14px;
-    display:flex; align-items:center; gap:14px;
-  }
+  header{position:sticky; top:0; z-index:1000; background:linear-gradient(180deg,#fff 0,#f6fbff 100%);
+    border-bottom:1px solid var(--border); box-shadow:0 2px 12px rgba(0,0,0,.06)}
+  .head-inner{max-width:1200px; margin:0 auto; padding:10px 14px; display:flex; align-items:center; gap:14px}
   .brand-wrap{display:flex; align-items:center; gap:12px}
   .brand-wrap img{height:36px; width:auto; border-radius:4px}
   .brand-title{font-weight:700; letter-spacing:.3px; color:var(--brand-ink); cursor:pointer}
@@ -33,75 +19,46 @@
   .spacer{flex:1}
   .nav{ display:flex; gap:10px; align-items:center; }
   .nav > .menu{ position:relative; }
-  .menu > button, .menu > a{
-    appearance:none; border:1px solid var(--border);
-    background:#fff; color:#1f2d36;
-    border-radius:10px; padding:10px 14px; cursor:pointer;
-    font-weight:600;
-    box-shadow:0 1px 4px rgba(0,0,0,.04);
-    touch-action:manipulation;
-  }
+  .menu > button, .menu > a{appearance:none; border:1px solid var(--border); background:#fff; color:#1f2d36;
+    border-radius:10px; padding:10px 14px; cursor:pointer; font-weight:600; box-shadow:0 1px 4px rgba(0,0,0,.04)}
   .menu > button:hover, .menu > a:hover{border-color:#d8e5ef}
-  .dropdown{
-    position:absolute; top:44px; left:0;
-    background:#fff; border:1px solid var(--border);
-    border-radius:12px; box-shadow:0 10px 26px rgba(0,0,0,.12);
-    min-width:260px; max-width:92vw; display:none; max-height:60vh; overflow:auto;
-  }
+  .dropdown{position:absolute; top:44px; left:0; background:#fff; border:1px solid var(--border);
+    border-radius:12px; box-shadow:0 10px 26px rgba(0,0,0,.12); min-width:260px; max-width:92vw; display:none;
+    max-height:60vh; overflow:auto}
   .menu.open .dropdown{display:block}
-  .dropdown h4{
-    margin:10px 12px 6px; font-size:13px; color:#486072; text-transform:uppercase; letter-spacing:.6px;
-  }
-  .dropdown a{
-    display:block; padding:10px 12px; text-decoration:none; color:#1f2d36; border-radius:8px; margin:4px 8px;
-  }
+  .dropdown h4{margin:10px 12px 6px; font-size:13px; color:#486072; text-transform:uppercase; letter-spacing:.6px}
+  .dropdown a{display:block; padding:10px 12px; text-decoration:none; color:#1f2d36; border-radius:8px; margin:4px 8px}
   .dropdown a:hover{background:#f2f7fb}
 
   .wrap{max-width:1200px; margin:0 auto; padding:16px}
-  .book{
-    background:var(--page); border-radius:14px;
-    box-shadow:0 14px 34px rgba(16,40,60,.12);
-    min-height:calc(100vh - 300px);
-    position:relative; overflow:hidden; border:1px solid var(--border);
-  }
-  .toolbar{
-    display:flex; gap:10px; align-items:center; padding:12px;
-    border-bottom:1px solid var(--border); background:#ffffffc7; backdrop-filter:saturate(1.2) blur(3px);
-  }
+  .book{background:var(--page); border-radius:14px; box-shadow:0 14px 34px rgba(16,40,60,.12);
+    min-height:calc(100vh - 300px); position:relative; overflow:hidden; border:1px solid var(--border)}
+  .toolbar{display:flex; gap:10px; align-items:center; padding:12px; border-bottom:1px solid var(--border);
+    background:#ffffffc7; backdrop-filter:saturate(1.2) blur(3px)}
   .toolbar .title{font-weight:800; letter-spacing:.2px; cursor:pointer}
   .toolbar .title:active{opacity:.85}
-  .toolbar .pill{
-    background:#eef5fb; color:#2d3a44; padding:6px 10px; border-radius:999px; font-size:12px;
-  }
+  .toolbar .pill{background:#eef5fb; color:#2d3a44; padding:6px 10px; border-radius:999px; font-size:12px}
   .paper{min-height:calc(100vh - 300px - 56px); display:grid; place-items:center; background:#fff}
   .page{max-width:1000px; width:100%; padding:18px}
   .inner{border:1px solid var(--border); border-radius:12px; padding:20px}
   .inner.cover{
-    background:
-      radial-gradient(900px 400px at 70% 10%, rgba(200,168,107,.14), rgba(255,255,255,0)),
-      linear-gradient(180deg,#ffffff 0,#fbfdff 100%);
-    text-align:center; padding:48px 22px;
+    background:radial-gradient(900px 400px at 70% 10%, rgba(200,168,107,.14), rgba(255,255,255,0)),
+               linear-gradient(180deg,#ffffff 0,#fbfdff 100%);
+    text-align:center; padding:48px 22px
   }
-  .cover .kicker{
-    display:inline-block; background:#eef5fb; color:#1e6aa8;
-    padding:6px 10px; border-radius:999px; font-weight:700; margin-bottom:12px; letter-spacing:.3px;
-  }
+  .cover .kicker{display:inline-block; background:#eef5fb; color:#1e6aa8; padding:6px 10px; border-radius:999px;
+    font-weight:700; margin-bottom:12px; letter-spacing:.3px}
   h1{margin:8px 0 6px; font-size:36px}
   .sub{color:#5a6b78; font-size:16px}
   figure{margin:0} figure img{width:100%; height:auto; border-radius:10px}
   figcaption{margin-top:8px; color:#2d3a44; font-size:14px}
   iframe{width:100%; aspect-ratio:16/9; border:0; border-radius:10px;}
-  .navbtn{
-    position:absolute; top:50%; transform:translateY(-50%);
-    background:#fff; border:1px solid var(--border); border-radius:10px;
-    padding:12px 14px; cursor:pointer; font-weight:700;
-    box-shadow:0 6px 16px rgba(0,0,0,.08); touch-action:manipulation;
-  }
+  .navbtn{position:absolute; top:50%; transform:translateY(-50%); background:#fff; border:1px solid var(--border);
+    border-radius:10px; padding:12px 14px; cursor:pointer; font-weight:700; box-shadow:0 6px 16px rgba(0,0,0,.08)}
   #prev{left:12px} #next{right:12px}
   .hint{font-size:12px; color:#6a7b88; margin-top:6px}
   footer{color:#6f8aa0; padding:18px; text-align:center}
 
-  /* Plans grid & lightbox */
   .plans-head{margin:0 0 8px; font-size:22px}
   .plans-sub{margin:0 0 14px; color:#5a6b78}
   .plans-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
@@ -111,26 +68,19 @@
   .thumb img{width:100%; height:auto; display:block}
   .thumb span{display:block; padding:6px 8px; font-size:12px; color:#2b3a46;}
   .plans-pager{display:flex; align-items:center; gap:8px; margin-top:14px; flex-wrap:wrap}
-  .btn-min{appearance:none; border:1px solid var(--border); background:#fff; padding:10px 12px; border-radius:8px; cursor:pointer; touch-action:manipulation}
+  .btn-min{appearance:none; border:1px solid var(--border); background:#fff; padding:10px 12px; border-radius:8px; cursor:pointer}
   .min-muted{font-size:12px; color:#6b7c8a}
 
-  .lightbox{
-    position:fixed; inset:0; background:rgba(10,20,30,.85);
-    display:none; align-items:center; justify-content:center; z-index:2000;
-  }
+  .lightbox{position:fixed; inset:0; background:rgba(10,20,30,.85); display:none; align-items:center; justify-content:center; z-index:2000}
   .lightbox.open{display:flex}
   .lb-inner{max-width:92vw; max-height:88vh; position:relative}
   .lb-inner img{max-width:92vw; max-height:88vh; border-radius:10px; display:block}
-  .lb-prev,.lb-next,.lb-close{
-    position:absolute; top:50%; transform:translateY(-50%); background:#fff; border:1px solid var(--border);
-    border-radius:10px; padding:10px 12px; cursor:pointer; font-weight:700; box-shadow:0 6px 16px rgba(0,0,0,.25);
-    touch-action:manipulation;
-  }
+  .lb-prev,.lb-next,.lb-close{position:absolute; top:50%; transform:translateY(-50%); background:#fff; border:1px solid var(--border);
+    border-radius:10px; padding:10px 12px; cursor:pointer; font-weight:700; box-shadow:0 6px 16px rgba(0,0,0,.25)}
   .lb-prev{left:-4rem} .lb-next{right:-4rem}
   .lb-close{top:-3rem; right:0; transform:none}
   @media(max-width:900px){ .lb-prev{left:0.5rem} .lb-next{right:0.5rem} .lb-close{right:0.5rem} }
 
-  /* Mobile tuning */
   @media (max-width:860px){
     .dropdown{right:0; left:auto; width:min(92vw, 360px)}
     .nav{gap:8px}
@@ -196,7 +146,9 @@
           <div class="kicker">Macquarie Point Development Corporation</div>
           <h1>STADIUM DESIGN SHOWCASE</h1>
           <div class="sub">31 Oct – 5 Nov · The Goods Shed, Hobart</div>
-          <div class="hint" style="margin-top:14px">Detecting Display Boards…</div>
+          <div class="hint" style="margin-top:14px">
+            Detecting Display Boards… <a href="#" id="skipDetect">(skip)</a>
+          </div>
         </div>
       </div>
       <button class="navbtn" id="prev" aria-label="Previous page">‹ Prev</button>
@@ -218,84 +170,91 @@
 </div>
 
 <script>
-  const CACHE_BUST = '?v=8'; // bump to force reloads
+  const CACHE_BUST = '?v=9';
 
-  // Videos (9)
+  // YouTube links
   const YT_LINKS = [
-    "https://youtu.be/Zx76BnLkNlY",
-    "https://youtu.be/KcSXlcSaL_8",
-    "https://youtu.be/zskCZeWZ-xo",
-    "https://youtu.be/nJqy5tg7z_o",
-    "https://youtu.be/mJzHTXnSrb8",
-    "https://youtu.be/waWApjh_snA",
-    "https://youtu.be/84pkAhplxIY",
-    "https://youtu.be/NSc6u8vX-cQ",
-    "https://youtu.be/zM63SF3_8fI"
+    "https://youtu.be/Zx76BnLkNlY","https://youtu.be/KcSXlcSaL_8","https://youtu.be/zskCZeWZ-xo",
+    "https://youtu.be/nJqy5tg7z_o","https://youtu.be/mJzHTXnSrb8","https://youtu.be/waWApjh_snA",
+    "https://youtu.be/84pkAhplxIY","https://youtu.be/NSc6u8vX-cQ","https://youtu.be/zM63SF3_8fI"
   ];
-
-  // Socials (replace # with real URLs)
   const SOCIALS = [
-    {label:"Facebook", href:"#"},
-    {label:"Instagram", href:"#"},
-    {label:"LinkedIn", href:"#"},
-    {label:"YouTube", href:"#"}
+    {label:"Facebook", href:"#"}, {label:"Instagram", href:"#"},
+    {label:"LinkedIn", href:"#"}, {label:"YouTube", href:"#"}
   ];
-
-  // Plans (groups — fill later)
   const PLANS_GROUPS = [
     { title: "Bowl & Roof", desc: "Key sections and details for main bowl and roof structure.", images: [] },
     { title: "Back-of-House (BOH)", desc: "Service corridors, loading dock, plant areas, and BOH circulation.", images: [] },
     { title: "Public Concourse & Entries", desc: "Entry sequences, concourses, amenities, and egress paths.", images: [] }
   ];
-
-  // Helpers
   const toEmbed = (u)=>{ try{ const url=new URL(u); if(url.hostname==='youtu.be') return `https://www.youtube.com/embed/${url.pathname.slice(1)}`; if(url.hostname.includes('youtube.com')) return `https://www.youtube.com/embed/${url.searchParams.get('v')}`; }catch(e){} return u; };
-  function chunk(arr, size){ const out=[]; for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i,i+size)); return out; }
+  const chunk=(a,s)=>{const o=[]; for(let i=0;i<a.length;i+=s)o.push(a.slice(i,i+s)); return o; };
+  const pad2 = n => (n<10?'0'+n:''+n);
 
-  // ---- Auto-detect Display Boards that actually exist ----
+  // --- Fast, parallel board detection with sane caps ---
   const BOARD_BASES = ["assets/boards/boards1_","assets/boards/boards2_","assets/boards/boards3_"];
-  const BOARD_RANGE = 40; // try 01..40 per set (we'll only keep those that load)
+  const BOARD_RANGE = 25;              // try up to 25 per set
   const EXTENSIONS = ['.jpg','.JPG','.jpeg','.JPEG'];
+  const PER_IMAGE_TIMEOUT = 900;       // ms
+  const GLOBAL_DETECTION_TIMEOUT = 3500; // ms hard cap
 
-  function pad2(n){ return n<10 ? '0'+n : ''+n; }
-
-  function probeOne(base, n){
+  function probeUrl(url){
     return new Promise(resolve=>{
-      let idx=0;
-      function tryNext(){
-        if(idx>=EXTENSIONS.length){ resolve(null); return; }
-        const url = base + pad2(n) + EXTENSIONS[idx] + CACHE_BUST;
-        const img = new Image();
-        let done=false;
-        const timeout = setTimeout(()=>{ if(!done){ done=true; img.src=''; idx++; tryNext(); } }, 5000);
-        img.onload = ()=>{ if(!done){ done=true; clearTimeout(timeout); resolve(url.replace(CACHE_BUST,'')); } };
-        img.onerror = ()=>{ if(!done){ done=true; clearTimeout(timeout); idx++; tryNext(); } };
-        img.src = url;
-      }
-      tryNext();
+      const img = new Image();
+      let settled = false;
+      const t = setTimeout(()=>{ if(!settled){ settled = true; img.src=''; resolve(null); } }, PER_IMAGE_TIMEOUT);
+      img.onload = ()=>{ if(!settled){ settled=true; clearTimeout(t); resolve(url); } };
+      img.onerror = ()=>{ if(!settled){ settled=true; clearTimeout(t); resolve(null); } };
+      img.src = url + CACHE_BUST;
     });
   }
-
-  async function detectBoards(){
-    const found=[];
-    for(const base of BOARD_BASES){
-      for(let n=1;n<=BOARD_RANGE;n++){
-        /* eslint-disable no-await-in-loop */
-        const url = await probeOne(base, n);
-        if(url) found.push(url);
-      }
+  function probeOne(base, n){
+    // fire all extensions at once and take the first that loads
+    const attempts = EXTENSIONS.map(ext => probeUrl(base + pad2(n) + ext));
+    return Promise.any(attempts).catch(()=>null);
+  }
+  async function detectBoardsFast(){
+    const candidates = [];
+    BOARD_BASES.forEach(base=>{
+      for(let n=1;n<=BOARD_RANGE;n++){ candidates.push(probeOne(base, n)); }
+    });
+    const globalAbort = new Promise(resolve=> setTimeout(()=>resolve('ABORT'), GLOBAL_DETECTION_TIMEOUT));
+    const results = await Promise.race([
+      Promise.all(candidates),
+      globalAbort
+    ]);
+    if(results==='ABORT'){
+      return null; // signal to use fallback
     }
-    return found;
+    return results.filter(Boolean);
   }
 
-  // ---- Build everything after detection ----
+  // Fallback to a safe 25 boards (10 + 10 + 5)
+  function fallbackBoards(){
+    const arr = [];
+    for(let n=1;n<=10;n++) arr.push(`assets/boards/boards1_${pad2(n)}.jpg`);
+    for(let n=1;n<=10;n++) arr.push(`assets/boards/boards2_${pad2(n)}.jpg`);
+    for(let n=1;n<=5;n++)  arr.push(`assets/boards/boards3_${pad2(n)}.jpg`);
+    return arr;
+  }
+
+  // Allow user to skip detection
+  document.getElementById('skipDetect').addEventListener('click', (e)=>{
+    e.preventDefault();
+    buildBook(fallbackBoards());
+  });
+
+  // Kick off detection
   (async function init(){
-    const detectedBoards = await detectBoards(); // e.g. 25 items
-    buildBook(detectedBoards);
+    let detected = await detectBoardsFast();
+    if(!detected || detected.length===0){
+      detected = fallbackBoards();
+    }
+    buildBook(detected);
   })();
 
+  // ---------------- Build the book ----------------
   function buildBook(DISPLAY_BOARD_FILES){
-    // Plans pages
     const PLANS_PAGES = [];
     PLANS_GROUPS.forEach((g, gi)=>{
       const pages = chunk(g.images, 4);
@@ -308,7 +267,6 @@
       }
     });
 
-    // Build full book
     const PAGES = [
       { type:"cover", title:"STADIUM DESIGN SHOWCASE", subtitle:"31 Oct – 5 Nov · The Goods Shed, Hobart" },
       ...DISPLAY_BOARD_FILES.map((src,i)=>({type:"image", src, caption:`Display Board ${i+1}`})),
@@ -320,25 +278,17 @@
       ]}
     ];
 
-    // Index helpers
     const coverIndex = 0;
     const boardsStart = 1;
     const videosStart = boardsStart + DISPLAY_BOARD_FILES.length;
     const plansStart  = videosStart + YT_LINKS.length;
-    const linksIndex  = plansStart + PLANS_PAGES.length;
 
-    // Render core
     let i = 0;
     const inner = document.getElementById('inner');
     const ind = document.getElementById('ind');
 
-    function scrollTopSmooth(){ try{ window.scrollTo({top:0, behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); } }
-
-    function robustImg(src){
-      const img = document.createElement('img');
-      img.src = src + CACHE_BUST;
-      return img;
-    }
+    const robustImg = (src)=>{ const im=new Image(); im.src = src + CACHE_BUST; return im; };
+    const scrollTopSmooth = ()=>{ try{ window.scrollTo({top:0, behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); } };
 
     function render(){
       const p = PAGES[i]; inner.className = 'inner'; inner.innerHTML = '';
@@ -461,7 +411,7 @@
     menuVideos.querySelector('button').addEventListener('click', openMenu(menuVideos));
     menuPlans.querySelector('button').addEventListener('click', openMenu(menuPlans));
 
-    // Boards dropdown (auto based on detected files)
+    // Boards dropdown (from detected/fallback files)
     boardsList.innerHTML = '';
     DISPLAY_BOARD_FILES.forEach((src, idx)=>{
       const a = document.createElement('a');
@@ -489,10 +439,10 @@
       a.textContent = g.title;
       a.onclick = (ev)=>{
         ev.preventDefault();
-        let abs = plansStart, offset = 0;
+        let abs = videosStart + YT_LINKS.length; let offset = 0;
         for (let k = 0; k < PLANS_GROUPS.length; k++){
           const pagesCount = Math.max(1, Math.ceil((PLANS_GROUPS[k].images||[]).length / 4));
-          if (k === gi){ abs = plansStart + offset; break; }
+          if (k === gi){ abs = (videosStart + YT_LINKS.length) + offset; break; }
           else { offset += pagesCount; }
         }
         i = abs; render(); menuPlans.classList.remove('open'); scrollTopSmooth();
@@ -506,7 +456,7 @@
       const plansPageCount = PLANS_GROUPS
         .map(g => Math.max(1, Math.ceil((g.images||[]).length / 4)))
         .reduce((a,b)=>a+b,0);
-      i = plansStart + plansPageCount; render(); scrollTopSmooth();
+      i = (videosStart + YT_LINKS.length) + plansPageCount; render(); scrollTopSmooth();
     });
 
     // Lightbox
@@ -519,10 +469,7 @@
     let lbGroupImages = [];
     let lbIndex = 0;
     function openLightbox(groupIndex, images, startIdx){
-      lbGroupImages = images;
-      lbIndex = startIdx;
-      showLb();
-      lb.classList.add('open');
+      lbGroupImages = images; lbIndex = startIdx; showLb(); lb.classList.add('open');
     }
     function showLb(){
       const src = lbGroupImages[lbIndex];
@@ -535,15 +482,13 @@
     lbClose.onclick = ()=> lb.classList.remove('open');
     lb.addEventListener('click', (e)=>{ if(e.target===lb) lb.classList.remove('open'); });
 
-    // Home click
-    function goHome(){ i = coverIndex; render(); scrollTopSmooth(); }
+    // Home clicks
+    const goHome = ()=>{ i = coverIndex; render(); scrollTopSmooth(); };
     document.getElementById('homeBrand').addEventListener('click', goHome);
     document.getElementById('homeTitle').addEventListener('click', goHome);
 
-    // Initial render
+    // Initial render + touch swipe
     render();
-
-    // Touch swipe
     let startX=null; const paper=document.querySelector('.paper');
     paper.addEventListener('touchstart', e=>{startX=e.changedTouches[0].screenX;}, {passive:true});
     paper.addEventListener('touchend', e=>{
