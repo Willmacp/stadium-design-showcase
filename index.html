@@ -56,23 +56,26 @@
 <footer>© 2025 Macquarie Point Development Corporation</footer>
 
 <script>
-  // 🖼️ All display boards (1–3 series)
+  // Cache-buster to force fresh loads after deploys
+  const V = '?v=3';
+
+  // --- All display boards (1–3 series) ---
   const DEFAULT_BOARD_FILES = [
-    // --- Set 1 ---
+    // Set 1
     "assets/boards/boards1_01.jpg","assets/boards/boards1_02.jpg","assets/boards/boards1_03.jpg",
     "assets/boards/boards1_04.jpg","assets/boards/boards1_05.jpg","assets/boards/boards1_06.jpg",
     "assets/boards/boards1_07.jpg","assets/boards/boards1_08.jpg","assets/boards/boards1_09.jpg","assets/boards/boards1_10.jpg",
-    // --- Set 2 ---
+    // Set 2
     "assets/boards/boards2_01.jpg","assets/boards/boards2_02.jpg","assets/boards/boards2_03.jpg",
     "assets/boards/boards2_04.jpg","assets/boards/boards2_05.jpg","assets/boards/boards2_06.jpg",
     "assets/boards/boards2_07.jpg","assets/boards/boards2_08.jpg","assets/boards/boards2_09.jpg","assets/boards/boards2_10.jpg",
-    // --- Set 3 (new, from Open House Boards) ---
+    // Set 3 (new)
     "assets/boards/boards3_01.jpg","assets/boards/boards3_02.jpg","assets/boards/boards3_03.jpg",
     "assets/boards/boards3_04.jpg","assets/boards/boards3_05.jpg","assets/boards/boards3_06.jpg",
     "assets/boards/boards3_07.jpg","assets/boards/boards3_08.jpg","assets/boards/boards3_09.jpg"
   ];
 
-  // 🎬 YouTube videos (placeholders or real links)
+  // YouTube videos (replace with your actual embeds when ready)
   const YOUTUBE_VIDEOS = [
     { title: "Player Facilities (Brendon Gale)", url: "https://www.youtube.com/embed/XHOmBV4js_E" },
     { title: "Stadium Design Overview", url: "https://www.youtube.com/embed/eX2qFMC8cFo" },
@@ -81,7 +84,7 @@
     { title: "AFL Tasmania Future Showcase", url: "https://www.youtube.com/embed/tgbNymZ7vqY" }
   ];
 
-  // 📖 Book structure
+  // Build pages
   const PAGES = [
     { type:"cover", title:"STADIUM DESIGN SHOWCASE", subtitle:"31 Oct – 5 Nov · The Goods Shed, Hobart" },
     ...DEFAULT_BOARD_FILES.map((src, i) => ({ type:"image", src, caption:`Display Board ${i+1}` })),
@@ -100,6 +103,33 @@
   const toc = document.getElementById('toc');
   const tocbtn = document.getElementById('tocbtn');
 
+  // Try alternative extensions if the first image path fails
+  function robustImg(src) {
+    const img = document.createElement('img');
+    const candidates = [src, src.replace('.jpg', '.JPG'), src.replace('.jpg', '.jpeg'), src.replace('.jpg', '.JPEG')];
+    let idx = 0;
+    function tryNext() {
+      if (idx >= candidates.length) {
+        // show a helpful hint
+        const wrap = document.createElement('div');
+        wrap.style.padding = '12px';
+        wrap.style.background = '#fff6f6';
+        wrap.style.border = '1px solid #f1d6d6';
+        wrap.style.borderRadius = '8px';
+        wrap.innerHTML = `<strong>Missing image:</strong> ${src}<br><small>Check filename & extension in <code>assets/boards/</code>.</small>`;
+        return wrap;
+      }
+      const attempt = candidates[idx] + V;
+      img.src = attempt;
+      img.onerror = () => { idx++; const replacement = tryNext(); if (replacement) inner.appendChild(replacement); };
+      img.onload = () => {}; // success
+      return null;
+    }
+    const replacement = tryNext();
+    if (replacement) return replacement;
+    return img;
+  }
+
   function render() {
     const p = PAGES[i]; inner.className = 'inner'; inner.innerHTML = '';
     if (!p) return;
@@ -111,10 +141,10 @@
 
     if (p.type === 'image') {
       const f = document.createElement('figure');
-      const img = document.createElement('img');
-      img.src = p.src; img.alt = p.caption||'Display Board';
-      const cap = document.createElement('figcaption'); cap.textContent = p.caption||'';
-      f.appendChild(img); f.appendChild(cap); inner.appendChild(f);
+      const imgEl = robustImg(p.src);
+      imgEl.alt = p.caption || 'Display Board';
+      const cap = document.createElement('figcaption'); cap.textContent = p.caption || '';
+      f.appendChild(imgEl); f.appendChild(cap); inner.appendChild(f);
     }
 
     if (p.type === 'youtube') {
@@ -141,6 +171,8 @@
     }
 
     ind.textContent = `Page ${i+1} / ${PAGES.length}`;
+    document.getElementById('prev').disabled = (i===0);
+    document.getElementById('next').disabled = (i===PAGES.length-1);
   }
 
   function prev(){ if (i>0){ i--; render(); } }
