@@ -32,9 +32,7 @@
   .nav{
     display:flex; gap:10px; align-items:center;
   }
-  .nav > .menu{
-    position:relative;
-  }
+  .nav > .menu{ position:relative; }
   .menu > button, .menu > a{
     appearance:none; border:1px solid var(--border);
     background:#fff; color:var(--brand-ink);
@@ -98,9 +96,34 @@
   #prev{left:12px} #next{right:12px}
   .hint{font-size:12px; color:#6a7b88; margin-top:6px}
   footer{color:#6f8aa0; padding:18px; text-align:center}
-  @media (max-width:760px){
-    h1{font-size:28px}
+  @media (max-width:760px){ h1{font-size:28px} }
+
+  /* Plans grid & lightbox */
+  .plans-head{margin:0 0 8px; font-size:22px}
+  .plans-sub{margin:0 0 14px; color:#5a6b78}
+  .plans-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+  @media(min-width:900px){ .plans-grid{grid-template-columns:repeat(4,1fr);} }
+  .thumb{border:1px solid var(--border); border-radius:10px; overflow:hidden; cursor:pointer; background:#fff}
+  .thumb img{width:100%; height:auto; display:block}
+  .thumb span{display:block; padding:6px 8px; font-size:12px; color:#2b3a46;}
+  .plans-pager{display:flex; align-items:center; gap:8px; margin-top:14px}
+  .btn-min{appearance:none; border:1px solid var(--border); background:#fff; padding:6px 10px; border-radius:8px; cursor:pointer}
+  .min-muted{font-size:12px; color:#6b7c8a}
+
+  .lightbox{
+    position:fixed; inset:0; background:rgba(10,20,30,.85);
+    display:none; align-items:center; justify-content:center; z-index:2000;
   }
+  .lightbox.open{display:flex}
+  .lb-inner{max-width:92vw; max-height:88vh; position:relative}
+  .lb-inner img{max-width:92vw; max-height:88vh; border-radius:10px; display:block}
+  .lb-prev,.lb-next,.lb-close{
+    position:absolute; top:50%; transform:translateY(-50%); background:#fff; border:1px solid var(--border);
+    border-radius:10px; padding:10px 12px; cursor:pointer; font-weight:700; box-shadow:0 6px 16px rgba(0,0,0,.25);
+  }
+  .lb-prev{left:-4rem} .lb-next{right:-4rem}
+  .lb-close{top:-3rem; right:0; transform:none}
+  @media(max-width:900px){ .lb-prev{left:0.5rem} .lb-next{right:0.5rem} .lb-close{right:0.5rem} }
 </style>
 </head>
 <body>
@@ -126,7 +149,13 @@
           <div id="videosList"></div>
         </div>
       </div>
-      <div class="menu"><a href="#" id="jumpPlans">Plans</a></div>
+      <div class="menu" id="menuPlans">
+        <button type="button">Plans ▾</button>
+        <div class="dropdown" id="ddPlans">
+          <h4>Plans</h4>
+          <div id="plansList"></div>
+        </div>
+      </div>
       <div class="menu"><a href="#" id="jumpLinks">Links</a></div>
     </nav>
   </div>
@@ -140,9 +169,7 @@
       <span class="pill" id="ind">Page 1 / 1</span>
     </div>
     <div class="paper">
-      <div class="page"><div class="inner cover" id="inner">
-        <!-- Cover fallback content (replaced by JS) -->
-      </div></div>
+      <div class="page"><div class="inner cover" id="inner"></div></div>
       <button class="navbtn" id="prev">‹ Prev</button>
       <button class="navbtn" id="next">Next ›</button>
     </div>
@@ -151,11 +178,21 @@
 
 <footer>© 2025 Macquarie Point Development Corporation</footer>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-inner">
+    <img id="lbImg" alt="">
+    <button class="lb-prev" id="lbPrev">‹</button>
+    <button class="lb-next" id="lbNext">›</button>
+    <button class="lb-close" id="lbClose">✕</button>
+  </div>
+</div>
+
 <script>
   // ------------------ CONFIG ------------------
-  const CACHE_BUST = '?v=4'; // cache-buster for Netlify refreshes
+  const CACHE_BUST = '?v=5'; // bump this to force reloads on Netlify
 
-  // Your 39 Display Boards (already in your repo)
+  // Display Boards list (already live in your repo)
   const DISPLAY_BOARD_FILES = [
     // Set 1
     "assets/boards/boards1_01.jpg","assets/boards/boards1_02.jpg","assets/boards/boards1_03.jpg",
@@ -165,13 +202,13 @@
     "assets/boards/boards2_01.jpg","assets/boards/boards2_02.jpg","assets/boards/boards2_03.jpg",
     "assets/boards/boards2_04.jpg","assets/boards/boards2_05.jpg","assets/boards/boards2_06.jpg",
     "assets/boards/boards2_07.jpg","assets/boards/boards2_08.jpg","assets/boards/boards2_09.jpg","assets/boards/boards2_10.jpg",
-    // Set 3 (Open House boards)
+    // Set 3
     "assets/boards/boards3_01.jpg","assets/boards/boards3_02.jpg","assets/boards/boards3_03.jpg",
     "assets/boards/boards3_04.jpg","assets/boards/boards3_05.jpg","assets/boards/boards3_06.jpg",
     "assets/boards/boards3_07.jpg","assets/boards/boards3_08.jpg","assets/boards/boards3_09.jpg"
   ];
 
-  // Your 9 YouTube links (converted to embed URLs automatically)
+  // Your 9 YouTube links (converted to embed URLs)
   const YT_LINKS = [
     "https://youtu.be/Zx76BnLkNlY",
     "https://youtu.be/KcSXlcSaL_8",
@@ -184,7 +221,7 @@
     "https://youtu.be/zM63SF3_8fI"
   ];
 
-  // MPDC social links (add real URLs when ready)
+  // MPDC social links (TODO: replace # with real URLs)
   const SOCIALS = [
     {label:"Facebook", href:"#"},
     {label:"Instagram", href:"#"},
@@ -192,17 +229,42 @@
     {label:"YouTube", href:"#"}
   ];
 
-  // -------------- HELPERS & PAGES --------------
+  // PLANS — group your plan images here (4 per page UI)
+  // Put the real filenames in each group's images array:
+  const PLANS_GROUPS = [
+    {
+      title: "Bowl & Roof",
+      desc: "Key sections and details for main bowl and roof structure.",
+      images: [
+        // "assets/plans/bowl_01.jpg","assets/plans/bowl_02.jpg","assets/plans/bowl_03.jpg","assets/plans/bowl_04.jpg",
+        // "assets/plans/bowl_05.jpg","assets/plans/bowl_06.jpg","assets/plans/bowl_07.jpg","assets/plans/bowl_08.jpg"
+      ]
+    },
+    {
+      title: "Back-of-House (BOH)",
+      desc: "Service corridors, loading dock, plant areas, and BOH circulation.",
+      images: [
+        // "assets/plans/boh_01.jpg","assets/plans/boh_02.jpg","assets/plans/boh_03.jpg","assets/plans/boh_04.jpg"
+      ]
+    },
+    {
+      title: "Public Concourse & Entries",
+      desc: "Entry sequences, concourses, amenities, and egress paths.",
+      images: [
+        // "assets/plans/concourse_01.jpg","assets/plans/concourse_02.jpg","assets/plans/concourse_03.jpg","assets/plans/concourse_04.jpg"
+      ]
+    }
+  ];
+
+  // ---------------- HELPERS ----------------
   const toEmbed = (u) => {
     try{
-      // supports youtu.be/<id> and youtube.com/watch?v=<id>
       const url = new URL(u);
       if (url.hostname === 'youtu.be') return `https://www.youtube.com/embed/${url.pathname.slice(1)}`;
       if (url.hostname.includes('youtube.com')) return `https://www.youtube.com/embed/${url.searchParams.get('v')}`;
     }catch(e){}
     return u;
   };
-
   function robustImg(src){
     const img = document.createElement('img');
     const candidates = [src, src.replace('.jpg','.JPG'), src.replace('.jpg','.jpeg'), src.replace('.jpg','.JPEG')];
@@ -214,7 +276,7 @@
         wrap.style.background = '#fff6f6';
         wrap.style.border = '1px solid #f1d6d6';
         wrap.style.borderRadius = '8px';
-        wrap.innerHTML = `<strong>Missing image:</strong> ${src}<br><small>Check filename & extension in <code>assets/boards/</code>.</small>`;
+        wrap.innerHTML = `<strong>Missing image:</strong> ${src}<br><small>Check filename & extension.</small>`;
         return wrap;
       }
       const attempt = candidates[idx] + CACHE_BUST;
@@ -228,18 +290,40 @@
     return img;
   }
 
+  // Build plans pages (chunk each group into pages of 4)
+  function chunk(arr, size){ const out=[]; for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i,i+size)); return out; }
+  const PLANS_PAGES = []; // each item: { type:'plansGrid', g: groupIndex, p: pageIndex, pagesInGroup, title, desc, items:[srcs] }
+  PLANS_GROUPS.forEach((g, gi)=>{
+    const pages = chunk(g.images, 4);
+    if(pages.length===0){ // still create an empty stub page
+      PLANS_PAGES.push({type:'plansGrid', g:gi, p:0, pagesInGroup:1, title:g.title, desc:g.desc, items:[]});
+    } else {
+      pages.forEach((items, pi)=>{
+        PLANS_PAGES.push({type:'plansGrid', g:gi, p:pi, pagesInGroup:pages.length, title:g.title, desc:g.desc, items});
+      });
+    }
+  });
+
+  // Build full book
   const PAGES = [
     { type:"cover", title:"STADIUM DESIGN SHOWCASE", subtitle:"31 Oct – 5 Nov · The Goods Shed, Hobart" },
     ...DISPLAY_BOARD_FILES.map((src,i)=>({type:"image", src, caption:`Display Board ${i+1}`})),
     ...YT_LINKS.map((u,ix)=>({type:"youtube", title:`Video ${ix+1}`, url: toEmbed(u)})),
-    { type:"plans", caption:"Architectural Plans" },
+    ...PLANS_PAGES,
     { type:"links", items:[
       { text:"FAQ: Stadium — Find out more", href:"https://www.macpoint.com/stadium-find-out-more" },
       { text:"Mac Point website", href:"https://www.macpoint.com" }
     ]}
   ];
 
-  // -------------- RENDER CORE --------------
+  // Index helpers
+  const coverIndex = 0;
+  const boardsStart = 1;
+  const videosStart = boardsStart + DISPLAY_BOARD_FILES.length;
+  const plansStart  = videosStart + YT_LINKS.length;
+  const linksIndex  = plansStart + PLANS_PAGES.length;
+
+  // ---------------- RENDER CORE ----------------
   let i = 0;
   const inner = document.getElementById('inner');
   const ind = document.getElementById('ind');
@@ -276,8 +360,50 @@
       const caption = document.createElement('div'); caption.className='hint'; caption.textContent = p.title; inner.appendChild(caption);
     }
 
-    if(p.type==='plans'){
-      inner.innerHTML = '<h2>Architectural Plans</h2><p class="sub">Add plan images to <code>assets/plans/</code> and list them in <code>assets/plans.json</code>.</p>';
+    if(p.type==='plansGrid'){
+      // Header + explainer
+      const h = document.createElement('h2'); h.className='plans-head'; h.textContent = p.title;
+      const d = document.createElement('p'); d.className='plans-sub'; d.textContent = p.desc||'';
+      inner.appendChild(h); inner.appendChild(d);
+
+      // Grid
+      const grid = document.createElement('div'); grid.className='plans-grid';
+      p.items.forEach((src, idx)=>{
+        const wrap = document.createElement('div'); wrap.className='thumb';
+        const img = robustImg(src);
+        const label = document.createElement('span');
+        // derive friendly label from filename
+        const name = src.split('/').pop();
+        label.textContent = name.replace(/\.[^.]+$/,'');
+        wrap.appendChild(img); wrap.appendChild(label);
+        wrap.onclick = ()=> openLightbox(p.g, p.items, idx);
+        grid.appendChild(wrap);
+      });
+      if(p.items.length===0){
+        const empty = document.createElement('div');
+        empty.className='min-muted';
+        empty.textContent = 'No plan images added yet. Add files to assets/plans/ and list them under this group.';
+        inner.appendChild(empty);
+      } else {
+        inner.appendChild(grid);
+      }
+
+      // Pager within group
+      const pager = document.createElement('div'); pager.className='plans-pager';
+      const bPrev = document.createElement('button'); bPrev.className='btn-min'; bPrev.textContent='‹ Prev Page';
+      const bNext = document.createElement('button'); bNext.className='btn-min'; bNext.textContent='Next Page ›';
+      const info = document.createElement('span'); info.className='min-muted';
+      info.textContent = `Page ${p.p+1} of ${p.pagesInGroup} in “${p.title}”`;
+
+      // compute the absolute index of first page of this group
+      const groupFirstAbs = plansStart + PLANS_PAGES.findIndex(pp => pp.g===p.g && pp.p===0);
+      bPrev.disabled = (p.p===0);
+      bNext.disabled = (p.p===p.pagesInGroup-1);
+      bPrev.onclick = ()=>{ if(p.p>0){ i = groupFirstAbs + (p.p-1); render(); } };
+      bNext.onclick = ()=>{ if(p.p<p.pagesInGroup-1){ i = groupFirstAbs + (p.p+1); render(); } };
+
+      pager.appendChild(bPrev); pager.appendChild(info); pager.appendChild(bNext);
+      inner.appendChild(pager);
     }
 
     if(p.type==='links'){
@@ -291,6 +417,8 @@
     }
 
     ind.textContent = `Page ${i+1} / ${PAGES.length}`;
+    document.getElementById('prev').disabled = (i===0);
+    document.getElementById('next').disabled = (i===PAGES.length-1);
   }
 
   function prev(){ if(i>0){ i--; render(); } }
@@ -299,19 +427,26 @@
   document.getElementById('next').onclick = next;
   document.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
 
-  // -------------- MENU WIRING --------------
+  // -------------- MENUS --------------
   const menuBoards = document.getElementById('menuBoards');
   const ddBoards = document.getElementById('ddBoards');
   const boardsList = document.getElementById('boardsList');
   const menuVideos = document.getElementById('menuVideos');
   const ddVideos = document.getElementById('ddVideos');
   const videosList = document.getElementById('videosList');
+  const menuPlans = document.getElementById('menuPlans');
+  const ddPlans = document.getElementById('ddPlans');
+  const plansList = document.getElementById('plansList');
+  const jumpLinks = document.getElementById('jumpLinks');
 
   function closeMenus(e){
     if(!e) return;
-    const m1 = e.target.closest('#menuBoards'); const m2 = e.target.closest('#menuVideos');
+    const m1 = e.target.closest('#menuBoards');
+    const m2 = e.target.closest('#menuVideos');
+    const m3 = e.target.closest('#menuPlans');
     if(!m1) menuBoards.classList.remove('open');
     if(!m2) menuVideos.classList.remove('open');
+    if(!m3) menuPlans.classList.remove('open');
   }
   document.addEventListener('click', closeMenus);
 
@@ -319,20 +454,28 @@
     e.stopPropagation();
     menuBoards.classList.toggle('open');
     menuVideos.classList.remove('open');
+    menuPlans.classList.remove('open');
   });
   menuVideos.querySelector('button').addEventListener('click', (e)=>{
     e.stopPropagation();
     menuVideos.classList.toggle('open');
     menuBoards.classList.remove('open');
+    menuPlans.classList.remove('open');
+  });
+  menuPlans.querySelector('button').addEventListener('click', (e)=>{
+    e.stopPropagation();
+    menuPlans.classList.toggle('open');
+    menuBoards.classList.remove('open');
+    menuVideos.classList.remove('open');
   });
 
-  // Build Display Boards dropdown (labels: Display Board 1…)
+  // Build Display Boards dropdown
   boardsList.innerHTML = '';
   DISPLAY_BOARD_FILES.forEach((src, idx)=>{
     const a = document.createElement('a');
     a.href = '#';
     a.textContent = `Display Board ${idx+1}`;
-    a.onclick = (ev)=>{ ev.preventDefault(); i = 1 + idx; render(); menuBoards.classList.remove('open'); };
+    a.onclick = (ev)=>{ ev.preventDefault(); i = boardsStart + idx; render(); menuBoards.classList.remove('open'); };
     boardsList.appendChild(a);
   });
 
@@ -342,30 +485,70 @@
     const a = document.createElement('a');
     a.href = '#';
     a.textContent = `Video ${ix+1}`;
-    a.onclick = (ev)=>{ ev.preventDefault();
-      // cover is index 0; boards are 1..N; videos start at (1 + DISPLAY_BOARD_FILES.length)
-      i = 1 + DISPLAY_BOARD_FILES.length + ix;
-      render(); menuVideos.classList.remove('open');
-    };
+    a.onclick = (ev)=>{ ev.preventDefault(); i = videosStart + ix; render(); menuVideos.classList.remove('open'); };
     videosList.appendChild(a);
   });
 
-  // Jump links
-  document.getElementById('jumpPlans').addEventListener('click',(e)=>{
-    e.preventDefault();
-    i = 1 + DISPLAY_BOARD_FILES.length + YT_LINKS.length;
-    render();
-  });
-  document.getElementById('jumpLinks').addEventListener('click',(e)=>{
-    e.preventDefault();
-    i = 1 + DISPLAY_BOARD_FILES.length + YT_LINKS.length + 1;
-    render();
+  // Build Plans dropdown — one entry per group
+  plansList.innerHTML = '';
+  PLANS_GROUPS.forEach((g, gi)=>{
+    const a = document.createElement('a');
+    a.href = '#';
+    a.textContent = g.title;
+    a.onclick = (ev)=>{
+      ev.preventDefault();
+      // find absolute index of first page of this group
+      const abs = plansStart + PLANS_PAGES.findIndex(pp => pp.g===gi && pp.p===0);
+      i = abs >= plansStart ? abs : plansStart;
+      render(); menuPlans.classList.remove('open');
+    };
+    plansList.appendChild(a);
   });
 
-  // Init
-  render();
+  // Links menu item
+  jumpLinks.addEventListener('click',(e)=>{
+    e.preventDefault(); i = linksIndex; render();
+  });
 
-  // Touch swipe
+  // -------------- LIGHTBOX --------------
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
+  const lbClose = document.getElementById('lbClose');
+
+  let lbGroupImages = [];
+  let lbIndex = 0;
+  function openLightbox(groupIndex, images, startIdx){
+    lbGroupImages = images;
+    lbIndex = startIdx;
+    showLb();
+    lb.classList.add('open');
+  }
+  function showLb(){
+    const src = lbGroupImages[lbIndex];
+    const img = new Image();
+    img.onload = ()=>{ lbImg.src = src + CACHE_BUST; };
+    img.src = src + CACHE_BUST;
+  }
+  lbPrev.onclick = ()=>{ if(lbIndex>0){ lbIndex--; showLb(); } };
+  lbNext.onclick = ()=>{ if(lbIndex < lbGroupImages.length-1){ lbIndex++; showLb(); } };
+  lbClose.onclick = ()=> lb.classList.remove('open');
+  lb.addEventListener('click', (e)=>{ if(e.target===lb) lb.classList.remove('open'); });
+
+  // -------------- INIT --------------
+  function initCover(){
+    inner.classList.add('cover');
+    inner.innerHTML = `
+      <div class="kicker">Macquarie Point Development Corporation</div>
+      <h1>STADIUM DESIGN SHOWCASE</h1>
+      <div class="sub">31 Oct – 5 Nov · The Goods Shed, Hobart</div>
+      <div class="hint" style="margin-top:14px">Use ← / → keys, Next/Prev, or the menu to jump anywhere.</div>
+    `;
+  }
+  initCover(); render();
+
+  // Touch swipe navigation
   let startX=null; const paper=document.querySelector('.paper');
   paper.addEventListener('touchstart', e=>{startX=e.changedTouches[0].screenX;}, {passive:true});
   paper.addEventListener('touchend', e=>{
