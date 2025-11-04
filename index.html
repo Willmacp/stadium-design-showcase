@@ -63,7 +63,7 @@
 
   .dropdown{
     position:absolute; top:44px;
-    right:0; left:auto;  /* keep inside viewport on narrow screens */
+    right:0; left:auto;
     background:#fff; border:1px solid var(--border);
     border-radius:12px; box-shadow:0 10px 26px rgba(0,0,0,.12);
     min-width:220px; max-width:min(92vw, 340px);
@@ -336,11 +336,10 @@
 </div>
 
 <script>
-  const CACHE_BUST = '?v=15';
+  const CACHE_BUST = '?v=18';
 
-  // ---- DISPLAY BOARDS: exactly your 25 files ----
+  // ---- DISPLAY BOARDS ----
   const DISPLAY_BOARD_FILES = [
-    // Set 1 (9)
     "assets/boards/boards1_01.jpg",
     "assets/boards/boards1_02.jpg",
     "assets/boards/boards1_03.jpg",
@@ -350,7 +349,6 @@
     "assets/boards/boards1_07.jpg",
     "assets/boards/boards1_08.jpg",
     "assets/boards/boards1_09.jpg",
-    // Set 2 (7)
     "assets/boards/boards2_01.jpg",
     "assets/boards/boards2_02.jpg",
     "assets/boards/boards2_03.jpg",
@@ -358,7 +356,6 @@
     "assets/boards/boards2_05.jpg",
     "assets/boards/boards2_06.jpg",
     "assets/boards/boards2_07.jpg",
-    // Set 3 (9)
     "assets/boards/boards3_01.jpg",
     "assets/boards/boards3_02.jpg",
     "assets/boards/boards3_03.jpg",
@@ -383,7 +380,6 @@
     "https://youtu.be/zM63SF3_8fI"
   ];
 
-  // Short, menu-friendly labels for each video
   const VIDEO_LABELS = [
     "Back of House & Player Facilities",
     "Entering the Stadium",
@@ -404,8 +400,32 @@
     {label:"YouTube", href:"#"}
   ];
 
-  // Plans groups – you can fill in the images later
+  // ---- PLANS GROUPS ----
   const PLANS_GROUPS = [
+    {
+      title: "Stadium layouts",
+      desc: "Key stadium bowl and field layouts for different sports and event configurations.",
+      images: [
+        "assets/plans/stadium-layout-soccer.jpg",
+        "assets/plans/stadium-layout-afl.jpg",
+        "assets/plans/stadium-layout-cricket.jpg",
+        "assets/plans/stadium-layout-nrl.jpg",
+        "assets/plans/stadium-layout-boxing.jpg",
+        "assets/plans/stadium-layout-basketball.jpg",
+        "assets/plans/stadium-layout-concert-mode-3.jpg",
+        "assets/plans/stadium-layout-concert-mode-4.jpg"
+      ]
+    },
+    {
+      title: "Stadium views",
+      desc: "Visual context of the stadium within Hobart and its surrounding public spaces.",
+      images: [
+        "assets/plans/stadium-view-waterfront.jpeg",
+        "assets/plans/stadium-view-city-bay.png",
+        "assets/plans/stadium-view-memorial.jpeg",
+        "assets/plans/stadium-view-street.jpeg"
+      ]
+    },
     { title: "Bowl & Roof", desc: "Key sections and details for main bowl and roof structure.", images: [] },
     { title: "Back-of-House (BOH)", desc: "Service corridors, loading dock, plant areas, and BOH circulation.", images: [] },
     { title: "Public Concourse & Entries", desc: "Entry sequences, concourses, amenities, and egress paths.", images: [] }
@@ -598,7 +618,7 @@
     boardsList.appendChild(a);
   });
 
-  // Videos dropdown, using short labels
+  // Videos dropdown, using labels
   videosList.innerHTML='';
   YT_LINKS.forEach((u,ix)=>{
     const a=document.createElement('a');
