@@ -738,15 +738,43 @@
   ];
 
   function boardLabelFromFile(file, idx) {
+    const customNames = [
+      "Seating Bowl",
+      "User Experience",
+      "Roof Design",
+      "A Multipurpose Venue",
+      "Reflecting Tasmania",
+      "Business Events",
+      "The Goods Shed",
+      "Precinct Plan",
+      "Site Master Plan",
+      "Remediation",
+      "Geotechnical Investigations",
+      "Transport",
+      "Accessibility",
+      "Site Archaeology",
+      "Investment Opportunity",
+      "Permit Conditions",
+      "Media Spaces",
+      "Continuous Concourse",
+      "The Goods Shed",
+      "Sports Bar",
+      "The Restaurant",
+      "The Chair's Club / Event Space",
+      "Function Space",
+      "Corporate Suits",
+      "Field Club"
+    ];
     const num = String(idx + 1).padStart(2, "0");
-    return `Display board ${num}`;
+    return customNames[idx] || `Display board ${num}`;
   }
 
-  // VIDEO ITEMS – titles updated to match positions you described
+  // VIDEO ITEMS
+  // Order matches the earlier "good" layout; titles match your final mapping.
   const VIDEO_ITEMS = [
     {
       id: "video-1",
-      title: "Macquarie Point Multipurpose Stadium – Back of House, Secure Zone and Player Facilities",
+      title: "Back of House, Secure Zone and Player Facilities",
       url: "https://youtu.be/Zx76BnLkNlY",
       note: "Back-of-house amenities, secure player circulation and player facilities."
     },
@@ -758,44 +786,44 @@
     },
     {
       id: "video-3",
-      title: "The Complexities of Remediating Contaminated Sites",
-      url: "https://youtu.be/zM63SF3_8fI",
-      note: "Challenges and considerations in delivering remediation on complex, contaminated sites."
+      title: "The complexities of remediating contaminated sites",
+      url: "https://youtu.be/waWApjh_snA",
+      note: "Challenges and considerations in delivering remediation on complex sites."
     },
     {
       id: "video-4",
-      title: "Mac Point Remediation Work",
-      url: "https://youtu.be/NSc6u8vX-cQ",
-      note: "Overview of remediation works at Macquarie Point and how they support the stadium project."
+      title: "Mac Point remediation work",
+      url: "https://youtu.be/mJzHTXnSrb8",
+      note: "Overview of remediation works at Macquarie Point and how they support the stadium."
     },
     {
       id: "video-5",
-      title: "Entering the Macquarie Point Multipurpose Stadium",
-      url: "https://youtu.be/zskCZeWZ-xo",
+      title: "Entering the Macquarie Point multipurpose stadium",
+      url: "https://youtu.be/NSc6u8vX-cQ",
       note: "Approach, thresholds and first impressions as you enter the stadium."
     },
     {
       id: "video-6",
-      title: "Inside the Macquarie Point Multipurpose Stadium",
-      url: "https://youtu.be/nJqy5tg7z_o",
+      title: "Inside the Macquarie Point multipurpose stadium",
+      url: "https://youtu.be/zM63SF3_8fI",
       note: "Concourse, seating tiers and interior spectator experience."
     },
     {
       id: "video-7",
-      title: "In Situ-Solidification | Remediation at Mac Point",
+      title: "Remediation: In situ-solidification",
       url: "https://youtu.be/84pkAhplxIY",
       note: "In situ-solidification methodology used to treat ground conditions at Macquarie Point."
     },
     {
       id: "video-8",
-      title: "Multipurpose Stadium – Sun and Shadowing Study",
-      url: "https://youtu.be/waWApjh_snA",
+      title: "Multipurpose stadium – sun and shadowing study",
+      url: "https://youtu.be/zskCZeWZ-xo",
       note: "How the stadium responds to sun and shade across seasons, events and times of day."
     },
     {
       id: "video-9",
-      title: "Meet Some of the Design Team",
-      url: "https://youtu.be/mJzHTXnSrb8",
+      title: "Meet some of the design team",
+      url: "https://youtu.be/nJqy5tg7z_o",
       note: "Members of the design team talk through key project drivers and design intent."
     }
   ];
@@ -807,8 +835,8 @@
     { file: "stadium-layout-soccer.jpg",         label: "Soccer" },
     { file: "stadium-layout-boxing.jpg",         label: "Boxing" },
     { file: "stadium-layout-basketball.jpg",     label: "Basketball" },
-    { file: "stadium-layout-concert-mode-3.jpg", label: "Concert Mode" },
-    { file: "stadium-layout-concert-mode-4.jpg", label: "Smaller Concert Mode" }
+    { file: "stadium-layout-concert-mode-3.jpg", label: "Concert mode" },
+    { file: "stadium-layout-concert-mode-4.jpg", label: "Smaller concert mode" }
   ];
 
   const STADIUM_VIEW_IMAGES = [
