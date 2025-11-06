@@ -97,17 +97,17 @@
     }
 
     .nav-btn {
-      border: 1px solid rgba(109,110,113,0.3);
-      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(109,110,113,0.25);
+      background: rgba(255,255,255,0.85);
       color: var(--text-main);
       padding: 6px 11px;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       border-radius: 999px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-weight: 600;
+      font-weight: 400; /* not bold */
       letter-spacing: 0.03em;
       text-transform: uppercase;
       transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
@@ -115,7 +115,7 @@
 
     .nav-btn:hover {
       background: rgba(95,128,155,0.08);
-      border-color: rgba(95,128,155,0.6);
+      border-color: rgba(95,128,155,0.55);
       color: var(--mpdc-blue);
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
@@ -309,7 +309,7 @@
       padding: 14px 14px 14px 16px;
       border-radius: 18px;
       border: 1px solid rgba(115,134,120,0.55);
-      background: #f5f1ea; /* single colour, no gradient */
+      background: #f5f1ea;
       display: flex;
       flex-wrap: wrap;
       gap: 10px 18px;
@@ -512,7 +512,7 @@
       background: #111827;
     }
 
-    /* LINKS PAGE */
+    /* LINKS PAGE – NEW STYLE */
 
     .links-heading {
       margin: 12px 0 4px;
@@ -523,34 +523,53 @@
     }
 
     .links-list {
-      margin-top: 6px;
+      margin-top: 4px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 10px;
+      grid-template-columns: 1fr;
+      gap: 6px;
     }
 
-    .link-card {
-      border-radius: 16px;
-      border: 1px solid var(--border-soft);
-      padding: 9px 10px;
-      background: #f9fafc;
+    .link-row {
       display: flex;
-      flex-direction: row;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: #f9fafc;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, transform 0.1s ease;
     }
 
-    .link-card-title {
+    .link-row:hover {
+      border-color: rgba(95,128,155,0.55);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      background: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .link-row-main {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .link-row-title {
       font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-main);
+      margin-bottom: 1px;
     }
 
-    .link-card.social {
-      padding: 7px 9px;
+    .link-row-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .social-icon {
+    .link-row-badge {
       width: 26px;
       height: 26px;
       border-radius: 999px;
@@ -563,14 +582,10 @@
       flex-shrink: 0;
     }
 
-    .link-card.social .link-card-title {
-      font-size: 0.88rem;
-    }
-
-    .link-card .btn-ghost {
-      margin-left: auto;
-      font-size: 0.78rem;
-      padding: 5px 10px;
+    .link-row-arrow {
+      font-size: 0.9rem;
+      color: var(--mpdc-blue);
+      flex-shrink: 0;
     }
 
     /* LIGHTBOX */
@@ -829,7 +844,6 @@
     return customNames[idx] || `Display board ${num}`;
   }
 
-  // VIDEO ITEMS
   const VIDEO_ITEMS = [
     {
       id: "video-1",
@@ -1088,12 +1102,10 @@
     const idx = getPageIndex(page.id);
     const total = PAGES.length;
 
-    // Top-level data-page buttons (Cover, Links)
     document.querySelectorAll(".nav-btn[data-page]").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.page === page.id);
     });
 
-    // Menu buttons
     document.querySelectorAll(".nav-btn.nav-has-menu").forEach(btn => {
       const menuId = btn.dataset.menu;
       let active = false;
@@ -1418,45 +1430,56 @@
 
     const webItems = [
       {
-        title: "Macquarie Point Development Corporation",
-        url: "https://www.macpoint.com",
-        label: "Visit macpoint.com"
+        title: "macpoint.com",
+        sub: "Macquarie Point Development Corporation",
+        url: "https://www.macpoint.com"
       },
       {
-        title: "Stadium project page",
-        url: "https://www.macpoint.com/stadium",
-        label: "Open macpoint.com/stadium"
+        title: "macpoint.com/stadium",
+        sub: "Stadium project information",
+        url: "https://www.macpoint.com/stadium"
       },
       {
-        title: "Subscribe for updates",
-        url: "mailto:contact@macpoint.com?subject=Stadium%20design%20updates",
-        label: "Subscribe"
+        title: "Subscribe for stadium updates",
+        sub: "Email contact@macpoint.com with “Stadium design updates” in the subject line.",
+        url: "mailto:contact@macpoint.com?subject=Stadium%20design%20updates"
       },
       {
         title: "Contact the project team",
-        url: "mailto:contact@macpoint.com",
-        label: "Email contact@macpoint.com"
+        sub: "Questions or feedback – contact@macpoint.com",
+        url: "mailto:contact@macpoint.com"
       }
     ];
 
     webItems.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "link-card";
+      const a = document.createElement("a");
+      a.className = "link-row";
+      a.href = item.url;
+      a.target = item.url.startsWith("mailto:") ? "_self" : "_blank";
+      if (!item.url.startsWith("mailto:")) a.rel = "noopener";
+
+      const main = document.createElement("div");
+      main.className = "link-row-main";
 
       const title = document.createElement("div");
-      title.className = "link-card-title";
+      title.className = "link-row-title";
       title.textContent = item.title;
 
-      const btn = document.createElement("a");
-      btn.className = "btn-ghost";
-      btn.href = item.url;
-      btn.target = item.url.startsWith("mailto:") ? "_self" : "_blank";
-      if (!item.url.startsWith("mailto:")) btn.rel = "noopener";
-      btn.textContent = item.label;
+      const sub = document.createElement("div");
+      sub.className = "link-row-sub";
+      sub.textContent = item.sub || "";
 
-      card.appendChild(title);
-      card.appendChild(btn);
-      webList.appendChild(card);
+      main.appendChild(title);
+      if (item.sub) main.appendChild(sub);
+
+      const arrow = document.createElement("div");
+      arrow.className = "link-row-arrow";
+      arrow.textContent = "↗";
+
+      a.appendChild(main);
+      a.appendChild(arrow);
+
+      webList.appendChild(a);
     });
 
     container.appendChild(webList);
@@ -1472,53 +1495,63 @@
 
     const socialItems = [
       {
-        title: "MPDC on LinkedIn",
+        title: "LinkedIn",
+        sub: "Updates and project news",
         url: "https://www.linkedin.com/company/macquarie-point-development-corporation/",
-        label: "LinkedIn",
-        icon: "in",
-        brandColor: "#0a66c2"
+        badge: "in",
+        color: "#0a66c2"
       },
       {
-        title: "MPDC on Facebook",
+        title: "Facebook",
+        sub: "Community updates and events",
         url: "https://www.facebook.com/macpointtas/",
-        label: "Facebook",
-        icon: "f",
-        brandColor: "#1877f2"
+        badge: "f",
+        color: "#1877f2"
       },
       {
-        title: "MPDC on Instagram",
+        title: "Instagram",
+        sub: "Visual stories from Mac Point",
         url: "https://www.instagram.com/macpointtas/",
-        label: "Instagram",
-        icon: "IG",
-        brandColor: "#d62976"
+        badge: "IG",
+        color: "#d62976"
       }
     ];
 
     socialItems.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "link-card social";
+      const a = document.createElement("a");
+      a.className = "link-row";
+      a.href = item.url;
+      a.target = "_blank";
+      a.rel = "noopener";
 
-      const icon = document.createElement("div");
-      icon.className = "social-icon";
-      icon.textContent = item.icon || "";
-      icon.style.background = item.brandColor || "var(--mpdc-blue)";
+      const badge = document.createElement("div");
+      badge.className = "link-row-badge";
+      badge.textContent = item.badge || "";
+      badge.style.background = item.color || "var(--mpdc-blue)";
+
+      const main = document.createElement("div");
+      main.className = "link-row-main";
 
       const title = document.createElement("div");
-      title.className = "link-card-title";
+      title.className = "link-row-title";
       title.textContent = item.title;
 
-      const btn = document.createElement("a");
-      btn.className = "btn-ghost";
-      btn.href = item.url;
-      btn.target = "_blank";
-      btn.rel = "noopener";
-      btn.textContent = item.label;
+      const sub = document.createElement("div");
+      sub.className = "link-row-sub";
+      sub.textContent = item.sub || "";
 
-      card.appendChild(icon);
-      card.appendChild(title);
-      card.appendChild(btn);
+      main.appendChild(title);
+      if (item.sub) main.appendChild(sub);
 
-      socialList.appendChild(card);
+      const arrow = document.createElement("div");
+      arrow.className = "link-row-arrow";
+      arrow.textContent = "↗";
+
+      a.appendChild(badge);
+      a.appendChild(main);
+      a.appendChild(arrow);
+
+      socialList.appendChild(a);
     });
 
     container.appendChild(socialList);
