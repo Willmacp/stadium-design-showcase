@@ -308,6 +308,53 @@
       color: var(--text-muted);
     }
 
+    /* PAGE NAV (Prev/Next) */
+
+    .page-nav-row {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .page-nav-row .spacer {
+      flex: 1 1 auto;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 7px 12px;
+      border: 1px solid var(--mpdc-blue);
+      font-size: 0.84rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--mpdc-blue);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #4c6a83;
+      border-color: #4c6a83;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--mpdc-blue);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(95,128,155,0.08);
+    }
+
     /* IMAGE GRID */
 
     .image-grid-intro {
@@ -380,6 +427,7 @@
       border: 1px solid var(--border-soft);
       background: #f9fafc;
       padding: 10px;
+      cursor: pointer;
     }
 
     .image-full-wrap img {
@@ -402,7 +450,7 @@
 
     .video-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 12px;
       margin-top: 12px;
     }
@@ -428,37 +476,13 @@
       color: var(--text-muted);
     }
 
-    .btn-primary,
-    .btn-ghost {
-      border-radius: 999px;
-      padding: 7px 12px;
-      border: 1px solid var(--mpdc-blue);
-      font-size: 0.84rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-    }
-
-    .btn-primary {
-      background: var(--mpdc-blue);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: #4c6a83;
-      border-color: #4c6a83;
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--mpdc-blue);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(95,128,155,0.08);
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      border: none;
+      margin-bottom: 4px;
+      background: #111827;
     }
 
     /* LINKS PAGE */
@@ -528,16 +552,24 @@
       font-size: 0.86rem;
     }
 
-    .lightbox-header span {
-      opacity: 0.85;
+    .lightbox-controls {
+      display: flex;
+      gap: 6px;
+      align-items: center;
     }
 
     .lightbox-header button {
       border: none;
-      background: transparent;
+      background: rgba(31,41,55,0.9);
       color: #e5e7eb;
-      font-size: 1.2rem;
+      font-size: 0.9rem;
       cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+
+    .lightbox-header button:hover {
+      background: rgba(55,65,81,0.95);
     }
 
     .lightbox-img-wrap {
@@ -676,7 +708,11 @@
   <div class="lightbox-inner">
     <div class="lightbox-header">
       <div id="lightboxTitle"></div>
-      <button type="button" id="lightboxClose" aria-label="Close image">✕</button>
+      <div class="lightbox-controls">
+        <button type="button" id="lightboxPrev" aria-label="Previous image">‹</button>
+        <button type="button" id="lightboxNext" aria-label="Next image">›</button>
+        <button type="button" id="lightboxClose" aria-label="Close image">✕</button>
+      </div>
     </div>
     <div class="lightbox-img-wrap">
       <img id="lightboxImg" src="" alt="">
@@ -685,6 +721,21 @@
 </div>
 
 <script>
+  // ------------ HELPERS ------------
+
+  function toEmbed(url) {
+    try {
+      const u = new URL(url);
+      if (u.hostname === "youtu.be") {
+        return "https://www.youtube.com/embed/" + u.pathname.slice(1);
+      }
+      if (u.hostname.includes("youtube.com")) {
+        return "https://www.youtube.com/embed/" + u.searchParams.get("v");
+      }
+    } catch(e) {}
+    return url;
+  }
+
   // ------------ DATA ------------
 
   const DISPLAY_BOARD_FILES = [
@@ -697,7 +748,6 @@
   ];
 
   function boardLabelFromFile(file, idx) {
-    // Simple "Display board 01" style
     const num = String(idx + 1).padStart(2, "0");
     return `Display board ${num}`;
   }
@@ -759,15 +809,16 @@
     }
   ];
 
+  // Stadium layouts (updated grouping & labels)
   const STADIUM_LAYOUT_IMAGES = [
-    { file: "stadium-layout-afl.jpg",            label: "AFL layout" },
-    { file: "stadium-layout-cricket.jpg",        label: "Cricket layout" },
-    { file: "stadium-layout-nrl.jpg",            label: "NRL layout" },
-    { file: "stadium-layout-soccer.jpg",         label: "Soccer layout" },
-    { file: "stadium-layout-boxing.jpg",         label: "Boxing mode" },
-    { file: "stadium-layout-basketball.jpg",     label: "Basketball mode" },
-    { file: "stadium-layout-concert-mode-3.jpg", label: "Concert mode A" },
-    { file: "stadium-layout-concert-mode-4.jpg", label: "Concert mode B" }
+    { file: "stadium-layout-afl.jpg",            label: "AFL" },
+    { file: "stadium-layout-cricket.jpg",        label: "Cricket" },
+    { file: "stadium-layout-nrl.jpg",            label: "NRL" },
+    { file: "stadium-layout-soccer.jpg",         label: "Soccer" },
+    { file: "stadium-layout-boxing.jpg",         label: "Boxing" },
+    { file: "stadium-layout-basketball.jpg",     label: "Basketball" },
+    { file: "stadium-layout-concert-mode-3.jpg", label: "Concert Mode" },
+    { file: "stadium-layout-concert-mode-4.jpg", label: "Smaller Concert Mode" }
   ];
 
   const STADIUM_VIEW_IMAGES = [
@@ -777,31 +828,38 @@
     { file: "stadium-view-street.jpeg",     label: "View · Evans Street" }
   ];
 
-  // NEW: GA plans, sections & facades
-
+  // GA plans – 8 pages
   const GA_PLAN_IMAGES = [
     { file: "plan-ga-ground-plane-external-concourse.jpg", label: "Ground plane – external concourse" },
     { file: "plan-ga-level0-field.jpg",                    label: "Level 0 – field level" },
     { file: "plan-ga-level1-concourse.jpg",                label: "Level 1 – public concourse" },
-    { file: "plan-ga-level1m-premium.jpg",                 label: "Level 1M – premium & media" }
+    { file: "plan-ga-level1m-premium.jpg",                 label: "Level 1M – premium & media" },
+    { file: "plan-ga-level2-stadium-club.jpg",             label: "Level 2 – stadium club" },
+    { file: "plan-ga-level3-media.jpg",                    label: "Level 3 – media level" },
+    { file: "plan-ga-level4-gantry.jpg",                   label: "Level 4 – gantry level" },
+    { file: "plan-ga-roof.jpg",                            label: "Roof plan" }
   ];
 
+  // Sections – 9 pages
   const SECTION_IMAGES = [
-    { file: "section-site-overall.jpg",        label: "Site sections – north/south & east/west" },
-    { file: "section-building-east.jpg",       label: "Building sections – east" },
-    { file: "section-building-north.jpg",      label: "Building sections – north" },
-    { file: "section-building-south.jpg",      label: "Building sections – south" },
-    { file: "section-building-west.jpg",       label: "Building sections – west" }
+    { file: "section-site-overall.jpg",        label: "Site sections – overall" },
+    { file: "section-building-east.jpg",       label: "Building section – east" },
+    { file: "section-building-north.jpg",      label: "Building section – north" },
+    { file: "section-building-south.jpg",      label: "Building section – south" },
+    { file: "section-building-west.jpg",       label: "Building section – west" },
+    { file: "section-building-southeast.jpg",  label: "Building section – south-east" },
+    { file: "section-building-southwest.jpg",  label: "Building section – south-west" },
+    { file: "section-building-northeast.jpg",  label: "Building section – north-east" },
+    { file: "section-building-northwest.jpg",  label: "Building section – north-west" }
   ];
 
+  // Facade sections – 3 page images
   const FACADE_IMAGES = [
-    { file: "facade-gate2-entry.jpg",         label: "Facade detail – Gate 2 entry" },
-    { file: "facade-gate3-entry.jpg",         label: "Facade detail – Gate 3 entry" },
-    { file: "facade-concourse-ribbon.jpg",    label: "Facade detail – concourse & ribbon board" },
-    { file: "facade-atrium-lobby.jpg",        label: "Facade detail – atrium lobby" }
+    { file: "facade-sections-01.jpg", label: "Facade sections – sheet 1" },
+    { file: "facade-sections-02.jpg", label: "Facade sections – sheet 2" },
+    { file: "facade-sections-03.jpg", label: "Facade sections – sheet 3" }
   ];
 
-  // PAGES will be built programmatically so we can include one per board
   const PAGES = [];
 
   function buildPages() {
@@ -835,7 +893,7 @@
       });
     });
 
-    // Videos page (one page with all videos)
+    // Videos page (with embedded players)
     PAGES.push({
       id: "videos",
       type: "videos",
@@ -844,25 +902,26 @@
       category: "Media"
     });
 
-    // Plans: stadium layouts (two pages of four)
+    // Plans: stadium layouts – field sports (now 6 images)
     PAGES.push({
       id: "plans-layouts-1",
       type: "image-grid",
       title: "Stadium layouts · Field sports",
       subtitle: "Multi-code playing surface overlays",
       category: "Plans",
-      images: STADIUM_LAYOUT_IMAGES.slice(0, 4),
-      intro: "Four core multi-use bowls showing AFL, cricket, NRL and soccer overlays."
+      images: STADIUM_LAYOUT_IMAGES.slice(0, 6),
+      intro: "Core multi-use bowls showing AFL, cricket, NRL, soccer, boxing and basketball configurations."
     });
 
+    // Plans: stadium layouts – event modes (2 images)
     PAGES.push({
       id: "plans-layouts-2",
       type: "image-grid",
       title: "Stadium layouts · Event modes",
-      subtitle: "Indoor sports and concert configurations",
+      subtitle: "Concert and amplified event configurations",
       category: "Plans",
-      images: STADIUM_LAYOUT_IMAGES.slice(4),
-      intro: "Alternate event modes including boxing, basketball and concert staging options."
+      images: STADIUM_LAYOUT_IMAGES.slice(6),
+      intro: "Alternate staging for concerts and smaller live events."
     });
 
     // Plans: GA
@@ -887,15 +946,15 @@
       intro: "Sections cutting through the site and bowl, describing scale, roof profile and relationships to the surrounding city."
     });
 
-    // Plans: facades
+    // Plans: facade sections
     PAGES.push({
       id: "plans-facades",
       type: "image-grid",
-      title: "Architectural plans · Facade details",
-      subtitle: "Gate entries and concourse facade",
+      title: "Architectural plans · Facade sections",
+      subtitle: "Layering, structure and entries",
       category: "Plans",
       images: FACADE_IMAGES,
-      intro: "Selected detailed facade sections that capture entries, glazing, ribbon board and cladding strategies."
+      intro: "Combined facade section sheets illustrating entry sequences, concourse edges and stadium skin."
     });
 
     // Views page
@@ -933,16 +992,33 @@
     return PAGES.findIndex(p => p.id === id);
   }
 
+  function goToPageByIndex(idx) {
+    if (idx < 0 || idx >= PAGES.length) return;
+    renderPage(PAGES[idx].id);
+  }
+
+  function goPrevPage() {
+    const idx = getPageIndex(currentPageId);
+    if (idx > 0) goToPageByIndex(idx - 1);
+  }
+
+  function goNextPage() {
+    const idx = getPageIndex(currentPageId);
+    if (idx < PAGES.length - 1) goToPageByIndex(idx + 1);
+  }
+
   function renderPage(id) {
     const page = PAGES.find(p => p.id === id) || PAGES[0];
     currentPageId = page.id;
+
+    const idx = getPageIndex(page.id);
+    const total = PAGES.length;
 
     // Update nav active state
     document.querySelectorAll(".nav-btn[data-page]").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.page === page.id);
     });
 
-    // Build page shell
     const shell = document.createElement("div");
     shell.className = "page-shell";
 
@@ -980,6 +1056,36 @@
       renderLinks(body);
     }
 
+    // Page prev/next row
+    const navRow = document.createElement("div");
+    navRow.className = "page-nav-row";
+
+    if (idx > 0) {
+      const prevBtn = document.createElement("button");
+      prevBtn.className = "btn-ghost";
+      prevBtn.innerHTML = "‹ Previous page";
+      prevBtn.addEventListener("click", goPrevPage);
+      navRow.appendChild(prevBtn);
+    } else {
+      navRow.appendChild(document.createElement("div"));
+    }
+
+    const spacer = document.createElement("div");
+    spacer.className = "spacer";
+    navRow.appendChild(spacer);
+
+    if (idx < total - 1) {
+      const nextBtn = document.createElement("button");
+      nextBtn.className = "btn-ghost";
+      nextBtn.innerHTML = "Next page ›";
+      nextBtn.addEventListener("click", goNextPage);
+      navRow.appendChild(nextBtn);
+    } else {
+      navRow.appendChild(document.createElement("div"));
+    }
+
+    shell.appendChild(navRow);
+
     // Logo row
     const logoRow = document.createElement("div");
     logoRow.className = "logo-row";
@@ -990,8 +1096,6 @@
     pageContainer.appendChild(shell);
 
     // Footer page info
-    const idx = getPageIndex(page.id);
-    const total = PAGES.length;
     pageTitleFooter.innerHTML = `<strong>${page.title}</strong>`;
     pageCounterFooter.textContent = `Page ${idx + 1} of ${total}`;
   }
@@ -1022,7 +1126,7 @@
       </div>
       <p>
         The content is optimised for phones, tablets and laptops. Tap the image tiles to open them
-        larger, and use the drop-down menus to jump directly to a specific board, layout or plan.
+        larger, and use the drop-down menus or left/right arrow keys to move between pages.
       </p>
     `;
     container.appendChild(intro);
@@ -1038,10 +1142,15 @@
     const grid = document.createElement("div");
     grid.className = "image-grid";
 
+    const group = DISPLAY_BOARD_FILES.map((file, idx) => ({
+      src: `assets/boards/${file}`,
+      title: boardLabelFromFile(file, idx)
+    }));
+
     DISPLAY_BOARD_FILES.forEach((file, idx) => {
       const card = document.createElement("div");
       card.className = "image-card";
-      card.addEventListener("click", () => openLightbox(`assets/boards/${file}`, boardLabelFromFile(file, idx)));
+      card.addEventListener("click", () => openLightboxGroup(group, idx));
 
       const thumbWrap = document.createElement("div");
       thumbWrap.className = "image-card-thumb";
@@ -1074,7 +1183,9 @@
       <span>Tip: click the image to enlarge</span>
     `;
 
-    wrap.addEventListener("click", () => openLightbox(page.image, page.title));
+    const group = [{ src: page.image, title: page.title }];
+
+    wrap.addEventListener("click", () => openLightboxGroup(group, 0));
 
     container.appendChild(wrap);
     container.appendChild(cap);
@@ -1094,23 +1205,37 @@
       const card = document.createElement("div");
       card.className = "video-card";
 
-      card.innerHTML = `
-        <div class="video-title">${v.title}</div>
-        <div class="video-meta">${v.note || ""}</div>
-      `;
+      const iframe = document.createElement("iframe");
+      iframe.className = "video-frame";
+      iframe.src = toEmbed(v.url);
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      card.appendChild(iframe);
+
+      const title = document.createElement("div");
+      title.className = "video-title";
+      title.textContent = v.title;
+
+      const meta = document.createElement("div");
+      meta.className = "video-meta";
+      meta.textContent = v.note || "";
 
       const btnRow = document.createElement("div");
       btnRow.style.marginTop = "4px";
 
       const btn = document.createElement("a");
-      btn.className = "btn-primary";
+      btn.className = "btn-ghost";
       btn.href = v.url;
       btn.target = "_blank";
       btn.rel = "noopener";
-      btn.textContent = "Watch on YouTube";
+      btn.textContent = "Open on YouTube";
+
       btnRow.appendChild(btn);
 
+      card.appendChild(title);
+      card.appendChild(meta);
       card.appendChild(btnRow);
+
       list.appendChild(card);
     });
 
@@ -1128,7 +1253,13 @@
     const grid = document.createElement("div");
     grid.className = "image-grid";
 
-    (page.images || []).forEach((img, idx) => {
+    const images = page.images || [];
+    const group = images.map(img => ({
+      src: `assets/plans/${img.file}`,
+      title: img.label
+    }));
+
+    images.forEach((img, idx) => {
       const card = document.createElement("div");
       card.className = "image-card";
 
@@ -1145,7 +1276,7 @@
 
       card.appendChild(thumb);
       card.appendChild(body);
-      card.addEventListener("click", () => openLightbox(`assets/plans/${img.file}`, `${img.label}`));
+      card.addEventListener("click", () => openLightboxGroup(group, idx));
 
       grid.appendChild(card);
     });
@@ -1212,25 +1343,56 @@
     container.appendChild(list);
   }
 
-  // ------------ LIGHTBOX ------------
+  // ------------ LIGHTBOX (with group navigation) ------------
 
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   const lightboxTitle = document.getElementById("lightboxTitle");
+  const lbPrevBtn = document.getElementById("lightboxPrev");
+  const lbNextBtn = document.getElementById("lightboxNext");
+  const lbCloseBtn = document.getElementById("lightboxClose");
 
-  function openLightbox(src, title) {
-    lightboxImg.src = src;
-    lightboxImg.alt = title || "";
-    lightboxTitle.textContent = title || "";
+  let lightboxGroup = [];
+  let lightboxIndex = 0;
+
+  function showLightboxItem() {
+    if (!lightboxGroup.length) return;
+    const item = lightboxGroup[lightboxIndex];
+    lightboxImg.src = item.src;
+    lightboxImg.alt = item.title || "";
+    lightboxTitle.textContent = item.title || "";
+  }
+
+  function openLightboxGroup(group, startIndex) {
+    if (!group || !group.length) return;
+    lightboxGroup = group;
+    lightboxIndex = startIndex || 0;
+    showLightboxItem();
     lightbox.classList.add("open");
+  }
+
+  function lightboxPrev() {
+    if (!lightboxGroup.length) return;
+    lightboxIndex = (lightboxIndex - 1 + lightboxGroup.length) % lightboxGroup.length;
+    showLightboxItem();
+  }
+
+  function lightboxNext() {
+    if (!lightboxGroup.length) return;
+    lightboxIndex = (lightboxIndex + 1) % lightboxGroup.length;
+    showLightboxItem();
   }
 
   function closeLightbox() {
     lightbox.classList.remove("open");
     lightboxImg.src = "";
+    lightboxGroup = [];
   }
 
-  document.getElementById("lightboxClose").addEventListener("click", closeLightbox);
+  lbPrevBtn.addEventListener("click", lightboxPrev);
+  lbNextBtn.addEventListener("click", lightboxNext);
+  lbCloseBtn.addEventListener("click", closeLightbox);
+
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) closeLightbox();
   });
@@ -1334,9 +1496,9 @@
       const btn = document.createElement("button");
       btn.innerHTML = `${v.title} <span>${idx+1}</span>`;
       btn.addEventListener("click", () => {
-        window.open(v.url, "_blank", "noopener");
-        closeAllMenus();
+        renderPage("videos");
         appRoot.classList.remove("nav-open");
+        closeAllMenus();
       });
       videosMenu.appendChild(btn);
     });
@@ -1367,10 +1529,10 @@
     plansMenu.appendChild(archHeader);
 
     [
-      { id: "plans-ga", label: "General arrangement" },
-      { id: "plans-sections", label: "Sections" },
-      { id: "plans-facades", label: "Facade details" },
-      { id: "views", label: "Context views" }
+      { id: "plans-ga",       label: "General arrangement" },
+      { id: "plans-sections", label: "Building & site sections" },
+      { id: "plans-facades",  label: "Facade sections" },
+      { id: "views",          label: "Context views" }
     ].forEach(item => {
       const btn = document.createElement("button");
       btn.textContent = item.label;
@@ -1384,6 +1546,26 @@
   }
 
   buildMenus();
+
+  // Keyboard navigation: pages + lightbox
+  document.addEventListener("keydown", (e) => {
+    if (lightbox.classList.contains("open")) {
+      if (e.key === "ArrowLeft") {
+        lightboxPrev();
+      } else if (e.key === "ArrowRight") {
+        lightboxNext();
+      } else if (e.key === "Escape") {
+        closeLightbox();
+      }
+      return;
+    }
+
+    if (e.key === "ArrowLeft") {
+      goPrevPage();
+    } else if (e.key === "ArrowRight") {
+      goNextPage();
+    }
+  });
 
   // Initial render
   renderPage("cover");
