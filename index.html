@@ -446,7 +446,7 @@
       gap: 10px;
     }
 
-    /* VIDEO LIST */
+    /* VIDEO LIST + SINGLE VIDEO */
 
     .video-list {
       display: grid;
@@ -482,6 +482,16 @@
       border-radius: 12px;
       border: none;
       margin-bottom: 4px;
+      background: #111827;
+    }
+
+    .video-single-frame {
+      width: 100%;
+      max-width: 720px;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      border: none;
+      margin: 6px 0 10px;
       background: #111827;
     }
 
@@ -752,60 +762,61 @@
     return `Display board ${num}`;
   }
 
+  // Updated video titles / mapping
   const VIDEO_ITEMS = [
     {
       id: "video-1",
-      title: "Back of house & player facilities",
+      title: "Back of house, secure zone & player facilities",
       url: "https://youtu.be/Zx76BnLkNlY",
-      note: "Behind-the-scenes spaces and secure player zones"
+      note: "Focused on back-of-house operations, secure player circulation and facilities."
     },
     {
       id: "video-2",
-      title: "Arriving at Gate 2 & function room",
+      title: "Gate 2, featuring our function room",
       url: "https://youtu.be/KcSXlcSaL_8",
-      note: "Public arrival sequence and hospitality"
+      note: "Arrival experience via Gate 2 and integrated function / events spaces."
     },
     {
       id: "video-3",
-      title: "Inside the stadium",
+      title: "Entering the Macquarie Point multipurpose stadium",
       url: "https://youtu.be/zskCZeWZ-xo",
-      note: "Concourse, bowl and interior experience"
+      note: "Approach, threshold and first impressions as you enter the stadium."
     },
     {
       id: "video-4",
-      title: "Meet the design team",
+      title: "Inside the Macquarie Point multipurpose stadium",
       url: "https://youtu.be/nJqy5tg7z_o",
-      note: "Design drivers and collaboration"
+      note: "Concourse, bowl and interior spectator experience."
     },
     {
       id: "video-5",
-      title: "Sun and shadow study",
+      title: "Meet some of the design team",
       url: "https://youtu.be/mJzHTXnSrb8",
-      note: "Performance across seasons and events"
+      note: "Members of the design team talk through key project drivers."
     },
     {
       id: "video-6",
-      title: "Remediation: In situ-solidification",
+      title: "Multipurpose stadium – sun & shadowing study",
       url: "https://youtu.be/waWApjh_snA",
-      note: "Ground improvement methodology"
+      note: "How the bowl performs across seasons, events and times of day."
     },
     {
       id: "video-7",
-      title: "Mac Point remediation works",
+      title: "Remediation: In situ-solidification",
       url: "https://youtu.be/84pkAhplxIY",
-      note: "On-site works in progress"
+      note: "In situ-solidification methodology used to treat ground conditions."
     },
     {
       id: "video-8",
-      title: "Remediation – site complexities",
+      title: "Mac Point remediation work",
       url: "https://youtu.be/NSc6u8vX-cQ",
-      note: "Working with contamination constraints"
+      note: "Overview of on-site remediation works at Macquarie Point."
     },
     {
       id: "video-9",
-      title: "Stadium fly-through",
+      title: "The complexities of remediating contaminated sites",
       url: "https://youtu.be/zM63SF3_8fI",
-      note: "Overall vision and atmosphere"
+      note: "Broader context and challenges in delivering remediation on complex sites."
     }
   ];
 
@@ -893,7 +904,7 @@
       });
     });
 
-    // Videos page (with embedded players)
+    // Videos overview page
     PAGES.push({
       id: "videos",
       type: "videos",
@@ -902,7 +913,19 @@
       category: "Media"
     });
 
-    // Plans: stadium layouts – field sports (now 6 images)
+    // Per-video pages
+    VIDEO_ITEMS.forEach(v => {
+      PAGES.push({
+        id: v.id,
+        type: "video-single",
+        title: v.title,
+        subtitle: v.note || "Video walkthrough",
+        category: "Media",
+        videoId: v.id
+      });
+    });
+
+    // Plans: stadium layouts – field sports (6 images)
     PAGES.push({
       id: "plans-layouts-1",
       type: "image-grid",
@@ -1050,6 +1073,8 @@
       renderSingleImage(body, page);
     } else if (page.type === "videos") {
       renderVideos(body);
+    } else if (page.type === "video-single") {
+      renderVideoSingle(body, page);
     } else if (page.type === "image-grid") {
       renderImageGrid(body, page);
     } else if (page.type === "links") {
@@ -1240,6 +1265,42 @@
     });
 
     container.appendChild(list);
+  }
+
+  function renderVideoSingle(container, page) {
+    const v = VIDEO_ITEMS.find(x => x.id === page.videoId) || VIDEO_ITEMS[0];
+
+    const intro = document.createElement("p");
+    intro.style.fontSize = "0.9rem";
+    intro.style.color = "var(--text-muted)";
+    intro.textContent = v.note || "";
+    container.appendChild(intro);
+
+    const iframe = document.createElement("iframe");
+    iframe.className = "video-single-frame";
+    iframe.src = toEmbed(v.url);
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowFullscreen = true;
+    container.appendChild(iframe);
+
+    const hint = document.createElement("p");
+    hint.style.fontSize = "0.82rem";
+    hint.style.color = "var(--text-muted)";
+    hint.textContent = "Tip: you can also use the Videos menu to jump between different walkthroughs.";
+    container.appendChild(hint);
+
+    const btnRow = document.createElement("div");
+    btnRow.style.marginTop = "4px";
+
+    const btn = document.createElement("a");
+    btn.className = "btn-ghost";
+    btn.href = v.url;
+    btn.target = "_blank";
+    btn.rel = "noopener";
+    btn.textContent = "Open this video on YouTube";
+
+    btnRow.appendChild(btn);
+    container.appendChild(btnRow);
   }
 
   function renderImageGrid(container, page) {
@@ -1489,14 +1550,14 @@
     videosMenu.appendChild(videosAllBtn);
 
     const videosHeader = document.createElement("h4");
-    videosHeader.textContent = "Quick links";
+    videosHeader.textContent = "Individual videos";
     videosMenu.appendChild(videosHeader);
 
     VIDEO_ITEMS.forEach((v, idx) => {
       const btn = document.createElement("button");
       btn.innerHTML = `${v.title} <span>${idx+1}</span>`;
       btn.addEventListener("click", () => {
-        renderPage("videos");
+        renderPage(v.id);
         appRoot.classList.remove("nav-open");
         closeAllMenus();
       });
