@@ -7,10 +7,12 @@
   <style>
     :root {
       --mpdc-blue: #5f809b;
+      --mpdc-grey: #6d6e71;
+      --mpdc-green: #738678;
       --accent-warm: #d4c9b4;
       --bg: #d4c9b4;
       --text-main: #222;
-      --text-muted: #555;
+      --text-muted: #6d6e71;
       --border-soft: #dde3eb;
       --page-shadow: 0 16px 40px rgba(0,0,0,0.18);
       --radius-lg: 18px;
@@ -274,14 +276,17 @@
       gap: 6px;
       padding: 4px 9px;
       border-radius: 999px;
-      background: linear-gradient(135deg, rgba(212,201,180,0.6), rgba(95,128,155,0.05));
-      color: var(--mpdc-blue);
+      background: rgba(95,128,155,0.06);
+      color: var(--mpdc-grey);
       font-size: 0.75rem;
       margin-bottom: 10px;
-      border: 1px solid rgba(95,128,155,0.25);
+      border: 1px solid rgba(95,128,155,0.35);
     }
 
-    .pill-tag strong { font-weight: 600; }
+    .pill-tag strong {
+      font-weight: 600;
+      color: var(--mpdc-green);
+    }
 
     .logo-row {
       display: flex;
@@ -299,8 +304,8 @@
       margin: 14px 0;
       padding: 14px 14px 14px 16px;
       border-radius: 18px;
-      border: 1px solid rgba(95,128,155,0.22);
-      background: radial-gradient(circle at top left, rgba(212,201,180,0.25), rgba(255,255,255,0.95));
+      border: 1px solid rgba(115,134,120,0.55);
+      background: radial-gradient(circle at top left, rgba(212,201,180,0.25), rgba(255,255,255,0.96));
       display: flex;
       flex-wrap: wrap;
       gap: 10px 18px;
@@ -318,7 +323,7 @@
       color: var(--text-muted);
     }
 
-    /* PAGE NAV (Prev/Next) */
+    /* PAGE NAV */
 
     .page-nav-row {
       margin-top: 16px;
@@ -505,8 +510,16 @@
 
     /* LINKS PAGE */
 
+    .links-heading {
+      margin: 12px 0 4px;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mpdc-grey);
+    }
+
     .links-list {
-      margin-top: 8px;
+      margin-top: 6px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 10px;
@@ -515,11 +528,12 @@
     .link-card {
       border-radius: 16px;
       border: 1px solid var(--border-soft);
-      padding: 10px 12px;
+      padding: 9px 10px;
       background: #f9fafc;
       display: flex;
-      flex-direction: column;
-      gap: 6px;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
     }
 
     .link-card-title {
@@ -528,16 +542,8 @@
       color: var(--text-main);
     }
 
-    .link-card-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
     .link-card.social {
-      flex-direction: row;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 9px;
+      padding: 7px 9px;
     }
 
     .social-icon {
@@ -557,7 +563,7 @@
       font-size: 0.88rem;
     }
 
-    .link-card.social .btn-ghost {
+    .link-card .btn-ghost {
       margin-left: auto;
       font-size: 0.78rem;
       padding: 5px 10px;
@@ -843,19 +849,19 @@
       id: "video-4",
       title: "Mac Point remediation work",
       url: "https://youtu.be/mJzHTXnSrb8",
-      note: "Overview of remediation works at Macquarie Point and how they support the stadium."
+      note: "Overview of remediation works at Mac Point and how they support the stadium."
     },
     {
       id: "video-5",
-      title: "Entering the Macquarie Point multipurpose stadium",
+      title: "Entering the Macquarie Point Multipurpose Stadium",
       url: "https://youtu.be/NSc6u8vX-cQ",
-      note: "Approach, thresholds and first impressions as you enter the stadium."
+      note: "Approach, thresholds and first impressions as you enter the Macquarie Point Multipurpose Stadium."
     },
     {
       id: "video-6",
-      title: "Inside the Macquarie Point multipurpose stadium",
+      title: "Inside the Macquarie Point Multipurpose Stadium",
       url: "https://youtu.be/zM63SF3_8fI",
-      note: "Concourse, seating tiers and interior spectator experience."
+      note: "Concourse, seating tiers and interior spectator experience within the Macquarie Point Multipurpose Stadium."
     },
     {
       id: "video-7",
@@ -958,7 +964,7 @@
       id: "videos",
       type: "videos",
       title: "Video walkthroughs",
-      subtitle: "Short films exploring the stadium design, experience and remediation",
+      subtitle: "",
       category: "Media"
     });
 
@@ -1182,8 +1188,8 @@
           <h2>Welcome to the Stadium Design Showcase digital handbook</h2>
           <p>
             This handbook captures the key content from the physical exhibition at the Goods Shed,
-            including display boards, plans, sections, videos and context views of the Macquarie
-            Point multipurpose stadium.
+            including display boards, plans, sections, videos and context views of the
+            Macquarie Point Multipurpose Stadium.
           </p>
         </div>
         <div style="flex: 1 1 160px;">
@@ -1267,7 +1273,7 @@
 
   function renderVideos(container) {
     const intro = document.createElement("p");
-    intro.textContent = "Short films that unpack the experience, technical design and remediation work behind the Macquarie Point multipurpose stadium.";
+    intro.textContent = "Short films that unpack the experience, technical design and remediation work behind the Macquarie Point Multipurpose Stadium.";
     intro.style.fontSize = "0.9rem";
     intro.style.color = "var(--text-muted)";
     container.appendChild(intro);
@@ -1397,107 +1403,111 @@
     p.style.color = "var(--text-muted)";
     container.appendChild(p);
 
-    const list = document.createElement("div");
-    list.className = "links-list";
+    // Websites
+    const webHeading = document.createElement("div");
+    webHeading.className = "links-heading";
+    webHeading.textContent = "Websites";
+    container.appendChild(webHeading);
 
-    const items = [
+    const webList = document.createElement("div");
+    webList.className = "links-list";
+
+    const webItems = [
       {
         title: "Macquarie Point Development Corporation",
-        desc: "Project information, planning documents and news.",
         url: "https://www.macpoint.com",
-        label: "Visit macpoint.com",
-        type: "site"
+        label: "Visit macpoint.com"
       },
       {
         title: "Stadium project page",
-        desc: "Focused information about the proposed multipurpose stadium.",
         url: "https://www.macpoint.com/stadium",
-        label: "Open macpoint.com/stadium",
-        type: "site"
-      },
+        label: "Open macpoint.com/stadium"
+      }
+    ];
+
+    webItems.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "link-card";
+
+      const title = document.createElement("div");
+      title.className = "link-card-title";
+      title.textContent = item.title;
+
+      const btn = document.createElement("a");
+      btn.className = "btn-ghost";
+      btn.href = item.url;
+      btn.target = "_blank";
+      btn.rel = "noopener";
+      btn.textContent = item.label;
+
+      card.appendChild(title);
+      card.appendChild(btn);
+      webList.appendChild(card);
+    });
+
+    container.appendChild(webList);
+
+    // Social
+    const socialHeading = document.createElement("div");
+    socialHeading.className = "links-heading";
+    socialHeading.textContent = "Social media";
+    container.appendChild(socialHeading);
+
+    const socialList = document.createElement("div");
+    socialList.className = "links-list";
+
+    const socialItems = [
       {
         title: "MPDC on LinkedIn",
-        desc: "Updates from the project team and partners.",
         url: "https://www.linkedin.com/company/macquarie-point-development-corporation/",
         label: "LinkedIn",
-        type: "social",
         icon: "in",
         brandColor: "#0a66c2"
       },
       {
         title: "MPDC on Facebook",
-        desc: "Community updates and engagement.",
         url: "https://www.facebook.com/macpointtas/",
         label: "Facebook",
-        type: "social",
         icon: "f",
         brandColor: "#1877f2"
       },
       {
         title: "MPDC on Instagram",
-        desc: "Visual stories, renders and site photography.",
         url: "https://www.instagram.com/macpointtas/",
         label: "Instagram",
-        type: "social",
         icon: "IG",
         brandColor: "#d62976"
       }
     ];
 
-    items.forEach(item => {
+    socialItems.forEach(item => {
       const card = document.createElement("div");
-      card.className = "link-card" + (item.type === "social" ? " social" : "");
+      card.className = "link-card social";
 
-      if (item.type === "social") {
-        const icon = document.createElement("div");
-        icon.className = "social-icon";
-        icon.textContent = item.icon || "";
-        icon.style.background = item.brandColor || "var(--mpdc-blue)";
+      const icon = document.createElement("div");
+      icon.className = "social-icon";
+      icon.textContent = item.icon || "";
+      icon.style.background = item.brandColor || "var(--mpdc-blue)";
 
-        const textWrap = document.createElement("div");
-        const title = document.createElement("div");
-        title.className = "link-card-title";
-        title.textContent = item.title;
-        const desc = document.createElement("div");
-        desc.className = "link-card-desc";
-        desc.textContent = item.desc;
+      const title = document.createElement("div");
+      title.className = "link-card-title";
+      title.textContent = item.title;
 
-        textWrap.appendChild(title);
-        textWrap.appendChild(desc);
+      const btn = document.createElement("a");
+      btn.className = "btn-ghost";
+      btn.href = item.url;
+      btn.target = "_blank";
+      btn.rel = "noopener";
+      btn.textContent = item.label;
 
-        const btn = document.createElement("a");
-        btn.className = "btn-ghost";
-        btn.href = item.url;
-        btn.target = "_blank";
-        btn.rel = "noopener";
-        btn.textContent = item.label;
+      card.appendChild(icon);
+      card.appendChild(title);
+      card.appendChild(btn);
 
-        card.appendChild(icon);
-        card.appendChild(textWrap);
-        card.appendChild(btn);
-      } else {
-        const title = document.createElement("div");
-        title.className = "link-card-title";
-        title.textContent = item.title;
-        const desc = document.createElement("div");
-        desc.className = "link-card-desc";
-        desc.textContent = item.desc;
-        const btn = document.createElement("a");
-        btn.className = "btn-ghost";
-        btn.href = item.url;
-        btn.target = "_blank";
-        btn.rel = "noopener";
-        btn.textContent = item.label;
-
-        card.appendChild(title);
-        card.appendChild(desc);
-        card.appendChild(btn);
-      }
-
-      list.appendChild(card);
+      socialList.appendChild(card);
     });
 
-    container.appendChild(list);
+    container.appendChild(socialList);
   }
 
   // ------------ LIGHTBOX ------------
