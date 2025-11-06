@@ -107,9 +107,9 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-weight: 400; /* not bold */
+      font-weight: 400; /* softer */
       letter-spacing: 0.03em;
-      text-transform: uppercase;
+      /* no text-transform so only first letter capitalised as typed */
       transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
@@ -128,7 +128,6 @@
     }
 
     .nav-btn.nav-link {
-      text-transform: none;
       letter-spacing: 0.02em;
     }
 
@@ -512,7 +511,7 @@
       background: #111827;
     }
 
-    /* LINKS PAGE – NEW STYLE */
+    /* LINKS PAGE – STYLE */
 
     .links-heading {
       margin: 12px 0 4px;
@@ -558,7 +557,7 @@
       font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-main);
-      margin-bottom: 1px;
+      margin-bottom: 0;
     }
 
     .link-row-sub {
@@ -1431,22 +1430,18 @@
     const webItems = [
       {
         title: "macpoint.com",
-        sub: "Macquarie Point Development Corporation",
         url: "https://www.macpoint.com"
       },
       {
         title: "macpoint.com/stadium",
-        sub: "Stadium project information",
         url: "https://www.macpoint.com/stadium"
       },
       {
         title: "Subscribe for stadium updates",
-        sub: "Email contact@macpoint.com with “Stadium design updates” in the subject line.",
-        url: "mailto:contact@macpoint.com?subject=Stadium%20design%20updates"
+        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=iqvrZPTMXEui0ytOly2Wsrl40AF9vslDorV-Toe-MB5URTNCUVYxR0JXRFVFVk1RM0lCRFlGU0U0RS4u"
       },
       {
-        title: "Contact the project team",
-        sub: "Questions or feedback – contact@macpoint.com",
+        title: "Contact the project team (contact@macpoint.com)",
         url: "mailto:contact@macpoint.com"
       }
     ];
@@ -1465,12 +1460,7 @@
       title.className = "link-row-title";
       title.textContent = item.title;
 
-      const sub = document.createElement("div");
-      sub.className = "link-row-sub";
-      sub.textContent = item.sub || "";
-
       main.appendChild(title);
-      if (item.sub) main.appendChild(sub);
 
       const arrow = document.createElement("div");
       arrow.className = "link-row-arrow";
@@ -1496,21 +1486,18 @@
     const socialItems = [
       {
         title: "LinkedIn",
-        sub: "Updates and project news",
         url: "https://www.linkedin.com/company/macquarie-point-development-corporation/",
         badge: "in",
         color: "#0a66c2"
       },
       {
         title: "Facebook",
-        sub: "Community updates and events",
         url: "https://www.facebook.com/macpointtas/",
         badge: "f",
         color: "#1877f2"
       },
       {
         title: "Instagram",
-        sub: "Visual stories from Mac Point",
         url: "https://www.instagram.com/macpointtas/",
         badge: "IG",
         color: "#d62976"
@@ -1536,12 +1523,7 @@
       title.className = "link-row-title";
       title.textContent = item.title;
 
-      const sub = document.createElement("div");
-      sub.className = "link-row-sub";
-      sub.textContent = item.sub || "";
-
       main.appendChild(title);
-      if (item.sub) main.appendChild(sub);
 
       const arrow = document.createElement("div");
       arrow.className = "link-row-arrow";
