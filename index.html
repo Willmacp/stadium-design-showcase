@@ -97,8 +97,8 @@
     }
 
     .nav-btn {
-      border: 1px solid transparent;
-      background: transparent;
+      border: 1px solid rgba(109,110,113,0.3);
+      background: rgba(255,255,255,0.8);
       color: var(--text-main);
       padding: 6px 11px;
       font-size: 0.85rem;
@@ -107,25 +107,29 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .nav-btn:hover {
       background: rgba(95,128,155,0.08);
-      border-color: rgba(95,128,155,0.35);
+      border-color: rgba(95,128,155,0.6);
       color: var(--mpdc-blue);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
 
     .nav-btn.active {
       background: var(--mpdc-blue);
       color: #fff;
       border-color: var(--mpdc-blue);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.18);
     }
 
     .nav-btn.nav-link {
-      font-weight: 400;
       text-transform: none;
-      text-decoration: none;
+      letter-spacing: 0.02em;
     }
 
     .nav-group { position: relative; }
@@ -159,7 +163,7 @@
       font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--text-muted);
+      color: var(--mpdc-green);
     }
 
     .nav-menu button {
@@ -244,7 +248,7 @@
       font-size: 1.1rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--mpdc-blue);
+      color: var(--mpdc-green);
       margin: 0 0 4px;
     }
 
@@ -305,7 +309,7 @@
       padding: 14px 14px 14px 16px;
       border-radius: 18px;
       border: 1px solid rgba(115,134,120,0.55);
-      background: radial-gradient(circle at top left, rgba(212,201,180,0.25), rgba(255,255,255,0.96));
+      background: #f5f1ea; /* single colour, no gradient */
       display: flex;
       flex-wrap: wrap;
       gap: 10px 18px;
@@ -314,7 +318,7 @@
     .hero-callout h2 {
       margin: 0 0 6px;
       font-size: 1.1rem;
-      color: var(--mpdc-blue);
+      color: var(--mpdc-green);
     }
 
     .hero-callout p {
@@ -515,7 +519,7 @@
       font-size: 0.8rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--mpdc-grey);
+      color: var(--mpdc-green);
     }
 
     .links-list {
@@ -945,7 +949,7 @@
       id: "display-overview",
       type: "boards-overview",
       title: "Display boards",
-      subtitle: "All A0 presentation boards from the Goods Shed showcase",
+      subtitle: "",
       category: "Display boards"
     });
 
@@ -963,7 +967,7 @@
     PAGES.push({
       id: "videos",
       type: "videos",
-      title: "Video walkthroughs",
+      title: "Videos and animations",
       subtitle: "",
       category: "Media"
     });
@@ -983,7 +987,7 @@
       id: "plans-layouts-1",
       type: "image-grid",
       title: "Stadium layouts · Field sports",
-      subtitle: "Multi-code playing surface overlays",
+      subtitle: "",
       category: "Plans",
       images: STADIUM_LAYOUT_IMAGES.slice(0, 6),
       intro: "Core multi-use layouts showing AFL, cricket, NRL, soccer, boxing and basketball configurations."
@@ -993,7 +997,7 @@
       id: "plans-layouts-2",
       type: "image-grid",
       title: "Stadium layouts · Event modes",
-      subtitle: "Concert and amplified event configurations",
+      subtitle: "",
       category: "Plans",
       images: STADIUM_LAYOUT_IMAGES.slice(6),
       intro: "Alternate staging for concerts and smaller live events."
@@ -1033,7 +1037,7 @@
       id: "views",
       type: "image-grid",
       title: "Stadium views",
-      subtitle: "How the stadium sits within Hobart",
+      subtitle: "",
       category: "Plans",
       images: STADIUM_VIEW_IMAGES,
       intro: "Key view lines from the waterfront, memorial, street network and city hillsides."
@@ -1043,7 +1047,7 @@
       id: "links",
       type: "links",
       title: "Links & contacts",
-      subtitle: "Further information and MPDC channels",
+      subtitle: "",
       category: "Links"
     });
   }
@@ -1089,7 +1093,7 @@
       btn.classList.toggle("active", btn.dataset.page === page.id);
     });
 
-    // Menu buttons (Display boards, Videos, Plans)
+    // Menu buttons
     document.querySelectorAll(".nav-btn.nav-has-menu").forEach(btn => {
       const menuId = btn.dataset.menu;
       let active = false;
@@ -1198,7 +1202,7 @@
           </p>
           <ul style="margin:0; padding-left:18px; font-size:0.84rem; color:var(--text-muted);">
             <li>Display boards</li>
-            <li>Video walkthroughs</li>
+            <li>Videos and animations</li>
             <li>Stadium layouts & architectural plans</li>
             <li>City views and reference links</li>
           </ul>
@@ -1273,7 +1277,7 @@
 
   function renderVideos(container) {
     const intro = document.createElement("p");
-    intro.textContent = "Short films that unpack the experience, technical design and remediation work behind the Macquarie Point Multipurpose Stadium.";
+    intro.textContent = "Short films and animations that unpack the experience, technical design and remediation work behind the Macquarie Point Multipurpose Stadium.";
     intro.style.fontSize = "0.9rem";
     intro.style.color = "var(--text-muted)";
     container.appendChild(intro);
@@ -1403,10 +1407,10 @@
     p.style.color = "var(--text-muted)";
     container.appendChild(p);
 
-    // Websites
+    // Websites & email
     const webHeading = document.createElement("div");
     webHeading.className = "links-heading";
-    webHeading.textContent = "Websites";
+    webHeading.textContent = "Websites & email";
     container.appendChild(webHeading);
 
     const webList = document.createElement("div");
@@ -1422,6 +1426,16 @@
         title: "Stadium project page",
         url: "https://www.macpoint.com/stadium",
         label: "Open macpoint.com/stadium"
+      },
+      {
+        title: "Subscribe for updates",
+        url: "mailto:contact@macpoint.com?subject=Stadium%20design%20updates",
+        label: "Subscribe"
+      },
+      {
+        title: "Contact the project team",
+        url: "mailto:contact@macpoint.com",
+        label: "Email contact@macpoint.com"
       }
     ];
 
@@ -1436,8 +1450,8 @@
       const btn = document.createElement("a");
       btn.className = "btn-ghost";
       btn.href = item.url;
-      btn.target = "_blank";
-      btn.rel = "noopener";
+      btn.target = item.url.startsWith("mailto:") ? "_self" : "_blank";
+      if (!item.url.startsWith("mailto:")) btn.rel = "noopener";
       btn.textContent = item.label;
 
       card.appendChild(title);
@@ -1640,7 +1654,7 @@
 
     videosMenu.innerHTML = "";
     const videosAllBtn = document.createElement("button");
-    videosAllBtn.textContent = "All videos";
+    videosAllBtn.textContent = "All videos & animations";
     videosAllBtn.classList.add("menu-all");
     videosAllBtn.addEventListener("click", () => {
       renderPage("videos");
