@@ -7,11 +7,12 @@
   <style>
     :root {
       --mpdc-blue: #5f809b;
-      --bg: #f5f7fa;
+      --accent-warm: #d4c9b4;
+      --bg: #d4c9b4;
       --text-main: #222;
       --text-muted: #555;
       --border-soft: #dde3eb;
-      --page-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --page-shadow: 0 16px 40px rgba(0,0,0,0.18);
       --radius-lg: 18px;
       --radius-xl: 26px;
     }
@@ -67,9 +68,9 @@
     }
 
     .brand-title {
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      font-size: 0.98rem;
       color: var(--mpdc-blue);
       cursor: pointer;
       text-transform: uppercase;
@@ -172,6 +173,7 @@
       justify-content: space-between;
       align-items: center;
       color: var(--text-main);
+      transition: background 0.15s ease, transform 0.1s ease;
     }
 
     .nav-menu button span {
@@ -181,6 +183,19 @@
 
     .nav-menu button:hover {
       background: rgba(95,128,155,0.07);
+      transform: translateX(1px);
+    }
+
+    .nav-menu button.menu-all {
+      font-weight: 600;
+      background: rgba(95,128,155,0.06);
+      border: 1px solid rgba(95,128,155,0.25);
+      margin-bottom: 4px;
+    }
+
+    .nav-menu button.menu-all:hover {
+      background: rgba(95,128,155,0.12);
+      transform: translateX(1px);
     }
 
     .nav-toggle {
@@ -199,13 +214,7 @@
       flex: 1 1 auto;
       padding: 18px 24px 16px;
       overflow-y: auto;
-      background: repeating-linear-gradient(
-        -45deg,
-        #f6f8fb,
-        #f6f8fb 8px,
-        #f3f6fa 8px,
-        #f3f6fa 16px
-      );
+      background: #f4f1eb;
     }
 
     .page-shell {
@@ -243,6 +252,16 @@
       margin: 0 0 14px;
     }
 
+    .cover-page .page-title {
+      font-size: 1.4rem;
+      letter-spacing: 0.18em;
+    }
+
+    .cover-page .page-subtitle {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
     .page-body {
       font-size: 0.92rem;
       line-height: 1.55;
@@ -255,10 +274,11 @@
       gap: 6px;
       padding: 4px 9px;
       border-radius: 999px;
-      background: rgba(95,128,155,0.07);
+      background: linear-gradient(135deg, rgba(212,201,180,0.6), rgba(95,128,155,0.05));
       color: var(--mpdc-blue);
       font-size: 0.75rem;
       margin-bottom: 10px;
+      border: 1px solid rgba(95,128,155,0.25);
     }
 
     .pill-tag strong { font-weight: 600; }
@@ -280,7 +300,7 @@
       padding: 14px 14px 14px 16px;
       border-radius: 18px;
       border: 1px solid rgba(95,128,155,0.22);
-      background: linear-gradient(135deg, rgba(95,128,155,0.06), rgba(255,255,255,0.9));
+      background: radial-gradient(circle at top left, rgba(212,201,180,0.25), rgba(255,255,255,0.95));
       display: flex;
       flex-wrap: wrap;
       gap: 10px 18px;
@@ -288,7 +308,7 @@
 
     .hero-callout h2 {
       margin: 0 0 6px;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       color: var(--mpdc-blue);
     }
 
@@ -488,8 +508,8 @@
     .links-list {
       margin-top: 8px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
     }
 
     .link-card {
@@ -511,6 +531,36 @@
     .link-card-desc {
       font-size: 0.8rem;
       color: var(--text-muted);
+    }
+
+    .link-card.social {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 9px;
+    }
+
+    .social-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .link-card.social .link-card-title {
+      font-size: 0.88rem;
+    }
+
+    .link-card.social .btn-ghost {
+      margin-left: auto;
+      font-size: 0.78rem;
+      padding: 5px 10px;
     }
 
     /* LIGHTBOX */
@@ -770,7 +820,6 @@
   }
 
   // VIDEO ITEMS
-  // Order matches the earlier "good" layout; titles match your final mapping.
   const VIDEO_ITEMS = [
     {
       id: "video-1",
@@ -900,7 +949,7 @@
         type: "single-image",
         image: `assets/boards/${file}`,
         title: boardLabelFromFile(file, idx),
-        subtitle: "A0 display board",
+        subtitle: "",
         category: "Display boards"
       });
     });
@@ -1029,12 +1078,24 @@
     const idx = getPageIndex(page.id);
     const total = PAGES.length;
 
+    // Top-level data-page buttons (Cover, Links)
     document.querySelectorAll(".nav-btn[data-page]").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.page === page.id);
     });
 
+    // Menu buttons (Display boards, Videos, Plans)
+    document.querySelectorAll(".nav-btn.nav-has-menu").forEach(btn => {
+      const menuId = btn.dataset.menu;
+      let active = false;
+      if (menuId === "boardsMenu" && page.category === "Display boards") active = true;
+      if (menuId === "videosMenu" && page.category === "Media") active = true;
+      if (menuId === "plansMenu" && page.category === "Plans") active = true;
+      btn.classList.toggle("active", active);
+    });
+
     const shell = document.createElement("div");
     shell.className = "page-shell";
+    if (page.type === "cover") shell.classList.add("cover-page");
 
     const titleEl = document.createElement("h1");
     titleEl.className = "page-title";
@@ -1344,44 +1405,95 @@
         title: "Macquarie Point Development Corporation",
         desc: "Project information, planning documents and news.",
         url: "https://www.macpoint.com",
-        label: "Visit macpoint.com"
+        label: "Visit macpoint.com",
+        type: "site"
+      },
+      {
+        title: "Stadium project page",
+        desc: "Focused information about the proposed multipurpose stadium.",
+        url: "https://www.macpoint.com/stadium",
+        label: "Open macpoint.com/stadium",
+        type: "site"
       },
       {
         title: "MPDC on LinkedIn",
         desc: "Updates from the project team and partners.",
         url: "https://www.linkedin.com/company/macquarie-point-development-corporation/",
-        label: "Open LinkedIn"
+        label: "LinkedIn",
+        type: "social",
+        icon: "in",
+        brandColor: "#0a66c2"
       },
       {
         title: "MPDC on Facebook",
         desc: "Community updates and engagement.",
         url: "https://www.facebook.com/macpointtas/",
-        label: "Open Facebook"
+        label: "Facebook",
+        type: "social",
+        icon: "f",
+        brandColor: "#1877f2"
       },
       {
         title: "MPDC on Instagram",
         desc: "Visual stories, renders and site photography.",
         url: "https://www.instagram.com/macpointtas/",
-        label: "Open Instagram"
+        label: "Instagram",
+        type: "social",
+        icon: "IG",
+        brandColor: "#d62976"
       }
     ];
 
     items.forEach(item => {
       const card = document.createElement("div");
-      card.className = "link-card";
-      card.innerHTML = `
-        <div class="link-card-title">${item.title}</div>
-        <div class="link-card-desc">${item.desc}</div>
-      `;
+      card.className = "link-card" + (item.type === "social" ? " social" : "");
 
-      const btn = document.createElement("a");
-      btn.className = "btn-ghost";
-      btn.href = item.url;
-      btn.target = "_blank";
-      btn.rel = "noopener";
-      btn.textContent = item.label;
+      if (item.type === "social") {
+        const icon = document.createElement("div");
+        icon.className = "social-icon";
+        icon.textContent = item.icon || "";
+        icon.style.background = item.brandColor || "var(--mpdc-blue)";
 
-      card.appendChild(btn);
+        const textWrap = document.createElement("div");
+        const title = document.createElement("div");
+        title.className = "link-card-title";
+        title.textContent = item.title;
+        const desc = document.createElement("div");
+        desc.className = "link-card-desc";
+        desc.textContent = item.desc;
+
+        textWrap.appendChild(title);
+        textWrap.appendChild(desc);
+
+        const btn = document.createElement("a");
+        btn.className = "btn-ghost";
+        btn.href = item.url;
+        btn.target = "_blank";
+        btn.rel = "noopener";
+        btn.textContent = item.label;
+
+        card.appendChild(icon);
+        card.appendChild(textWrap);
+        card.appendChild(btn);
+      } else {
+        const title = document.createElement("div");
+        title.className = "link-card-title";
+        title.textContent = item.title;
+        const desc = document.createElement("div");
+        desc.className = "link-card-desc";
+        desc.textContent = item.desc;
+        const btn = document.createElement("a");
+        btn.className = "btn-ghost";
+        btn.href = item.url;
+        btn.target = "_blank";
+        btn.rel = "noopener";
+        btn.textContent = item.label;
+
+        card.appendChild(title);
+        card.appendChild(desc);
+        card.appendChild(btn);
+      }
+
       list.appendChild(card);
     });
 
@@ -1492,6 +1604,7 @@
     boardsMenu.innerHTML = "";
     const boardsOverviewBtn = document.createElement("button");
     boardsOverviewBtn.textContent = "All display boards";
+    boardsOverviewBtn.classList.add("menu-all");
     boardsOverviewBtn.addEventListener("click", () => {
       renderPage("display-overview");
       appRoot.classList.remove("nav-open");
@@ -1518,6 +1631,7 @@
     videosMenu.innerHTML = "";
     const videosAllBtn = document.createElement("button");
     videosAllBtn.textContent = "All videos";
+    videosAllBtn.classList.add("menu-all");
     videosAllBtn.addEventListener("click", () => {
       renderPage("videos");
       appRoot.classList.remove("nav-open");
