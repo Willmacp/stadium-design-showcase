@@ -100,7 +100,7 @@
     .nav-btn {
       border: 1px solid rgba(255,255,255,0.7);
       background: rgba(255,255,255,0.25);
-      color: #1f2933;
+      color: #ffffff; /* white text when unselected */
       padding: 6px 11px;
       font-size: 0.84rem;
       border-radius: 999px;
@@ -758,7 +758,7 @@
         right: 0;
         top: 100%;
         padding: 8px 10px 10px;
-        background: #ffffff;
+        background: #7f9ab1; /* match header so white pills still readable */
         border-bottom: 1px solid var(--border-soft);
         display: none;
         flex-wrap: wrap;
@@ -1528,6 +1528,7 @@
     p.style.color = "var(--text-muted)";
     container.appendChild(p);
 
+    // Websites & email
     const webHeading = document.createElement("div");
     webHeading.className = "links-heading";
     webHeading.textContent = "Websites & email";
@@ -1539,8 +1540,8 @@
     const webItems = [
       { title: "macpoint.com", url: "https://www.macpoint.com" },
       { title: "macpoint.com/stadium", url: "https://www.macpoint.com/stadium" },
-      { title: "Subscribe for stadium updates", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=iqvrZPTMXEui0ytOly2Wsrl40AF9vslDorV-Toe-MB5URTNCUVYxR0JXRFVFVk1RM0lCRFlGU0U0RS4u" },
-      { title: "Contact the project team (contact@macpoint.com)", url: "mailto:contact@macpoint.com" }
+      { title: "Subscribe", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=iqvrZPTMXEui0ytOly2Wsrl40AF9vslDorV-Toe-MB5URTNCUVYxR0JXRFVFVk1RM0lCRFlGU0U0RS4u" },
+      { title: "Contact", url: "mailto:contact@macpoint.com" }
     ];
 
     webItems.forEach(item => {
@@ -1571,6 +1572,7 @@
 
     container.appendChild(webList);
 
+    // Social
     const socialHeading = document.createElement("div");
     socialHeading.className = "links-heading";
     socialHeading.textContent = "Social media";
