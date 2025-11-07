@@ -326,6 +326,20 @@
       color: var(--text-muted);
     }
 
+    .cover-image-wrap {
+      margin-top: 14px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      background: #dde3eb;
+    }
+
+    .cover-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* PAGE NAV */
 
     .page-nav-row {
@@ -745,6 +759,14 @@
         <div class="nav-menu" id="videosMenu"></div>
       </div>
 
+      <!-- NEW INFO MENU -->
+      <div class="nav-group">
+        <button class="nav-btn nav-has-menu" type="button" data-menu="infoMenu">
+          Info
+        </button>
+        <div class="nav-menu" id="infoMenu"></div>
+      </div>
+
       <div class="nav-group">
         <button class="nav-btn nav-has-menu" type="button" data-menu="plansMenu">
           Plans
@@ -947,6 +969,23 @@
     { file: "facade-sections-03.jpg", label: "Facade sections – sheet 3" }
   ];
 
+  // INFO POSTER IMAGES
+  const INFO_DESIGN_IMAGES = [
+    { file: "info-design-development-1.jpg", label: "Design development – overview" },
+    { file: "info-design-development-2.jpg", label: "Design development – process" },
+    { file: "info-design-development-3.jpg", label: "Design development – procurement method" }
+  ];
+
+  const INFO_CAPACITY_IMAGES = [
+    { file: "info-stadium-capacity-1.jpg", label: "Stadium capacity and future proofing" }
+  ];
+
+  const INFO_CRICKET_IMAGES = [
+    { file: "info-stadium-cricket-1.jpg", label: "A stadium designed for cricket – overview" },
+    { file: "info-stadium-cricket-2.jpg", label: "A stadium designed for cricket – roof height" },
+    { file: "info-stadium-cricket-3.jpg", label: "A stadium designed for cricket – roof design & test rig" }
+  ];
+
   const PAGES = [];
 
   function buildPages() {
@@ -994,6 +1033,15 @@
         category: "Media",
         videoId: v.id
       });
+    });
+
+    // NEW INFO PAGE (single page containing all info sheets)
+    PAGES.push({
+      id: "info-sheets",
+      type: "info",
+      title: "Information Sheets",
+      subtitle: "Design development · capacity · cricket",
+      category: "Info"
     });
 
     PAGES.push({
@@ -1110,6 +1158,7 @@
       let active = false;
       if (menuId === "boardsMenu" && page.category === "Display boards") active = true;
       if (menuId === "videosMenu" && page.category === "Media") active = true;
+      if (menuId === "infoMenu" && page.category === "Info") active = true;
       if (menuId === "plansMenu" && page.category === "Plans") active = true;
       btn.classList.toggle("active", active);
     });
@@ -1152,6 +1201,8 @@
       renderImageGrid(body, page);
     } else if (page.type === "links") {
       renderLinks(body);
+    } else if (page.type === "info") {
+      renderInfoPage(body);
     }
 
     const navRow = document.createElement("div");
@@ -1215,7 +1266,7 @@
             <li>Display boards</li>
             <li>Videos and animations</li>
             <li>Stadium layouts & architectural plans</li>
-            <li>City views and reference links</li>
+            <li>City views, information sheets and links</li>
           </ul>
         </div>
       </div>
@@ -1225,6 +1276,11 @@
       </p>
     `;
     container.appendChild(intro);
+
+    const coverImgWrap = document.createElement("div");
+    coverImgWrap.className = "cover-image-wrap";
+    coverImgWrap.innerHTML = `<img src="assets/stadium-ariel.jpg" alt="Macquarie Point Multipurpose Stadium aerial view" onerror="this.style.display='none'">`;
+    container.appendChild(coverImgWrap);
   }
 
   function renderBoardsOverview(container) {
@@ -1409,6 +1465,61 @@
     });
 
     container.appendChild(grid);
+  }
+
+  // NEW: INFORMATION SHEETS PAGE RENDERER
+  function renderInfoPage(container) {
+    const intro = document.createElement("p");
+    intro.textContent = "Supporting information sheets that step through design development, stadium capacity and detailed cricket considerations for the Macquarie Point Multipurpose Stadium.";
+    intro.style.fontSize = "0.9rem";
+    intro.style.color = "var(--text-muted)";
+    container.appendChild(intro);
+
+    const allGroup = [];
+
+    function renderInfoSection(title, items) {
+      const heading = document.createElement("div");
+      heading.className = "links-heading";
+      heading.textContent = title;
+      container.appendChild(heading);
+
+      const grid = document.createElement("div");
+      grid.className = "image-grid";
+
+      items.forEach((img) => {
+        const groupIndex = allGroup.length;
+        allGroup.push({
+          src: `assets/info/${img.file}`,
+          title: img.label
+        });
+
+        const card = document.createElement("div");
+        card.className = "image-card";
+
+        const thumb = document.createElement("div");
+        thumb.className = "image-card-thumb";
+        thumb.innerHTML = `<img src="assets/info/${img.file}" alt="${img.label}">`;
+
+        const body = document.createElement("div");
+        body.className = "image-card-body";
+        body.innerHTML = `
+          <div class="image-card-title">${img.label}</div>
+          <div class="image-card-caption">Tap to view larger</div>
+        `;
+
+        card.appendChild(thumb);
+        card.appendChild(body);
+        card.addEventListener("click", () => openLightboxGroup(allGroup, groupIndex));
+
+        grid.appendChild(card);
+      });
+
+      container.appendChild(grid);
+    }
+
+    renderInfoSection("Design development", INFO_DESIGN_IMAGES);
+    renderInfoSection("Stadium capacity", INFO_CAPACITY_IMAGES);
+    renderInfoSection("A stadium designed for cricket", INFO_CRICKET_IMAGES);
   }
 
   function renderLinks(container) {
@@ -1638,6 +1749,7 @@
   function buildMenus() {
     const boardsMenu = document.getElementById("boardsMenu");
     const videosMenu = document.getElementById("videosMenu");
+    const infoMenu = document.getElementById("infoMenu");
     const plansMenu = document.getElementById("plansMenu");
 
     boardsMenu.innerHTML = "";
@@ -1692,6 +1804,18 @@
       });
       videosMenu.appendChild(btn);
     });
+
+    // INFO MENU
+    infoMenu.innerHTML = "";
+    const infoBtn = document.createElement("button");
+    infoBtn.textContent = "Information sheets";
+    infoBtn.classList.add("menu-all");
+    infoBtn.addEventListener("click", () => {
+      renderPage("info-sheets");
+      appRoot.classList.remove("nav-open");
+      closeAllMenus();
+    });
+    infoMenu.appendChild(infoBtn);
 
     plansMenu.innerHTML = "";
 
