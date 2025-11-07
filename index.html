@@ -107,9 +107,8 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-weight: 400; /* softer */
+      font-weight: 400;
       letter-spacing: 0.03em;
-      /* no text-transform so only first letter capitalised as typed */
       transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
@@ -125,10 +124,6 @@
       color: #fff;
       border-color: var(--mpdc-blue);
       box-shadow: 0 3px 8px rgba(0,0,0,0.18);
-    }
-
-    .nav-btn.nav-link {
-      letter-spacing: 0.02em;
     }
 
     .nav-group { position: relative; }
@@ -866,60 +861,15 @@
   }
 
   const VIDEO_ITEMS = [
-    {
-      id: "video-1",
-      title: "Back of House, Secure Zone and Player Facilities",
-      url: "https://youtu.be/Zx76BnLkNlY",
-      note: "Back-of-house amenities, secure player circulation and player facilities."
-    },
-    {
-      id: "video-2",
-      title: "Gate 2, featuring our Function Room",
-      url: "https://youtu.be/KcSXlcSaL_8",
-      note: "Arrival experience via Gate 2 and integrated function / events spaces."
-    },
-    {
-      id: "video-3",
-      title: "The complexities of remediating contaminated sites",
-      url: "https://youtu.be/waWApjh_snA",
-      note: "Challenges and considerations in delivering remediation on complex sites."
-    },
-    {
-      id: "video-4",
-      title: "Mac Point remediation work",
-      url: "https://youtu.be/mJzHTXnSrb8",
-      note: "Overview of remediation works at Mac Point and how they support the stadium."
-    },
-    {
-      id: "video-5",
-      title: "Entering the Macquarie Point Multipurpose Stadium",
-      url: "https://youtu.be/NSc6u8vX-cQ",
-      note: "Approach, thresholds and first impressions as you enter the Macquarie Point Multipurpose Stadium."
-    },
-    {
-      id: "video-6",
-      title: "Inside the Macquarie Point Multipurpose Stadium",
-      url: "https://youtu.be/zM63SF3_8fI",
-      note: "Concourse, seating tiers and interior spectator experience within the Macquarie Point Multipurpose Stadium."
-    },
-    {
-      id: "video-7",
-      title: "Remediation: In situ-solidification",
-      url: "https://youtu.be/84pkAhplxIY",
-      note: "In situ-solidification methodology used to treat ground conditions at Macquarie Point."
-    },
-    {
-      id: "video-8",
-      title: "Multipurpose stadium – sun and shadowing study",
-      url: "https://youtu.be/zskCZeWZ-xo",
-      note: "How the stadium responds to sun and shade across seasons, events and times of day."
-    },
-    {
-      id: "video-9",
-      title: "Meet some of the design team",
-      url: "https://youtu.be/nJqy5tg7z_o",
-      note: "Members of the design team talk through key project drivers and design intent."
-    }
+    { id: "video-1", title: "Back of House, Secure Zone and Player Facilities", url: "https://youtu.be/Zx76BnLkNlY", note: "Back-of-house amenities, secure player circulation and player facilities." },
+    { id: "video-2", title: "Gate 2, featuring our Function Room", url: "https://youtu.be/KcSXlcSaL_8", note: "Arrival experience via Gate 2 and integrated function / events spaces." },
+    { id: "video-3", title: "The complexities of remediating contaminated sites", url: "https://youtu.be/waWApjh_snA", note: "Challenges and considerations in delivering remediation on complex sites." },
+    { id: "video-4", title: "Mac Point remediation work", url: "https://youtu.be/mJzHTXnSrb8", note: "Overview of remediation works at Mac Point and how they support the stadium." },
+    { id: "video-5", title: "Entering the Macquarie Point Multipurpose Stadium", url: "https://youtu.be/NSc6u8vX-cQ", note: "Approach, thresholds and first impressions as you enter the Macquarie Point Multipurpose Stadium." },
+    { id: "video-6", title: "Inside the Macquarie Point Multipurpose Stadium", url: "https://youtu.be/zM63SF3_8fI", note: "Concourse, seating tiers and interior spectator experience within the Macquarie Point Multipurpose Stadium." },
+    { id: "video-7", title: "Remediation: In situ-solidification", url: "https://youtu.be/84pkAhplxIY", note: "In situ-solidification methodology used to treat ground conditions at Macquarie Point." },
+    { id: "video-8", title: "Multipurpose stadium – sun and shadowing study", url: "https://youtu.be/zskCZeWZ-xo", note: "How the stadium responds to sun and shade across seasons, events and times of day." },
+    { id: "video-9", title: "Meet some of the design team", url: "https://youtu.be/nJqy5tg7z_o", note: "Members of the design team talk through key project drivers and design intent." }
   ];
 
   const STADIUM_LAYOUT_IMAGES = [
@@ -969,7 +919,7 @@
     { file: "facade-sections-03.jpg", label: "Facade sections – sheet 3" }
   ];
 
-  // INFO POSTER IMAGES
+  // INFO POSTER IMAGES (grouped into three "documents")
   const INFO_DESIGN_IMAGES = [
     { file: "info-design-development-1.jpg", label: "Design development – overview" },
     { file: "info-design-development-2.jpg", label: "Design development – process" },
@@ -986,24 +936,31 @@
     { file: "info-stadium-cricket-3.jpg", label: "A stadium designed for cricket – roof design & test rig" }
   ];
 
+  // Document-level collection for Info page tiles
+  const INFO_DOCS = [
+    {
+      title: "Design development",
+      images: INFO_DESIGN_IMAGES,
+      thumb: "info-design-development-1.jpg"
+    },
+    {
+      title: "Stadium capacity",
+      images: INFO_CAPACITY_IMAGES,
+      thumb: "info-stadium-capacity-1.jpg"
+    },
+    {
+      title: "A stadium designed for cricket",
+      images: INFO_CRICKET_IMAGES,
+      thumb: "info-stadium-cricket-1.jpg"
+    }
+  ];
+
   const PAGES = [];
 
   function buildPages() {
-    PAGES.push({
-      id: "cover",
-      type: "cover",
-      title: "Stadium Design Showcase",
-      subtitle: "31 Oct – 5 Nov · The Goods Shed Hobart",
-      category: "Overview"
-    });
+    PAGES.push({ id: "cover", type: "cover", title: "Stadium Design Showcase", subtitle: "31 Oct – 5 Nov · The Goods Shed Hobart", category: "Overview" });
 
-    PAGES.push({
-      id: "display-overview",
-      type: "boards-overview",
-      title: "Display boards",
-      subtitle: "",
-      category: "Display boards"
-    });
+    PAGES.push({ id: "display-overview", type: "boards-overview", title: "Display boards", subtitle: "", category: "Display boards" });
 
     DISPLAY_BOARD_FILES.forEach((file, idx) => {
       PAGES.push({
@@ -1016,101 +973,48 @@
       });
     });
 
-    PAGES.push({
-      id: "videos",
-      type: "videos",
-      title: "Videos and animations",
-      subtitle: "",
-      category: "Media"
-    });
+    PAGES.push({ id: "videos", type: "videos", title: "Videos and animations", subtitle: "", category: "Media" });
 
     VIDEO_ITEMS.forEach(v => {
-      PAGES.push({
-        id: v.id,
-        type: "video-single",
-        title: v.title,
-        subtitle: "",
-        category: "Media",
-        videoId: v.id
-      });
+      PAGES.push({ id: v.id, type: "video-single", title: v.title, subtitle: "", category: "Media", videoId: v.id });
     });
 
-    // NEW INFO PAGE (single page containing all info sheets)
-    PAGES.push({
-      id: "info-sheets",
-      type: "info",
-      title: "Information Sheets",
-      subtitle: "Design development · capacity · cricket",
-      category: "Info"
-    });
+    // NEW INFO PAGE (single tile-grid page; each tile opens its doc pages in the lightbox)
+    PAGES.push({ id: "info-sheets", type: "info", title: "Information Sheets", subtitle: "Design development · capacity · cricket", category: "Info" });
 
     PAGES.push({
-      id: "plans-layouts-1",
-      type: "image-grid",
-      title: "Stadium layouts · Field sports",
-      subtitle: "",
-      category: "Plans",
+      id: "plans-layouts-1", type: "image-grid", title: "Stadium layouts · Field sports", subtitle: "", category: "Plans",
       images: STADIUM_LAYOUT_IMAGES.slice(0, 6),
       intro: "Core multi-use layouts showing AFL, cricket, NRL, soccer, boxing and basketball configurations."
     });
 
     PAGES.push({
-      id: "plans-layouts-2",
-      type: "image-grid",
-      title: "Stadium layouts · Event modes",
-      subtitle: "",
-      category: "Plans",
+      id: "plans-layouts-2", type: "image-grid", title: "Stadium layouts · Event modes", subtitle: "", category: "Plans",
       images: STADIUM_LAYOUT_IMAGES.slice(6),
       intro: "Alternate staging for concerts and smaller live events."
     });
 
     PAGES.push({
-      id: "plans-ga",
-      type: "image-grid",
-      title: "Architectural plans · General arrangement",
-      subtitle: "Key stadium GA drawings at 1:500",
-      category: "Plans",
-      images: GA_PLAN_IMAGES,
-      intro: "Primary general arrangement plans that locate the field, concourses and premium levels within the Macquarie Point site."
+      id: "plans-ga", type: "image-grid", title: "Architectural plans · General arrangement", subtitle: "Key stadium GA drawings at 1:500", category: "Plans",
+      images: GA_PLAN_IMAGES, intro: "Primary general arrangement plans that locate the field, concourses and premium levels within the Macquarie Point site."
     });
 
     PAGES.push({
-      id: "plans-sections",
-      type: "image-grid",
-      title: "Architectural plans · Sections",
-      subtitle: "Site and stadium sections",
-      category: "Plans",
-      images: SECTION_IMAGES,
-      intro: "Sections cutting through the site and stadium, describing scale, roof profile and relationships to the surrounding city."
+      id: "plans-sections", type: "image-grid", title: "Architectural plans · Sections", subtitle: "Site and stadium sections", category: "Plans",
+      images: SECTION_IMAGES, intro: "Sections cutting through the site and stadium, describing scale, roof profile and relationships to the surrounding city."
     });
 
     PAGES.push({
-      id: "plans-facades",
-      type: "image-grid",
-      title: "Architectural plans · Facade sections",
-      subtitle: "Layering, structure and entries",
-      category: "Plans",
-      images: FACADE_IMAGES,
-      intro: "Combined facade section sheets illustrating entry sequences, concourse edges and stadium skin."
+      id: "plans-facades", type: "image-grid", title: "Architectural plans · Facade sections", subtitle: "Layering, structure and entries", category: "Plans",
+      images: FACADE_IMAGES, intro: "Combined facade section sheets illustrating entry sequences, concourse edges and stadium skin."
     });
 
     PAGES.push({
-      id: "views",
-      type: "image-grid",
-      title: "Stadium views",
-      subtitle: "",
-      category: "Plans",
-      images: STADIUM_VIEW_IMAGES,
-      intro: "Key view lines from the waterfront, memorial, street network and city hillsides."
+      id: "views", type: "image-grid", title: "Stadium views", subtitle: "", category: "Plans",
+      images: STADIUM_VIEW_IMAGES, intro: "Key view lines from the waterfront, memorial, street network and city hillsides."
     });
 
-    PAGES.push({
-      id: "links",
-      type: "links",
-      title: "Links & contacts",
-      subtitle: "",
-      category: "Links"
-    });
+    PAGES.push({ id: "links", type: "links", title: "Links & contacts", subtitle: "", category: "Links" });
   }
 
   buildPages();
@@ -1123,24 +1027,13 @@
 
   let currentPageId = "cover";
 
-  function getPageIndex(id) {
-    return PAGES.findIndex(p => p.id === id);
-  }
+  function getPageIndex(id) { return PAGES.findIndex(p => p.id === id); }
 
-  function goToPageByIndex(idx) {
-    if (idx < 0 || idx >= PAGES.length) return;
-    renderPage(PAGES[idx].id);
-  }
+  function goToPageByIndex(idx) { if (idx < 0 || idx >= PAGES.length) return; renderPage(PAGES[idx].id); }
 
-  function goPrevPage() {
-    const idx = getPageIndex(currentPageId);
-    if (idx > 0) goToPageByIndex(idx - 1);
-  }
+  function goPrevPage() { const idx = getPageIndex(currentPageId); if (idx > 0) goToPageByIndex(idx - 1); }
 
-  function goNextPage() {
-    const idx = getPageIndex(currentPageId);
-    if (idx < PAGES.length - 1) goToPageByIndex(idx + 1);
-  }
+  function goNextPage() { const idx = getPageIndex(currentPageId); if (idx < PAGES.length - 1) goToPageByIndex(idx + 1); }
 
   function renderPage(id) {
     const page = PAGES.find(p => p.id === id) || PAGES[0];
@@ -1467,59 +1360,45 @@
     container.appendChild(grid);
   }
 
-  // NEW: INFORMATION SHEETS PAGE RENDERER
+  // NEW: INFORMATION SHEETS PAGE RENDERER — 3 tiles (each is a doc with multiple pages)
   function renderInfoPage(container) {
     const intro = document.createElement("p");
-    intro.textContent = "Supporting information sheets that step through design development, stadium capacity and detailed cricket considerations for the Macquarie Point Multipurpose Stadium.";
+    intro.textContent = "Supporting information sheets grouped by topic. Tap a tile to open its pages; use left/right to step through.";
     intro.style.fontSize = "0.9rem";
     intro.style.color = "var(--text-muted)";
     container.appendChild(intro);
 
-    const allGroup = [];
+    const grid = document.createElement("div");
+    grid.className = "image-grid";
 
-    function renderInfoSection(title, items) {
-      const heading = document.createElement("div");
-      heading.className = "links-heading";
-      heading.textContent = title;
-      container.appendChild(heading);
+    INFO_DOCS.forEach(doc => {
+      const group = doc.images.map(img => ({
+        src: `assets/info/${img.file}`,
+        title: img.label
+      }));
 
-      const grid = document.createElement("div");
-      grid.className = "image-grid";
+      const card = document.createElement("div");
+      card.className = "image-card";
+      card.addEventListener("click", () => openLightboxGroup(group, 0));
 
-      items.forEach((img) => {
-        const groupIndex = allGroup.length;
-        allGroup.push({
-          src: `assets/info/${img.file}`,
-          title: img.label
-        });
+      const thumb = document.createElement("div");
+      thumb.className = "image-card-thumb";
+      thumb.innerHTML = `<img src="assets/info/${doc.thumb}" alt="${doc.title} – first page">`;
 
-        const card = document.createElement("div");
-        card.className = "image-card";
+      const body = document.createElement("div");
+      body.className = "image-card-body";
+      const pagesCount = doc.images.length;
+      body.innerHTML = `
+        <div class="image-card-title">${doc.title}</div>
+        <div class="image-card-caption">${pagesCount} ${pagesCount === 1 ? "page" : "pages"}</div>
+      `;
 
-        const thumb = document.createElement("div");
-        thumb.className = "image-card-thumb";
-        thumb.innerHTML = `<img src="assets/info/${img.file}" alt="${img.label}">`;
+      card.appendChild(thumb);
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
 
-        const body = document.createElement("div");
-        body.className = "image-card-body";
-        body.innerHTML = `
-          <div class="image-card-title">${img.label}</div>
-          <div class="image-card-caption">Tap to view larger</div>
-        `;
-
-        card.appendChild(thumb);
-        card.appendChild(body);
-        card.addEventListener("click", () => openLightboxGroup(allGroup, groupIndex));
-
-        grid.appendChild(card);
-      });
-
-      container.appendChild(grid);
-    }
-
-    renderInfoSection("Design development", INFO_DESIGN_IMAGES);
-    renderInfoSection("Stadium capacity", INFO_CAPACITY_IMAGES);
-    renderInfoSection("A stadium designed for cricket", INFO_CRICKET_IMAGES);
+    container.appendChild(grid);
   }
 
   function renderLinks(container) {
@@ -1539,22 +1418,10 @@
     webList.className = "links-list";
 
     const webItems = [
-      {
-        title: "macpoint.com",
-        url: "https://www.macpoint.com"
-      },
-      {
-        title: "macpoint.com/stadium",
-        url: "https://www.macpoint.com/stadium"
-      },
-      {
-        title: "Subscribe for stadium updates",
-        url: "https://forms.office.com/Pages/ResponsePage.aspx?id=iqvrZPTMXEui0ytOly2Wsrl40AF9vslDorV-Toe-MB5URTNCUVYxR0JXRFVFVk1RM0lCRFlGU0U0RS4u"
-      },
-      {
-        title: "Contact the project team (contact@macpoint.com)",
-        url: "mailto:contact@macpoint.com"
-      }
+      { title: "macpoint.com", url: "https://www.macpoint.com" },
+      { title: "macpoint.com/stadium", url: "https://www.macpoint.com/stadium" },
+      { title: "Subscribe for stadium updates", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=iqvrZPTMXEui0ytOly2Wsrl40AF9vslDorV-Toe-MB5URTNCUVYxR0JXRFVFVk1RM0lCRFlGU0U0RS4u" },
+      { title: "Contact the project team (contact@macpoint.com)", url: "mailto:contact@macpoint.com" }
     ];
 
     webItems.forEach(item => {
@@ -1595,24 +1462,9 @@
     socialList.className = "links-list";
 
     const socialItems = [
-      {
-        title: "LinkedIn",
-        url: "https://www.linkedin.com/company/macquarie-point-development-corporation/",
-        badge: "in",
-        color: "#0a66c2"
-      },
-      {
-        title: "Facebook",
-        url: "https://www.facebook.com/macpointtas/",
-        badge: "f",
-        color: "#1877f2"
-      },
-      {
-        title: "Instagram",
-        url: "https://www.instagram.com/macpointtas/",
-        badge: "IG",
-        color: "#d62976"
-      }
+      { title: "LinkedIn",  url: "https://www.linkedin.com/company/macquarie-point-development-corporation/", badge: "in", color: "#0a66c2" },
+      { title: "Facebook",  url: "https://www.facebook.com/macpointtas/",                                   badge: "f",  color: "#1877f2" },
+      { title: "Instagram", url: "https://www.instagram.com/macpointtas/",                                   badge: "IG", color: "#d62976" }
     ];
 
     socialItems.forEach(item => {
@@ -1805,7 +1657,7 @@
       videosMenu.appendChild(btn);
     });
 
-    // INFO MENU
+    // INFO MENU (single page)
     infoMenu.innerHTML = "";
     const infoBtn = document.createElement("button");
     infoBtn.textContent = "Information sheets";
@@ -1817,6 +1669,7 @@
     });
     infoMenu.appendChild(infoBtn);
 
+    // PLANS MENU (unchanged)
     plansMenu.innerHTML = "";
 
     const layoutsHeader = document.createElement("h4");
