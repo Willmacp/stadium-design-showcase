@@ -731,6 +731,46 @@
       max-height: none;
     }
 
+    /* RELATED CONTENT PANEL */
+
+    .related-panel {
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #f5f7fb;
+      border: 1px solid var(--border-soft);
+      font-size: 0.85rem;
+    }
+
+    .related-panel-title {
+      font-weight: 600;
+      color: var(--mpdc-green);
+      margin-bottom: 4px;
+    }
+
+    .related-links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .related-pill {
+      border-radius: 999px;
+      padding: 4px 9px;
+      border: 1px solid var(--mpdc-blue);
+      background: #ffffff;
+      color: var(--mpdc-blue);
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .related-pill:hover {
+      background: var(--mpdc-blue);
+      color: #ffffff;
+    }
+
     /* FOOTER */
 
     .footer {
@@ -1017,6 +1057,38 @@
     { title: "A stadium designed for cricket", images: INFO_CRICKET_IMAGES,   thumb: "info-stadium-cricket-1.jpg" }
   ];
 
+  // RELATED LINKS (for contextual navigation)
+  const RELATED = {
+    // Roof design board -> plans
+    "display-board-3": [
+      { id: "plans-sections", label: "Architectural sections" },
+      { id: "plans-facades",  label: "Facade sections" }
+    ],
+    // Remediation board -> remediation videos
+    "display-board-10": [
+      { id: "video-3", label: "Complexities of remediation" },
+      { id: "video-4", label: "Remediation work at Mac Point" },
+      { id: "video-7", label: "Remediation: In situ-solidification" }
+    ],
+    // Remediation videos -> remediation board
+    "video-3": [
+      { id: "display-board-10", label: "Remediation display board" }
+    ],
+    "video-4": [
+      { id: "display-board-10", label: "Remediation display board" }
+    ],
+    "video-7": [
+      { id: "display-board-10", label: "Remediation display board" }
+    ],
+    // Sections / facades -> Roof design board
+    "plans-sections": [
+      { id: "display-board-3", label: "Roof design display board" }
+    ],
+    "plans-facades": [
+      { id: "display-board-3", label: "Roof design display board" }
+    ]
+  };
+
   const PAGES = [];
 
   function buildPages() {
@@ -1142,6 +1214,33 @@
     if (idx < PAGES.length - 1) goToPageByIndex(idx + 1);
   }
 
+  function appendRelatedPanel(container, pageId) {
+    const links = RELATED[pageId];
+    if (!links || !links.length) return;
+    const panel = document.createElement("div");
+    panel.className = "related-panel";
+
+    const title = document.createElement("div");
+    title.className = "related-panel-title";
+    title.textContent = "Related content";
+    panel.appendChild(title);
+
+    const row = document.createElement("div");
+    row.className = "related-links-row";
+
+    links.forEach(link => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "related-pill";
+      btn.textContent = link.label;
+      btn.addEventListener("click", () => renderPage(link.id));
+      row.appendChild(btn);
+    });
+
+    panel.appendChild(row);
+    container.appendChild(panel);
+  }
+
   function renderPage(id) {
     const page = PAGES.find(p => p.id === id) || PAGES[0];
     currentPageId = page.id;
@@ -1192,12 +1291,15 @@
       renderBoardsOverview(body);
     } else if (page.type === "single-image") {
       renderSingleImage(body, page);
+      appendRelatedPanel(body, page.id);
     } else if (page.type === "videos") {
       renderVideos(body);
     } else if (page.type === "video-single") {
       renderVideoSingle(body, page);
+      appendRelatedPanel(body, page.id);
     } else if (page.type === "image-grid") {
       renderImageGrid(body, page);
+      appendRelatedPanel(body, page.id);
     } else if (page.type === "links") {
       renderLinks(body);
     } else if (page.type === "info") {
