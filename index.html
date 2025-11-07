@@ -734,11 +734,11 @@
     /* RELATED CONTENT PANEL */
 
     .related-panel {
-      margin-top: 10px;
-      padding: 8px 10px;
+      margin-top: 14px;
+      padding: 9px 10px;
       border-radius: 12px;
-      background: #f5f7fb;
-      border: 1px solid var(--border-soft);
+      background: #eef3fa;
+      border: 1px solid rgba(95,128,155,0.8);
       font-size: 0.85rem;
     }
 
@@ -764,6 +764,7 @@
       font-size: 0.8rem;
       cursor: pointer;
       white-space: nowrap;
+      font-weight: 500;
     }
 
     .related-pill:hover {
@@ -1057,35 +1058,35 @@
     { title: "A stadium designed for cricket", images: INFO_CRICKET_IMAGES,   thumb: "info-stadium-cricket-1.jpg" }
   ];
 
-  // RELATED LINKS (for contextual navigation)
+  // RELATED LINKS (for contextual navigation) — now with type labels
   const RELATED = {
     // Roof design board -> plans
     "display-board-3": [
-      { id: "plans-sections", label: "Architectural sections" },
-      { id: "plans-facades",  label: "Facade sections" }
+      { id: "plans-sections", label: "Architectural sections", type: "Plan" },
+      { id: "plans-facades",  label: "Facade sections",        type: "Plan" }
     ],
     // Remediation board -> remediation videos
     "display-board-10": [
-      { id: "video-3", label: "Complexities of remediation" },
-      { id: "video-4", label: "Remediation work at Mac Point" },
-      { id: "video-7", label: "Remediation: In situ-solidification" }
+      { id: "video-3", label: "Complexities of remediation",      type: "Video" },
+      { id: "video-4", label: "Remediation work at Mac Point",    type: "Video" },
+      { id: "video-7", label: "Remediation: In situ-solidification", type: "Video" }
     ],
     // Remediation videos -> remediation board
     "video-3": [
-      { id: "display-board-10", label: "Remediation display board" }
+      { id: "display-board-10", label: "Remediation display board", type: "Board" }
     ],
     "video-4": [
-      { id: "display-board-10", label: "Remediation display board" }
+      { id: "display-board-10", label: "Remediation display board", type: "Board" }
     ],
     "video-7": [
-      { id: "display-board-10", label: "Remediation display board" }
+      { id: "display-board-10", label: "Remediation display board", type: "Board" }
     ],
     // Sections / facades -> Roof design board
     "plans-sections": [
-      { id: "display-board-3", label: "Roof design display board" }
+      { id: "display-board-3", label: "Roof design display board", type: "Board" }
     ],
     "plans-facades": [
-      { id: "display-board-3", label: "Roof design display board" }
+      { id: "display-board-3", label: "Roof design display board", type: "Board" }
     ]
   };
 
@@ -1232,7 +1233,8 @@
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "related-pill";
-      btn.textContent = link.label;
+      const type = link.type ? (link.type + ": ") : "";
+      btn.textContent = type + link.label;
       btn.addEventListener("click", () => renderPage(link.id));
       row.appendChild(btn);
     });
