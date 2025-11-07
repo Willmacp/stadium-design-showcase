@@ -68,7 +68,6 @@
 
     .nav { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
 
-    /* NAV BUTTONS – resting = white bg + blue text, active = blue bg + white text */
     .nav-btn {
       border: 1px solid rgba(255,255,255,0.9);
       background: #ffffff;
@@ -138,11 +137,9 @@
     .hero-callout h2 { margin: 0 0 6px; font-size: 1.05rem; color: var(--mpdc-green); }
     .hero-callout p { margin: 0; font-size: 0.9rem; color: var(--text-muted); }
 
-    /* Cover hero with background image */
     .cover-hero { margin-top: 10px; border-radius: 18px; border: 1px solid var(--border-soft); overflow: hidden; background-size: cover; background-position: center; background-repeat: no-repeat; background-color: #dde3eb; min-height: 220px; }
     .cover-hero-inner { padding: 14px 16px 16px; background: rgba(255,255,255,0.82); }
 
-    /* NAV row */
     .page-nav-row { margin-top: 16px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
     .page-nav-row .spacer { flex: 1 1 auto; }
 
@@ -155,7 +152,6 @@
     .btn-ghost { background: transparent; color: var(--mpdc-blue); }
     .btn-ghost:hover { background: rgba(95,128,155,0.08); }
 
-    /* IMAGE GRID */
     .image-grid-intro { margin-bottom: 10px; font-size: 0.88rem; color: var(--text-muted); }
     .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 10px; }
 
@@ -167,12 +163,10 @@
     .image-card-title { font-size: 0.86rem; font-weight: 600; color: var(--text-main); margin-bottom: 2px; }
     .image-card-caption { font-size: 0.8rem; color: var(--text-muted); }
 
-    /* SINGLE IMAGE PAGE */
     .image-full-wrap { margin-top: 10px; border-radius: 18px; border: 1px solid var(--border-soft); background: #f3f5fa; padding: 10px; cursor: pointer; }
     .image-full-wrap img { width: 100%; height: auto; display: block; border-radius: 12px; }
     .image-full-caption { font-size: 0.84rem; color: var(--text-muted); margin-top: 6px; display: flex; justify-content: space-between; gap: 10px; }
 
-    /* VIDEO LIST + SINGLE VIDEO */
     .video-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
     .video-card { border-radius: 16px; border: 1px solid var(--border-soft); padding: 10px 11px; background: #f4f6fa; display: flex; flex-direction: column; gap: 6px; cursor: pointer; }
     .video-card:hover { box-shadow: 0 8px 18px rgba(0,0,0,0.1); border-color: rgba(95,128,155,0.65); transform: translateY(-1px); }
@@ -184,7 +178,6 @@
     .video-frame { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: none; margin-bottom: 4px; background: #111827; }
     .video-single-frame { width: 100%; max-width: 720px; aspect-ratio: 16 / 9; border-radius: 14px; border: none; margin: 6px 0 10px; background: #111827; }
 
-    /* LINKS PAGE */
     .links-heading { margin: 12px 0 4px; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mpdc-green); }
     .links-list { margin-top: 4px; display: grid; grid-template-columns: 1fr; gap: 6px; max-width: 520px; margin-left: auto; margin-right: auto; }
     .link-row { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 12px; border: 1px solid var(--border-soft); background: #f5efe4; text-decoration: none; color: var(--text-main); transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, transform 0.1s ease; }
@@ -194,7 +187,6 @@
     .link-row-badge { width: 26px; height: 26px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: #fff; flex-shrink: 0; }
     .link-row-arrow { font-size: 0.9rem; color: var(--mpdc-blue); flex-shrink: 0; }
 
-    /* LIGHTBOX – default */
     .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.78); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
     .lightbox.open { display: flex; }
     .lightbox-inner { max-width: 1100px; width: 100%; max-height: 100%; background: #111827; border-radius: 16px; padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 8px; }
@@ -205,23 +197,19 @@
     .lightbox-img-wrap { flex: 1 1 auto; display: flex; justify-content: center; align-items: center; overflow: auto; }
     .lightbox-img-wrap img { max-width: 100%; max-height: 80vh; height: auto; border-radius: 10px; display: block; }
 
-    /* LIGHTBOX – bigger for Info Sheets only */
     .lightbox.info-lightbox .lightbox-inner { max-width: 1300px; max-height: 95vh; }
     .lightbox.info-lightbox .lightbox-img-wrap { align-items: flex-start; }
     .lightbox.info-lightbox .lightbox-img-wrap img { max-height: none; }
 
-    /* RELATED CONTENT PANEL */
     .related-panel { margin-top: 14px; padding: 9px 10px; border-radius: 12px; background: #eef3fa; border: 1px solid rgba(95,128,155,0.8); font-size: 0.85rem; }
     .related-panel-title { font-weight: 600; color: var(--mpdc-green); margin-bottom: 4px; }
     .related-links-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
     .related-pill { border-radius: 999px; padding: 4px 9px; border: 1px solid var(--mpdc-blue); background: #ffffff; color: var(--mpdc-blue); font-size: 0.8rem; cursor: pointer; white-space: nowrap; font-weight: 500; }
     .related-pill:hover { background: var(--mpdc-blue); color: #ffffff; }
 
-    /* FOOTER */
-    .footer { border-top: 1px solid var(--border-soft); padding: 6px 18px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); background: #f0f2f8; }
+    .footer { border-top: 1px solid var(--border-soft); padding: 6px 18px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); background: #fafbfe; }
     .footer strong { font-weight: 600; color: var(--mpdc-blue); }
 
-    /* RESPONSIVE */
     @media (max-width: 820px) {
       .top-bar { align-items: center; }
       .nav { position: absolute; left: 0; right: 0; top: 100%; padding: 8px 10px 10px; background: #7f9ab1; border-bottom: 1px solid var(--border-soft); display: none; flex-wrap: wrap; gap: 6px; z-index: 15; }
@@ -253,7 +241,6 @@
         <div class="nav-menu" id="videosMenu"></div>
       </div>
 
-      <!-- Info Sheets: button (no dropdown) -->
       <button class="nav-btn" data-page="info-sheets">Info Sheets</button>
 
       <div class="nav-group">
@@ -274,7 +261,6 @@
   </footer>
 </div>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <div class="lightbox-inner">
     <div class="lightbox-header">
@@ -292,7 +278,6 @@
 </div>
 
 <script>
-  /* ---------- HELPERS ---------- */
   function toEmbed(url) {
     try {
       const u = new URL(url);
@@ -309,999 +294,6 @@
     } catch(e) {}
     return "";
   }
-
-  /* ---------- DATA ---------- */
-
-  const DISPLAY_BOARD_FILES = [
-    "boards1_01.jpg","boards1_02.jpg","boards1_03.jpg","boards1_04.jpg","boards1_05.jpg",
-    "boards1_06.jpg","boards1_07.jpg","boards1_08.jpg","boards1_09.jpg",
-    "boards2_01.jpg","boards2_02.jpg","boards2_03.jpg","boards2_04.jpg","boards2_05.jpg",
-    "boards2_06.jpg","boards2_07.jpg",
-    "boards3_01.jpg","boards3_02.jpg","boards3_03.jpg","boards3_04.jpg","boards3_05.jpg",
-    "boards3_06.jpg","boards3_07.jpg","boards3_08.jpg","boards3_09.jpg"
-  ];
-
-  function boardLabelFromFile(file, idx) {
-    const customNames = [
-      "Seating Bowl","User Experience","Roof Design","A Multipurpose Venue","Reflecting Tasmania",
-      "Business Events","The Goods Shed","Precinct Plan","Site Master Plan","Remediation",
-      "Geotechnical Investigations","Transport","Accessibility","Site Archaeology","Investment Opportunity",
-      "Permit Conditions","Media Spaces","Continuous Concourse","The Goods Shed","Sports Bar",
-      "The Restaurant","The Chair's Club / Event Space","Function Space","Corporate Suits","Field Club"
-    ];
-    return customNames[idx] || `Display board ${String(idx + 1).padStart(2,"0")}`;
-  }
-
-  const VIDEO_ITEMS = [
-    { id: "video-1", title: "Back of House, Secure Zone and Player Facilities", url: "https://youtu.be/Zx76BnLkNlY", note: "Back-of-house amenities, secure player circulation and player facilities." },
-    { id: "video-2", title: "Gate 2, featuring our Function Room", url: "https://youtu.be/KcSXlcSaL_8", note: "Arrival experience via Gate 2 and integrated function / events spaces." },
-    { id: "video-3", title: "The complexities of remediating contaminated sites", url: "https://youtu.be/waWApjh_snA", note: "Challenges and considerations in delivering remediation on complex sites." },
-    { id: "video-4", title: "Mac Point remediation work", url: "https://youtu.be/mJzHTXnSrb8", note: "Overview of remediation works at Mac Point and how they support the stadium." },
-    { id: "video-5", title: "Entering the Macquarie Point Multipurpose Stadium", url: "https://youtu.be/NSc6u8vX-cQ", note: "Approach, thresholds and first impressions as you enter the Macquarie Point Multipurpose Stadium." },
-    { id: "video-6", title: "Inside the Macquarie Point Multipurpose Stadium", url: "https://youtu.be/zM63SF3_8fI", note: "Concourse, seating tiers and interior spectator experience within the Macquarie Point Multipurpose Stadium." },
-    { id: "video-7", title: "Remediation: In situ-solidification", url: "https://youtu.be/84pkAhplxIY", note: "In situ-solidification methodology used to treat ground conditions at Macquarie Point." },
-    { id: "video-8", title: "Multipurpose stadium – sun and shadowing study", url: "https://youtu.be/zskCZeWZ-xo", note: "How the stadium responds to sun and shade across seasons, events and times of day." },
-    { id: "video-9", title: "Meet some of the design team", url: "https://youtu.be/nJqy5tg7z_o", note: "Members of the design team talk through key project drivers and design intent." }
-  ];
-
-  const STADIUM_LAYOUT_IMAGES = [
-    { file: "stadium-layout-afl.jpg", label: "AFL" },
-    { file: "stadium-layout-cricket.jpg", label: "Cricket" },
-    { file: "stadium-layout-nrl.jpg", label: "NRL" },
-    { file: "stadium-layout-soccer.jpg", label: "Soccer" },
-    { file: "stadium-layout-boxing.jpg", label: "Boxing" },
-    { file: "stadium-layout-basketball.jpg", label: "Basketball" },
-    { file: "stadium-layout-concert-mode-3.jpg", label: "Concert mode" },
-    { file: "stadium-layout-concert-mode-4.jpg", label: "Smaller concert mode" }
-  ];
-
-  const STADIUM_VIEW_IMAGES = [
-    { file: "stadium-view-waterfront.jpeg", label: "View · Waterfront" },
-    { file: "stadium-view-city-bay.png", label: "View · City & bay" },
-    { file: "stadium-view-memorial.jpeg", label: "View · Cenotaph" },
-    { file: "stadium-view-street.jpeg", label: "View · Evans Street" }
-  ];
-
-  const GA_PLAN_IMAGES = [
-    { file: "plan-ga-ground-plane-external-concourse.jpg", label: "Ground plane – external concourse" }, // 0
-    { file: "plan-ga-level0-field.jpg",                    label: "Level 0 – field level" },             // 1
-    { file: "plan-ga-level1-concourse.jpg",                label: "Level 1 – public concourse" },        // 2
-    { file: "plan-ga-level1m-premium.jpg",                 label: "Level 1M – premium & media" },        // 3
-    { file: "plan-ga-level2-stadium-club.jpg",             label: "Level 2 – stadium club" },            // 4
-    { file: "plan-ga-level3-media.jpg",                    label: "Level 3 – media level" },             // 5
-    { file: "plan-ga-level4-gantry.jpg",                   label: "Level 4 – gantry level" },            // 6
-    { file: "plan-ga-roof.jpg",                            label: "Roof plan" }                          // 7
-  ];
-
-  const SECTION_IMAGES = [
-    { file: "section-site-overall.jpg",       label: "Site sections – overall" },
-    { file: "section-building-east.jpg",      label: "Building section – east" },
-    { file: "section-building-north.jpg",     label: "Building section – north" },
-    { file: "section-building-south.jpg",     label: "Building section – south" },
-    { file: "section-building-west.jpg",      label: "Building section – west" },
-    { file: "section-building-southeast.jpg", label: "Building section – south-east" },
-    { file: "section-building-southwest.jpg", label: "Building section – south-west" },
-    { file: "section-building-northeast.jpg", label: "Building section – north-east" },
-    { file: "section-building-northwest.jpg", label: "Building section – north-west" }
-  ];
-
-  const FACADE_IMAGES = [
-    { file: "facade-sections-01.jpg", label: "Facade sections – sheet 1" },
-    { file: "facade-sections-02.jpg", label: "Facade sections – sheet 2" },
-    { file: "facade-sections-03.jpg", label: "Facade sections – sheet 3" }
-  ];
-
-  /* Info sheets */
-  const INFO_DESIGN_IMAGES = [
-    { file: "info-design-development-1.jpg", label: "Design development – overview" },
-    { file: "info-design-development-2.jpg", label: "Design development – process" },
-    { file: "info-design-development-3.jpg", label: "Design development – procurement method" }
-  ];
-  const INFO_CAPACITY_IMAGES = [
-    { file: "info-stadium-capacity-1.jpg", label: "Stadium capacity and future proofing" }
-  ];
-  const INFO_CRICKET_IMAGES = [
-    { file: "info-stadium-cricket-1.jpg", label: "A stadium designed for cricket – overview" },
-    { file: "info-stadium-cricket-2.jpg", label: "A stadium designed for cricket – roof height" },
-    { file: "info-stadium-cricket-3.jpg", label: "A stadium designed for cricket – roof design & test rig" }
-  ];
-  const INFO_DOCS = [
-    { key: "design",   title: "Design development",             images: INFO_DESIGN_IMAGES,   thumb: "info-design-development-1.jpg" },
-    { key: "capacity", title: "Stadium capacity",               images: INFO_CAPACITY_IMAGES, thumb: "info-stadium-capacity-1.jpg" },
-    { key: "cricket",  title: "A stadium designed for cricket", images: INFO_CRICKET_IMAGES,  thumb: "info-stadium-cricket-1.jpg" }
-  ];
-
-  /* ---------- RELATED LINKS (mutual, with deep link metadata) ---------- */
-  const RELATED = {
-    /* Roof design board → sections + facades */
-    "display-board-3": [
-      { id: "plans-sections", label: "Architectural sections", type: "Plan" },
-      { id: "plans-facades",  label: "Facade sections",        type: "Plan" }
-    ],
-    "plans-sections": [{ id: "display-board-3", label: "Roof Design board", type: "Board" }],
-    "plans-facades":  [{ id: "display-board-3", label: "Roof Design board", type: "Board" }],
-
-    /* Remediation board ↔ remediation videos */
-    "display-board-10": [
-      { id: "video-3", label: "Complexities of remediation",         type: "Video" },
-      { id: "video-4", label: "Remediation work at Mac Point",       type: "Video" },
-      { id: "video-7", label: "Remediation – in situ-solidification",type: "Video" }
-    ],
-    "video-3": [{ id: "display-board-10", label: "Remediation board", type: "Board" }],
-    "video-4": [{ id: "display-board-10", label: "Remediation board", type: "Board" }],
-    "video-7": [{ id: "display-board-10", label: "Remediation board", type: "Board" }],
-
-    /* 1 Seating Bowl ↔ inside video */
-    "display-board-1": [{ id: "video-6", label: "Inside the stadium", type: "Video" }],
-    "video-6": [
-      { id: "display-board-1",  label: "Seating Bowl board",          type: "Board" },
-      { id: "display-board-2",  label: "User Experience board",       type: "Board" },
-      { id: "display-board-18", label: "Continuous Concourse board",  type: "Board" }
-    ],
-
-    /* 2 User Experience ↔ inside + arriving */
-    "display-board-2": [
-      { id: "video-6", label: "Inside the stadium",  type: "Video" },
-      { id: "video-5", label: "Entering the stadium",type: "Video" }
-    ],
-    "video-5": [{ id: "display-board-2", label: "User Experience board", type: "Board" }],
-
-    /* 4 A Multipurpose Venue → ONLY cricket info (deep-open) */
-    "display-board-4": [
-      { id: "info-sheets", label: "Cricket information sheet", type: "Info", infoKey: "cricket" }
-    ],
-    /* From Info sheets page back to that board */
-    "info-sheets": [
-      { id: "display-board-4", label: "A Multipurpose Venue board", type: "Board" }
-    ],
-
-    /* 6 Business Events ↔ Function/Chair's/Level 2 plan */
-    "display-board-6": [
-      { id: "video-2",        label: "Function Room video",            type: "Video" },
-      { id: "display-board-23", label: "Function Space board",        type: "Board" },
-      { id: "display-board-22", label: "The Chair's Club / Event board", type: "Board" },
-      { id: "plans-ga",       label: "Level 2 – stadium club plan",    type: "Plan", openIndex: 4 }
-    ],
-    "display-board-22": [
-      { id: "display-board-6", label: "Business Events board",         type: "Board" },
-      { id: "plans-ga",        label: "Level 2 – stadium club plan",   type: "Plan", openIndex: 4 }
-    ],
-    "display-board-23": [
-      { id: "display-board-6", label: "Business Events board",         type: "Board" },
-      { id: "plans-ga",        label: "Level 2 – stadium club plan",   type: "Plan", openIndex: 4 }
-    ],
-
-    /* 7 ↔ 19 Goods Shed boards */
-    "display-board-7":  [{ id: "display-board-19", label: "The Goods Shed (related board)", type: "Board" }],
-    "display-board-19": [{ id: "display-board-7",  label: "The Goods Shed (related board)", type: "Board" }],
-
-    /* 17 Media Spaces ↔ GA plans Level 1M & 3 */
-    "display-board-17": [
-      { id: "plans-ga", label: "Level 1M – premium & media", type: "Plan", openIndex: 3 },
-      { id: "plans-ga", label: "Level 3 – media level",       type: "Plan", openIndex: 5 }
-    ],
-
-    /* 18 Continuous Concourse ↔ inside video + Level 1 plan */
-    "display-board-18": [
-      { id: "video-6",  label: "Inside the stadium",             type: "Video" },
-      { id: "plans-ga", label: "Level 1 – public concourse plan",type: "Plan", openIndex: 2 }
-    ],
-
-    /* GA plan page back to relevant boards */
-    "plans-ga": [
-      { id: "display-board-17", label: "Media Spaces board",          type: "Board" },
-      { id: "display-board-18", label: "Continuous Concourse board",  type: "Board" },
-      { id: "display-board-6",  label: "Business Events board",       type: "Board" },
-      { id: "display-board-23", label: "Function Space board",        type: "Board" },
-      { id: "display-board-22", label: "The Chair's Club board",      type: "Board" }
-    ],
-
-    /* 25 Field Club ↔ BOH video */
-    "display-board-25": [{ id: "video-1", label: "Back of House video", type: "Video" }],
-    "video-1": [{ id: "display-board-25", label: "Field Club board", type: "Board" }]
-  };
-
-  /* ---------- PAGES ---------- */
-  const PAGES = [];
-  function buildPages() {
-    PAGES.push({ id: "cover", type: "cover", title: "Stadium Design Showcase", subtitle: "31 Oct – 5 Nov · The Goods Shed Hobart", category: "Overview" });
-
-    PAGES.push({ id: "display-overview", type: "boards-overview", title: "Display boards", subtitle: "", category: "Display boards" });
-
-    DISPLAY_BOARD_FILES.forEach((file, idx) => {
-      PAGES.push({ id: `display-board-${idx+1}`, type: "single-image", image: `assets/boards/${file}`, title: boardLabelFromFile(file, idx), subtitle: "", category: "Display boards" });
-    });
-
-    PAGES.push({ id: "videos", type: "videos", title: "Videos and animations", subtitle: "", category: "Media" });
-
-    VIDEO_ITEMS.forEach(v => {
-      PAGES.push({ id: v.id, type: "video-single", title: v.title, subtitle: "", category: "Media", videoId: v.id });
-    });
-
-    PAGES.push({ id: "info-sheets", type: "info", title: "Information Sheets", subtitle: "Design development · capacity · cricket", category: "Info" });
-
-    PAGES.push({ id: "plans-layouts-1", type: "image-grid", title: "Stadium layouts · Field sports", subtitle: "", category: "Plans", images: STADIUM_LAYOUT_IMAGES.slice(0, 6), intro: "Core multi-use layouts showing AFL, cricket, NRL, soccer, boxing and basketball configurations." });
-    PAGES.push({ id: "plans-layouts-2", type: "image-grid", title: "Stadium layouts · Event modes",  subtitle: "", category: "Plans", images: STADIUM_LAYOUT_IMAGES.slice(6), intro: "Alternate staging for concerts and smaller live events." });
-
-    PAGES.push({ id: "plans-ga",       type: "image-grid", title: "Architectural plans · General arrangement", subtitle: "Key stadium GA drawings at 1:500", category: "Plans", images: GA_PLAN_IMAGES, intro: "Primary general arrangement plans that locate the field, concourses and premium levels within the Macquarie Point site." });
-    PAGES.push({ id: "plans-sections", type: "image-grid", title: "Architectural plans · Sections",           subtitle: "Site and stadium sections", category: "Plans", images: SECTION_IMAGES, intro: "Sections cutting through the site and stadium, describing scale, roof profile and relationships to the surrounding city." });
-    PAGES.push({ id: "plans-facades",  type: "image-grid", title: "Architectural plans · Facade sections",    subtitle: "Layering, structure and entries", category: "Plans", images: FACADE_IMAGES,  intro: "Combined facade section sheets illustrating entry sequences, concourse edges and stadium skin." });
-
-    PAGES.push({ id: "views", type: "image-grid", title: "Stadium views", subtitle: "", category: "Plans", images: STADIUM_VIEW_IMAGES, intro: "Key view lines from the waterfront, memorial, street network and city hillsides." });
-
-    PAGES.push({ id: "links", type: "links", title: "Links & contacts", subtitle: "", category: "Links" });
-  }
-  buildPages();
-
-  /* ---------- RENDERING ---------- */
-  const pageContainer = document.getElementById("pageContainer");
-  const pageTitleFooter = document.getElementById("pageTitle");
-  const pageCounterFooter = document.getElementById("pageCounter");
-
-  let currentPageId = "cover";
-  const getPageIndex = (id) => PAGES.findIndex(p => p.id === id);
-  const goToPageByIndex = (i, opts) => (i >= 0 && i < PAGES.length) && renderPage(PAGES[i].id, opts);
-  const goPrevPage = () => { const i = getPageIndex(currentPageId); if (i > 0) goToPageByIndex(i-1); };
-  const goNextPage = () => { const i = getPageIndex(currentPageId); if (i < PAGES.length - 1) goToPageByIndex(i+1); };
-
-  function appendRelatedPanel(container, pageId) {
-    const links = RELATED[pageId];
-    if (!links || !links.length) return;
-    const panel = document.createElement("div");
-    panel.className = "related-panel";
-    const title = document.createElement("div");
-    title.className = "related-panel-title";
-    title.textContent = "Related content";
-    const row = document.createElement("div");
-    row.className = "related-links-row";
-    links.forEach(link => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "related-pill";
-      btn.textContent = (link.type ? link.type + ": " : "") + link.label;
-      btn.addEventListener("click", () => renderPage(link.id, { openIndex: link.openIndex, infoKey: link.infoKey }));
-      row.appendChild(btn);
-    });
-    panel.appendChild(title);
-    panel.appendChild(row);
-    container.appendChild(panel);
-  }
-
-  function renderPage(id, opts) {
-    opts = opts || {};
-    const page = PAGES.find(p => p.id === id) || PAGES[0];
-    currentPageId = page.id;
-
-    const idx = getPageIndex(page.id), total = PAGES.length;
-
-    document.querySelectorAll(".nav-btn[data-page]").forEach(btn => btn.classList.toggle("active", btn.dataset.page === page.id));
-    document.querySelectorAll(".nav-btn.nav-has-menu").forEach(btn => {
-      const menuId = btn.dataset.menu;
-      let active = false;
-      if (menuId === "boardsMenu" && page.category === "Display boards") active = true;
-      if (menuId === "videosMenu" && page.category === "Media") active = true;
-      if (menuId === "plansMenu"  && page.category === "Plans") active = true;
-      btn.classList.toggle("active", active);
-    });
-
-    const shell = document.createElement("div");
-    shell.className = "page-shell";
-    if (page.type === "cover") shell.classList.add("cover-page");
-
-    const titleEl = document.createElement("h1"); titleEl.className = "page-title"; titleEl.textContent = page.title;
-    const subtitleEl = document.createElement("div"); subtitleEl.className = "page-subtitle"; subtitleEl.textContent = page.subtitle || "";
-    const pill = document.createElement("div"); pill.className = "pill-tag"; pill.innerHTML = `<strong>${page.category || "Section"}</strong><span>Digital handbook</span>`;
-    const body = document.createElement("div"); body.className = "page-body";
-
-    shell.appendChild(pill); shell.appendChild(titleEl); if (page.subtitle) shell.appendChild(subtitleEl); shell.appendChild(body);
-
-    if (page.type === "cover")      renderCover(body);
-    else if (page.type === "boards-overview") renderBoardsOverview(body);
-    else if (page.type === "single-image")   { renderSingleImage(body, page); appendRelatedPanel(body, page.id); }
-    else if (page.type === "videos")         renderVideos(body);
-    else if (page.type === "video-single")   { renderVideoSingle(body, page); appendRelatedPanel(body, page.id); }
-    else if (page.type === "image-grid")     { renderImageGrid(body, page, opts); appendRelatedPanel(body, page.id); }
-    else if (page.type === "links")          renderLinks(body);
-    else if (page.type === "info")           { renderInfoPage(body, opts); appendRelatedPanel(body, page.id); }
-
-    const navRow = document.createElement("div"); navRow.className = "page-nav-row";
-    if (idx > 0) { const prevBtn = document.createElement("button"); prevBtn.className = "btn-ghost"; prevBtn.innerHTML = "‹ Previous page"; prevBtn.addEventListener("click", goPrevPage); navRow.appendChild(prevBtn); }
-    else navRow.appendChild(document.createElement("div"));
-    const spacer = document.createElement("div"); spacer.className = "spacer"; navRow.appendChild(spacer);
-    if (idx < total - 1) { const nextBtn = document.createElement("button"); nextBtn.className = "btn-ghost"; nextBtn.innerHTML = "Next page ›"; nextBtn.addEventListener("click", goNextPage); navRow.appendChild(nextBtn); }
-    else navRow.appendChild(document.createElement("div"));
-    shell.appendChild(navRow);
-
-    const logoRow = document.createElement("div"); logoRow.className = "logo-row"; logoRow.innerHTML = `<img src="assets/mpdc-logo.png" alt="MPDC logo" onerror="this.style.display='none'">`;
-    shell.appendChild(logoRow);
-
-    pageContainer.innerHTML = ""; pageContainer.appendChild(shell);
-    pageTitleFooter.innerHTML = `<strong>${page.title}</strong>`; pageCounterFooter.textContent = `Page ${idx + 1} of ${total}`;
-  }
-
-  function renderCover(container) {
-    const heroWrap = document.createElement("div");
-    heroWrap.className = "cover-hero";
-    heroWrap.style.backgroundImage = "linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.25)), url('assets/stadium-ariel.jpg')";
-
-    const inner = document.createElement("div");
-    inner.className = "cover-hero-inner";
-    inner.innerHTML = `
-      <div class="hero-callout">
-        <div style="flex: 2 1 220px;">
-          <h2>Welcome to the Stadium Design Showcase digital handbook</h2>
-          <p>This handbook captures the key content from the physical exhibition at the Goods Shed,
-          including display boards, plans, sections, videos and context views of the
-          Macquarie Point Multipurpose Stadium.</p>
-        </div>
-        <div style="flex: 1 1 160px;">
-          <p style="font-size:0.85rem; margin:0 0 4px; color:var(--text-muted);">Use the navigation at the top to move between:</p>
-          <ul style="margin:0; padding-left:18px; font-size:0.84rem; color:var(--text-muted);">
-            <li>Display boards</li>
-            <li>Videos and animations</li>
-            <li>Stadium layouts & architectural plans</li>
-            <li>City views, information sheets and links</li>
-          </ul>
-        </div>
-      </div>
-      <p style="margin:10px 0 0; font-size:0.9rem; color:var(--text-muted);">The content is optimised for phones, tablets and laptops. Tap the image tiles to open them
-      larger, and use the drop-down menus or left/right arrow keys to move between pages.</p>
-    `;
-    heroWrap.appendChild(inner);
-    container.appendChild(heroWrap);
-  }
-
-  function renderBoardsOverview(container) {
-    const p = document.createElement("p");
-    p.textContent = "All display boards from the Goods Shed showcase. Tap a tile or use the Display boards menu to jump directly to a specific board.";
-    p.style.fontSize = "0.9rem"; p.style.color = "var(--text-muted)"; container.appendChild(p);
-
-    const grid = document.createElement("div"); grid.className = "image-grid";
-
-    const group = DISPLAY_BOARD_FILES.map((file, idx) => ({ src: `assets/boards/${file}`, title: boardLabelFromFile(file, idx) }));
-
-    DISPLAY_BOARD_FILES.forEach((file, idx) => {
-      const card = document.createElement("div"); card.className = "image-card";
-      card.addEventListener("click", () => openLightboxGroup(group, idx, false));
-      const thumbWrap = document.createElement("div"); thumbWrap.className = "image-card-thumb";
-      thumbWrap.innerHTML = `<img src="assets/boards/${file}" alt="${boardLabelFromFile(file, idx)}">`;
-      const body = document.createElement("div"); body.className = "image-card-body";
-      body.innerHTML = `<div class="image-card-title">${boardLabelFromFile(file, idx)}</div><div class="image-card-caption">Click to view full board</div>`;
-      card.appendChild(thumbWrap); card.appendChild(body); grid.appendChild(card);
-    });
-
-    container.appendChild(grid);
-  }
-
-  function renderSingleImage(container, page) {
-    const wrap = document.createElement("div"); wrap.className = "image-full-wrap"; wrap.innerHTML = `<img src="${page.image}" alt="${page.title}">`;
-    const cap = document.createElement("div"); cap.className = "image-full-caption"; cap.innerHTML = `<span>${page.title}</span><span>Tip: click the image to enlarge</span>`;
-    const group = [{ src: page.image, title: page.title }];
-    wrap.addEventListener("click", () => openLightboxGroup(group, 0, false));
-    container.appendChild(wrap); container.appendChild(cap);
-  }
-
-  function renderVideos(container) {
-    const intro = document.createElement("p");
-    intro.textContent = "Short films and animations that unpack the experience, technical design and remediation work behind the Macquarie Point Multipurpose Stadium.";
-    intro.style.fontSize = "0.9rem"; intro.style.color = "var(--text-muted)"; container.appendChild(intro);
-
-    const list = document.createElement("div"); list.className = "video-list";
-
-    VIDEO_ITEMS.forEach(v => {
-      const card = document.createElement("div"); card.className = "video-card";
-      card.addEventListener("click", () => { renderPage(v.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
-
-      const videoId = getYouTubeId(v.url); const thumbUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : "";
-      const thumb = document.createElement("div"); thumb.className = "video-thumb";
-      if (thumbUrl) thumb.innerHTML = `<img src="${thumbUrl}" alt="${v.title} thumbnail">`;
-
-      const title = document.createElement("div"); title.className = "video-title"; title.textContent = v.title;
-      const meta = document.createElement("div"); meta.className = "video-meta"; meta.textContent = v.note || "";
-
-      const btnRow = document.createElement("div"); btnRow.style.marginTop = "4px";
-      const btn = document.createElement("a"); btn.className = "btn-ghost"; btn.href = v.url; btn.target = "_blank"; btn.rel = "noopener"; btn.textContent = "Open on YouTube";
-      btn.addEventListener("click", (e) => e.stopPropagation());
-      btnRow.appendChild(btn);
-
-      card.appendChild(thumb); card.appendChild(title); card.appendChild(meta); card.appendChild(btnRow);
-      list.appendChild(card);
-    });
-
-    container.appendChild(list);
-  }
-
-  function renderVideoSingle(container, page) {
-    const v = VIDEO_ITEMS.find(x => x.id === page.videoId) || VIDEO_ITEMS[0];
-    if (v.note) { const intro = document.createElement("p"); intro.style.fontSize = "0.9rem"; intro.style.color = "var(--text-muted)"; intro.textContent = v.note; container.appendChild(intro); }
-    const iframe = document.createElement("iframe"); iframe.className = "video-single-frame"; iframe.src = toEmbed(v.url);
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"; iframe.allowFullscreen = true; container.appendChild(iframe);
-    const btnRow = document.createElement("div"); btnRow.style.marginTop = "4px";
-    const btn = document.createElement("a"); btn.className = "btn-ghost"; btn.href = v.url; btn.target = "_blank"; btn.rel = "noopener"; btn.textContent = "Open this video on YouTube";
-    btnRow.appendChild(btn); container.appendChild(btnRow);
-  }
-
-  function renderImageGrid(container, page, opts) {
-    opts = opts || {};
-    if (page.intro) { const intro = document.createElement("div"); intro.className = "image-grid-intro"; intro.textContent = page.intro; container.appendChild(intro); }
-    const grid = document.createElement("div"); grid.className = "image-grid";
-    const images = page.images || [];
-    const group = images.map(img => ({ src: `assets/plans/${img.file}`, title: img.label }));
-    images.forEach((img, idx) => {
-      const card = document.createElement("div"); card.className = "image-card";
-      const thumb = document.createElement("div"); thumb.className = "image-card-thumb"; thumb.innerHTML = `<img src="assets/plans/${img.file}" alt="${img.label}">`;
-      const body = document.createElement("div"); body.className = "image-card-body"; body.innerHTML = `<div class="image-card-title">${img.label}</div><div class="image-card-caption">Tap to view larger</div>`;
-      card.appendChild(thumb); card.appendChild(body); card.addEventListener("click", () => openLightboxGroup(group, idx, false)); grid.appendChild(card);
-    });
-    container.appendChild(grid);
-
-    if (typeof opts.openIndex === "number" && group.length) {
-      const index = Math.min(Math.max(opts.openIndex, 0), group.length - 1);
-      openLightboxGroup(group, index, false);
-    }
-  }
-
-  function renderInfoPage(container, opts) {
-    opts = opts || {};
-    const p = document.createElement("p");
-    p.textContent = "Supporting information sheets grouped by topic. Tap a tile to open its pages; use left/right to step through.";
-    p.style.fontSize = "0.9rem"; p.style.color = "var(--text-muted)"; container.appendChild(p);
-
-    const grid = document.createElement("div"); grid.className = "image-grid";
-
-    const docGroups = {};
-
-    INFO_DOCS.forEach(doc => {
-      const group = doc.images.map(img => ({ src: `assets/info/${img.file}`, title: img.label }));
-      docGroups[doc.key] = group;
-
-      const card = document.createElement("div"); card.className = "image-card";
-      card.addEventListener("click", () => openLightboxGroup(group, 0, true));
-
-      const thumb = document.createElement("div"); thumb.className = "image-card-thumb";
-      thumb.innerHTML = `<img src="assets/info/${doc.thumb}" alt="${doc.title} – first page">`;
-
-      const body = document.createElement("div"); body.className = "image-card-body";
-      const pagesCount = doc.images.length;
-      body.innerHTML = `<div class="image-card-title">${doc.title}</div><div class="image-card-caption">${pagesCount} ${pagesCount === 1 ? "page" : "pages"}</div>`;
-
-      card.appendChild(thumb); card.appendChild(body); grid.appendChild(card);
-    });
-
-    container.appendChild(grid);
-
-    if (opts.infoKey && docGroups[opts.infoKey]) {
-      openLightboxGroup(docGroups[opts.infoKey], 0, true);
-    }
-  }
-
-  function renderLinks(container) {
-    const p = document.createElement("p");
-    p.textContent = "Stay in touch with Macquarie Point Development Corporation and access further information about the project.";
-    p.style.fontSize = "0.9rem";
-    p.style.color = "var(--text-muted)";
-    container.appendChild(p);
-
-    // Websites & email
-    const webHeading = document.createElement("div");
-    webHeading.className = "links-heading";
-    webHeading.textContent = "Websites & email";
-    container.appendChild(webHeading);
-
-    const webList = document.createElement("div");
-    webList.className = "links-list";
-
-    const webItems = [
-      { title: "macpoint.com",                  url: "https://www.macpoint.com" },
-      { title: "macpoint.com/stadium",          url: "https://www.macpoint.com/stadium" },
-      { title: "Subscribe",                     url: "https://forms.office.com/Pages/ResponsePage.aspx?id=iqvrZPTMXEui0ytOly2Wsrl40AF9vslDorV-Toe-MB5URTNCUVYxR0JXRFVFVk1RM0lCRFlGU0U0RS4u" },
-      { title: "Contact",                       url: "mailto:contact@macpoint.com" }
-    ];
-
-    webItems.forEach(item => {
-      const a = document.createElement("a");
-      a.className = "link-row";
-      a.href = item.url;
-      a.target = item.url.startsWith("mailto:") ? "_self" : "_blank";
-      if (!item.url.startsWith("mailto:")) a.rel = "noopener";
-
-      const main = document.createElement("div");
-      main.className = "link-row-main";
-
-      const title = document.createElement("div");
-      title.className = "link-row-title";
-      title.textContent = item.title;
-
-      main.appendChild(title);
-
-      const arrow = document.createElement("div");
-      arrow.className = "link-row-arrow";
-      arrow.textContent = "↗";
-
-      a.appendChild(main);
-      a.appendChild(arrow);
-
-      webList.appendChild(a);
-    });
-
-    container.appendChild(webList);
-
-    // Social
-    const socialHeading = document.createElement("div");
-    socialHeading.className = "links-heading";
-    socialHeading.textContent = "Social media";
-    container.appendChild(socialHeading);
-
-    const socialList = document.createElement("div");
-    socialList.className = "links-list";
-
-    const socialItems = [
-      { title: "LinkedIn",  url: "https://www.linkedin.com/company/macquarie-point-development-corporation/", badge: "in", color: "#0a66c2" },
-      { title: "Facebook",  url: "https://www.facebook.com/macpointtas/",                                   badge: "f",  color: "#1877f2" },
-      { title: "Instagram", url: "https://www.instagram.com/macpointtas/",                                  badge: "IG", color: "#d62976" }
-    ];
-
-    socialItems.forEach(item => {
-      const a = document.createElement("a");
-      a.className = "link-row";
-      a.href = item.url;
-      a.target = "_blank";
-      a.rel = "noopener";
-
-      const badge = document.createElement("div");
-      badge.className = "link-row-badge";
-      badge.textContent = item.badge || "";
-      badge.style.background = item.color || "var(--mpdc-blue)";
-
-      const main = document.createElement("div");
-      main.className = "link-row-main";
-
-      const title = document.createElement("div");
-      title.className = "link-row-title";
-      title.textContent = item.title;
-
-      main.appendChild(title);
-
-      const arrow = document.createElement("div");
-      arrow.className = "link-row-arrow";
-      arrow.textContent = "↗";
-
-      a.appendChild(badge);
-      a.appendChild(main);
-      a.appendChild(arrow);
-
-      socialList.appendChild(a);
-    });
-
-    container.appendChild(socialList);
-  }
-
-  /* ---------- LIGHTBOX ---------- */
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightboxImg");
-  const lightboxTitle = document.getElementById("lightboxTitle");
-  const lbPrevBtn = document.getElementById("lightboxPrev");
-  const lbNextBtn = document.getElementById("lightboxNext");
-  const lbCloseBtn = document.getElementById("lightboxClose");
-
-  let lightboxGroup = []; let lightboxIndex = 0;
-
-  function showLightboxItem() {
-    if (!lightboxGroup.length) return;
-    const item = lightboxGroup[lightboxIndex];
-    lightboxImg.src = item.src; lightboxImg.alt = item.title || ""; lightboxTitle.textContent = item.title || "";
-    const multi = lightboxGroup.length > 1;
-    lbPrevBtn.style.display = multi ? "inline-flex" : "none";
-    lbNextBtn.style.display = multi ? "inline-flex" : "none";
-  }
-  function openLightboxGroup(group, startIndex, isInfo) {
-    if (!group || !group.length) return;
-    lightboxGroup = group; lightboxIndex = startIndex || 0;
-    if (isInfo) lightbox.classList.add("info-lightbox"); else lightbox.classList.remove("info-lightbox");
-    showLightboxItem(); lightbox.classList.add("open");
-  }
-  function lightboxPrev() { if (!lightboxGroup.length) return; lightboxIndex = (lightboxIndex - 1 + lightboxGroup.length) % lightboxGroup.length; showLightboxItem(); }
-  function lightboxNext() { if (!lightboxGroup.length) return; lightboxIndex = (lightboxIndex + 1) % lightboxGroup.length; showLightboxItem(); }
-  function closeLightbox() { lightbox.classList.remove("open"); lightbox.classList.remove("info-lightbox"); lightboxImg.src = ""; lightboxGroup = []; }
-  lbPrevBtn.addEventListener("click", lightboxPrev); lbNextBtn.addEventListener("click", lightboxNext); lbCloseBtn.addEventListener("click", closeLightbox);
-  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
-
-  /* ---------- NAV & MENUS ---------- */
-  const navToggle = document.getElementById("navToggle");
-  const appRoot = document.getElementById("appRoot");
-  navToggle.addEventListener("click", () => { appRoot.classList.toggle("nav-open"); });
-  document.getElementById("homeLink").addEventListener("click", () => { renderPage("cover"); appRoot.classList.remove("nav-open"); });
-  document.querySelectorAll(".nav-btn[data-page]").forEach(btn => btn.addEventListener("click", () => { renderPage(btn.dataset.page); appRoot.classList.remove("nav-open"); closeAllMenus(); }));
-
-  function closeAllMenus() { document.querySelectorAll(".nav-menu").forEach(m => m.classList.remove("open")); }
-  document.querySelectorAll(".nav-has-menu").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      const menu = document.getElementById(btn.dataset.menu);
-      const open = menu.classList.contains("open");
-      closeAllMenus(); if (!open) menu.classList.add("open"); e.stopPropagation();
-    });
-  });
-  document.addEventListener("click", closeAllMenus);
-
-  function buildMenus() {
-    const boardsMenu = document.getElementById("boardsMenu");
-    const videosMenu = document.getElementById("videosMenu");
-    const plansMenu  = document.getElementById("plansMenu");
-
-    // Boards menu
-    boardsMenu.innerHTML = "";
-    const boardsAll = document.createElement("button");
-    boardsAll.textContent = "All display boards"; boardsAll.classList.add("menu-all");
-    boardsAll.addEventListener("click", () => { renderPage("display-overview"); appRoot.classList.remove("nav-open"); closeAllMenus(); });
-    boardsMenu.appendChild(boardsAll);
-    const bHead = document.createElement("h4"); bHead.textContent = "Individual boards"; boardsMenu.appendChild(bHead);
-    DISPLAY_BOARD_FILES.forEach((file, idx) => {
-      const pageId = `display-board-${idx+1}`;
-      const btn = document.createElement("button");
-      btn.innerHTML = `${boardLabelFromFile(file, idx)} <span>${idx+1}</span>`;
-      btn.addEventListener("click", () => { renderPage(pageId); appRoot.classList.remove("nav-open"); closeAllMenus(); });
-      boardsMenu.appendChild(btn);
-    });
-
-    // Videos menu
-    videosMenu.innerHTML = "";
-    const vidsAll = document.createElement("button");
-    vidsAll.textContent = "All videos & animations"; vidsAll.classList.add("menu-all");
-    vidsAll.addEventListener("click", () => { renderPage("videos"); appRoot.classList.remove("nav-open"); closeAllMenus(); });
-    videosMenu.appendChild(vidsAll);
-    const vHead = document.createElement("h4"); vHead.textContent = "Individual videos"; videosMenu.appendChild(vHead);
-    VIDEO_ITEMS.forEach((v, idx) => {
-      const btn = document.createElement("button");
-      btn.innerHTML = `${v.title} <span>${idx+1}</span>`;
-      btn.addEventListener("click", () => { renderPage(v.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
-      videosMenu.appendChild(btn);
-    });
-
-    // Plans menu
-    plansMenu.innerHTML = "";
-    const layoutsHead = document.createElement("h4"); layoutsHead.textContent = "Stadium layouts"; plansMenu.appendChild(layoutsHead);
-    [{ id:"plans-layouts-1", label:"Field sports layouts" }, { id:"plans-layouts-2", label:"Event modes" }].forEach(item => {
-      const btn = document.createElement("button"); btn.textContent = item.label;
-      btn.addEventListener("click", () => { renderPage(item.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
-      plansMenu.appendChild(btn);
-    });
-    const archHead = document.createElement("h4"); archHead.textContent = "Architectural plans"; plansMenu.appendChild(archHead);
-    [{ id:"plans-ga", label:"General arrangement" }, { id:"plans-sections", label:"Building & site sections" }, { id:"plans-facades", label:"Facade sections" }, { id:"views", label:"Context views" }].forEach(item => {
-      const btn = document.createElement("button"); btn.textContent = item.label;
-      btn.addEventListener("click", () => { renderPage(item.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
-      plansMenu.appendChild(btn);
-    });
-  }
-  buildMenus();
-
-  document.addEventListener("keydown", (e) => {
-    if (lightbox.classList.contains("open")) {
-      if (e.key === "ArrowLeft") lightboxPrev();
-      else if (e.key === "ArrowRight") lightboxNext();
-      else if (e.key === "Escape") closeLightbox();
-      return;
-    }
-    if (e.key === "ArrowLeft") goPrevPage();
-    else if (e.key === "ArrowRight") goNextPage();
-  });
-
-  renderPage("cover");
-</script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Stadium Design Showcase — Digital Handbook</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --mpdc-blue: #5f809b;
-      --mpdc-grey: #55575a;
-      --mpdc-green: #5c6f61;
-      --accent-warm: #d4c9b4;
-      --bg: #d4c9b4;
-      --text-main: #1b1c1e;
-      --text-muted: #4c4e52;
-      --border-soft: #c7ced8;
-      --page-shadow: 0 16px 40px rgba(0,0,0,0.22);
-      --radius-lg: 18px;
-      --radius-xl: 26px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text-main);
-      background: var(--bg);
-    }
-
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-    }
-
-    .app {
-      max-width: 1200px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      background: #ffffff;
-      box-shadow: var(--page-shadow);
-      border-radius: var(--radius-xl);
-      margin: 10px;
-      overflow: hidden;
-    }
-
-    /* HEADER / NAV */
-
-    .top-bar {
-      position: relative;
-      padding: 14px 20px 10px;
-      border-bottom: 1px solid rgba(0,0,0,0.12);
-      background: #7f9ab1;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px 20px;
-      color: #f5f7fb;
-    }
-
-    .brand-wrapper { display: flex; flex-direction: column; gap: 2px; flex: 1 1 200px; min-width: 0; }
-    .brand-title { font-weight: 800; letter-spacing: 0.12em; font-size: 0.98rem; color: #fff; cursor: pointer; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .brand-subtitle { font-size: 0.82rem; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-    .nav { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
-
-    /* NAV BUTTONS – resting = white bg + blue text, active = blue bg + white text */
-    .nav-btn {
-      border: 1px solid rgba(255,255,255,0.9);
-      background: #ffffff;
-      color: var(--mpdc-blue);
-      padding: 6px 11px;
-      font-size: 0.84rem;
-      border-radius: 999px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-weight: 400;
-      letter-spacing: 0.03em;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-    .nav-btn:hover { background: #f5f7fb; border-color: #ffffff; color: var(--mpdc-blue); box-shadow: 0 2px 6px rgba(0,0,0,0.18); }
-    .nav-btn.active { background: var(--mpdc-blue); color: #ffffff; border-color: var(--mpdc-blue); box-shadow: 0 3px 8px rgba(0,0,0,0.22); }
-
-    .nav-group { position: relative; }
-    .nav-has-menu::after { content: "▾"; font-size: 0.6rem; margin-left: 2px; }
-
-    .nav-menu {
-      position: absolute; top: calc(100% + 4px); right: 0; min-width: 220px; max-width: 90vw; max-height: 60vh; overflow-y: auto;
-      background: #fff; border-radius: 14px; box-shadow: 0 10px 20px rgba(0,0,0,0.16); padding: 6px; display: none; z-index: 20; color: var(--text-main);
-    }
-    .nav-menu.open { display: block; }
-    .nav-menu h4 { margin: 4px 6px 2px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mpdc-green); }
-    .nav-menu button {
-      width: 100%; text-align: left; border-radius: 10px; border: none; background: transparent; padding: 6px 8px; font-size: 0.82rem; cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center; color: var(--text-main); transition: background 0.15s ease, transform 0.1s ease;
-    }
-    .nav-menu button span { font-size: 0.75rem; color: var(--text-muted); }
-    .nav-menu button:hover { background: rgba(95,128,155,0.07); transform: translateX(1px); }
-    .nav-menu button.menu-all { font-weight: 600; background: rgba(95,128,155,0.06); border: 1px solid rgba(95,128,155,0.25); margin-bottom: 4px; }
-    .nav-menu button.menu-all:hover { background: rgba(95,128,155,0.12); transform: translateX(1px); }
-
-    .nav-toggle { margin-left: auto; border: none; background: transparent; font-size: 1.3rem; cursor: pointer; display: none; color: #fff; }
-
-    /* MAIN */
-    #pageContainer { flex: 1 1 auto; padding: 18px 24px 16px; overflow-y: auto; background: #c9c0ad; }
-
-    .page-shell {
-      max-width: 960px; margin: 0 auto; background: #fff; border-radius: var(--radius-lg); box-shadow: var(--page-shadow);
-      padding: 20px 22px 24px; position: relative; border: 1px solid rgba(0,0,0,0.05);
-    }
-    .page-shell::before, .page-shell::after { content: ""; position: absolute; inset: 16px 20px auto; border-radius: inherit; border-top: 2px solid rgba(95,128,155,0.15); pointer-events: none; }
-    .page-shell::after { inset: auto 20px 16px; }
-
-    .page-title { font-size: 1.12rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mpdc-green); margin: 0 0 4px; }
-    .page-subtitle { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 14px; }
-
-    .cover-page .page-title { font-size: 1.4rem; letter-spacing: 0.18em; }
-    .cover-page .page-subtitle { font-size: 1rem; font-weight: 500; }
-
-    .page-body { font-size: 0.92rem; line-height: 1.55; color: var(--text-main); }
-
-    .pill-tag {
-      display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border-radius: 999px;
-      background: rgba(95,128,155,0.10); color: var(--mpdc-grey); font-size: 0.75rem; margin-bottom: 10px; border: 1px solid rgba(95,128,155,0.5);
-    }
-    .pill-tag strong { font-weight: 600; color: var(--mpdc-green); }
-
-    .logo-row { display: flex; justify-content: flex-end; margin-top: 10px; }
-    .logo-row img { max-height: 42px; width: auto; object-fit: contain; }
-
-    .hero-callout { margin: 0; padding: 10px 12px; border-radius: 14px; border: 1px solid rgba(115,134,120,0.65); background: rgba(253,251,247,0.96); display: flex; flex-wrap: wrap; gap: 10px 18px; }
-    .hero-callout h2 { margin: 0 0 6px; font-size: 1.05rem; color: var(--mpdc-green); }
-    .hero-callout p { margin: 0; font-size: 0.9rem; color: var(--text-muted); }
-
-    /* Cover hero with background image */
-    .cover-hero { margin-top: 10px; border-radius: 18px; border: 1px solid var(--border-soft); overflow: hidden; background-size: cover; background-position: center; background-repeat: no-repeat; background-color: #dde3eb; min-height: 220px; }
-    .cover-hero-inner { padding: 14px 16px 16px; background: rgba(255,255,255,0.82); }
-
-    /* NAV row */
-    .page-nav-row { margin-top: 16px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-    .page-nav-row .spacer { flex: 1 1 auto; }
-
-    .btn-primary, .btn-ghost {
-      border-radius: 999px; padding: 7px 12px; border: 1px solid var(--mpdc-blue); font-size: 0.84rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-    }
-    .btn-primary { background: var(--mpdc-blue); color: #fff; }
-    .btn-primary:hover { background: #4c6a83; border-color: #4c6a83; }
-    .btn-ghost { background: transparent; color: var(--mpdc-blue); }
-    .btn-ghost:hover { background: rgba(95,128,155,0.08); }
-
-    /* IMAGE GRID */
-    .image-grid-intro { margin-bottom: 10px; font-size: 0.88rem; color: var(--text-muted); }
-    .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 10px; }
-
-    .image-card { background: #f4f6fa; border-radius: 16px; border: 1px solid var(--border-soft); overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; }
-    .image-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); border-color: rgba(95,128,155,0.65); }
-    .image-card-thumb { background: #dde3eb; padding: 6px; display: flex; align-items: center; justify-content: center; min-height: 120px; }
-    .image-card-thumb img { max-width: 100%; max-height: 190px; display: block; border-radius: 10px; }
-    .image-card-body { padding: 8px 10px 10px; }
-    .image-card-title { font-size: 0.86rem; font-weight: 600; color: var(--text-main); margin-bottom: 2px; }
-    .image-card-caption { font-size: 0.8rem; color: var(--text-muted); }
-
-    /* SINGLE IMAGE PAGE */
-    .image-full-wrap { margin-top: 10px; border-radius: 18px; border: 1px solid var(--border-soft); background: #f3f5fa; padding: 10px; cursor: pointer; }
-    .image-full-wrap img { width: 100%; height: auto; display: block; border-radius: 12px; }
-    .image-full-caption { font-size: 0.84rem; color: var(--text-muted); margin-top: 6px; display: flex; justify-content: space-between; gap: 10px; }
-
-    /* VIDEO LIST + SINGLE VIDEO */
-    .video-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
-    .video-card { border-radius: 16px; border: 1px solid var(--border-soft); padding: 10px 11px; background: #f4f6fa; display: flex; flex-direction: column; gap: 6px; cursor: pointer; }
-    .video-card:hover { box-shadow: 0 8px 18px rgba(0,0,0,0.1); border-color: rgba(95,128,155,0.65); transform: translateY(-1px); }
-    .video-thumb { width: 100%; border-radius: 12px; overflow: hidden; background: #111827; position: relative; margin-bottom: 4px; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; }
-    .video-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .video-thumb::after { content: "▶"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 42px; height: 42px; border-radius: 999px; background: rgba(0,0,0,0.55); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-    .video-title { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
-    .video-meta { font-size: 0.78rem; color: var(--text-muted); }
-    .video-frame { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: none; margin-bottom: 4px; background: #111827; }
-    .video-single-frame { width: 100%; max-width: 720px; aspect-ratio: 16 / 9; border-radius: 14px; border: none; margin: 6px 0 10px; background: #111827; }
-
-    /* LINKS PAGE */
-    .links-heading { margin: 12px 0 4px; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mpdc-green); }
-    .links-list { margin-top: 4px; display: grid; grid-template-columns: 1fr; gap: 6px; max-width: 520px; margin-left: auto; margin-right: auto; }
-    .link-row { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 12px; border: 1px solid var(--border-soft); background: #f5efe4; text-decoration: none; color: var(--text-main); transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, transform 0.1s ease; }
-    .link-row:hover { border-color: rgba(95,128,155,0.7); box-shadow: 0 4px 10px rgba(0,0,0,0.1); background: #fff8ed; transform: translateY(-1px); }
-    .link-row-main { flex: 1 1 auto; min-width: 0; }
-    .link-row-title { font-size: 0.9rem; font-weight: 400; color: var(--text-main); margin-bottom: 0; }
-    .link-row-badge { width: 26px; height: 26px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: #fff; flex-shrink: 0; }
-    .link-row-arrow { font-size: 0.9rem; color: var(--mpdc-blue); flex-shrink: 0; }
-
-    /* LIGHTBOX – default (boards, plans, views, etc.) */
-    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.78); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
-    .lightbox.open { display: flex; }
-    .lightbox-inner { max-width: 1100px; width: 100%; max-height: 100%; background: #111827; border-radius: 16px; padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 8px; }
-    .lightbox-header { display: flex; justify-content: space-between; align-items: center; color: #e5e7eb; font-size: 0.86rem; }
-    .lightbox-controls { display: flex; gap: 6px; align-items: center; }
-    .lightbox-header button { border: none; background: rgba(31,41,55,0.9); color: #e5e7eb; font-size: 0.9rem; cursor: pointer; padding: 4px 8px; border-radius: 999px; }
-    .lightbox-header button:hover { background: rgba(55,65,81,0.95); }
-    .lightbox-img-wrap { flex: 1 1 auto; display: flex; justify-content: center; align-items: center; overflow: auto; }
-    .lightbox-img-wrap img { max-width: 100%; max-height: 80vh; height: auto; border-radius: 10px; display: block; }
-
-    /* LIGHTBOX – bigger for Info Sheets only */
-    .lightbox.info-lightbox .lightbox-inner { max-width: 1300px; max-height: 95vh; }
-    .lightbox.info-lightbox .lightbox-img-wrap { align-items: flex-start; }
-    .lightbox.info-lightbox .lightbox-img-wrap img { max-height: none; }
-
-    /* RELATED CONTENT PANEL */
-    .related-panel { margin-top: 14px; padding: 9px 10px; border-radius: 12px; background: #eef3fa; border: 1px solid rgba(95,128,155,0.8); font-size: 0.85rem; }
-    .related-panel-title { font-weight: 600; color: var(--mpdc-green); margin-bottom: 4px; }
-    .related-links-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-    .related-pill { border-radius: 999px; padding: 4px 9px; border: 1px solid var(--mpdc-blue); background: #ffffff; color: var(--mpdc-blue); font-size: 0.8rem; cursor: pointer; white-space: nowrap; font-weight: 500; }
-    .related-pill:hover { background: var(--mpdc-blue); color: #ffffff; }
-
-    /* FOOTER */
-    .footer { border-top: 1px solid var(--border-soft); padding: 6px 18px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); background: #f0f28; }
-    .footer strong { font-weight: 600; color: var(--mpdc-blue); }
-
-    /* RESPONSIVE */
-    @media (max-width: 820px) {
-      .top-bar { align-items: center; }
-      .nav { position: absolute; left: 0; right: 0; top: 100%; padding: 8px 10px 10px; background: #7f9ab1; border-bottom: 1px solid var(--border-soft); display: none; flex-wrap: wrap; gap: 6px; z-index: 15; }
-      .app.nav-open .nav { display: flex; }
-      .nav-toggle { display: block; }
-      .nav-menu { position: static; max-height: 220px; box-shadow: none; border-radius: 12px; border: 1px solid var(--border-soft); margin-top: 4px; }
-      #pageContainer { padding: 14px 14px 12px; }
-      .page-shell { padding: 16px 14px 18px; }
-    }
-  </style>
-</head>
-<body>
-<div class="app" id="appRoot">
-  <header class="top-bar">
-    <div class="brand-wrapper">
-      <div class="brand-title" id="homeLink">Stadium Design Showcase</div>
-      <div class="brand-subtitle">31 Oct – 5 Nov · The Goods Shed Hobart · Digital handbook</div>
-    </div>
-    <nav class="nav" id="mainNav">
-      <button class="nav-btn" data-page="cover">Cover</button>
-
-      <div class="nav-group">
-        <button class="nav-btn nav-has-menu" type="button" data-menu="boardsMenu">Display boards</button>
-        <div class="nav-menu" id="boardsMenu"></div>
-      </div>
-
-      <div class="nav-group">
-        <button class="nav-btn nav-has-menu" type="button" data-menu="videosMenu">Videos</button>
-        <div class="nav-menu" id="videosMenu"></div>
-      </div>
-
-      <!-- Info Sheets: button (no dropdown) -->
-      <button class="nav-btn" data-page="info-sheets">Info Sheets</button>
-
-      <div class="nav-group">
-        <button class="nav-btn nav-has-menu" type="button" data-menu="plansMenu">Plans</button>
-        <div class="nav-menu" id="plansMenu"></div>
-      </div>
-
-      <button class="nav-btn nav-link" data-page="links">Links</button>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
-  </header>
-
-  <main id="pageContainer"></main>
-
-  <footer class="footer">
-    <span id="pageTitle"></span>
-    <span id="pageCounter"></span>
-  </footer>
-</div>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <div class="lightbox-inner">
-    <div class="lightbox-header">
-      <div id="lightboxTitle"></div>
-      <div class="lightbox-controls">
-        <button type="button" id="lightboxPrev" aria-label="Previous image">‹</button>
-        <button type="button" id="lightboxNext" aria-label="Next image">›</button>
-        <button type="button" id="lightboxClose" aria-label="Close image">✕</button>
-      </div>
-    </div>
-    <div class="lightbox-img-wrap">
-      <img id="lightboxImg" src="" alt="">
-    </div>
-  </div>
-</div>
-
-<script>
-  /* ---------- HELPERS ---------- */
-  function toEmbed(url) {
-    try {
-      const u = new URL(url);
-      if (u.hostname === "youtu.be") return "https://www.youtube.com/embed/" + u.pathname.slice(1);
-      if (u.hostname.includes("youtube.com")) return "https://www.youtube.com/embed/" + u.searchParams.get("v");
-    } catch(e) {}
-    return url;
-  }
-  function getYouTubeId(url) {
-    try {
-      const u = new URL(url);
-      if (u.hostname === "youtu.be") return u.pathname.slice(1);
-      if (u.hostname.includes("youtube.com")) return u.searchParams.get("v") || "";
-    } catch(e) {}
-    return "";
-  }
-
-  /* ---------- DATA ---------- */
 
   const DISPLAY_BOARD_FILES = [
     "boards1_01.jpg","boards1_02.jpg","boards1_03.jpg","boards1_04.jpg","boards1_05.jpg",
@@ -1355,21 +347,21 @@
 
   const GA_PLAN_IMAGES = [
     { file: "plan-ga-ground-plane-external-concourse.jpg", label: "Ground plane – external concourse" },
-    { file: "plan-ga-level0-field.jpg", label: "Level 0 – field level" },
-    { file: "plan-ga-level1-concourse.jpg", label: "Level 1 – public concourse" },
-    { file: "plan-ga-level1m-premium.jpg", label: "Level 1M – premium & media" },
-    { file: "plan-ga-level2-stadium-club.jpg", label: "Level 2 – stadium club" },
-    { file: "plan-ga-level3-media.jpg", label: "Level 3 – media level" },
-    { file: "plan-ga-level4-gantry.jpg", label: "Level 4 – gantry level" },
-    { file: "plan-ga-roof.jpg", label: "Roof plan" }
+    { file: "plan-ga-level0-field.jpg",                    label: "Level 0 – field level" },
+    { file: "plan-ga-level1-concourse.jpg",                label: "Level 1 – public concourse" },
+    { file: "plan-ga-level1m-premium.jpg",                 label: "Level 1M – premium & media" },
+    { file: "plan-ga-level2-stadium-club.jpg",             label: "Level 2 – stadium club" },
+    { file: "plan-ga-level3-media.jpg",                    label: "Level 3 – media level" },
+    { file: "plan-ga-level4-gantry.jpg",                   label: "Level 4 – gantry level" },
+    { file: "plan-ga-roof.jpg",                            label: "Roof plan" }
   ];
 
   const SECTION_IMAGES = [
-    { file: "section-site-overall.jpg", label: "Site sections – overall" },
-    { file: "section-building-east.jpg", label: "Building section – east" },
-    { file: "section-building-north.jpg", label: "Building section – north" },
-    { file: "section-building-south.jpg", label: "Building section – south" },
-    { file: "section-building-west.jpg", label: "Building section – west" },
+    { file: "section-site-overall.jpg",       label: "Site sections – overall" },
+    { file: "section-building-east.jpg",      label: "Building section – east" },
+    { file: "section-building-north.jpg",     label: "Building section – north" },
+    { file: "section-building-south.jpg",     label: "Building section – south" },
+    { file: "section-building-west.jpg",      label: "Building section – west" },
     { file: "section-building-southeast.jpg", label: "Building section – south-east" },
     { file: "section-building-southwest.jpg", label: "Building section – south-west" },
     { file: "section-building-northeast.jpg", label: "Building section – north-east" },
@@ -1396,96 +388,161 @@
     { file: "info-stadium-cricket-2.jpg", label: "A stadium designed for cricket – roof height" },
     { file: "info-stadium-cricket-3.jpg", label: "A stadium designed for cricket – roof design & test rig" }
   ];
+
   const INFO_DOCS = [
-    { title: "Design development",              images: INFO_DESIGN_IMAGES,   thumb: "info-design-development-1.jpg" },
-    { title: "Stadium capacity",                images: INFO_CAPACITY_IMAGES,  thumb: "info-stadium-capacity-1.jpg" },
-    { title: "A stadium designed for cricket",  images: INFO_CRICKET_IMAGES,   thumb: "info-stadium-cricket-1.jpg" }
+    { key: "design",   title: "Design development",             images: INFO_DESIGN_IMAGES,   thumb: "info-design-development-1.jpg" },
+    { key: "capacity", title: "Stadium capacity",               images: INFO_CAPACITY_IMAGES, thumb: "info-stadium-capacity-1.jpg" },
+    { key: "cricket",  title: "A stadium designed for cricket", images: INFO_CRICKET_IMAGES,  thumb: "info-stadium-cricket-1.jpg" }
   ];
 
-  /* ---------- RELATED LINKS (mutual) ---------- */
+  const INFO_DOC_INDEX = { design: 0, capacity: 1, cricket: 2 };
+
+  /* Lightbox state */
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const lightboxTitle = document.getElementById("lightboxTitle");
+  const lbPrevBtn = document.getElementById("lightboxPrev");
+  const lbNextBtn = document.getElementById("lightboxNext");
+  const lbCloseBtn = document.getElementById("lightboxClose");
+
+  let lightboxGroup = [];
+  let lightboxIndex = 0;
+
+  function showLightboxItem() {
+    if (!lightboxGroup.length) return;
+    const item = lightboxGroup[lightboxIndex];
+    lightboxImg.src = item.src;
+    lightboxImg.alt = item.title || "";
+    lightboxTitle.textContent = item.title || "";
+    const multi = lightboxGroup.length > 1;
+    lbPrevBtn.style.display = multi ? "inline-flex" : "none";
+    lbNextBtn.style.display = multi ? "inline-flex" : "none";
+  }
+
+  function openLightboxGroup(group, startIndex, isInfo) {
+    if (!group || !group.length) return;
+    lightboxGroup = group;
+    lightboxIndex = startIndex || 0;
+    if (isInfo) lightbox.classList.add("info-lightbox"); else lightbox.classList.remove("info-lightbox");
+    showLightboxItem();
+    lightbox.classList.add("open");
+  }
+
+  function lightboxPrev() { if (!lightboxGroup.length) return; lightboxIndex = (lightboxIndex - 1 + lightboxGroup.length) % lightboxGroup.length; showLightboxItem(); }
+  function lightboxNext() { if (!lightboxGroup.length) return; lightboxIndex = (lightboxIndex + 1) % lightboxGroup.length; showLightboxItem(); }
+  function closeLightbox() { lightbox.classList.remove("open"); lightbox.classList.remove("info-lightbox"); lightboxImg.src = ""; lightboxGroup = []; }
+  lbPrevBtn.addEventListener("click", lightboxPrev);
+  lbNextBtn.addEventListener("click", lightboxNext);
+  lbCloseBtn.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+
+  /* Deep helpers */
+  function openPlanByIndex(planIdx) {
+    renderPage("plans-ga");
+    const group = GA_PLAN_IMAGES.map(img => ({ src: `assets/plans/${img.file}`, title: img.label }));
+    openLightboxGroup(group, planIdx, false);
+  }
+
+  function openInfoDoc(key) {
+    const docIndex = INFO_DOC_INDEX[key];
+    if (docIndex == null) return;
+    renderPage("info-sheets");
+    const doc = INFO_DOCS[docIndex];
+    const group = doc.images.map(img => ({ src: `assets/info/${img.file}`, title: img.label }));
+    openLightboxGroup(group, 0, true);
+  }
+
+  /* RELATED LINKS (with deep-link metadata) */
   const RELATED = {
-    /* Already wired earlier */
     "display-board-3": [
       { id: "plans-sections", label: "Architectural sections", type: "Plan" },
       { id: "plans-facades",  label: "Facade sections",        type: "Plan" }
     ],
     "plans-sections": [{ id: "display-board-3", label: "Roof design display board", type: "Board" }],
     "plans-facades":  [{ id: "display-board-3", label: "Roof design display board", type: "Board" }],
+
     "display-board-10": [
-      { id: "video-3", label: "Complexities of remediation",        type: "Video" },
-      { id: "video-4", label: "Remediation work at Mac Point",      type: "Video" },
-      { id: "video-7", label: "Remediation: In situ-solidification",type: "Video" }
+      { id: "video-3", label: "Complexities of remediation",         type: "Video" },
+      { id: "video-4", label: "Remediation work at Mac Point",       type: "Video" },
+      { id: "video-7", label: "Remediation: In situ-solidification", type: "Video" }
     ],
     "video-3": [{ id: "display-board-10", label: "Remediation display board", type: "Board" }],
     "video-4": [{ id: "display-board-10", label: "Remediation display board", type: "Board" }],
     "video-7": [{ id: "display-board-10", label: "Remediation display board", type: "Board" }],
 
-    /* NEW per your list */
-    // 1 Seating Bowl ↔ inside video
+    /* Seating Bowl ↔ inside video */
     "display-board-1": [{ id: "video-6", label: "Inside the stadium", type: "Video" }],
     "video-6": [
-      { id: "display-board-1", label: "Seating Bowl board", type: "Board" },
-      { id: "display-board-2", label: "User Experience board", type: "Board" },
-      { id: "display-board-18", label: "Continuous Concourse board", type: "Board" }
+      { id: "display-board-1",  label: "Seating Bowl board",          type: "Board" },
+      { id: "display-board-2",  label: "User Experience board",       type: "Board" },
+      { id: "display-board-18", label: "Continuous Concourse board",  type: "Board" }
     ],
 
-    // 2 User Experience ↔ inside + arriving
+    /* User Experience ↔ inside + arriving */
     "display-board-2": [
       { id: "video-6", label: "Inside the stadium",  type: "Video" },
       { id: "video-5", label: "Entering the stadium",type: "Video" }
     ],
     "video-5": [{ id: "display-board-2", label: "User Experience board", type: "Board" }],
 
-    // 4 A Multipurpose Venue ↔ cricket info sheet (Info page)
-    "display-board-4": [{ id: "info-sheets", label: "Cricket info sheet", type: "Info" }],
-    "info-sheets": [{ id: "display-board-4", label: "A Multipurpose Venue board", type: "Board" }],
+    /* Multipurpose venue ↔ cricket info sheet (deep link) */
+    "display-board-4": [
+      { id: "info-sheets", label: "Cricket info sheet", type: "Info", infoKey: "cricket" }
+    ],
+    "info-sheets": [
+      { id: "display-board-4", label: "A Multipurpose Venue board", type: "Board" }
+    ],
 
-    // 6 Business Events ↔ function room video, Function Space board, Chair's Club board, Level 2 plan
+    /* Business Events + related boards + Level 2 GA */
     "display-board-6": [
-      { id: "video-2", label: "Function Room (Gate 2)", type: "Video" },
-      { id: "display-board-23", label: "Function Space board", type: "Board" },
-      { id: "display-board-22", label: "The Chair's Club / Event Space board", type: "Board" },
-      { id: "plans-ga", label: "Level 2 – stadium club plan", type: "Plan" }
+      { id: "video-2",          label: "Function room video",                type: "Video" },
+      { id: "display-board-23", label: "Function Space board",               type: "Board" },
+      { id: "display-board-22", label: "The Chair's Club / Event Space",     type: "Board" },
+      { id: "plans-ga",         label: "Level 2 – stadium club plan",        type: "Plan", planIndex: 4 }
     ],
     "display-board-22": [
-      { id: "display-board-6", label: "Business Events board", type: "Board" },
-      { id: "plans-ga", label: "Level 2 – stadium club plan", type: "Plan" }
+      { id: "display-board-6",  label: "Business Events board",          type: "Board" },
+      { id: "plans-ga",         label: "Level 2 – stadium club plan",    type: "Plan", planIndex: 4 }
     ],
     "display-board-23": [
-      { id: "display-board-6", label: "Business Events board", type: "Board" },
-      { id: "plans-ga", label: "Level 2 – stadium club plan", type: "Plan" }
+      { id: "display-board-6",  label: "Business Events board",          type: "Board" },
+      { id: "plans-ga",         label: "Level 2 – stadium club plan",    type: "Plan", planIndex: 4 }
     ],
 
-    // 7 The Goods Shed ↔ 19 The Goods Shed
+    /* Goods Shed boards cross-link */
     "display-board-7":  [{ id: "display-board-19", label: "The Goods Shed (related board)", type: "Board" }],
     "display-board-19": [{ id: "display-board-7",  label: "The Goods Shed (related board)", type: "Board" }],
 
-    // 17 Media Spaces ↔ GA plans 1M + Level 3
+    /* Media Spaces ↔ GA 1M + Level 3 */
     "display-board-17": [
-      { id: "plans-ga", label: "Level 1M – premium & media plan", type: "Plan" },
-      { id: "plans-ga", label: "Level 3 – media level plan",      type: "Plan" }
+      { id: "plans-ga", label: "Level 1M – premium & media plan", type: "Plan", planIndex: 3 },
+      { id: "plans-ga", label: "Level 3 – media level plan",      type: "Plan", planIndex: 5 }
     ],
 
-    // 18 Continuous Concourse ↔ inside video + Level 1 plan
+    /* Continuous Concourse ↔ inside video + Level 1 concourse plan */
     "display-board-18": [
-      { id: "video-6", label: "Inside the stadium", type: "Video" },
-      { id: "plans-ga", label: "Level 1 – public concourse plan", type: "Plan" }
-    ],
-    // plan page back-links for 17 & 18 (generic to GA)
-    "plans-ga": [
-      { id: "display-board-17", label: "Media Spaces board",       type: "Board" },
-      { id: "display-board-18", label: "Continuous Concourse board", type: "Board" },
-      { id: "display-board-6",  label: "Business Events board",    type: "Board" },
-      { id: "display-board-23", label: "Function Space board",     type: "Board" },
-      { id: "display-board-22", label: "The Chair's Club board",   type: "Board" }
+      { id: "video-6",  label: "Inside the stadium video",         type: "Video" },
+      { id: "plans-ga", label: "Level 1 – public concourse plan",  type: "Plan", planIndex: 2 }
     ],
 
-    // 25 Field Club ↔ BOH video
-    "display-board-25": [{ id: "video-1", label: "Back of House video", type: "Video" }],
-    "video-1": [{ id: "display-board-25", label: "Field Club board", type: "Board" }]
+    /* GA page back-links */
+    "plans-ga": [
+      { id: "display-board-17", label: "Media Spaces board",          type: "Board" },
+      { id: "display-board-18", label: "Continuous Concourse board",  type: "Board" },
+      { id: "display-board-6",  label: "Business Events board",       type: "Board" },
+      { id: "display-board-23", label: "Function Space board",        type: "Board" },
+      { id: "display-board-22", label: "The Chair's Club / Event Space board", type: "Board" }
+    ],
+
+    /* Field Club ↔ BOH video */
+    "display-board-25": [
+      { id: "video-1", label: "Back of House video", type: "Video" }
+    ],
+    "video-1": [
+      { id: "display-board-25", label: "Field Club board", type: "Board" }
+    ]
   };
 
-  /* ---------- PAGES ---------- */
   const PAGES = [];
   function buildPages() {
     PAGES.push({ id: "cover", type: "cover", title: "Stadium Design Showcase", subtitle: "31 Oct – 5 Nov · The Goods Shed Hobart", category: "Overview" });
@@ -1497,7 +554,6 @@
     });
 
     PAGES.push({ id: "videos", type: "videos", title: "Videos and animations", subtitle: "", category: "Media" });
-
     VIDEO_ITEMS.forEach(v => {
       PAGES.push({ id: v.id, type: "video-single", title: v.title, subtitle: "", category: "Media", videoId: v.id });
     });
@@ -1517,7 +573,6 @@
   }
   buildPages();
 
-  /* ---------- RENDERING ---------- */
   const pageContainer = document.getElementById("pageContainer");
   const pageTitleFooter = document.getElementById("pageTitle");
   const pageCounterFooter = document.getElementById("pageCounter");
@@ -1543,7 +598,15 @@
       btn.type = "button";
       btn.className = "related-pill";
       btn.textContent = (link.type ? link.type + ": " : "") + link.label;
-      btn.addEventListener("click", () => renderPage(link.id));
+      btn.addEventListener("click", () => {
+        if (link.planIndex != null) {
+          openPlanByIndex(link.planIndex);
+        } else if (link.infoKey) {
+          openInfoDoc(link.infoKey);
+        } else {
+          renderPage(link.id);
+        }
+      });
       row.appendChild(btn);
     });
     panel.appendChild(title);
@@ -1606,7 +669,6 @@
     const heroWrap = document.createElement("div");
     heroWrap.className = "cover-hero";
     heroWrap.style.backgroundImage = "linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.25)), url('assets/stadium-ariel.jpg')";
-
     const inner = document.createElement("div");
     inner.className = "cover-hero-inner";
     inner.innerHTML = `
@@ -1627,8 +689,10 @@
           </ul>
         </div>
       </div>
-      <p style="margin:10px 0 0; font-size:0.9rem; color:var(--text-muted);">The content is optimised for phones, tablets and laptops. Tap the image tiles to open them
-      larger, and use the drop-down menus or left/right arrow keys to move between pages.</p>
+      <p style="margin:10px 0 0; font-size:0.9rem; color:var(--text-muted);">
+        The content is optimised for phones, tablets and laptops. Tap the image tiles to open them
+        larger, and use the drop-down menus or left/right arrow keys to move between pages.
+      </p>
     `;
     heroWrap.appendChild(inner);
     container.appendChild(heroWrap);
@@ -1637,57 +701,106 @@
   function renderBoardsOverview(container) {
     const p = document.createElement("p");
     p.textContent = "All display boards from the Goods Shed showcase. Tap a tile or use the Display boards menu to jump directly to a specific board.";
-    p.style.fontSize = "0.9rem"; p.style.color = "var(--text-muted)"; container.appendChild(p);
+    p.style.fontSize = "0.9rem";
+    p.style.color = "var(--text-muted)";
+    container.appendChild(p);
 
-    const grid = document.createElement("div"); grid.className = "image-grid";
+    const grid = document.createElement("div");
+    grid.className = "image-grid";
 
     const group = DISPLAY_BOARD_FILES.map((file, idx) => ({ src: `assets/boards/${file}`, title: boardLabelFromFile(file, idx) }));
 
     DISPLAY_BOARD_FILES.forEach((file, idx) => {
-      const card = document.createElement("div"); card.className = "image-card";
+      const card = document.createElement("div");
+      card.className = "image-card";
       card.addEventListener("click", () => openLightboxGroup(group, idx, false));
-      const thumbWrap = document.createElement("div"); thumbWrap.className = "image-card-thumb";
+
+      const thumbWrap = document.createElement("div");
+      thumbWrap.className = "image-card-thumb";
       thumbWrap.innerHTML = `<img src="assets/boards/${file}" alt="${boardLabelFromFile(file, idx)}">`;
-      const body = document.createElement("div"); body.className = "image-card-body";
-      body.innerHTML = `<div class="image-card-title">${boardLabelFromFile(file, idx)}</div><div class="image-card-caption">Click to view full board</div>`;
-      card.appendChild(thumbWrap); card.appendChild(body); grid.appendChild(card);
+
+      const body = document.createElement("div");
+      body.className = "image-card-body";
+      body.innerHTML = `
+        <div class="image-card-title">${boardLabelFromFile(file, idx)}</div>
+        <div class="image-card-caption">Click to view full board</div>
+      `;
+
+      card.appendChild(thumbWrap);
+      card.appendChild(body);
+      grid.appendChild(card);
     });
 
     container.appendChild(grid);
   }
 
   function renderSingleImage(container, page) {
-    const wrap = document.createElement("div"); wrap.className = "image-full-wrap"; wrap.innerHTML = `<img src="${page.image}" alt="${page.title}">`;
-    const cap = document.createElement("div"); cap.className = "image-full-caption"; cap.innerHTML = `<span>${page.title}</span><span>Tip: click the image to enlarge</span>`;
+    const wrap = document.createElement("div");
+    wrap.className = "image-full-wrap";
+    wrap.innerHTML = `<img src="${page.image}" alt="${page.title}">`;
+
+    const cap = document.createElement("div");
+    cap.className = "image-full-caption";
+    cap.innerHTML = `<span>${page.title}</span><span>Tip: click the image to enlarge</span>`;
+
     const group = [{ src: page.image, title: page.title }];
     wrap.addEventListener("click", () => openLightboxGroup(group, 0, false));
-    container.appendChild(wrap); container.appendChild(cap);
+
+    container.appendChild(wrap);
+    container.appendChild(cap);
   }
 
   function renderVideos(container) {
     const intro = document.createElement("p");
     intro.textContent = "Short films and animations that unpack the experience, technical design and remediation work behind the Macquarie Point Multipurpose Stadium.";
-    intro.style.fontSize = "0.9rem"; intro.style.color = "var(--text-muted)"; container.appendChild(intro);
+    intro.style.fontSize = "0.9rem";
+    intro.style.color = "var(--text-muted)";
+    container.appendChild(intro);
 
-    const list = document.createElement("div"); list.className = "video-list";
+    const list = document.createElement("div");
+    list.className = "video-list";
 
     VIDEO_ITEMS.forEach(v => {
-      const card = document.createElement("div"); card.className = "video-card";
-      card.addEventListener("click", () => { renderPage(v.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+      const card = document.createElement("div");
+      card.className = "video-card";
+      card.addEventListener("click", () => {
+        renderPage(v.id);
+        appRoot.classList.remove("nav-open");
+        closeAllMenus();
+      });
 
-      const videoId = getYouTubeId(v.url); const thumbUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : "";
-      const thumb = document.createElement("div"); thumb.className = "video-thumb";
+      const videoId = getYouTubeId(v.url);
+      const thumbUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : "";
+      const thumb = document.createElement("div");
+      thumb.className = "video-thumb";
       if (thumbUrl) thumb.innerHTML = `<img src="${thumbUrl}" alt="${v.title} thumbnail">`;
 
-      const title = document.createElement("div"); title.className = "video-title"; title.textContent = v.title;
-      const meta = document.createElement("div"); meta.className = "video-meta"; meta.textContent = v.note || "";
+      const title = document.createElement("div");
+      title.className = "video-title";
+      title.textContent = v.title;
 
-      const btnRow = document.createElement("div"); btnRow.style.marginTop = "4px";
-      const btn = document.createElement("a"); btn.className = "btn-ghost"; btn.href = v.url; btn.target = "_blank"; btn.rel = "noopener"; btn.textContent = "Open on YouTube";
+      const meta = document.createElement("div");
+      meta.className = "video-meta";
+      meta.textContent = v.note || "";
+
+      const btnRow = document.createElement("div");
+      btnRow.style.marginTop = "4px";
+
+      const btn = document.createElement("a");
+      btn.className = "btn-ghost";
+      btn.href = v.url;
+      btn.target = "_blank";
+      btn.rel = "noopener";
+      btn.textContent = "Open on YouTube";
       btn.addEventListener("click", (e) => e.stopPropagation());
+
       btnRow.appendChild(btn);
 
-      card.appendChild(thumb); card.appendChild(title); card.appendChild(meta); card.appendChild(btnRow);
+      card.appendChild(thumb);
+      card.appendChild(title);
+      card.appendChild(meta);
+      card.appendChild(btnRow);
+
       list.appendChild(card);
     });
 
@@ -1696,143 +809,333 @@
 
   function renderVideoSingle(container, page) {
     const v = VIDEO_ITEMS.find(x => x.id === page.videoId) || VIDEO_ITEMS[0];
-    if (v.note) { const intro = document.createElement("p"); intro.style.fontSize = "0.9rem"; intro.style.color = "var(--text-muted)"; intro.textContent = v.note; container.appendChild(intro); }
-    const iframe = document.createElement("iframe"); iframe.className = "video-single-frame"; iframe.src = toEmbed(v.url);
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"; iframe.allowFullscreen = true; container.appendChild(iframe);
-    const btnRow = document.createElement("div"); btnRow.style.marginTop = "4px";
-    const btn = document.createElement("a"); btn.className = "btn-ghost"; btn.href = v.url; btn.target = "_blank"; btn.rel = "noopener"; btn.textContent = "Open this video on YouTube";
-    btnRow.appendChild(btn); container.appendChild(btnRow);
+
+    if (v.note) {
+      const intro = document.createElement("p");
+      intro.style.fontSize = "0.9rem";
+      intro.style.color = "var(--text-muted)";
+      intro.textContent = v.note;
+      container.appendChild(intro);
+    }
+
+    const iframe = document.createElement("iframe");
+    iframe.className = "video-single-frame";
+    iframe.src = toEmbed(v.url);
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowFullscreen = true;
+    container.appendChild(iframe);
+
+    const btnRow = document.createElement("div");
+    btnRow.style.marginTop = "4px";
+
+    const btn = document.createElement("a");
+    btn.className = "btn-ghost";
+    btn.href = v.url;
+    btn.target = "_blank";
+    btn.rel = "noopener";
+    btn.textContent = "Open this video on YouTube";
+
+    btnRow.appendChild(btn);
+    container.appendChild(btnRow);
   }
 
   function renderImageGrid(container, page) {
-    if (page.intro) { const intro = document.createElement("div"); intro.className = "image-grid-intro"; intro.textContent = page.intro; container.appendChild(intro); }
-    const grid = document.createElement("div"); grid.className = "image-grid";
+    if (page.intro) {
+      const intro = document.createElement("div");
+      intro.className = "image-grid-intro";
+      intro.textContent = page.intro;
+      container.appendChild(intro);
+    }
+
+    const grid = document.createElement("div");
+    grid.className = "image-grid";
+
     const images = page.images || [];
     const group = images.map(img => ({ src: `assets/plans/${img.file}`, title: img.label }));
+
     images.forEach((img, idx) => {
-      const card = document.createElement("div"); card.className = "image-card";
-      const thumb = document.createElement("div"); thumb.className = "image-card-thumb"; thumb.innerHTML = `<img src="assets/plans/${img.file}" alt="${img.label}">`;
-      const body = document.createElement("div"); body.className = "image-card-body"; body.innerHTML = `<div class="image-card-title">${img.label}</div><div class="image-card-caption">Tap to view larger</div>`;
-      card.appendChild(thumb); card.appendChild(body); card.addEventListener("click", () => openLightboxGroup(group, idx, false)); grid.appendChild(card);
+      const card = document.createElement("div");
+      card.className = "image-card";
+
+      const thumb = document.createElement("div");
+      thumb.className = "image-card-thumb";
+      thumb.innerHTML = `<img src="assets/plans/${img.file}" alt="${img.label}">`;
+
+      const body = document.createElement("div");
+      body.className = "image-card-body";
+      body.innerHTML = `
+        <div class="image-card-title">${img.label}</div>
+        <div class="image-card-caption">Tap to view larger</div>
+      `;
+
+      card.appendChild(thumb);
+      card.appendChild(body);
+      card.addEventListener("click", () => openLightboxGroup(group, idx, false));
+
+      grid.appendChild(card);
     });
+
     container.appendChild(grid);
   }
 
   function renderInfoPage(container) {
-    const intro = document.createElement("p");
-    intro.textContent = "Supporting information sheets grouped by topic. Tap a tile to open its pages; use left/right to step through.";
-    intro.style.fontSize = "0.9rem"; intro.style.color = "var(--text-muted)"; container.appendChild(intro);
+    const p = document.createElement("p");
+    p.textContent = "Supporting information sheets grouped by topic. Tap a tile to open its pages; use left/right to step through.";
+    p.style.fontSize = "0.9rem";
+    p.style.color = "var(--text-muted)";
+    container.appendChild(p);
 
-    const grid = document.createElement("div"); grid.className = "image-grid";
+    const grid = document.createElement("div");
+    grid.className = "image-grid";
 
     INFO_DOCS.forEach(doc => {
       const group = doc.images.map(img => ({ src: `assets/info/${img.file}`, title: img.label }));
-      const card = document.createElement("div"); card.className = "image-card";
+      const card = document.createElement("div");
+      card.className = "image-card";
       card.addEventListener("click", () => openLightboxGroup(group, 0, true));
-      const thumb = document.createElement("div"); thumb.className = "image-card-thumb";
+
+      const thumb = document.createElement("div");
+      thumb.className = "image-card-thumb";
       thumb.innerHTML = `<img src="assets/info/${doc.thumb}" alt="${doc.title} – first page">`;
-      const body = document.createElement("div"); body.className = "image-card-body";
+
+      const body = document.createElement("div");
+      body.className = "image-card-body";
       const pagesCount = doc.images.length;
-      body.innerHTML = `<div class="image-card-title">${doc.title}</div><div class="image-card-caption">${pagesCount} ${pagesCount === 1 ? "page" : "pages"}</div>`;
-      card.appendChild(thumb); card.appendChild(body); grid.appendChild(card);
+      body.innerHTML = `
+        <div class="image-card-title">${doc.title}</div>
+        <div class="image-card-caption">${pagesCount} ${pagesCount === 1 ? "page" : "pages"}</div>
+      `;
+
+      card.appendChild(thumb);
+      card.appendChild(body);
+      grid.appendChild(card);
     });
 
     container.appendChild(grid);
   }
 
-  /* ---------- LIGHTBOX ---------- */
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightboxImg");
-  const lightboxTitle = document.getElementById("lightboxTitle");
-  const lbPrevBtn = document.getElementById("lightboxPrev");
-  const lbNextBtn = document.getElementById("lightboxNext");
-  const lbCloseBtn = document.getElementById("lightboxClose");
+  function renderLinks(container) {
+    const p = document.createElement("p");
+    p.textContent = "Stay in touch with Macquarie Point Development Corporation and access further information about the project.";
+    p.style.fontSize = "0.9rem";
+    p.style.color = "var(--text-muted)";
+    container.appendChild(p);
 
-  let lightboxGroup = []; let lightboxIndex = 0;
+    const webHeading = document.createElement("div");
+    webHeading.className = "links-heading";
+    webHeading.textContent = "Websites & email";
+    container.appendChild(webHeading);
 
-  function showLightboxItem() {
-    if (!lightboxGroup.length) return;
-    const item = lightboxGroup[lightboxIndex];
-    lightboxImg.src = item.src; lightboxImg.alt = item.title || ""; lightboxTitle.textContent = item.title || "";
-    const multi = lightboxGroup.length > 1;
-    lbPrevBtn.style.display = multi ? "inline-flex" : "none";
-    lbNextBtn.style.display = multi ? "inline-flex" : "none";
+    const webList = document.createElement("div");
+    webList.className = "links-list";
+
+    const webItems = [
+      { title: "macpoint.com",              url: "https://www.macpoint.com" },
+      { title: "macpoint.com/stadium",      url: "https://www.macpoint.com/stadium" },
+      { title: "Subscribe",                 url: "https://forms.office.com/Pages/ResponsePage.aspx?id=iqvrZPTMXEui0ytOly2Wsrl40AF9vslDorV-Toe-MB5URTNCUVYxR0JXRFVFVk1RM0lCRFlGU0U0RS4u" },
+      { title: "Contact",                   url: "mailto:contact@macpoint.com" }
+    ];
+
+    webItems.forEach(item => {
+      const a = document.createElement("a");
+      a.className = "link-row";
+      a.href = item.url;
+      a.target = item.url.startsWith("mailto:") ? "_self" : "_blank";
+      if (!item.url.startsWith("mailto:")) a.rel = "noopener";
+
+      const main = document.createElement("div");
+      main.className = "link-row-main";
+
+      const title = document.createElement("div");
+      title.className = "link-row-title";
+      title.textContent = item.title;
+
+      main.appendChild(title);
+
+      const arrow = document.createElement("div");
+      arrow.className = "link-row-arrow";
+      arrow.textContent = "↗";
+
+      a.appendChild(main);
+      a.appendChild(arrow);
+
+      webList.appendChild(a);
+    });
+
+    container.appendChild(webList);
+
+    const socialHeading = document.createElement("div");
+    socialHeading.className = "links-heading";
+    socialHeading.textContent = "Social media";
+    container.appendChild(socialHeading);
+
+    const socialList = document.createElement("div");
+    socialList.className = "links-list";
+
+    const socialItems = [
+      { title: "LinkedIn",  url: "https://www.linkedin.com/company/macquarie-point-development-corporation/", badge: "in", color: "#0a66c2" },
+      { title: "Facebook",  url: "https://www.facebook.com/macpointtas/",                                   badge: "f",  color: "#1877f2" },
+      { title: "Instagram", url: "https://www.instagram.com/macpointtas/",                                  badge: "IG", color: "#d62976" }
+    ];
+
+    socialItems.forEach(item => {
+      const a = document.createElement("a");
+      a.className = "link-row";
+      a.href = item.url;
+      a.target = "_blank";
+      a.rel = "noopener";
+
+      const badge = document.createElement("div");
+      badge.className = "link-row-badge";
+      badge.textContent = item.badge || "";
+      badge.style.background = item.color || "var(--mpdc-blue)";
+
+      const main = document.createElement("div");
+      main.className = "link-row-main";
+
+      const title = document.createElement("div");
+      title.className = "link-row-title";
+      title.textContent = item.title;
+
+      main.appendChild(title);
+
+      const arrow = document.createElement("div");
+      arrow.className = "link-row-arrow";
+      arrow.textContent = "↗";
+
+      a.appendChild(badge);
+      a.appendChild(main);
+      a.appendChild(arrow);
+
+      socialList.appendChild(a);
+    });
+
+    container.appendChild(socialList);
   }
-  function openLightboxGroup(group, startIndex, isInfo) {
-    if (!group || !group.length) return;
-    lightboxGroup = group; lightboxIndex = startIndex || 0;
-    if (isInfo) lightbox.classList.add("info-lightbox"); else lightbox.classList.remove("info-lightbox");
-    showLightboxItem(); lightbox.classList.add("open");
-  }
-  function lightboxPrev() { if (!lightboxGroup.length) return; lightboxIndex = (lightboxIndex - 1 + lightboxGroup.length) % lightboxGroup.length; showLightboxItem(); }
-  function lightboxNext() { if (!lightboxGroup.length) return; lightboxIndex = (lightboxIndex + 1) % lightboxGroup.length; showLightboxItem(); }
-  function closeLightbox() { lightbox.classList.remove("open"); lightbox.classList.remove("info-lightbox"); lightboxImg.src = ""; lightboxGroup = []; }
-  lbPrevBtn.addEventListener("click", lightboxPrev); lbNextBtn.addEventListener("click", lightboxNext); lbCloseBtn.addEventListener("click", closeLightbox);
-  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
 
-  /* ---------- NAV & MENUS ---------- */
   const navToggle = document.getElementById("navToggle");
   const appRoot = document.getElementById("appRoot");
-  navToggle.addEventListener("click", () => { appRoot.classList.toggle("nav-open"); });
+  navToggle.addEventListener("click", () => appRoot.classList.toggle("nav-open"));
   document.getElementById("homeLink").addEventListener("click", () => { renderPage("cover"); appRoot.classList.remove("nav-open"); });
-  document.querySelectorAll(".nav-btn[data-page]").forEach(btn => btn.addEventListener("click", () => { renderPage(btn.dataset.page); appRoot.classList.remove("nav-open"); closeAllMenus(); }));
 
-  function closeAllMenus() { document.querySelectorAll(".nav-menu").forEach(m => m.classList.remove("open")); }
-  document.querySelectorAll(".nav-has-menu").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      const menu = document.getElementById(btn.dataset.menu);
-      const open = menu.classList.contains("open");
-      closeAllMenus(); if (!open) menu.classList.add("open"); e.stopPropagation();
+  document.querySelectorAll(".nav-btn[data-page]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const pageId = btn.dataset.page;
+      renderPage(pageId);
+      appRoot.classList.remove("nav-open");
+      closeAllMenus();
     });
   });
-  document.addEventListener("click", closeAllMenus);
+
+  function closeAllMenus() { document.querySelectorAll(".nav-menu").forEach(menu => menu.classList.remove("open")); }
+
+  document.querySelectorAll(".nav-has-menu").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const menuId = btn.dataset.menu;
+      const menu = document.getElementById(menuId);
+      const alreadyOpen = menu.classList.contains("open");
+      closeAllMenus();
+      if (!alreadyOpen) menu.classList.add("open");
+      e.stopPropagation();
+    });
+  });
+
+  document.addEventListener("click", () => closeAllMenus());
 
   function buildMenus() {
     const boardsMenu = document.getElementById("boardsMenu");
     const videosMenu = document.getElementById("videosMenu");
     const plansMenu  = document.getElementById("plansMenu");
 
-    // Boards menu
     boardsMenu.innerHTML = "";
-    const boardsAll = document.createElement("button");
-    boardsAll.textContent = "All display boards"; boardsAll.classList.add("menu-all");
-    boardsAll.addEventListener("click", () => { renderPage("display-overview"); appRoot.classList.remove("nav-open"); closeAllMenus(); });
-    boardsMenu.appendChild(boardsAll);
-    const bHead = document.createElement("h4"); bHead.textContent = "Individual boards"; boardsMenu.appendChild(bHead);
+    const boardsOverviewBtn = document.createElement("button");
+    boardsOverviewBtn.textContent = "All display boards";
+    boardsOverviewBtn.classList.add("menu-all");
+    boardsOverviewBtn.addEventListener("click", () => {
+      renderPage("display-overview");
+      appRoot.classList.remove("nav-open");
+      closeAllMenus();
+    });
+    boardsMenu.appendChild(boardsOverviewBtn);
+
+    const boardsHeader = document.createElement("h4");
+    boardsHeader.textContent = "Individual boards";
+    boardsMenu.appendChild(boardsHeader);
+
     DISPLAY_BOARD_FILES.forEach((file, idx) => {
       const pageId = `display-board-${idx+1}`;
       const btn = document.createElement("button");
       btn.innerHTML = `${boardLabelFromFile(file, idx)} <span>${idx+1}</span>`;
-      btn.addEventListener("click", () => { renderPage(pageId); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+      btn.addEventListener("click", () => {
+        renderPage(pageId);
+        appRoot.classList.remove("nav-open");
+        closeAllMenus();
+      });
       boardsMenu.appendChild(btn);
     });
 
-    // Videos menu
     videosMenu.innerHTML = "";
-    const vidsAll = document.createElement("button");
-    vidsAll.textContent = "All videos & animations"; vidsAll.classList.add("menu-all");
-    vidsAll.addEventListener("click", () => { renderPage("videos"); appRoot.classList.remove("nav-open"); closeAllMenus(); });
-    videosMenu.appendChild(vidsAll);
-    const vHead = document.createElement("h4"); vHead.textContent = "Individual videos"; videosMenu.appendChild(vHead);
+    const videosAllBtn = document.createElement("button");
+    videosAllBtn.textContent = "All videos & animations";
+    videosAllBtn.classList.add("menu-all");
+    videosAllBtn.addEventListener("click", () => {
+      renderPage("videos");
+      appRoot.classList.remove("nav-open");
+      closeAllMenus();
+    });
+    videosMenu.appendChild(videosAllBtn);
+
+    const videosHeader = document.createElement("h4");
+    videosHeader.textContent = "Individual videos";
+    videosMenu.appendChild(videosHeader);
+
     VIDEO_ITEMS.forEach((v, idx) => {
       const btn = document.createElement("button");
       btn.innerHTML = `${v.title} <span>${idx+1}</span>`;
-      btn.addEventListener("click", () => { renderPage(v.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+      btn.addEventListener("click", () => {
+        renderPage(v.id);
+        appRoot.classList.remove("nav-open");
+        closeAllMenus();
+      });
       videosMenu.appendChild(btn);
     });
 
-    // Plans menu
     plansMenu.innerHTML = "";
-    const layoutsHead = document.createElement("h4"); layoutsHead.textContent = "Stadium layouts"; plansMenu.appendChild(layoutsHead);
-    [{ id:"plans-layouts-1", label:"Field sports layouts" }, { id:"plans-layouts-2", label:"Event modes" }].forEach(item => {
-      const btn = document.createElement("button"); btn.textContent = item.label;
-      btn.addEventListener("click", () => { renderPage(item.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+    const layoutsHeader = document.createElement("h4");
+    layoutsHeader.textContent = "Stadium layouts";
+    plansMenu.appendChild(layoutsHeader);
+
+    [
+      { id: "plans-layouts-1", label: "Field sports layouts" },
+      { id: "plans-layouts-2", label: "Event modes" }
+    ].forEach(item => {
+      const btn = document.createElement("button");
+      btn.textContent = item.label;
+      btn.addEventListener("click", () => {
+        renderPage(item.id);
+        appRoot.classList.remove("nav-open");
+        closeAllMenus();
+      });
       plansMenu.appendChild(btn);
     });
-    const archHead = document.createElement("h4"); archHead.textContent = "Architectural plans"; plansMenu.appendChild(archHead);
-    [{ id:"plans-ga", label:"General arrangement" }, { id:"plans-sections", label:"Building & site sections" }, { id:"plans-facades", label:"Facade sections" }, { id:"views", label:"Context views" }].forEach(item => {
-      const btn = document.createElement("button"); btn.textContent = item.label;
-      btn.addEventListener("click", () => { renderPage(item.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+
+    const archHeader = document.createElement("h4");
+    archHeader.textContent = "Architectural plans";
+    plansMenu.appendChild(archHeader);
+
+    [
+      { id: "plans-ga",       label: "General arrangement" },
+      { id: "plans-sections", label: "Building & site sections" },
+      { id: "plans-facades",  label: "Facade sections" },
+      { id: "views",          label: "Context views" }
+    ].forEach(item => {
+      const btn = document.createElement("button");
+      btn.textContent = item.label;
+      btn.addEventListener("click", () => {
+        renderPage(item.id);
+        appRoot.classList.remove("nav-open");
+        closeAllMenus();
+      });
       plansMenu.appendChild(btn);
     });
   }
