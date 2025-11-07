@@ -268,6 +268,9 @@
       <div class="lightbox-controls">
         <button type="button" id="lightboxPrev" aria-label="Previous image">‹</button>
         <button type="button" id="lightboxNext" aria-label="Next image">›</button>
+        <button type="button" id="lightboxZoomOut" aria-label="Zoom out">−</button>
+        <button type="button" id="lightboxZoomIn" aria-label="Zoom in">+</button>
+        <button type="button" id="lightboxZoomReset" aria-label="Reset zoom">100%</button>
         <button type="button" id="lightboxClose" aria-label="Close image">✕</button>
       </div>
     </div>
@@ -340,9 +343,9 @@
 
   const STADIUM_VIEW_IMAGES = [
     { file: "stadium-view-waterfront.jpeg", label: "View · Waterfront" },
-    { file: "stadium-view-city-bay.png", label: "View · City & bay" },
-    { file: "stadium-view-memorial.jpeg", label: "View · Cenotaph" },
-    { file: "stadium-view-street.jpeg", label: "View · Evans Street" }
+    { file: "stadium-view-city-bay.png",    label: "View · City & bay" },
+    { file: "stadium-view-memorial.jpeg",   label: "View · Cenotaph" },
+    { file: "stadium-view-street.jpeg",     label: "View · Evans Street" }
   ];
 
   const GA_PLAN_IMAGES = [
@@ -394,19 +397,27 @@
     { key: "capacity", title: "Stadium capacity",               images: INFO_CAPACITY_IMAGES, thumb: "info-stadium-capacity-1.jpg" },
     { key: "cricket",  title: "A stadium designed for cricket", images: INFO_CRICKET_IMAGES,  thumb: "info-stadium-cricket-1.jpg" }
   ];
-
   const INFO_DOC_INDEX = { design: 0, capacity: 1, cricket: 2 };
 
-  /* Lightbox state */
+  /* LIGHTBOX */
+
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   const lightboxTitle = document.getElementById("lightboxTitle");
   const lbPrevBtn = document.getElementById("lightboxPrev");
   const lbNextBtn = document.getElementById("lightboxNext");
   const lbCloseBtn = document.getElementById("lightboxClose");
+  const lbZoomInBtn = document.getElementById("lightboxZoomIn");
+  const lbZoomOutBtn = document.getElementById("lightboxZoomOut");
+  const lbZoomResetBtn = document.getElementById("lightboxZoomReset");
 
   let lightboxGroup = [];
   let lightboxIndex = 0;
+  let lightboxZoom = 1;
+
+  function applyLightboxZoom() {
+    lightboxImg.style.transform = `scale(${lightboxZoom})`;
+  }
 
   function showLightboxItem() {
     if (!lightboxGroup.length) return;
@@ -417,6 +428,8 @@
     const multi = lightboxGroup.length > 1;
     lbPrevBtn.style.display = multi ? "inline-flex" : "none";
     lbNextBtn.style.display = multi ? "inline-flex" : "none";
+    lightboxZoom = 1;
+    applyLightboxZoom();
   }
 
   function openLightboxGroup(group, startIndex, isInfo) {
@@ -431,12 +444,27 @@
   function lightboxPrev() { if (!lightboxGroup.length) return; lightboxIndex = (lightboxIndex - 1 + lightboxGroup.length) % lightboxGroup.length; showLightboxItem(); }
   function lightboxNext() { if (!lightboxGroup.length) return; lightboxIndex = (lightboxIndex + 1) % lightboxGroup.length; showLightboxItem(); }
   function closeLightbox() { lightbox.classList.remove("open"); lightbox.classList.remove("info-lightbox"); lightboxImg.src = ""; lightboxGroup = []; }
+
   lbPrevBtn.addEventListener("click", lightboxPrev);
   lbNextBtn.addEventListener("click", lightboxNext);
   lbCloseBtn.addEventListener("click", closeLightbox);
   lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
 
+  lbZoomInBtn.addEventListener("click", () => {
+    lightboxZoom = Math.min(lightboxZoom * 1.25, 3);
+    applyLightboxZoom();
+  });
+  lbZoomOutBtn.addEventListener("click", () => {
+    lightboxZoom = Math.max(lightboxZoom / 1.25, 0.5);
+    applyLightboxZoom();
+  });
+  lbZoomResetBtn.addEventListener("click", () => {
+    lightboxZoom = 1;
+    applyLightboxZoom();
+  });
+
   /* Deep helpers */
+
   function openPlanByIndex(planIdx) {
     renderPage("plans-ga");
     const group = GA_PLAN_IMAGES.map(img => ({ src: `assets/plans/${img.file}`, title: img.label }));
@@ -452,7 +480,8 @@
     openLightboxGroup(group, 0, true);
   }
 
-  /* RELATED LINKS (with deep-link metadata) */
+  /* RELATED LINKS */
+
   const RELATED = {
     "display-board-3": [
       { id: "plans-sections", label: "Architectural sections", type: "Plan" },
@@ -470,7 +499,6 @@
     "video-4": [{ id: "display-board-10", label: "Remediation display board", type: "Board" }],
     "video-7": [{ id: "display-board-10", label: "Remediation display board", type: "Board" }],
 
-    /* Seating Bowl ↔ inside video */
     "display-board-1": [{ id: "video-6", label: "Inside the stadium", type: "Video" }],
     "video-6": [
       { id: "display-board-1",  label: "Seating Bowl board",          type: "Board" },
@@ -478,14 +506,15 @@
       { id: "display-board-18", label: "Continuous Concourse board",  type: "Board" }
     ],
 
-    /* User Experience ↔ inside + arriving */
     "display-board-2": [
       { id: "video-6", label: "Inside the stadium",  type: "Video" },
       { id: "video-5", label: "Entering the stadium",type: "Video" }
     ],
-    "video-5": [{ id: "display-board-2", label: "User Experience board", type: "Board" }],
+    "video-5": [
+      { id: "display-board-2", label: "User Experience board", type: "Board" },
+      { id: "plans-ga",        label: "Ground plane – external concourse plan", type: "Plan", planIndex: 0 }
+    ],
 
-    /* Multipurpose venue ↔ cricket info sheet (deep link) */
     "display-board-4": [
       { id: "info-sheets", label: "Cricket info sheet", type: "Info", infoKey: "cricket" }
     ],
@@ -493,7 +522,6 @@
       { id: "display-board-4", label: "A Multipurpose Venue board", type: "Board" }
     ],
 
-    /* Business Events + related boards + Level 2 GA */
     "display-board-6": [
       { id: "video-2",          label: "Function room video",                type: "Video" },
       { id: "display-board-23", label: "Function Space board",               type: "Board" },
@@ -509,32 +537,28 @@
       { id: "plans-ga",         label: "Level 2 – stadium club plan",    type: "Plan", planIndex: 4 }
     ],
 
-    /* Goods Shed boards cross-link */
     "display-board-7":  [{ id: "display-board-19", label: "The Goods Shed (related board)", type: "Board" }],
     "display-board-19": [{ id: "display-board-7",  label: "The Goods Shed (related board)", type: "Board" }],
 
-    /* Media Spaces ↔ GA 1M + Level 3 */
     "display-board-17": [
       { id: "plans-ga", label: "Level 1M – premium & media plan", type: "Plan", planIndex: 3 },
       { id: "plans-ga", label: "Level 3 – media level plan",      type: "Plan", planIndex: 5 }
     ],
 
-    /* Continuous Concourse ↔ inside video + Level 1 concourse plan */
     "display-board-18": [
       { id: "video-6",  label: "Inside the stadium video",         type: "Video" },
       { id: "plans-ga", label: "Level 1 – public concourse plan",  type: "Plan", planIndex: 2 }
     ],
 
-    /* GA page back-links */
     "plans-ga": [
       { id: "display-board-17", label: "Media Spaces board",          type: "Board" },
       { id: "display-board-18", label: "Continuous Concourse board",  type: "Board" },
       { id: "display-board-6",  label: "Business Events board",       type: "Board" },
       { id: "display-board-23", label: "Function Space board",        type: "Board" },
-      { id: "display-board-22", label: "The Chair's Club / Event Space board", type: "Board" }
+      { id: "display-board-22", label: "The Chair's Club / Event Space board", type: "Board" },
+      { id: "video-5",          label: "Entering the stadium video",  type: "Video" }
     ],
 
-    /* Field Club ↔ BOH video */
     "display-board-25": [
       { id: "video-1", label: "Back of House video", type: "Video" }
     ],
@@ -851,7 +875,11 @@
     grid.className = "image-grid";
 
     const images = page.images || [];
-    const group = images.map(img => ({ src: `assets/plans/${img.file}`, title: img.label }));
+    const isPlans = page.id === "plans-ga" || page.id === "plans-sections" || page.id === "plans-facades" || page.id === "views";
+    const group = images.map(img => ({
+      src: isPlans ? `assets/plans/${img.file}` : `assets/plans/${img.file}`,
+      title: img.label
+    }));
 
     images.forEach((img, idx) => {
       const card = document.createElement("div");
@@ -859,7 +887,7 @@
 
       const thumb = document.createElement("div");
       thumb.className = "image-card-thumb";
-      thumb.innerHTML = `<img src="assets/plans/${img.file}" alt="${img.label}">`;
+      thumb.innerHTML = `<img src="${isPlans ? "assets/plans/" : "assets/plans/"}${img.file}" alt="${img.label}">`;
 
       const body = document.createElement("div");
       body.className = "image-card-body";
