@@ -299,11 +299,11 @@
     }
 
     .hero-callout {
-      margin: 14px 0;
-      padding: 14px 14px 14px 16px;
-      border-radius: 18px;
+      margin: 0;
+      padding: 10px 12px;
+      border-radius: 14px;
       border: 1px solid rgba(115,134,120,0.55);
-      background: #f5f1ea;
+      background: rgba(245,241,234,0.9);
       display: flex;
       flex-wrap: wrap;
       gap: 10px 18px;
@@ -311,7 +311,7 @@
 
     .hero-callout h2 {
       margin: 0 0 6px;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--mpdc-green);
     }
 
@@ -321,18 +321,22 @@
       color: var(--text-muted);
     }
 
-    .cover-image-wrap {
-      margin-top: 14px;
-      border-radius: 16px;
-      overflow: hidden;
+    /* NEW: cover hero background with image */
+    .cover-hero {
+      margin-top: 10px;
+      border-radius: 18px;
       border: 1px solid var(--border-soft);
-      background: #dde3eb;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #dde3eb;
+      background-blend-mode: soft-light;
     }
 
-    .cover-image-wrap img {
-      width: 100%;
-      height: auto;
-      display: block;
+    .cover-hero-inner {
+      padding: 14px 16px 16px;
+      background: rgba(255,255,255,0.82);
     }
 
     /* PAGE NAV */
@@ -535,13 +539,16 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 6px;
+      max-width: 520px;          /* shorter tiles */
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .link-row {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 10px;
+      padding: 6px 8px;          /* reduced padding */
       border-radius: 12px;
       border: 1px solid var(--border-soft);
       background: #f9fafc;
@@ -564,7 +571,7 @@
 
     .link-row-title {
       font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 400;          /* no bold on links */
       color: var(--text-main);
       margin-bottom: 0;
     }
@@ -612,9 +619,9 @@
     .lightbox.open { display: flex; }
 
     .lightbox-inner {
-      max-width: 1100px;
+      max-width: 1300px;          /* bigger */
       width: 100%;
-      max-height: 100%;
+      max-height: 95vh;           /* taller */
       background: #111827;
       border-radius: 16px;
       padding: 10px 10px 12px;
@@ -655,13 +662,14 @@
       flex: 1 1 auto;
       display: flex;
       justify-content: center;
-      align-items: center;
-      overflow: auto;
+      align-items: flex-start;
+      overflow: auto;             /* scroll long posters */
     }
 
     .lightbox-img-wrap img {
       max-width: 100%;
-      max-height: 80vh;
+      height: auto;
+      max-height: none;           /* allow full height, scroll */
       border-radius: 10px;
       display: block;
     }
@@ -754,10 +762,10 @@
         <div class="nav-menu" id="videosMenu"></div>
       </div>
 
-      <!-- NEW INFO MENU -->
+      <!-- INFO SHEETS MENU -->
       <div class="nav-group">
         <button class="nav-btn nav-has-menu" type="button" data-menu="infoMenu">
-          Info
+          Info Sheets
         </button>
         <div class="nav-menu" id="infoMenu"></div>
       </div>
@@ -979,7 +987,7 @@
       PAGES.push({ id: v.id, type: "video-single", title: v.title, subtitle: "", category: "Media", videoId: v.id });
     });
 
-    // NEW INFO PAGE (single tile-grid page; each tile opens its doc pages in the lightbox)
+    // INFO PAGE (single tile-grid page; each tile opens its doc pages in the lightbox)
     PAGES.push({ id: "info-sheets", type: "info", title: "Information Sheets", subtitle: "Design development · capacity · cricket", category: "Info" });
 
     PAGES.push({
@@ -1140,8 +1148,15 @@
   }
 
   function renderCover(container) {
-    const intro = document.createElement("div");
-    intro.innerHTML = `
+    const heroWrap = document.createElement("div");
+    heroWrap.className = "cover-hero";
+    heroWrap.style.backgroundImage =
+      "linear-gradient(135deg, rgba(0,0,0,0.18), rgba(0,0,0,0.35)), url('assets/stadium-ariel.jpg')";
+
+    const inner = document.createElement("div");
+    inner.className = "cover-hero-inner";
+
+    inner.innerHTML = `
       <div class="hero-callout">
         <div style="flex: 2 1 220px;">
           <h2>Welcome to the Stadium Design Showcase digital handbook</h2>
@@ -1163,17 +1178,14 @@
           </ul>
         </div>
       </div>
-      <p>
+      <p style="margin:10px 0 0; font-size:0.9rem; color:var(--text-muted);">
         The content is optimised for phones, tablets and laptops. Tap the image tiles to open them
         larger, and use the drop-down menus or left/right arrow keys to move between pages.
       </p>
     `;
-    container.appendChild(intro);
 
-    const coverImgWrap = document.createElement("div");
-    coverImgWrap.className = "cover-image-wrap";
-    coverImgWrap.innerHTML = `<img src="assets/stadium-ariel.jpg" alt="Macquarie Point Multipurpose Stadium aerial view" onerror="this.style.display='none'">`;
-    container.appendChild(coverImgWrap);
+    heroWrap.appendChild(inner);
+    container.appendChild(heroWrap);
   }
 
   function renderBoardsOverview(container) {
@@ -1360,7 +1372,7 @@
     container.appendChild(grid);
   }
 
-  // NEW: INFORMATION SHEETS PAGE RENDERER — 3 tiles (each is a doc with multiple pages)
+  // INFORMATION SHEETS PAGE – 3 tiles (each opens its own pages in the lightbox)
   function renderInfoPage(container) {
     const intro = document.createElement("p");
     intro.textContent = "Supporting information sheets grouped by topic. Tap a tile to open its pages; use left/right to step through.";
@@ -1669,7 +1681,7 @@
     });
     infoMenu.appendChild(infoBtn);
 
-    // PLANS MENU (unchanged)
+    // PLANS MENU
     plansMenu.innerHTML = "";
 
     const layoutsHeader = document.createElement("h4");
