@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root{
-      --mpdc-blue:#345679;          /* slightly lighter, rich blue */
+      --mpdc-blue:#35557a;          /* tiny nudge lighter than before */
       --mpdc-grey:#384454;
-      --mpdc-green:#345679;
+      --mpdc-green:#35557a;
       --accent-warm:#f3e0c5;
       --bg:#f2ebe1;
       --text-main:#1f2933;
@@ -62,7 +62,7 @@
     .brand-title{
       font-weight:800;
       letter-spacing:.12em;
-      font-size:1.14rem;
+      font-size:1.16rem;
       color:#fff;
       cursor:pointer;
       text-transform:uppercase;
@@ -71,7 +71,7 @@
       text-overflow:ellipsis;
     }
     .brand-subtitle{
-      font-size:.94rem;
+      font-size:.96rem;
       color:rgba(255,255,255,.92);
       white-space:nowrap;
       overflow:hidden;
@@ -113,100 +113,56 @@
       box-shadow:0 3px 8px rgba(0,0,0,.22);
     }
 
-    .nav-caret{
-      border:1px solid rgba(255,255,255,.95);
-      background:#fff;
-      color:var(--mpdc-blue);
-      padding:6px 9px;
-      border-radius:999px;
-      cursor:pointer;
-      font-size:.86rem;
-      line-height:1;
-      display:inline-flex;
-      align-items:center;
-      transition:background .15s,color .15s,border-color .15s,box-shadow .15s;
-    }
-    .nav-caret:hover{background:#f5f7fb}
-    .nav-caret.active{
-      background:var(--mpdc-blue);
-      color:#fff;
-      border-color:var(--mpdc-blue);
-      box-shadow:0 3px 8px rgba(0,0,0,.22);
-    }
-
+    /* pill + arrow combined capsule */
     .nav-group{
       position:relative;
       display:flex;
       align-items:center;
       gap:0;
-      padding:2px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.6);
-      background:rgba(6,17,36,.25);
-    }
-    .nav-group .nav-btn,
-    .nav-group .nav-caret{
-      border-color:transparent;
-      box-shadow:none;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.65);
+      background:rgba(255,255,255,.08);
     }
     .nav-group .nav-btn{
+      border:none;
       border-radius:999px 0 0 999px;
-    }
-    .nav-group .nav-caret{
-      border-radius:0 999px 999px 0;
-      border-left:1px solid rgba(52,86,121,.2);
-    }
-    .nav-group .nav-btn.active,
-    .nav-group .nav-caret.active{
+      border-right:1px solid rgba(255,255,255,.55);
       box-shadow:none;
     }
+    .nav-group .nav-btn.active{
+      background:var(--mpdc-blue);
+      color:#fff;
+      border-right-color:var(--mpdc-blue);
+    }
 
-    .nav-menu{
-      position:absolute;
-      top:calc(100% + 4px);
-      right:0;
-      min-width:220px;
-      max-width:90vw;
-      max-height:60vh;
-      overflow-y:auto;
-      background:#fff;
-      border-radius:14px;
-      box-shadow:0 10px 20px rgba(0,0,0,.16);
-      padding:6px;
-      display:none;
-      z-index:20;
-      color:var(--text-main);
-    }
-    .nav-menu.open{display:block}
-    .nav-menu h4{
-      margin:4px 6px 2px;
-      font-size:.72rem;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:var(--mpdc-blue);
-    }
-    .nav-menu button{
-      width:100%;
-      text-align:left;
-      border-radius:10px;
+    .nav-caret{
       border:none;
-      background:transparent;
-      padding:6px 8px;
-      font-size:.86rem;
+      background:#fff;
+      color:var(--mpdc-blue);
+      padding:7px 9px;
+      border-radius:0 999px 999px 0;
       cursor:pointer;
-      display:flex;
-      justify-content:space-between;
+      font-size:.86rem;
+      line-height:1;
+      display:inline-flex;
       align-items:center;
-      color:var(--text-main);
-      transition:background .15s,transform .1s;
+      border-left:1px solid rgba(255,255,255,.55);
+      transition:background .15s,color .15s,border-color .15s;
     }
-    .nav-menu button span{
-      font-size:.75rem;
-      color:var(--text-muted);
+    .nav-caret:hover{
+      background:#f5f7fb;
     }
-    .nav-menu button:hover{
-      background:rgba(52,86,121,.07);
-      transform:translateX(1px);
+
+    /* when in that “zone”, soften but highlight the whole capsule */
+    .nav-group.active{
+      border-color:rgba(255,255,255,.95);
+      background:rgba(255,255,255,.16);
+    }
+    .nav-group.active .nav-caret{
+      background:var(--mpdc-blue);
+      color:#fff;
+      border-left-color:var(--mpdc-blue);
     }
 
     .nav-toggle{
@@ -242,7 +198,7 @@
       position:absolute;
       inset:16px 20px auto;
       border-radius:inherit;
-      border-top:2px solid rgba(52,86,121,.15);
+      border-top:2px solid rgba(53,85,122,.15);
       pointer-events:none;
     }
     .page-shell::after{inset:auto 20px 16px}
@@ -279,11 +235,11 @@
       gap:6px;
       padding:4px 9px;
       border-radius:999px;
-      background:rgba(52,86,121,.06);
+      background:rgba(53,85,122,.06);
       color:var(--mpdc-grey);
       font-size:.8rem;
       margin-bottom:10px;
-      border:1px solid rgba(52,86,121,.35);
+      border:1px solid rgba(53,85,122,.35);
     }
     .pill-tag strong{
       font-weight:700;
@@ -305,7 +261,7 @@
       margin:0;
       padding:12px 14px;
       border-radius:14px;
-      border:1px solid rgba(52,86,121,.4);
+      border:1px solid rgba(53,85,122,.4);
       background:rgba(255,255,255,.96);
       display:flex;
       flex-wrap:wrap;
@@ -327,7 +283,7 @@
       border-radius:18px;
       border:1px solid var(--border-soft);
       overflow:hidden;
-      background:linear-gradient(135deg,#345679,#3f6589);
+      background:linear-gradient(135deg,#35557a,#40658c);
       min-height:220px;
     }
     .cover-hero-inner{
@@ -371,7 +327,7 @@
       color:var(--mpdc-blue);
     }
     .btn-ghost:hover{
-      background:rgba(52,86,121,.08);
+      background:rgba(53,85,122,.08);
     }
 
     /* IMAGE GRID */
@@ -399,7 +355,7 @@
     .image-card:hover{
       transform:translateY(-2px);
       box-shadow:0 8px 18px rgba(0,0,0,.1);
-      border-color:rgba(52,86,121,.65);
+      border-color:rgba(53,85,122,.65);
     }
     .image-card-thumb{
       background:#dde3eb;
@@ -473,7 +429,7 @@
     }
     .video-card:hover{
       box-shadow:0 8px 18px rgba(0,0,0,.1);
-      border-color:rgba(52,86,121,.65);
+      border-color:rgba(53,85,122,.65);
       transform:translateY(-1px);
     }
     .video-thumb{
@@ -559,7 +515,7 @@
       transition:border-color .15s,box-shadow .15s,background .15s,transform .1s;
     }
     .link-row:hover{
-      border-color:rgba(52,86,121,.7);
+      border-color:rgba(53,85,122,.7);
       box-shadow:0 4px 10px rgba(0,0,0,.1);
       background:#fff8ed;
       transform:translateY(-1px);
@@ -667,7 +623,7 @@
       padding:9px 10px;
       border-radius:12px;
       background:#eef3fa;
-      border:1px solid rgba(52,86,121,.8);
+      border:1px solid rgba(53,85,122,.8);
       font-size:.88rem;
     }
     .related-panel-title{
@@ -731,6 +687,9 @@
       }
       .app.nav-open .nav{display:flex}
       .nav-toggle{display:block}
+      .nav-group{
+        width:100%;
+      }
       .nav-menu{
         position:static;
         max-height:220px;
@@ -738,6 +697,7 @@
         border-radius:12px;
         border:1px solid var(--border-soft);
         margin-top:4px;
+        background:#fff;
       }
       #pageContainer{
         padding:14px 14px 12px;
@@ -745,6 +705,54 @@
       .page-shell{
         padding:16px 14px 18px;
       }
+    }
+
+    .nav-menu{
+      position:absolute;
+      top:calc(100% + 4px);
+      right:0;
+      min-width:220px;
+      max-width:90vw;
+      max-height:60vh;
+      overflow-y:auto;
+      background:#fff;
+      border-radius:14px;
+      box-shadow:0 10px 20px rgba(0,0,0,.16);
+      padding:6px;
+      display:none;
+      z-index:20;
+      color:var(--text-main);
+    }
+    .nav-menu.open{display:block}
+    .nav-menu h4{
+      margin:4px 6px 2px;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--mpdc-blue);
+    }
+    .nav-menu button{
+      width:100%;
+      text-align:left;
+      border-radius:10px;
+      border:none;
+      background:transparent;
+      padding:6px 8px;
+      font-size:.86rem;
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:var(--text-main);
+      transition:background .15s,transform .1s;
+    }
+    .nav-menu button span{
+      font-size:.75rem;
+      color:var(--text-muted);
+    }
+    .nav-menu button:hover{
+      background:rgba(53,85,122,.07);
+      transform:translateX(1px);
     }
   </style>
 </head>
@@ -759,26 +767,29 @@
     </div>
 
     <nav class="nav" id="mainNav">
-      <!-- Display boards: pill = overview, caret = menu -->
-      <div class="nav-group">
+      <!-- Home -->
+      <button class="nav-btn" data-page="cover">Home</button>
+
+      <!-- Display boards: pill + arrow capsule -->
+      <div class="nav-group" data-group="boards">
         <button class="nav-btn" id="boardsRoot">Display boards</button>
-        <button class="nav-caret" id="boardsCaret" type="button" data-menu="boardsMenu" aria-label="Open display boards menu">▾</button>
+        <button class="nav-caret" type="button" data-menu="boardsMenu" aria-label="Open display boards menu">▾</button>
         <div class="nav-menu" id="boardsMenu"></div>
       </div>
 
-      <!-- Videos: same pattern -->
-      <div class="nav-group">
+      <!-- Videos -->
+      <div class="nav-group" data-group="videos">
         <button class="nav-btn" id="videosRoot">Videos</button>
-        <button class="nav-caret" id="videosCaret" type="button" data-menu="videosMenu" aria-label="Open videos menu">▾</button>
+        <button class="nav-caret" type="button" data-menu="videosMenu" aria-label="Open videos menu">▾</button>
         <div class="nav-menu" id="videosMenu"></div>
       </div>
 
       <button class="nav-btn" data-page="info-sheets">Info Sheets</button>
 
-      <!-- Plans: pill = overview, caret = menu -->
-      <div class="nav-group">
+      <!-- Plans -->
+      <div class="nav-group" data-group="plans">
         <button class="nav-btn" id="plansRoot">Plans</button>
-        <button class="nav-caret" id="plansCaret" type="button" data-menu="plansMenu" aria-label="Open plans menu">▾</button>
+        <button class="nav-caret" type="button" data-menu="plansMenu" aria-label="Open plans menu">▾</button>
         <div class="nav-menu" id="plansMenu"></div>
       </div>
 
@@ -955,10 +966,10 @@
   ];
 
   const DETAIL_IMAGES=[
-    {file:"Turf Diagram.pdf.jpg",label:"Hybrid turf system diagram"},
-    {file:"250829 DD Report_FINAL 134_edit.pdf.jpg",label:"External finishes — south & west"},
-    {file:"250829 DD Report_FINAL 135_edit.pdf.jpg",label:"External finishes — north & east"},
-    {file:"External.pdf.jpg",label:"External facade build-up detail"}
+    {file:"Turf Diagram.pdf.jpg",label:"Hybrid turf system — axonometric diagram"},
+    {file:"250829 DD Report_FINAL 134_edit.pdf.jpg",label:"External finishes — south-east & south-west"},
+    {file:"250829 DD Report_FINAL 135_edit.pdf.jpg",label:"External finishes — north-east & north-west"},
+    {file:"External.pdf.jpg",label:"Perforated facade cladding detail"}
   ];
 
   /* INFO SHEETS */
@@ -1122,16 +1133,6 @@
     });
 
     PAGES.push({
-      id:"plans-details",
-      type:"image-grid",
-      title:"Details · Turf & external finishes",
-      subtitle:"",
-      category:"Plans",
-      images:DETAIL_IMAGES,
-      intro:"Hybrid turf build-up and key external finishes to the stadium envelope."
-    });
-
-    PAGES.push({
       id:"plans-facades",
       type:"image-grid",
       title:"Architectural plans · Facade sections",
@@ -1139,6 +1140,16 @@
       category:"Plans",
       images:FACADE_IMAGES,
       intro:"Combined facade section sheets illustrating entry sequences, concourse edges and stadium skin."
+    });
+
+    PAGES.push({
+      id:"plans-details",
+      type:"image-grid",
+      title:"Architectural details · Turf & external finishes",
+      subtitle:"",
+      category:"Plans",
+      images:DETAIL_IMAGES,
+      intro:"Field construction and selected external materials and cladding details."
     });
 
     PAGES.push({
@@ -1477,17 +1488,20 @@
       btn.classList.toggle("active",btn.dataset.page===page.id);
     });
 
-    const inBoards=page.category==="Display boards";
-    const inVideos=page.category==="Media";
-    const inPlans=page.category==="Plans";
+    const boardsRoot=document.getElementById("boardsRoot");
+    const videosRoot=document.getElementById("videosRoot");
+    const plansRoot=document.getElementById("plansRoot");
+    const boardsGroup=document.querySelector('[data-group="boards"]');
+    const videosGroup=document.querySelector('[data-group="videos"]');
+    const plansGroup=document.querySelector('[data-group="plans"]');
 
-    document.getElementById("boardsRoot").classList.toggle("active",inBoards);
-    document.getElementById("videosRoot").classList.toggle("active",inVideos);
-    document.getElementById("plansRoot").classList.toggle("active",inPlans);
+    boardsRoot.classList.toggle("active",page.category==="Display boards");
+    videosRoot.classList.toggle("active",page.category==="Media");
+    plansRoot.classList.toggle("active",page.category==="Plans");
 
-    document.getElementById("boardsCaret").classList.toggle("active",inBoards);
-    document.getElementById("videosCaret").classList.toggle("active",inVideos);
-    document.getElementById("plansCaret").classList.toggle("active",inPlans);
+    boardsGroup.classList.toggle("active",page.category==="Display boards");
+    videosGroup.classList.toggle("active",page.category==="Media");
+    plansGroup.classList.toggle("active",page.category==="Plans");
 
     const shell=document.createElement("div");
     shell.className="page-shell";
@@ -1668,8 +1682,8 @@
       {id:"plans-egress",title:"Egress plans",thumb:`assets/plans/${EGRESS_PLAN_IMAGES[0].file}`},
       {id:"plans-sections",title:"Sections",thumb:`assets/plans/${SECTION_IMAGES[0].file}`},
       {id:"plans-elevations",title:"Building elevations",thumb:`assets/plans/${ELEVATION_IMAGES[0].file}`},
-      {id:"plans-details",title:"Turf & external finishes",thumb:`assets/plans/${DETAIL_IMAGES[0].file}`},
       {id:"plans-facades",title:"Facade sections",thumb:`assets/plans/${FACADE_IMAGES[0].file}`},
+      {id:"plans-details",title:"Turf & external finishes",thumb:`assets/plans/${DETAIL_IMAGES[0].file}`},
       {id:"views",title:"Context views",thumb:`assets/plans/${STADIUM_VIEW_IMAGES[0].file}`}
     ];
 
@@ -2079,7 +2093,7 @@
     const videosMenu=document.getElementById("videosMenu");
     const plansMenu=document.getElementById("plansMenu");
 
-    // Display boards: only individual boards (overview via pill)
+    // Display boards: individual only
     boardsMenu.innerHTML="";
     const boardsHeader=document.createElement("h4");
     boardsHeader.textContent="Individual boards";
@@ -2144,8 +2158,8 @@
       {id:"plans-egress",label:"Egress plans"},
       {id:"plans-sections",label:"Building & site sections"},
       {id:"plans-elevations",label:"Building elevations"},
-      {id:"plans-details",label:"Turf & external finishes"},
       {id:"plans-facades",label:"Facade sections"},
+      {id:"plans-details",label:"Turf & external finishes"},
       {id:"views",label:"Context views"}
     ].forEach(item=>{
       const btn=document.createElement("button");
