@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root{
-      --mpdc-blue:#2e4e72;          /* slightly lighter, rich blue */
+      --mpdc-blue:#345679;          /* slightly lighter, rich blue */
       --mpdc-grey:#384454;
-      --mpdc-green:#2e4e72;         /* reuse blue instead of washed-out green */
+      --mpdc-green:#345679;
       --accent-warm:#f3e0c5;
       --bg:#f2ebe1;
       --text-main:#1f2933;
@@ -124,14 +124,41 @@
       line-height:1;
       display:inline-flex;
       align-items:center;
+      transition:background .15s,color .15s,border-color .15s,box-shadow .15s;
     }
     .nav-caret:hover{background:#f5f7fb}
+    .nav-caret.active{
+      background:var(--mpdc-blue);
+      color:#fff;
+      border-color:var(--mpdc-blue);
+      box-shadow:0 3px 8px rgba(0,0,0,.22);
+    }
 
     .nav-group{
       position:relative;
       display:flex;
       align-items:center;
-      gap:2px; /* closer arrow-to-label spacing */
+      gap:0;
+      padding:2px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.6);
+      background:rgba(6,17,36,.25);
+    }
+    .nav-group .nav-btn,
+    .nav-group .nav-caret{
+      border-color:transparent;
+      box-shadow:none;
+    }
+    .nav-group .nav-btn{
+      border-radius:999px 0 0 999px;
+    }
+    .nav-group .nav-caret{
+      border-radius:0 999px 999px 0;
+      border-left:1px solid rgba(52,86,121,.2);
+    }
+    .nav-group .nav-btn.active,
+    .nav-group .nav-caret.active{
+      box-shadow:none;
     }
 
     .nav-menu{
@@ -178,7 +205,7 @@
       color:var(--text-muted);
     }
     .nav-menu button:hover{
-      background:rgba(46,78,114,.07);
+      background:rgba(52,86,121,.07);
       transform:translateX(1px);
     }
 
@@ -215,7 +242,7 @@
       position:absolute;
       inset:16px 20px auto;
       border-radius:inherit;
-      border-top:2px solid rgba(46,78,114,.15);
+      border-top:2px solid rgba(52,86,121,.15);
       pointer-events:none;
     }
     .page-shell::after{inset:auto 20px 16px}
@@ -252,11 +279,11 @@
       gap:6px;
       padding:4px 9px;
       border-radius:999px;
-      background:rgba(46,78,114,.06);
+      background:rgba(52,86,121,.06);
       color:var(--mpdc-grey);
       font-size:.8rem;
       margin-bottom:10px;
-      border:1px solid rgba(46,78,114,.35);
+      border:1px solid rgba(52,86,121,.35);
     }
     .pill-tag strong{
       font-weight:700;
@@ -278,7 +305,7 @@
       margin:0;
       padding:12px 14px;
       border-radius:14px;
-      border:1px solid rgba(46,78,114,.4);
+      border:1px solid rgba(52,86,121,.4);
       background:rgba(255,255,255,.96);
       display:flex;
       flex-wrap:wrap;
@@ -300,7 +327,7 @@
       border-radius:18px;
       border:1px solid var(--border-soft);
       overflow:hidden;
-      background:linear-gradient(135deg,#2e4e72,#3b5f86);
+      background:linear-gradient(135deg,#345679,#3f6589);
       min-height:220px;
     }
     .cover-hero-inner{
@@ -344,7 +371,7 @@
       color:var(--mpdc-blue);
     }
     .btn-ghost:hover{
-      background:rgba(46,78,114,.08);
+      background:rgba(52,86,121,.08);
     }
 
     /* IMAGE GRID */
@@ -372,7 +399,7 @@
     .image-card:hover{
       transform:translateY(-2px);
       box-shadow:0 8px 18px rgba(0,0,0,.1);
-      border-color:rgba(46,78,114,.65);
+      border-color:rgba(52,86,121,.65);
     }
     .image-card-thumb{
       background:#dde3eb;
@@ -446,7 +473,7 @@
     }
     .video-card:hover{
       box-shadow:0 8px 18px rgba(0,0,0,.1);
-      border-color:rgba(46,78,114,.65);
+      border-color:rgba(52,86,121,.65);
       transform:translateY(-1px);
     }
     .video-thumb{
@@ -532,7 +559,7 @@
       transition:border-color .15s,box-shadow .15s,background .15s,transform .1s;
     }
     .link-row:hover{
-      border-color:rgba(46,78,114,.7);
+      border-color:rgba(52,86,121,.7);
       box-shadow:0 4px 10px rgba(0,0,0,.1);
       background:#fff8ed;
       transform:translateY(-1px);
@@ -640,7 +667,7 @@
       padding:9px 10px;
       border-radius:12px;
       background:#eef3fa;
-      border:1px solid rgba(46,78,114,.8);
+      border:1px solid rgba(52,86,121,.8);
       font-size:.88rem;
     }
     .related-panel-title{
@@ -732,20 +759,17 @@
     </div>
 
     <nav class="nav" id="mainNav">
-      <!-- Home pill -->
-      <button class="nav-btn" data-page="cover">Home</button>
-
       <!-- Display boards: pill = overview, caret = menu -->
       <div class="nav-group">
         <button class="nav-btn" id="boardsRoot">Display boards</button>
-        <button class="nav-caret" type="button" data-menu="boardsMenu" aria-label="Open display boards menu">▾</button>
+        <button class="nav-caret" id="boardsCaret" type="button" data-menu="boardsMenu" aria-label="Open display boards menu">▾</button>
         <div class="nav-menu" id="boardsMenu"></div>
       </div>
 
       <!-- Videos: same pattern -->
       <div class="nav-group">
         <button class="nav-btn" id="videosRoot">Videos</button>
-        <button class="nav-caret" type="button" data-menu="videosMenu" aria-label="Open videos menu">▾</button>
+        <button class="nav-caret" id="videosCaret" type="button" data-menu="videosMenu" aria-label="Open videos menu">▾</button>
         <div class="nav-menu" id="videosMenu"></div>
       </div>
 
@@ -754,7 +778,7 @@
       <!-- Plans: pill = overview, caret = menu -->
       <div class="nav-group">
         <button class="nav-btn" id="plansRoot">Plans</button>
-        <button class="nav-caret" type="button" data-menu="plansMenu" aria-label="Open plans menu">▾</button>
+        <button class="nav-caret" id="plansCaret" type="button" data-menu="plansMenu" aria-label="Open plans menu">▾</button>
         <div class="nav-menu" id="plansMenu"></div>
       </div>
 
@@ -930,6 +954,13 @@
     {file:"facade-sections-03.jpg",label:"Facade sections – sheet 3"}
   ];
 
+  const DETAIL_IMAGES=[
+    {file:"Turf Diagram.pdf.jpg",label:"Hybrid turf system diagram"},
+    {file:"250829 DD Report_FINAL 134_edit.pdf.jpg",label:"External finishes — south & west"},
+    {file:"250829 DD Report_FINAL 135_edit.pdf.jpg",label:"External finishes — north & east"},
+    {file:"External.pdf.jpg",label:"External facade build-up detail"}
+  ];
+
   /* INFO SHEETS */
 
   const INFO_DESIGN_IMAGES=[
@@ -1049,7 +1080,7 @@
       intro:"Alternate staging for concerts and smaller live events."
     });
 
-    // PLANS: GA, EGRESS, SECTIONS, ELEVATIONS, FACADES, VIEWS
+    // PLANS: GA, EGRESS, SECTIONS, ELEVATIONS, FACADES, VIEWS, DETAILS
     PAGES.push({
       id:"plans-ga",
       type:"image-grid",
@@ -1088,6 +1119,16 @@
       category:"Plans",
       images:ELEVATION_IMAGES,
       intro:"Coloured elevations of all four primary aspects."
+    });
+
+    PAGES.push({
+      id:"plans-details",
+      type:"image-grid",
+      title:"Details · Turf & external finishes",
+      subtitle:"",
+      category:"Plans",
+      images:DETAIL_IMAGES,
+      intro:"Hybrid turf build-up and key external finishes to the stadium envelope."
     });
 
     PAGES.push({
@@ -1435,9 +1476,18 @@
     document.querySelectorAll(".nav-btn[data-page]").forEach(btn=>{
       btn.classList.toggle("active",btn.dataset.page===page.id);
     });
-    document.getElementById("boardsRoot").classList.toggle("active",page.category==="Display boards");
-    document.getElementById("videosRoot").classList.toggle("active",page.category==="Media");
-    document.getElementById("plansRoot").classList.toggle("active",page.category==="Plans");
+
+    const inBoards=page.category==="Display boards";
+    const inVideos=page.category==="Media";
+    const inPlans=page.category==="Plans";
+
+    document.getElementById("boardsRoot").classList.toggle("active",inBoards);
+    document.getElementById("videosRoot").classList.toggle("active",inVideos);
+    document.getElementById("plansRoot").classList.toggle("active",inPlans);
+
+    document.getElementById("boardsCaret").classList.toggle("active",inBoards);
+    document.getElementById("videosCaret").classList.toggle("active",inVideos);
+    document.getElementById("plansCaret").classList.toggle("active",inPlans);
 
     const shell=document.createElement("div");
     shell.className="page-shell";
@@ -1618,6 +1668,7 @@
       {id:"plans-egress",title:"Egress plans",thumb:`assets/plans/${EGRESS_PLAN_IMAGES[0].file}`},
       {id:"plans-sections",title:"Sections",thumb:`assets/plans/${SECTION_IMAGES[0].file}`},
       {id:"plans-elevations",title:"Building elevations",thumb:`assets/plans/${ELEVATION_IMAGES[0].file}`},
+      {id:"plans-details",title:"Turf & external finishes",thumb:`assets/plans/${DETAIL_IMAGES[0].file}`},
       {id:"plans-facades",title:"Facade sections",thumb:`assets/plans/${FACADE_IMAGES[0].file}`},
       {id:"views",title:"Context views",thumb:`assets/plans/${STADIUM_VIEW_IMAGES[0].file}`}
     ];
@@ -2093,6 +2144,7 @@
       {id:"plans-egress",label:"Egress plans"},
       {id:"plans-sections",label:"Building & site sections"},
       {id:"plans-elevations",label:"Building elevations"},
+      {id:"plans-details",label:"Turf & external finishes"},
       {id:"plans-facades",label:"Facade sections"},
       {id:"views",label:"Context views"}
     ].forEach(item=>{
