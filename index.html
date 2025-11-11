@@ -131,7 +131,7 @@
       position:relative;
       display:flex;
       align-items:center;
-      gap:6px;
+      gap:2px; /* closer arrow-to-label spacing */
     }
 
     .nav-menu{
@@ -732,6 +732,9 @@
     </div>
 
     <nav class="nav" id="mainNav">
+      <!-- Home pill -->
+      <button class="nav-btn" data-page="cover">Home</button>
+
       <!-- Display boards: pill = overview, caret = menu -->
       <div class="nav-group">
         <button class="nav-btn" id="boardsRoot">Display boards</button>
