@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -83,6 +83,12 @@
     .image-full-wrap img{width:100%;height:auto;display:block;border-radius:12px}
     .image-full-caption{font-size:.84rem;color:var(--text-muted);margin-top:6px;display:flex;justify-content:space-between;gap:10px}
 
+    /* related links (More information) */
+    .related-links{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+    .related-pill{border-radius:999px;padding:4px 10px;font-size:.8rem;border:1px solid var(--mpdc-blue);color:var(--mpdc-blue);background:#fff;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+    .related-pill span.label-prefix{font-weight:600;color:var(--mpdc-green)}
+    .related-pill:hover{background:rgba(95,128,155,.06)}
+
     .video-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px}
     .video-card{border-radius:16px;border:1px solid var(--border-soft);padding:10px 11px;background:#f9fafc;display:flex;flex-direction:column;gap:6px}
     .video-title{font-size:.9rem;font-weight:600;color:var(--text-main)}
@@ -141,6 +147,9 @@
         <button class="nav-btn nav-has-menu" type="button" data-menu="videosMenu">Videos</button>
         <div class="nav-menu" id="videosMenu"></div>
       </div>
+
+      <!-- NEW: Info sheets (no dropdown) -->
+      <button class="nav-btn" data-page="info">Info sheets</button>
 
       <div class="nav-group">
         <button class="nav-btn nav-has-menu" type="button" data-menu="plansMenu">Plans</button>
@@ -251,12 +260,7 @@
     {file:"plan-ga-roof.jpg",label:"Roof plan"}
   ];
 
-  // NEW: Egress plan images
-  // Map your raw filenames to these normalized names in assets/plans/:
-  // "_Egress - Concert Mode - LEVEL 1 CONCOURSE PLAN .jpg"  -> egress-concert-level1.jpg
-  // "Egress - AFL mode -- EXTERNAL CONCOURSE PLAN .jpg"     -> egress-afl-external.jpg
-  // "_Egress - Concert Mode  - EXTERNAL CONCOURSE PLAN.jpg" -> egress-concert-external.jpg
-  // "Egress - AFL mode - LEVEL 1 CONCOURSE PLAN .jpg"       -> egress-afl-level1.jpg
+  // Egress plans (you've already uploaded with these names)
   const EGRESS_PLAN_IMAGES=[
     {file:"egress-concert-level1.jpg",label:"Egress · Concert mode – Level 1 concourse"},
     {file:"egress-afl-external.jpg",label:"Egress · AFL mode – External concourse"},
@@ -264,16 +268,13 @@
     {file:"egress-afl-level1.jpg",label:"Egress · AFL mode – Level 1 concourse"}
   ];
 
-  // NEW: Building elevations
-  // "BUILDING ELEVATIONS - EAST AND WEST .jpg"  -> elevations-east-west.jpg
-  // "BUILDING ELEVATIONS - NORTH AND SOUTH .jpg"-> elevations-north-south.jpg
+  // Building elevations
   const ELEVATION_IMAGES=[
     {file:"elevations-east-west.jpg",label:"Building elevations – East & West"},
     {file:"elevations-north-south.jpg",label:"Building elevations – North & South"}
   ];
 
-  // Sections (append the extra sheet)
-  // "61s_Page_04.jpg" -> section-roof-detail-annulus.jpg
+  // Sections (with extra roof detail sheet)
   const SECTION_IMAGES=[
     {file:"section-site-overall.jpg",label:"Site sections – overall"},
     {file:"section-building-east.jpg",label:"Building section – east"},
@@ -293,6 +294,35 @@
     {file:"facade-sections-03.jpg",label:"Facade sections – sheet 3"}
   ];
 
+  // NEW: Info sheets (files in assets/info/)
+  const INFO_SHEETS=[
+    {
+      id:"design",
+      title:"Design development",
+      pages:[
+        "Design Development page 1.jpg",
+        "Design Development page 2.jpg",
+        "Design Development page 3.jpg"
+      ]
+    },
+    {
+      id:"cricket",
+      title:"A Stadium Designed for Cricket",
+      pages:[
+        "A Stadium Designed for Cricket page 1.jpg",
+        "A Stadium Designed for Cricket page 2.jpg",
+        "A Stadium Designed for Cricket page 3.jpg"
+      ]
+    },
+    {
+      id:"capacity",
+      title:"Stadium Capacity",
+      pages:[
+        "Stadium Capacity.jpg"
+      ]
+    }
+  ];
+
   const PAGES=[];
 
   function buildPages(){
@@ -308,19 +338,18 @@
       PAGES.push({id:v.id,type:"video-single",title:v.title,subtitle:"",category:"Media",videoId:v.id});
     });
 
+    // NEW: Info sheets page (single page, grid of three tiles)
+    PAGES.push({id:"info",type:"info",title:"Information sheets",subtitle:"",category:"Information"});
+
     PAGES.push({id:"plans-layouts-1",type:"image-grid",title:"Stadium layouts · Field sports",subtitle:"",category:"Plans",images:STADIUM_LAYOUT_IMAGES.slice(0,6),intro:"Core multi-use layouts showing AFL, cricket, NRL, soccer, boxing and basketball configurations."});
     PAGES.push({id:"plans-layouts-2",type:"image-grid",title:"Stadium layouts · Event modes",subtitle:"",category:"Plans",images:STADIUM_LAYOUT_IMAGES.slice(6),intro:"Alternate staging for concerts and smaller live events."});
 
-    // General Arrangement
     PAGES.push({id:"plans-ga",type:"image-grid",title:"Architectural plans · General arrangement",subtitle:"Key stadium GA drawings at 1:500",category:"Plans",images:GA_PLAN_IMAGES,intro:"Primary general arrangement plans that locate the field, concourses and premium levels within the Macquarie Point site."});
 
-    // NEW: Egress
-    PAGES.push({id:"plans-egress",type:"image-grid",title:"Architectural plans · Egress",subtitle:"Exit routes and widths",category:"Plans",images:EGRESS_PLAN_IMAGES,intro:"Egress studies for AFL and Concert modes across external and Level 1 concourses."});
+    PAGES.push({id:"plans-egress",type:"image-grid",title:"Architectural plans · Egress",subtitle:"Exit routes and widths",category:"Plans",images:EGRESS_PLAN_IMAGES,intro:"Egress studies for AFL and concert modes across external and Level 1 concourses."});
 
-    // Sections & Elevations (with extra sheet)
     PAGES.push({id:"plans-sections",type:"image-grid",title:"Architectural plans · Sections",subtitle:"Site and stadium sections",category:"Plans",images:SECTION_IMAGES,intro:"Sections cutting through the site and stadium, describing scale, roof profile and relationships to the surrounding city."});
 
-    // NEW: Elevations
     PAGES.push({id:"plans-elevations",type:"image-grid",title:"Architectural plans · Building elevations",subtitle:"",category:"Plans",images:ELEVATION_IMAGES,intro:"Coloured elevations of all four primary aspects."});
 
     PAGES.push({id:"plans-facades",type:"image-grid",title:"Architectural plans · Facade sections",subtitle:"Layering, structure and entries",category:"Plans",images:FACADE_IMAGES,intro:"Combined facade section sheets illustrating entry sequences, concourse edges and stadium skin."});
@@ -330,6 +359,109 @@
     PAGES.push({id:"links",type:"links",title:"Links & contacts",subtitle:"",category:"Links"});
   }
   buildPages();
+
+  // --------------- "MORE INFORMATION" MAPPING (RECIPROCAL) ---------------
+  // Keys are page IDs from PAGES (display-board-#, video-#, plans-*, info)
+  const RELATED_LINKS={
+    // Boards → videos/plans/info
+    "display-board-1":[ // Seating Bowl
+      {target:"video-6",prefix:"Video",label:"Inside the Macquarie Point Multipurpose Stadium"}
+    ],
+    "display-board-2":[ // User Experience
+      {target:"video-6",prefix:"Video",label:"Inside the Macquarie Point Multipurpose Stadium"},
+      {target:"video-5",prefix:"Video",label:"Entering the Macquarie Point Multipurpose Stadium"}
+    ],
+    "display-board-3":[ // Roof Design
+      {target:"plans-sections",prefix:"Plans",label:"Architectural plans · Sections"},
+      {target:"plans-facades",prefix:"Plans",label:"Architectural plans · Facade sections"}
+    ],
+    "display-board-4":[ // A Multipurpose Venue
+      {target:"plans-layouts-1",prefix:"Plans",label:"Stadium layouts · Field sports"},
+      {target:"plans-layouts-2",prefix:"Plans",label:"Stadium layouts · Event modes"},
+      {target:"info",prefix:"Info sheet",label:"A Stadium Designed for Cricket"}
+    ],
+    "display-board-6":[ // Business Events
+      {target:"video-2",prefix:"Video",label:"Gate 2, featuring our Function Room"},
+      {target:"display-board-22",prefix:"Display board",label:"The Chair's Club / Event Space"},
+      {target:"display-board-23",prefix:"Display board",label:"Function Space"},
+      {target:"plans-ga",prefix:"Plans",label:"Architectural plans · General arrangement"}
+    ],
+    "display-board-7":[ // The Goods Shed (first)
+      {target:"display-board-19",prefix:"Display board",label:"The Goods Shed (interior)"}
+    ],
+    "display-board-10":[ // Remediation
+      {target:"video-3",prefix:"Video",label:"The complexities of remediating contaminated sites"},
+      {target:"video-4",prefix:"Video",label:"Mac Point remediation work"},
+      {target:"video-7",prefix:"Video",label:"Remediation: In situ-solidification"}
+    ],
+    "display-board-17":[ // Media Spaces
+      {target:"plans-ga",prefix:"Plans",label:"Architectural plans · General arrangement"}
+    ],
+    "display-board-18":[ // Continuous Concourse
+      {target:"video-6",prefix:"Video",label:"Inside the Macquarie Point Multipurpose Stadium"},
+      {target:"plans-ga",prefix:"Plans",label:"Architectural plans · General arrangement"}
+    ],
+    "display-board-19":[ // The Goods Shed (second)
+      {target:"display-board-7",prefix:"Display board",label:"The Goods Shed (external)"}
+    ],
+    "display-board-23":[ // Function Space
+      {target:"plans-ga",prefix:"Plans",label:"Architectural plans · General arrangement"}
+    ],
+    "display-board-25":[ // Field Club
+      {target:"video-1",prefix:"Video",label:"Back of House, Secure Zone and Player Facilities"}
+    ],
+
+    // Videos → boards/plans
+    "video-1":[
+      {target:"display-board-25",prefix:"Display board",label:"Field Club"}
+    ],
+    "video-2":[
+      {target:"display-board-6",prefix:"Display board",label:"Business Events"}
+    ],
+    "video-3":[
+      {target:"display-board-10",prefix:"Display board",label:"Remediation"}
+    ],
+    "video-4":[
+      {target:"display-board-10",prefix:"Display board",label:"Remediation"}
+    ],
+    "video-7":[
+      {target:"display-board-10",prefix:"Display board",label:"Remediation"}
+    ],
+    "video-5":[ // Entering stadium
+      {target:"display-board-2",prefix:"Display board",label:"User Experience"},
+      {target:"plans-ga",prefix:"Plans",label:"Architectural plans · General arrangement"}
+    ],
+    "video-6":[ // Inside stadium
+      {target:"display-board-1",prefix:"Display board",label:"Seating Bowl"},
+      {target:"display-board-2",prefix:"Display board",label:"User Experience"},
+      {target:"display-board-18",prefix:"Display board",label:"Continuous Concourse"}
+    ],
+
+    // Plans pages → boards
+    "plans-sections":[
+      {target:"display-board-3",prefix:"Display board",label:"Roof Design"}
+    ],
+    "plans-facades":[
+      {target:"display-board-3",prefix:"Display board",label:"Roof Design"}
+    ],
+    "plans-layouts-1":[
+      {target:"display-board-4",prefix:"Display board",label:"A Multipurpose Venue"}
+    ],
+    "plans-layouts-2":[
+      {target:"display-board-4",prefix:"Display board",label:"A Multipurpose Venue"}
+    ],
+    "plans-ga":[
+      {target:"display-board-6",prefix:"Display board",label:"Business Events"},
+      {target:"display-board-17",prefix:"Display board",label:"Media Spaces"},
+      {target:"display-board-18",prefix:"Display board",label:"Continuous Concourse"},
+      {target:"display-board-23",prefix:"Display board",label:"Function Space"}
+    ],
+
+    // Info page → the most relevant board
+    "info":[
+      {target:"display-board-4",prefix:"Display board",label:"A Multipurpose Venue"}
+    ]
+  };
 
   // --------------- RENDERING ---------------
   const pageContainer=document.getElementById("pageContainer");
@@ -341,6 +473,22 @@
   function goToPageByIndex(idx){if(idx<0||idx>=PAGES.length)return;renderPage(PAGES[idx].id)}
   function goPrevPage(){const i=getPageIndex(currentPageId);if(i>0)goToPageByIndex(i-1)}
   function goNextPage(){const i=getPageIndex(currentPageId);if(i<PAGES.length-1)goToPageByIndex(i+1)}
+
+  function renderRelated(container,pageId){
+    const rel=RELATED_LINKS[pageId];
+    if(!rel||!rel.length) return;
+    const wrap=document.createElement("div");
+    wrap.className="related-links";
+    rel.forEach(item=>{
+      const btn=document.createElement("button");
+      btn.type="button";
+      btn.className="related-pill";
+      btn.innerHTML=`<span class="label-prefix">${item.prefix}:</span><span>${item.label}</span>`;
+      btn.addEventListener("click",()=>renderPage(item.target));
+      wrap.appendChild(btn);
+    });
+    container.appendChild(wrap);
+  }
 
   function renderPage(id){
     const page=PAGES.find(p=>p.id===id)||PAGES[0];
@@ -386,6 +534,7 @@
     else if(page.type==="videos"){ renderVideos(body); }
     else if(page.type==="video-single"){ renderVideoSingle(body,page); }
     else if(page.type==="image-grid"){ renderImageGrid(body,page); }
+    else if(page.type==="info"){ renderInfoSheets(body); }
     else if(page.type==="links"){ renderLinks(body); }
 
     const navRow=document.createElement("div"); navRow.className="page-nav-row";
@@ -421,7 +570,7 @@
             <li>Display boards</li>
             <li>Videos and animations</li>
             <li>Stadium layouts & architectural plans</li>
-            <li>City views and reference links</li>
+            <li>Information sheets and reference links</li>
           </ul>
         </div>
       </div>
@@ -440,7 +589,9 @@
     const group=DISPLAY_BOARD_FILES.map((file,idx)=>({src:`assets/boards/${file}`,title:boardLabelFromFile(file,idx)}));
 
     DISPLAY_BOARD_FILES.forEach((file,idx)=>{
-      const card=document.createElement("div"); card.className="image-card"; card.addEventListener("click",()=>openLightboxGroup(group,idx));
+      const card=document.createElement("div"); card.className="image-card"; 
+      // From here, keep behaviour: open in lightbox (zoom) when tapped
+      card.addEventListener("click",()=>openLightboxGroup(group,idx));
       const thumb=document.createElement("div"); thumb.className="image-card-thumb";
       thumb.innerHTML=`<img src="assets/boards/${file}" alt="${boardLabelFromFile(file,idx)}">`;
       const body=document.createElement("div"); body.className="image-card-body";
@@ -451,11 +602,16 @@
   }
 
   function renderSingleImage(container,page){
-    const wrap=document.createElement("div"); wrap.className="image-full-wrap"; wrap.innerHTML=`<img src="${page.image}" alt="${page.title}">`;
-    const cap=document.createElement("div"); cap.className="image-full-caption"; cap.innerHTML=`<span>${page.title}</span><span>Tip: click the image to enlarge</span>`;
+    const wrap=document.createElement("div"); 
+    wrap.className="image-full-wrap"; 
+    wrap.innerHTML=`<img src="${page.image}" alt="${page.title}">`;
+    const cap=document.createElement("div"); cap.className="image-full-caption"; 
+    cap.innerHTML=`<span>${page.title}</span><span>Tip: click the image to enlarge</span>`;
     const group=[{src:page.image,title:page.title}];
     wrap.addEventListener("click",()=>openLightboxGroup(group,0));
-    container.appendChild(wrap); container.appendChild(cap);
+    container.appendChild(wrap); 
+    container.appendChild(cap);
+    renderRelated(container,page.id);
   }
 
   function renderVideos(container){
@@ -466,14 +622,23 @@
     const list=document.createElement("div"); list.className="video-list";
     VIDEO_ITEMS.forEach(v=>{
       const card=document.createElement("div"); card.className="video-card";
-      // thumbnail behaves as link to the single page (no inline play)
-      const thumb=document.createElement("div"); thumb.style.width="100%"; thumb.style.aspectRatio="16/9"; thumb.style.borderRadius="12px"; thumb.style.background="#111827"; thumb.style.display="flex"; thumb.style.alignItems="center"; thumb.style.justifyContent="center"; thumb.style.color="#fff"; thumb.style.cursor="pointer"; thumb.textContent="Open video";
+
+      // Thumbnail as a button to go to the dedicated video page
+      const thumb=document.createElement("div");
+      thumb.style.width="100%"; thumb.style.aspectRatio="16/9";
+      thumb.style.borderRadius="12px"; thumb.style.background="#111827";
+      thumb.style.display="flex"; thumb.style.alignItems="center";
+      thumb.style.justifyContent="center"; thumb.style.color="#fff";
+      thumb.style.cursor="pointer"; thumb.textContent="Open video";
       thumb.addEventListener("click",()=>renderPage(v.id));
+
       const title=document.createElement("div"); title.className="video-title"; title.textContent=v.title;
       const meta=document.createElement("div"); meta.className="video-meta"; meta.textContent=v.note||"";
+
       const btnRow=document.createElement("div"); btnRow.style.marginTop="4px";
       const btn=document.createElement("a"); btn.className="btn-ghost"; btn.href=v.url; btn.target="_blank"; btn.rel="noopener"; btn.textContent="Open on YouTube";
       btnRow.appendChild(btn);
+
       card.appendChild(thumb); card.appendChild(title); card.appendChild(meta); card.appendChild(btnRow);
       list.appendChild(card);
     });
@@ -488,6 +653,8 @@
     const btnRow=document.createElement("div"); btnRow.style.marginTop="4px";
     const btn=document.createElement("a"); btn.className="btn-ghost"; btn.href=v.url; btn.target="_blank"; btn.rel="noopener"; btn.textContent="Open this video on YouTube";
     btnRow.appendChild(btn); container.appendChild(btnRow);
+
+    renderRelated(container,page.id);
   }
 
   function renderImageGrid(container,page){
@@ -504,6 +671,38 @@
       grid.appendChild(card);
     });
     container.appendChild(grid);
+    renderRelated(container,page.id);
+  }
+
+  // NEW: Info sheets page (3 tiles, each opening its own multi-page lightbox)
+  function renderInfoSheets(container){
+    const p=document.createElement("p");
+    p.textContent="Key explanatory sheets that sit alongside the exhibition, including capacity, design development and cricket-specific detail.";
+    p.style.fontSize=".9rem"; p.style.color="var(--text-muted)";
+    container.appendChild(p);
+
+    const grid=document.createElement("div");
+    grid.className="image-grid";
+
+    INFO_SHEETS.forEach(sheet=>{
+      const card=document.createElement("div"); card.className="image-card";
+      const thumb=document.createElement("div"); thumb.className="image-card-thumb";
+      const cover=sheet.pages[0];
+      thumb.innerHTML=`<img src="assets/info/${cover}" alt="${sheet.title}">`;
+      const body=document.createElement("div"); body.className="image-card-body";
+      body.innerHTML=`<div class="image-card-title">${sheet.title}</div><div class="image-card-caption">Tap to read the sheet</div>`;
+      card.appendChild(thumb); card.appendChild(body);
+
+      const group=sheet.pages.map((file,i)=>({
+        src:`assets/info/${file}`,title:`${sheet.title} · page ${i+1}`
+      }));
+      card.addEventListener("click",()=>openLightboxGroup(group,0));
+
+      grid.appendChild(card);
+    });
+
+    container.appendChild(grid);
+    renderRelated(container,"info");
   }
 
   function renderLinks(container){
@@ -574,7 +773,6 @@
   function resetZoom(){ scale=1; originX=0; originY=0; updateTransform(); }
   function updateTransform(){ lightboxImg.style.transform=`translate(${originX}px, ${originY}px) scale(${scale})`; }
 
-  // mouse wheel zoom
   lightboxImg.addEventListener("wheel",(e)=>{
     e.preventDefault();
     const delta = e.deltaY<0 ? 1.1 : 0.9;
@@ -586,7 +784,6 @@
     updateTransform();
   },{passive:false});
 
-  // drag
   let dragging=false, startX=0, startY=0;
   lightboxImg.addEventListener("mousedown",(e)=>{ if(scale<=1) return; dragging=true; startX=e.clientX-originX; startY=e.clientY-originY; });
   window.addEventListener("mousemove",(e)=>{ if(!dragging) return; originX=e.clientX-startX; originY=e.clientY-startY; updateTransform(); });
@@ -604,11 +801,22 @@
   document.getElementById("homeLink").addEventListener("click",()=>{ renderPage("cover"); appRoot.classList.remove("nav-open"); });
 
   document.querySelectorAll(".nav-btn[data-page]").forEach(btn=>{
-    btn.addEventListener("click",()=>{ const pageId=btn.dataset.page; renderPage(pageId); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+    btn.addEventListener("click",()=>{ 
+      const pageId=btn.dataset.page; 
+      renderPage(pageId); 
+      appRoot.classList.remove("nav-open"); 
+      closeAllMenus(); 
+    });
   });
   function closeAllMenus(){ document.querySelectorAll(".nav-menu").forEach(m=>m.classList.remove("open")); }
   document.querySelectorAll(".nav-has-menu").forEach(btn=>{
-    btn.addEventListener("click",(e)=>{ const menu=document.getElementById(btn.dataset.menu); const already=menu.classList.contains("open"); closeAllMenus(); if(!already) menu.classList.add("open"); e.stopPropagation(); });
+    btn.addEventListener("click",(e)=>{ 
+      const menu=document.getElementById(btn.dataset.menu); 
+      const already=menu.classList.contains("open"); 
+      closeAllMenus(); 
+      if(!already) menu.classList.add("open"); 
+      e.stopPropagation(); 
+    });
   });
   document.addEventListener("click",()=>closeAllMenus());
 
@@ -655,9 +863,9 @@
     const archHead=document.createElement("h4"); archHead.textContent="Architectural plans"; plansMenu.appendChild(archHead);
     [
       {id:"plans-ga",label:"General arrangement"},
-      {id:"plans-egress",label:"Egress plans"},              // NEW
+      {id:"plans-egress",label:"Egress plans"},
       {id:"plans-sections",label:"Building & site sections"},
-      {id:"plans-elevations",label:"Building elevations"},   // NEW
+      {id:"plans-elevations",label:"Building elevations"},
       {id:"plans-facades",label:"Facade sections"},
       {id:"views",label:"Context views"}
     ].forEach(item=>{
