@@ -5,306 +5,121 @@
   <title>Stadium Design Showcase — Digital Handbook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    :root {
-      --mpdc-blue: #5f809b;
-      --mpdc-dark: #3b5263;
-      --mpdc-grey: #6d6e71;
-      --mpdc-green: #738678;
-      --accent-warm: #d4c9b4;
-      --bg: #f4f4f4;
-      --text-main: #1e1e1e;
-      --text-muted: #4d4d4d;
-      --border-soft: #dde3eb;
-      --page-shadow: 0 16px 40px rgba(0,0,0,0.18);
-      --radius-lg: 18px;
-      --radius-xl: 26px;
+    :root{
+      --mpdc-blue:#5f809b;
+      --mpdc-grey:#6d6e71;
+      --mpdc-green:#738678;
+      --bg:#d4c9b4;
+      --text-main:#222;
+      --text-muted:#6d6e71;
+      --border-soft:#dde3eb;
+      --page-shadow:0 16px 40px rgba(0,0,0,.18);
+      --radius-lg:18px; --radius-xl:26px;
     }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;font-family:Arial,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text-main);background:var(--bg)}
+    body{display:flex;justify-content:center;align-items:stretch}
+    .app{max-width:1200px;width:100%;display:flex;flex-direction:column;background:#fff;box-shadow:var(--page-shadow);border-radius:var(--radius-xl);margin:10px;overflow:hidden}
 
-    * { box-sizing: border-box; }
+    /* HEADER */
+    .top-bar{padding:14px 20px 10px;border-bottom:1px solid var(--border-soft);background:linear-gradient(135deg,#f9fbff,#eef3f9);display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px}
+    .brand-wrapper{display:flex;flex-direction:column;gap:2px;flex:1 1 200px;min-width:0}
+    .brand-title{font-weight:800;letter-spacing:.12em;font-size:.98rem;color:var(--mpdc-blue);cursor:pointer;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand-subtitle{font-size:.82rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text-main);
-      background: var(--bg);
+    .nav{display:flex;align-items:center;gap:8px}
+    .nav-btn{border:1px solid rgba(109,110,113,.25);background:rgba(255,255,255,.85);color:var(--text-main);padding:6px 11px;font-size:.84rem;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-weight:400;letter-spacing:.03em;transition:.15s}
+    .nav-btn:hover{background:rgba(95,128,155,.08);border-color:rgba(95,128,155,.55);color:var(--mpdc-blue);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+    .nav-btn.active{background:var(--mpdc-blue);color:#fff;border-color:var(--mpdc-blue);box-shadow:0 3px 8px rgba(0,0,0,.18)}
+    .nav-group{position:relative}
+    .nav-has-menu::after{content:"▾";font-size:.6rem;margin-left:2px}
+    .nav-menu{position:absolute;top:calc(100% + 4px);right:0;min-width:220px;max-width:90vw;max-height:60vh;overflow-y:auto;background:#fff;border-radius:14px;box-shadow:0 10px 20px rgba(0,0,0,.12);padding:6px;display:none;z-index:20}
+    .nav-menu.open{display:block}
+    .nav-menu h4{margin:4px 6px 2px;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mpdc-green)}
+    .nav-menu button{width:100%;text-align:left;border-radius:10px;border:none;background:transparent;padding:6px 8px;font-size:.82rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--text-main);transition:background .15s,transform .1s}
+    .nav-menu button:hover{background:rgba(95,128,155,.07);transform:translateX(1px)}
+    .nav-menu button.menu-all{font-weight:600;background:rgba(95,128,155,.06);border:1px solid rgba(95,128,155,.25);margin-bottom:4px}
+    .nav-menu button.menu-all:hover{background:rgba(95,128,155,.12)}
+    .nav-toggle{margin-left:auto;border:none;background:transparent;font-size:1.3rem;cursor:pointer;display:none;color:var(--mpdc-blue)}
+
+    /* MAIN */
+    #pageContainer{flex:1 1 auto;padding:18px 24px 16px;overflow-y:auto;background:#f4f1eb}
+    .page-shell{max-width:960px;margin:0 auto;background:#fff;border-radius:var(--radius-lg);box-shadow:var(--page-shadow);padding:20px 22px 24px;position:relative}
+    .page-shell::before,.page-shell::after{content:"";position:absolute;inset:16px 20px auto;border-radius:inherit;border-top:2px solid rgba(95,128,155,.18);pointer-events:none}
+    .page-shell::after{inset:auto 20px 16px}
+    .page-title{font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mpdc-green);margin:0 0 4px}
+    .page-subtitle{font-size:.9rem;color:var(--text-muted);margin:0 0 14px}
+    .cover-page .page-title{font-size:1.4rem;letter-spacing:.18em}
+    .cover-page .page-subtitle{font-size:1rem;font-weight:500}
+    .page-body{font-size:.92rem;line-height:1.55;color:var(--text-main)}
+    .pill-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;background:rgba(95,128,155,.06);color:var(--mpdc-grey);font-size:.75rem;margin-bottom:10px;border:1px solid rgba(95,128,155,.35)}
+    .pill-tag strong{font-weight:600;color:var(--mpdc-green)}
+    .logo-row{display:flex;justify-content:flex-end;margin-top:10px}
+    .logo-row img{max-height:42px;width:auto;object-fit:contain}
+
+    .hero-callout{margin:14px 0;padding:14px 14px 14px 16px;border-radius:18px;border:1px solid rgba(115,134,120,.55);background:#f5f1ea;display:flex;flex-wrap:wrap;gap:10px 18px}
+    .hero-callout h2{margin:0 0 6px;font-size:1.1rem;color:var(--mpdc-green)}
+    .hero-callout p{margin:0;font-size:.9rem;color:var(--text-muted)}
+
+    .page-nav-row{margin-top:16px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+    .page-nav-row .spacer{flex:1 1 auto}
+    .btn-primary,.btn-ghost{border-radius:999px;padding:7px 12px;border:1px solid var(--mpdc-blue);font-size:.84rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:.15s}
+    .btn-primary{background:var(--mpdc-blue);color:#fff}
+    .btn-primary:hover{background:#4c6a83;border-color:#4c6a83}
+    .btn-ghost{background:transparent;color:var(--mpdc-blue)}
+    .btn-ghost:hover{background:rgba(95,128,155,.08)}
+
+    .image-grid-intro{margin-bottom:10px;font-size:.88rem;color:var(--text-muted)}
+    .image-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:10px}
+    .image-card{background:#f9fafc;border-radius:16px;border:1px solid var(--border-soft);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s,border-color .15s}
+    .image-card:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.08);border-color:rgba(95,128,155,.5)}
+    .image-card-thumb{background:#dde3eb;padding:6px;display:flex;align-items:center;justify-content:center;min-height:120px}
+    .image-card-thumb img{max-width:100%;max-height:190px;display:block;border-radius:10px}
+    .image-card-body{padding:8px 10px 10px}
+    .image-card-title{font-size:.86rem;font-weight:600;color:var(--text-main);margin-bottom:2px}
+    .image-card-caption{font-size:.8rem;color:var(--text-muted)}
+
+    .image-full-wrap{margin-top:10px;border-radius:18px;border:1px solid var(--border-soft);background:#f9fafc;padding:10px;cursor:pointer}
+    .image-full-wrap img{width:100%;height:auto;display:block;border-radius:12px}
+    .image-full-caption{font-size:.84rem;color:var(--text-muted);margin-top:6px;display:flex;justify-content:space-between;gap:10px}
+
+    .video-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px}
+    .video-card{border-radius:16px;border:1px solid var(--border-soft);padding:10px 11px;background:#f9fafc;display:flex;flex-direction:column;gap:6px}
+    .video-title{font-size:.9rem;font-weight:600;color:var(--text-main)}
+    .video-meta{font-size:.78rem;color:var(--text-muted)}
+    .video-frame{width:100%;aspect-ratio:16/9;border-radius:12px;border:none;margin-bottom:4px;background:#111827}
+    .video-single-frame{width:100%;max-width:720px;aspect-ratio:16/9;border-radius:14px;border:none;margin:6px 0 10px;background:#111827}
+
+    .links-heading{margin:12px 0 4px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mpdc-green)}
+    .links-list{margin-top:4px;display:grid;grid-template-columns:1fr;gap:6px}
+    .link-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;border:1px solid var(--border-soft);background:#f9fafc;text-decoration:none;color:var(--text-main);transition:border-color .15s,box-shadow .15s,background .15s,transform .1s}
+    .link-row:hover{border-color:rgba(95,128,155,.55);box-shadow:0 4px 10px rgba(0,0,0,.06);background:#fff;transform:translateY(-1px)}
+    .link-row-main{flex:1 1 auto;min-width:0}
+    .link-row-title{font-size:.9rem;font-weight:600;color:var(--text-main);margin-bottom:0}
+    .link-row-badge{width:26px;height:26px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;flex-shrink:0}
+    .link-row-arrow{font-size:.9rem;color:var(--mpdc-blue);flex-shrink:0}
+
+    /* LIGHTBOX */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+    .lightbox.open{display:flex}
+    .lightbox-inner{max-width:1100px;width:100%;max-height:100%;background:#111827;border-radius:16px;padding:10px 10px 12px;display:flex;flex-direction:column;gap:8px}
+    .lightbox-header{display:flex;justify-content:space-between;align-items:center;color:#e5e7eb;font-size:.86rem}
+    .lightbox-controls{display:flex;gap:6px;align-items:center}
+    .lightbox-header button{border:none;background:rgba(31,41,55,.9);color:#e5e7eb;font-size:.9rem;cursor:pointer;padding:4px 8px;border-radius:999px}
+    .lightbox-header button:hover{background:rgba(55,65,81,.95)}
+    .lightbox-img-wrap{flex:1 1 auto;display:flex;justify-content:center;align-items:center;overflow:auto}
+    .lightbox-img-wrap img{max-width:100%;max-height:80vh;border-radius:10px;display:block;transform-origin:0 0}
+    .footer{border-top:1px solid var(--border-soft);padding:6px 18px;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--text-muted);background:#fafbfe}
+    .footer strong{font-weight:600;color:var(--mpdc-blue)}
+
+    @media (max-width:820px){
+      .nav{position:absolute;left:0;right:0;top:100%;padding:8px 10px 10px;background:#fff;border-bottom:1px solid var(--border-soft);display:none;flex-wrap:wrap;gap:6px;z-index:15}
+      .app.nav-open .nav{display:flex}
+      .nav-toggle{display:block}
+      .nav-menu{position:static;max-height:220px;box-shadow:none;border-radius:12px;border:1px solid var(--border-soft);margin-top:4px}
+      #pageContainer{padding:14px}
+      .page-shell{padding:16px 14px 18px}
     }
-
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-    }
-
-    .app {
-      max-width: 1200px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      background: #ffffff;
-      box-shadow: var(--page-shadow);
-      border-radius: var(--radius-xl);
-      margin: 10px;
-      overflow: hidden;
-    }
-
-    /* HEADER / NAV */
-
-    .top-bar {
-      position: relative;
-      padding: 14px 20px 10px;
-      border-bottom: 1px solid var(--border-soft);
-      background: var(--mpdc-dark);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px 20px;
-    }
-
-    .brand-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      flex: 1 1 200px;
-      min-width: 0;
-    }
-
-    .brand-title {
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      font-size: 1rem;
-      color: #fff;
-      cursor: pointer;
-      text-transform: uppercase;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .brand-subtitle {
-      font-size: 0.82rem;
-      color: #e0e0e0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex: 0 0 auto;
-    }
-
-    .nav-btn {
-      border: 1px solid rgba(255,255,255,0.3);
-      background: #fff;
-      color: var(--mpdc-dark);
-      padding: 6px 11px;
-      font-size: 0.85rem;
-      border-radius: 999px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .nav-btn:hover {
-      background: rgba(255,255,255,0.8);
-      border-color: rgba(255,255,255,0.6);
-    }
-
-    .nav-btn.active {
-      background: var(--mpdc-dark);
-      color: #fff;
-      border-color: var(--mpdc-dark);
-      box-shadow: 0 3px 8px rgba(0,0,0,0.18);
-    }
-
-    .nav-group { position: relative; }
-
-    .nav-has-menu::after {
-      content: "▾";
-      font-size: 0.6rem;
-      margin-left: 3px;
-    }
-
-    .nav-menu {
-      position: absolute;
-      top: calc(100% + 4px);
-      right: 0;
-      min-width: 220px;
-      max-width: 90vw;
-      max-height: 60vh;
-      overflow-y: auto;
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
-      padding: 6px;
-      display: none;
-      z-index: 20;
-    }
-
-    .nav-menu.open { display: block; }
-
-    .nav-menu h4 {
-      margin: 4px 6px 2px;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--mpdc-green);
-    }
-
-    .nav-menu button {
-      width: 100%;
-      text-align: left;
-      border-radius: 10px;
-      border: none;
-      background: transparent;
-      padding: 6px 8px;
-      font-size: 0.82rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--text-main);
-      transition: background 0.15s ease, transform 0.1s ease;
-    }
-
-    .nav-menu button span {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .nav-menu button:hover {
-      background: rgba(95,128,155,0.07);
-      transform: translateX(1px);
-    }
-
-    .nav-menu button.menu-all {
-      font-weight: 600;
-      background: rgba(95,128,155,0.06);
-      border: 1px solid rgba(95,128,155,0.25);
-      margin-bottom: 4px;
-    }
-
-    /* MAIN PAGE WRAPPER */
-
-    #pageContainer {
-      flex: 1 1 auto;
-      padding: 18px 24px 16px;
-      overflow-y: auto;
-      background: var(--bg);
-    }
-
-    .page-shell {
-      max-width: 960px;
-      margin: 0 auto;
-      background: #fff;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--page-shadow);
-      padding: 20px 22px 24px;
-      position: relative;
-    }
-
-    .page-title {
-      font-size: 1.1rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--mpdc-green);
-      margin: 0 0 4px;
-    }
-
-    .page-body {
-      font-size: 0.92rem;
-      line-height: 1.55;
-      color: var(--text-main);
-    }
-
-    .image-full-wrap {
-      margin-top: 10px;
-      border-radius: 18px;
-      border: 1px solid var(--border-soft);
-      background: #f9fafc;
-      padding: 10px;
-      cursor: zoom-in;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .image-full-wrap img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 12px;
-      transform-origin: center center;
-      transition: transform 0.2s ease;
-    }
-
-    .zoom-controls {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      display: flex;
-      gap: 5px;
-      z-index: 5;
-    }
-
-    .zoom-controls button {
-      border: none;
-      background: rgba(255,255,255,0.8);
-      border-radius: 4px;
-      padding: 3px 6px;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-
-    .zoom-controls button:hover {
-      background: rgba(255,255,255,1);
-    }
-
-    .related-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .related-link {
-      background: var(--mpdc-blue);
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-size: 0.82rem;
-      text-decoration: none;
-      transition: background 0.15s ease;
-    }
-
-    .related-link:hover {
-      background: #4c6a83;
-    }
-
-    .video-list iframe {
-      pointer-events: none;
-    }
-
-    .footer {
-      border-top: 1px solid var(--border-soft);
-      padding: 6px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      background: #fafbfe;
-    }
-
-    .footer strong { color: var(--mpdc-blue); }
-
   </style>
 </head>
 <body>
@@ -316,381 +131,555 @@
     </div>
     <nav class="nav" id="mainNav">
       <button class="nav-btn" data-page="cover">Cover</button>
+
       <div class="nav-group">
         <button class="nav-btn nav-has-menu" type="button" data-menu="boardsMenu">Display boards</button>
         <div class="nav-menu" id="boardsMenu"></div>
       </div>
+
       <div class="nav-group">
         <button class="nav-btn nav-has-menu" type="button" data-menu="videosMenu">Videos</button>
         <div class="nav-menu" id="videosMenu"></div>
       </div>
-      <div class="nav-group">
-        <button class="nav-btn" type="button" data-page="infoSheets">Info Sheets</button>
-      </div>
+
       <div class="nav-group">
         <button class="nav-btn nav-has-menu" type="button" data-menu="plansMenu">Plans</button>
         <div class="nav-menu" id="plansMenu"></div>
       </div>
-      <button class="nav-btn" data-page="links">Links</button>
+
+      <button class="nav-btn nav-link" data-page="links">Links</button>
     </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
   </header>
 
   <main id="pageContainer"></main>
+
   <footer class="footer">
     <span id="pageTitle"></span>
     <span id="pageCounter"></span>
   </footer>
 </div>
 
-<script>
-// --- DATA SETUP ---
-// Boards, Videos, Info Sheets, Plans datasets condensed for brevity
-// You can expand image paths per your /assets folder structure.
-
-const boards = [
-  {id:1,title:"Seating Bowl",img:"assets/boards/board1.jpg",
-   links:[{type:"video",target:"inside"},{type:"video",target:"arriving"}]},
-  {id:2,title:"User Experience",img:"assets/boards/board2.jpg",
-   links:[{type:"video",target:"inside"},{type:"video",target:"arriving"}]},
-  {id:3,title:"Roof Design",img:"assets/boards/board3.jpg",
-   links:[{type:"planpage",target:"sections"}]},
-  {id:4,title:"A Multipurpose Venue",img:"assets/boards/board4.jpg",
-   links:[{type:"info",target:"cricket"}]},
-  {id:6,title:"Business Events",img:"assets/boards/board6.jpg",
-   links:[{type:"video",target:"functionroom"},
-          {type:"board",target:"Function Space"},
-          {type:"board",target:"Chair's Club / Event Space"},
-          {type:"plan",target:"level2-stadiumclub"}]},
-  {id:7,title:"The Goods Shed",img:"assets/boards/board7.jpg",
-   links:[{type:"board",target:"The Goods Shed"}]},
-  {id:10,title:"Remediation",img:"assets/boards/board10.jpg",
-   links:[{type:"video",target:"remediationwork"},
-          {type:"video",target:"complexities"},
-          {type:"video",target:"remediation3"}]},
-  {id:17,title:"Media Spaces",img:"assets/boards/board17.jpg",
-   links:[{type:"plan",target:"ga-level1m"},
-          {type:"plan",target:"level3-media"}]},
-  {id:18,title:"Continuous Concourse",img:"assets/boards/board18.jpg",
-   links:[{type:"video",target:"inside"},
-          {type:"plan",target:"level1-public"}]},
-  {id:25,title:"Field Club",img:"assets/boards/board25.jpg",
-   links:[{type:"video",target:"boh"}]}
-];
-
-const videos = [
-  {id:"inside",title:"Inside the Macquarie Point Multipurpose Stadium",src:"https://www.youtube.com/embed/XXXXX"},
-  {id:"arriving",title:"Arriving at the Macquarie Point Multipurpose Stadium",src:"https://www.youtube.com/embed/YYYYY"},
-  {id:"functionroom",title:"Function Room Overview",src:"https://www.youtube.com/embed/ZZZZZ"},
-  {id:"remediationwork",title:"Remediation Work",src:"https://www.youtube.com/embed/AAAAA"},
-  {id:"complexities",title:"Complexities of Remediation",src:"https://www.youtube.com/embed/BBBBB"},
-  {id:"remediation3",title:"Remediation Summary",src:"https://www.youtube.com/embed/CCCCC"},
-  {id:"boh",title:"Behind-the-House Tour",src:"https://www.youtube.com/embed/DDDDD"}
-];
-
-const infoSheets = [
-  {id:"design",title:"Design Development",imgs:[
-    "assets/info/Design Development page 1.jpg",
-    "assets/info/Design Development page 2.jpg",
-    "assets/info/Design Development page 3.jpg"]},
-  {id:"cricket",title:"A Stadium Designed for Cricket",imgs:[
-    "assets/info/A Stadium Designed for Cricket page 1.jpg",
-    "assets/info/A Stadium Designed for Cricket page 2.jpg",
-    "assets/info/A Stadium Designed for Cricket page 3.jpg"]},
-  {id:"capacity",title:"Stadium Capacity",imgs:[
-    "assets/info/Stadium Capacity.jpg"]}
-];
-
-const plans = [
-  {id:"sections",title:"Architectural plans · Sections",imgs:[
-    "assets/plans/plan-section1.jpg","assets/plans/plan-section2.jpg"]},
-  {id:"ga-level1m",title:"GA Plan Level 1M",imgs:["assets/plans/plan-ga-level1m.jpg"]},
-  {id:"level3-media",title:"Level 3 Media Plan",imgs:["assets/plans/plan-level3-media.jpg"]},
-  {id:"level1-public",title:"Level 1 Public Concourse",imgs:["assets/plans/plan-level1-public.jpg"]},
-  {id:"level2-stadiumclub",title:"Level 2 Stadium Club",imgs:["assets/plans/plan-level2-stadiumclub.jpg"]},
-  {id:"egress-afl-external",title:"Egress – AFL External Concourse",imgs:["assets/plans/egress-afl-external.jpg"]},
-  {id:"egress-afl-level1",title:"Egress – AFL Level 1 Concourse",imgs:["assets/plans/egress-afl-level1.jpg"]},
-  {id:"egress-concert-external",title:"Egress – Concert External Concourse",imgs:["assets/plans/egress-concert-external.jpg"]},
-  {id:"egress-concert-level1",title:"Egress – Concert Level 1 Concourse",imgs:["assets/plans/egress-concert-level1.jpg"]},
-  {id:"elev-eastwest",title:"Building Elevations – East & West",imgs:["assets/plans/elevations-east-west.jpg"]},
-  {id:"elev-northsouth",title:"Building Elevations – North & South",imgs:["assets/plans/elevations-north-south.jpg"]},
-  {id:"section-roof-detail-annulus",title:"Section Roof Detail – Annulus",imgs:["assets/plans/section-roof-detail-annulus.jpg"]}
-];
-
-// --- UTILITY FUNCTIONS ---
-
-function $(sel){return document.querySelector(sel);}
-function clearPage(){ $("#pageContainer").innerHTML=""; }
-function setActive(btn){
-  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-}
-function scrollTop(){ $("#pageContainer").scrollTop=0; }
-
-// --- NAV BUILD ---
-
-function buildNav(){
-  const boardsMenu=$("#boardsMenu");
-  boardsMenu.innerHTML=`<button class="menu-all" data-page="allBoards">All boards</button>`;
-  boards.forEach(b=>{
-    const el=document.createElement("button");
-    el.textContent=b.title;
-    el.dataset.page="board-"+b.id;
-    boardsMenu.appendChild(el);
-  });
-
-  const videosMenu=$("#videosMenu");
-  videosMenu.innerHTML=`<button class="menu-all" data-page="allVideos">All videos</button>`;
-  videos.forEach(v=>{
-    const el=document.createElement("button");
-    el.textContent=v.title;
-    el.dataset.page="video-"+v.id;
-    videosMenu.appendChild(el);
-  });
-
-  const plansMenu=$("#plansMenu");
-  plansMenu.innerHTML=`<button class="menu-all" data-page="allPlans">All plans</button>`;
-  plans.forEach(p=>{
-    const el=document.createElement("button");
-    el.textContent=p.title;
-    el.dataset.page="plan-"+p.id;
-    plansMenu.appendChild(el);
-  });
-}
-buildNav();
-
-// --- PAGE RENDERERS ---
-
-function renderCover(){
-  clearPage();
-  const c=document.createElement("div");
-  c.className="page-shell";
-  c.innerHTML=`
-    <h1 class="page-title">Macquarie Point Multipurpose Stadium Design Showcase</h1>
-    <div class="page-body">
-      <p>Explore the vision, design and delivery of Tasmania’s new world-class multipurpose stadium at Macquarie Point. 
-      This digital handbook complements the physical display within The Goods Shed, offering videos, boards, plans and 
-      detailed information sheets.</p>
-      <div class="image-full-wrap"><img src="assets/stadium-ariel.jpg" alt="Stadium aerial view"></div>
-    </div>`;
-  $("#pageContainer").appendChild(c);
-}
-
-function renderBoardsList(){
-  clearPage();
-  const wrap=document.createElement("div");
-  wrap.className="page-shell";
-  wrap.innerHTML=`<h2 class="page-title">All Display Boards</h2>
-    <div class="page-body">
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;">
-      ${boards.map(b=>`<div style="border:1px solid #ccc;border-radius:12px;overflow:hidden;cursor:pointer" data-page="board-${b.id}">
-        <img src="${b.img}" style="width:100%;height:150px;object-fit:cover">
-        <div style="padding:8px;font-size:0.85rem;font-weight:600">${b.title}</div>
-      </div>`).join("")}
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <div class="lightbox-header">
+      <div id="lightboxTitle"></div>
+      <div class="lightbox-controls">
+        <button type="button" id="lightboxPrev" aria-label="Previous image">‹</button>
+        <button type="button" id="lightboxNext" aria-label="Next image">›</button>
+        <button type="button" id="lightboxClose" aria-label="Close image">✕</button>
       </div>
-    </div>`;
-  $("#pageContainer").appendChild(wrap);
-  wrap.querySelectorAll("[data-page]").forEach(el=>el.addEventListener("click",()=>renderBoard(el.dataset.page.split("-")[1])));
-}
-
-function renderBoard(id){
-  const b=boards.find(x=>x.id==id);
-  if(!b)return;
-  clearPage();
-  const shell=document.createElement("div");
-  shell.className="page-shell";
-  shell.innerHTML=`
-    <h2 class="page-title">${b.title}</h2>
-    <div class="image-full-wrap">
-      <div class="zoom-controls"><button data-z="+">+</button><button data-z="-">–</button><button data-z="0">⟳</button></div>
-      <img src="${b.img}" alt="${b.title}">
     </div>
-    <div class="related-links">${b.links.map(l=>`<a class="related-link" data-link="${l.type}:${l.target}">${l.type.charAt(0).toUpperCase()+l.type.slice(1)}: ${l.target.replace(/-/g," ")}</a>`).join("")}</div>`;
-  $("#pageContainer").appendChild(shell);
-  enableZoom(shell.querySelector("img"),shell);
-  linkSetup();
-}
-
-function renderVideo(id){
-  const v=videos.find(x=>x.id==id);
-  if(!v)return;
-  clearPage();
-  const shell=document.createElement("div");
-  shell.className="page-shell";
-  shell.innerHTML=`<h2 class="page-title">${v.title}</h2>
-    <div style="position:relative;padding-bottom:56.25%;height:0;"><iframe src="${v.src}" allowfullscreen style="position:absolute;width:100%;height:100%;border:0"></iframe></div>`;
-  $("#pageContainer").appendChild(shell);
-  const backLinks=findLinksTo("video",id);
-  if(backLinks.length){addBackLinks(shell,backLinks);}
-}
-
-function renderAllVideos(){
-  clearPage();
-  const shell=document.createElement("div");
-  shell.className="page-shell";
-  shell.innerHTML=`<h2 class="page-title">Videos and Animations</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;">
-  ${videos.map(v=>`<div data-page="video-${v.id}" style="cursor:pointer;border:1px solid #ccc;border-radius:10px;overflow:hidden">
-    <img src="https://img.youtube.com/vi/${v.src.split('/').pop()}/hqdefault.jpg" style="width:100%;height:140px;object-fit:cover">
-    <div style="padding:8px;font-weight:600;font-size:0.85rem">${v.title}</div>
-  </div>`).join("")}</div>`;
-  $("#pageContainer").appendChild(shell);
-  shell.querySelectorAll("[data-page]").forEach(el=>el.addEventListener("click",()=>renderVideo(el.dataset.page.split("-")[1])));
-}
-
-function renderInfoSheets(){
-  clearPage();
-  const shell=document.createElement("div");
-  shell.className="page-shell";
-  shell.innerHTML=`<h2 class="page-title">Information Sheets</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;">
-  ${infoSheets.map(i=>`<div style="border:1px solid #ccc;border-radius:12px;overflow:hidden;cursor:pointer" data-info="${i.id}">
-    <img src="${i.imgs[0]}" style="width:100%;height:180px;object-fit:cover">
-    <div style="padding:8px;font-weight:600;font-size:0.85rem">${i.title}</div></div>`).join("")}
-  </div>`;
-  $("#pageContainer").appendChild(shell);
-  shell.querySelectorAll("[data-info]").forEach(el=>el.addEventListener("click",()=>renderInfoDetail(el.dataset.info)));
-}
-
-function renderInfoDetail(id){
-  const i=infoSheets.find(x=>x.id==id); if(!i)return;
-  clearPage();
-  const shell=document.createElement("div");
-  shell.className="page-shell";
-  shell.innerHTML=`<h2 class="page-title">${i.title}</h2>
-  ${i.imgs.map(src=>`<div class="image-full-wrap"><div class="zoom-controls"><button data-z="+">+</button><button data-z="-">–</button><button data-z="0">⟳</button></div><img src="${src}" alt="${i.title}"></div>`).join("")}`;
-  $("#pageContainer").appendChild(shell);
-  shell.querySelectorAll("img").forEach(img=>enableZoom(img,shell));
-}
-
-function renderPlan(id){
-  const p=plans.find(x=>x.id==id); if(!p)return;
-  clearPage();
-  const shell=document.createElement("div");
-  shell.className="page-shell";
-  shell.innerHTML=`<h2 class="page-title">${p.title}</h2>
-  ${p.imgs.map(src=>`<div class="image-full-wrap"><div class="zoom-controls"><button data-z="+">+</button><button data-z="-">–</button><button data-z="0">⟳</button></div><img src="${src}" alt="${p.title}"></div>`).join("")}`;
-  $("#pageContainer").appendChild(shell);
-  shell.querySelectorAll("img").forEach(img=>enableZoom(img,shell));
-}
-
-function renderAllPlans(){
-  clearPage();
-  const shell=document.createElement("div");
-  shell.className="page-shell";
-  shell.innerHTML=`<h2 class="page-title">All Plans</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;">
-  ${plans.map(p=>`<div data-page="plan-${p.id}" style="cursor:pointer;border:1px solid #ccc;border-radius:12px;overflow:hidden">
-    <img src="${p.imgs[0]}" style="width:100%;height:150px;object-fit:cover"><div style="padding:8px;font-weight:600;font-size:0.85rem">${p.title}</div></div>`).join("")}
-  </div>`;
-  $("#pageContainer").appendChild(shell);
-  shell.querySelectorAll("[data-page]").forEach(el=>el.addEventListener("click",()=>renderPlan(el.dataset.page.split("-")[1])));
-}
-
-function renderLinks(){
-  clearPage();
-  const shell=document.createElement("div");
-  shell.className="page-shell";
-  shell.innerHTML=`<h2 class="page-title">Links and Contacts</h2>
-  <div class="page-body" style="display:flex;flex-direction:column;gap:10px;">
-    <a class="related-link" href="https://www.macpoint.com/stadium" target="_blank">MacPoint Website</a>
-    <a class="related-link" href="mailto:contact@macpoint.com">Contact</a>
-    <a class="related-link" href="https://forms.office.com/Pages/ResponsePage.aspx?id=iqvrZPTMXEui0ytOly2Wsrl40AF9vslDorV-Toe-MB5URTNCUVYxR0JXRFVFVk1RM0lCRFlGU0U0RS4u" target="_blank">Subscribe</a>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <a class="related-link" style="background:#1877f2" href="#" target="_blank">Facebook</a>
-      <a class="related-link" style="background:#0a66c2" href="#" target="_blank">LinkedIn</a>
-      <a class="related-link" style="background:#e1306c" href="#" target="_blank">Instagram</a>
+    <div class="lightbox-img-wrap">
+      <img id="lightboxImg" src="" alt="">
     </div>
-  </div>`;
-  $("#pageContainer").appendChild(shell);
-}
+  </div>
+</div>
 
-// --- LINKING / ZOOM ---
+<script>
+  // ---------------- HELPERS ----------------
+  function toEmbed(url){
+    try{
+      const u=new URL(url);
+      if(u.hostname==="youtu.be") return "https://www.youtube.com/embed/"+u.pathname.slice(1);
+      if(u.hostname.includes("youtube.com")) return "https://www.youtube.com/embed/"+u.searchParams.get("v");
+    }catch(e){}
+    return url;
+  }
 
-function findLinksTo(type,target){
-  const arr=[];
-  boards.forEach(b=>b.links.forEach(l=>{if(l.type===type&&l.target===target)arr.push({from:"board",title:b.title,id:b.id});}));
-  videos.forEach(v=>{if(type==="video"&&v.id===target){}});
-  return arr;
-}
-function addBackLinks(shell,arr){
-  const div=document.createElement("div");
-  div.className="related-links";
-  div.innerHTML=arr.map(a=>`<a class="related-link" data-link="${a.from}:${a.id}">Board: ${a.title}</a>`).join("");
-  shell.appendChild(div);
-  linkSetup();
-}
+  // ---------------- DATA ----------------
 
-function linkSetup(){
-  document.querySelectorAll("[data-link]").forEach(a=>a.onclick=(e)=>{
-    const [type,id]=a.dataset.link.split(":");
-    if(type==="video")renderVideo(id);
-    else if(type==="plan")renderPlan(id);
-    else if(type==="planpage")renderAllPlans();
-    else if(type==="board")renderBoard(id);
-    else if(type==="info")renderInfoDetail(id);
-  });
-}
+  const DISPLAY_BOARD_FILES=[
+    "boards1_01.jpg","boards1_02.jpg","boards1_03.jpg","boards1_04.jpg","boards1_05.jpg",
+    "boards1_06.jpg","boards1_07.jpg","boards1_08.jpg","boards1_09.jpg",
+    "boards2_01.jpg","boards2_02.jpg","boards2_03.jpg","boards2_04.jpg","boards2_05.jpg",
+    "boards2_06.jpg","boards2_07.jpg",
+    "boards3_01.jpg","boards3_02.jpg","boards3_03.jpg","boards3_04.jpg","boards3_05.jpg",
+    "boards3_06.jpg","boards3_07.jpg","boards3_08.jpg","boards3_09.jpg"
+  ];
+  function boardLabelFromFile(file,idx){
+    const customNames=[
+      "Seating Bowl","User Experience","Roof Design","A Multipurpose Venue","Reflecting Tasmania",
+      "Business Events","The Goods Shed","Precinct Plan","Site Master Plan","Remediation",
+      "Geotechnical Investigations","Transport","Accessibility","Site Archaeology","Investment Opportunity",
+      "Permit Conditions","Media Spaces","Continuous Concourse","The Goods Shed","Sports Bar",
+      "The Restaurant","The Chair's Club / Event Space","Function Space","Corporate Suits","Field Club"
+    ];
+    const num=String(idx+1).padStart(2,"0");
+    return customNames[idx]||`Display board ${num}`;
+  }
 
-function enableZoom(img,container){
-  let scale=1;
-  const wrap=img.parentElement;
-  const controls=wrap.querySelectorAll(".zoom-controls button");
-  img.style.cursor="grab";
-  let pos={x:0,y:0}, dragging=false;
-  img.addEventListener("mousedown",e=>{dragging=true;pos={x:e.offsetX,y:e.offsetY};img.style.cursor="grabbing";});
-  img.addEventListener("mouseup",()=>{dragging=false;img.style.cursor="grab";});
-  img.addEventListener("mousemove",e=>{
-    if(dragging){
-      const dx=e.offsetX-pos.x, dy=e.offsetY-pos.y;
-      img.style.transform=`translate(${dx}px,${dy}px) scale(${scale})`;
-    }
-  });
-  controls.forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      if(btn.dataset.z==="+")scale+=0.25;
-      else if(btn.dataset.z==="-"&&scale>0.5)scale-=0.25;
-      else if(btn.dataset.z==="0")scale=1;
-      img.style.transform=`scale(${scale})`;
+  const VIDEO_ITEMS=[
+    {id:"video-1",title:"Back of House, Secure Zone and Player Facilities",url:"https://youtu.be/Zx76BnLkNlY",note:"Back-of-house amenities, secure player circulation and player facilities."},
+    {id:"video-2",title:"Gate 2, featuring our Function Room",url:"https://youtu.be/KcSXlcSaL_8",note:"Arrival experience via Gate 2 and integrated function / events spaces."},
+    {id:"video-3",title:"The complexities of remediating contaminated sites",url:"https://youtu.be/waWApjh_snA",note:"Challenges and considerations in delivering remediation on complex sites."},
+    {id:"video-4",title:"Mac Point remediation work",url:"https://youtu.be/mJzHTXnSrb8",note:"Overview of remediation works at Mac Point and how they support the stadium."},
+    {id:"video-5",title:"Entering the Macquarie Point Multipurpose Stadium",url:"https://youtu.be/NSc6u8vX-cQ",note:"Approach, thresholds and first impressions as you enter the Macquarie Point Multipurpose Stadium."},
+    {id:"video-6",title:"Inside the Macquarie Point Multipurpose Stadium",url:"https://youtu.be/zM63SF3_8fI",note:"Concourse, seating tiers and interior spectator experience within the Macquarie Point Multipurpose Stadium."},
+    {id:"video-7",title:"Remediation: In situ-solidification",url:"https://youtu.be/84pkAhplxIY",note:"In situ-solidification methodology used to treat ground conditions at Macquarie Point."},
+    {id:"video-8",title:"Multipurpose stadium – sun and shadowing study",url:"https://youtu.be/zskCZeWZ-xo",note:"How the stadium responds to sun and shade across seasons, events and times of day."},
+    {id:"video-9",title:"Meet some of the design team",url:"https://youtu.be/nJqy5tg7z_o",note:"Members of the design team talk through key project drivers and design intent."}
+  ];
+
+  const STADIUM_LAYOUT_IMAGES=[
+    {file:"stadium-layout-afl.jpg",label:"AFL"},
+    {file:"stadium-layout-cricket.jpg",label:"Cricket"},
+    {file:"stadium-layout-nrl.jpg",label:"NRL"},
+    {file:"stadium-layout-soccer.jpg",label:"Soccer"},
+    {file:"stadium-layout-boxing.jpg",label:"Boxing"},
+    {file:"stadium-layout-basketball.jpg",label:"Basketball"},
+    {file:"stadium-layout-concert-mode-3.jpg",label:"Concert mode"},
+    {file:"stadium-layout-concert-mode-4.jpg",label:"Smaller concert mode"}
+  ];
+
+  const STADIUM_VIEW_IMAGES=[
+    {file:"stadium-view-waterfront.jpeg",label:"View · Waterfront"},
+    {file:"stadium-view-city-bay.png",label:"View · City & bay"},
+    {file:"stadium-view-memorial.jpeg",label:"View · Cenotaph"},
+    {file:"stadium-view-street.jpeg",label:"View · Evans Street"}
+  ];
+
+  const GA_PLAN_IMAGES=[
+    {file:"plan-ga-ground-plane-external-concourse.jpg",label:"Ground plane – external concourse"},
+    {file:"plan-ga-level0-field.jpg",label:"Level 0 – field level"},
+    {file:"plan-ga-level1-concourse.jpg",label:"Level 1 – public concourse"},
+    {file:"plan-ga-level1m-premium.jpg",label:"Level 1M – premium & media"},
+    {file:"plan-ga-level2-stadium-club.jpg",label:"Level 2 – stadium club"},
+    {file:"plan-ga-level3-media.jpg",label:"Level 3 – media level"},
+    {file:"plan-ga-level4-gantry.jpg",label:"Level 4 – gantry level"},
+    {file:"plan-ga-roof.jpg",label:"Roof plan"}
+  ];
+
+  // NEW: Egress plan images
+  // Map your raw filenames to these normalized names in assets/plans/:
+  // "_Egress - Concert Mode - LEVEL 1 CONCOURSE PLAN .jpg"  -> egress-concert-level1.jpg
+  // "Egress - AFL mode -- EXTERNAL CONCOURSE PLAN .jpg"     -> egress-afl-external.jpg
+  // "_Egress - Concert Mode  - EXTERNAL CONCOURSE PLAN.jpg" -> egress-concert-external.jpg
+  // "Egress - AFL mode - LEVEL 1 CONCOURSE PLAN .jpg"       -> egress-afl-level1.jpg
+  const EGRESS_PLAN_IMAGES=[
+    {file:"egress-concert-level1.jpg",label:"Egress · Concert mode – Level 1 concourse"},
+    {file:"egress-afl-external.jpg",label:"Egress · AFL mode – External concourse"},
+    {file:"egress-concert-external.jpg",label:"Egress · Concert mode – External concourse"},
+    {file:"egress-afl-level1.jpg",label:"Egress · AFL mode – Level 1 concourse"}
+  ];
+
+  // NEW: Building elevations
+  // "BUILDING ELEVATIONS - EAST AND WEST .jpg"  -> elevations-east-west.jpg
+  // "BUILDING ELEVATIONS - NORTH AND SOUTH .jpg"-> elevations-north-south.jpg
+  const ELEVATION_IMAGES=[
+    {file:"elevations-east-west.jpg",label:"Building elevations – East & West"},
+    {file:"elevations-north-south.jpg",label:"Building elevations – North & South"}
+  ];
+
+  // Sections (append the extra sheet)
+  // "61s_Page_04.jpg" -> section-roof-detail-annulus.jpg
+  const SECTION_IMAGES=[
+    {file:"section-site-overall.jpg",label:"Site sections – overall"},
+    {file:"section-building-east.jpg",label:"Building section – east"},
+    {file:"section-building-north.jpg",label:"Building section – north"},
+    {file:"section-building-south.jpg",label:"Building section – south"},
+    {file:"section-building-west.jpg",label:"Building section – west"},
+    {file:"section-building-southeast.jpg",label:"Building section – south-east"},
+    {file:"section-building-southwest.jpg",label:"Building section – south-west"},
+    {file:"section-building-northeast.jpg",label:"Building section – north-east"},
+    {file:"section-building-northwest.jpg",label:"Building section – north-west"},
+    {file:"section-roof-detail-annulus.jpg",label:"Roof detail section – annulus"}
+  ];
+
+  const FACADE_IMAGES=[
+    {file:"facade-sections-01.jpg",label:"Facade sections – sheet 1"},
+    {file:"facade-sections-02.jpg",label:"Facade sections – sheet 2"},
+    {file:"facade-sections-03.jpg",label:"Facade sections – sheet 3"}
+  ];
+
+  const PAGES=[];
+
+  function buildPages(){
+    PAGES.push({id:"cover",type:"cover",title:"Stadium Design Showcase",subtitle:"31 Oct – 5 Nov · The Goods Shed Hobart",category:"Overview"});
+
+    PAGES.push({id:"display-overview",type:"boards-overview",title:"Display boards",subtitle:"",category:"Display boards"});
+    DISPLAY_BOARD_FILES.forEach((file,idx)=>{
+      PAGES.push({id:`display-board-${idx+1}`,type:"single-image",image:`assets/boards/${file}`,title:boardLabelFromFile(file,idx),subtitle:"",category:"Display boards"});
     });
+
+    PAGES.push({id:"videos",type:"videos",title:"Videos and animations",subtitle:"",category:"Media"});
+    VIDEO_ITEMS.forEach(v=>{
+      PAGES.push({id:v.id,type:"video-single",title:v.title,subtitle:"",category:"Media",videoId:v.id});
+    });
+
+    PAGES.push({id:"plans-layouts-1",type:"image-grid",title:"Stadium layouts · Field sports",subtitle:"",category:"Plans",images:STADIUM_LAYOUT_IMAGES.slice(0,6),intro:"Core multi-use layouts showing AFL, cricket, NRL, soccer, boxing and basketball configurations."});
+    PAGES.push({id:"plans-layouts-2",type:"image-grid",title:"Stadium layouts · Event modes",subtitle:"",category:"Plans",images:STADIUM_LAYOUT_IMAGES.slice(6),intro:"Alternate staging for concerts and smaller live events."});
+
+    // General Arrangement
+    PAGES.push({id:"plans-ga",type:"image-grid",title:"Architectural plans · General arrangement",subtitle:"Key stadium GA drawings at 1:500",category:"Plans",images:GA_PLAN_IMAGES,intro:"Primary general arrangement plans that locate the field, concourses and premium levels within the Macquarie Point site."});
+
+    // NEW: Egress
+    PAGES.push({id:"plans-egress",type:"image-grid",title:"Architectural plans · Egress",subtitle:"Exit routes and widths",category:"Plans",images:EGRESS_PLAN_IMAGES,intro:"Egress studies for AFL and Concert modes across external and Level 1 concourses."});
+
+    // Sections & Elevations (with extra sheet)
+    PAGES.push({id:"plans-sections",type:"image-grid",title:"Architectural plans · Sections",subtitle:"Site and stadium sections",category:"Plans",images:SECTION_IMAGES,intro:"Sections cutting through the site and stadium, describing scale, roof profile and relationships to the surrounding city."});
+
+    // NEW: Elevations
+    PAGES.push({id:"plans-elevations",type:"image-grid",title:"Architectural plans · Building elevations",subtitle:"",category:"Plans",images:ELEVATION_IMAGES,intro:"Coloured elevations of all four primary aspects."});
+
+    PAGES.push({id:"plans-facades",type:"image-grid",title:"Architectural plans · Facade sections",subtitle:"Layering, structure and entries",category:"Plans",images:FACADE_IMAGES,intro:"Combined facade section sheets illustrating entry sequences, concourse edges and stadium skin."});
+
+    PAGES.push({id:"views",type:"image-grid",title:"Stadium views",subtitle:"",category:"Plans",images:STADIUM_VIEW_IMAGES,intro:"Key view lines from the waterfront, memorial, street network and city hillsides."});
+
+    PAGES.push({id:"links",type:"links",title:"Links & contacts",subtitle:"",category:"Links"});
+  }
+  buildPages();
+
+  // --------------- RENDERING ---------------
+  const pageContainer=document.getElementById("pageContainer");
+  const pageTitleFooter=document.getElementById("pageTitle");
+  const pageCounterFooter=document.getElementById("pageCounter");
+  let currentPageId="cover";
+
+  function getPageIndex(id){return PAGES.findIndex(p=>p.id===id)}
+  function goToPageByIndex(idx){if(idx<0||idx>=PAGES.length)return;renderPage(PAGES[idx].id)}
+  function goPrevPage(){const i=getPageIndex(currentPageId);if(i>0)goToPageByIndex(i-1)}
+  function goNextPage(){const i=getPageIndex(currentPageId);if(i<PAGES.length-1)goToPageByIndex(i+1)}
+
+  function renderPage(id){
+    const page=PAGES.find(p=>p.id===id)||PAGES[0];
+    currentPageId=page.id;
+    const idx=getPageIndex(page.id), total=PAGES.length;
+
+    document.querySelectorAll(".nav-btn[data-page]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.page===page.id);
+    });
+    document.querySelectorAll(".nav-btn.nav-has-menu").forEach(btn=>{
+      const menuId=btn.dataset.menu; let active=false;
+      if(menuId==="boardsMenu" && page.category==="Display boards") active=true;
+      if(menuId==="videosMenu" && page.category==="Media") active=true;
+      if(menuId==="plansMenu"  && page.category==="Plans") active=true;
+      btn.classList.toggle("active",active);
+    });
+
+    const shell=document.createElement("div");
+    shell.className="page-shell";
+    if(page.type==="cover") shell.classList.add("cover-page");
+
+    const titleEl=document.createElement("h1");
+    titleEl.className="page-title"; titleEl.textContent=page.title;
+
+    const subtitleEl=document.createElement("div");
+    subtitleEl.className="page-subtitle"; subtitleEl.textContent=page.subtitle||"";
+
+    const pill=document.createElement("div");
+    pill.className="pill-tag";
+    pill.innerHTML=`<strong>${page.category||"Section"}</strong><span>Digital handbook</span>`;
+
+    const body=document.createElement("div");
+    body.className="page-body";
+
+    shell.appendChild(pill);
+    shell.appendChild(titleEl);
+    if(page.subtitle) shell.appendChild(subtitleEl);
+    shell.appendChild(body);
+
+    if(page.type==="cover"){ renderCover(body); }
+    else if(page.type==="boards-overview"){ renderBoardsOverview(body); }
+    else if(page.type==="single-image"){ renderSingleImage(body,page); }
+    else if(page.type==="videos"){ renderVideos(body); }
+    else if(page.type==="video-single"){ renderVideoSingle(body,page); }
+    else if(page.type==="image-grid"){ renderImageGrid(body,page); }
+    else if(page.type==="links"){ renderLinks(body); }
+
+    const navRow=document.createElement("div"); navRow.className="page-nav-row";
+    if(idx>0){ const prevBtn=document.createElement("button"); prevBtn.className="btn-ghost"; prevBtn.innerHTML="‹ Previous page"; prevBtn.addEventListener("click",goPrevPage); navRow.appendChild(prevBtn);}
+    else{ navRow.appendChild(document.createElement("div")); }
+    const spacer=document.createElement("div"); spacer.className="spacer"; navRow.appendChild(spacer);
+    if(idx<total-1){ const nextBtn=document.createElement("button"); nextBtn.className="btn-ghost"; nextBtn.innerHTML="Next page ›"; nextBtn.addEventListener("click",goNextPage); navRow.appendChild(nextBtn);}
+    else{ navRow.appendChild(document.createElement("div")); }
+    shell.appendChild(navRow);
+
+    const logoRow=document.createElement("div"); logoRow.className="logo-row";
+    logoRow.innerHTML=`<img src="assets/mpdc-logo.png" alt="MPDC logo" onerror="this.style.display='none'">`;
+    shell.appendChild(logoRow);
+
+    pageContainer.innerHTML=""; pageContainer.appendChild(shell);
+    pageTitleFooter.innerHTML=`<strong>${page.title}</strong>`;
+    pageCounterFooter.textContent=`Page ${idx+1} of ${total}`;
+  }
+
+  function renderCover(container){
+    const intro=document.createElement("div");
+    intro.innerHTML=`
+      <div class="hero-callout">
+        <div style="flex:2 1 220px;">
+          <h2>Welcome to the Stadium Design Showcase digital handbook</h2>
+          <p>This handbook captures the key content from the physical exhibition at the Goods Shed,
+          including display boards, plans, sections, videos and context views of the
+          Macquarie Point Multipurpose Stadium.</p>
+        </div>
+        <div style="flex:1 1 160px;">
+          <p style="font-size:.85rem;margin:0 0 4px;color:var(--text-muted);">Use the navigation at the top to move between:</p>
+          <ul style="margin:0;padding-left:18px;font-size:.84rem;color:var(--text-muted);">
+            <li>Display boards</li>
+            <li>Videos and animations</li>
+            <li>Stadium layouts & architectural plans</li>
+            <li>City views and reference links</li>
+          </ul>
+        </div>
+      </div>
+      <p>The content is optimised for phones, tablets and laptops. Tap the image tiles to open them larger,
+      and use the drop-down menus or left/right arrow keys to move between pages.</p>
+    `;
+    container.appendChild(intro);
+  }
+
+  function renderBoardsOverview(container){
+    const p=document.createElement("p");
+    p.textContent="All display boards from the Goods Shed showcase. Tap a tile or use the Display boards menu to jump directly to a specific board.";
+    p.style.fontSize=".9rem"; p.style.color="var(--text-muted)"; container.appendChild(p);
+
+    const grid=document.createElement("div"); grid.className="image-grid";
+    const group=DISPLAY_BOARD_FILES.map((file,idx)=>({src:`assets/boards/${file}`,title:boardLabelFromFile(file,idx)}));
+
+    DISPLAY_BOARD_FILES.forEach((file,idx)=>{
+      const card=document.createElement("div"); card.className="image-card"; card.addEventListener("click",()=>openLightboxGroup(group,idx));
+      const thumb=document.createElement("div"); thumb.className="image-card-thumb";
+      thumb.innerHTML=`<img src="assets/boards/${file}" alt="${boardLabelFromFile(file,idx)}">`;
+      const body=document.createElement("div"); body.className="image-card-body";
+      body.innerHTML=`<div class="image-card-title">${boardLabelFromFile(file,idx)}</div><div class="image-card-caption">Click to view full board</div>`;
+      card.appendChild(thumb); card.appendChild(body); grid.appendChild(card);
+    });
+    container.appendChild(grid);
+  }
+
+  function renderSingleImage(container,page){
+    const wrap=document.createElement("div"); wrap.className="image-full-wrap"; wrap.innerHTML=`<img src="${page.image}" alt="${page.title}">`;
+    const cap=document.createElement("div"); cap.className="image-full-caption"; cap.innerHTML=`<span>${page.title}</span><span>Tip: click the image to enlarge</span>`;
+    const group=[{src:page.image,title:page.title}];
+    wrap.addEventListener("click",()=>openLightboxGroup(group,0));
+    container.appendChild(wrap); container.appendChild(cap);
+  }
+
+  function renderVideos(container){
+    const intro=document.createElement("p");
+    intro.textContent="Short films and animations that unpack the experience, technical design and remediation work behind the Macquarie Point Multipurpose Stadium.";
+    intro.style.fontSize=".9rem"; intro.style.color="var(--text-muted)"; container.appendChild(intro);
+
+    const list=document.createElement("div"); list.className="video-list";
+    VIDEO_ITEMS.forEach(v=>{
+      const card=document.createElement("div"); card.className="video-card";
+      // thumbnail behaves as link to the single page (no inline play)
+      const thumb=document.createElement("div"); thumb.style.width="100%"; thumb.style.aspectRatio="16/9"; thumb.style.borderRadius="12px"; thumb.style.background="#111827"; thumb.style.display="flex"; thumb.style.alignItems="center"; thumb.style.justifyContent="center"; thumb.style.color="#fff"; thumb.style.cursor="pointer"; thumb.textContent="Open video";
+      thumb.addEventListener("click",()=>renderPage(v.id));
+      const title=document.createElement("div"); title.className="video-title"; title.textContent=v.title;
+      const meta=document.createElement("div"); meta.className="video-meta"; meta.textContent=v.note||"";
+      const btnRow=document.createElement("div"); btnRow.style.marginTop="4px";
+      const btn=document.createElement("a"); btn.className="btn-ghost"; btn.href=v.url; btn.target="_blank"; btn.rel="noopener"; btn.textContent="Open on YouTube";
+      btnRow.appendChild(btn);
+      card.appendChild(thumb); card.appendChild(title); card.appendChild(meta); card.appendChild(btnRow);
+      list.appendChild(card);
+    });
+    container.appendChild(list);
+  }
+
+  function renderVideoSingle(container,page){
+    const v=VIDEO_ITEMS.find(x=>x.id===page.videoId)||VIDEO_ITEMS[0];
+    if(v.note){ const intro=document.createElement("p"); intro.style.fontSize=".9rem"; intro.style.color="var(--text-muted)"; intro.textContent=v.note; container.appendChild(intro); }
+    const iframe=document.createElement("iframe"); iframe.className="video-single-frame"; iframe.src=toEmbed(v.url);
+    iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"; iframe.allowFullscreen=true; container.appendChild(iframe);
+    const btnRow=document.createElement("div"); btnRow.style.marginTop="4px";
+    const btn=document.createElement("a"); btn.className="btn-ghost"; btn.href=v.url; btn.target="_blank"; btn.rel="noopener"; btn.textContent="Open this video on YouTube";
+    btnRow.appendChild(btn); container.appendChild(btnRow);
+  }
+
+  function renderImageGrid(container,page){
+    if(page.intro){ const intro=document.createElement("div"); intro.className="image-grid-intro"; intro.textContent=page.intro; container.appendChild(intro); }
+    const grid=document.createElement("div"); grid.className="image-grid";
+    const images=page.images||[];
+    const group=images.map(img=>({src:`assets/plans/${img.file}`,title:img.label}));
+    images.forEach((img,idx)=>{
+      const card=document.createElement("div"); card.className="image-card";
+      const thumb=document.createElement("div"); thumb.className="image-card-thumb"; thumb.innerHTML=`<img src="assets/plans/${img.file}" alt="${img.label}">`;
+      const body=document.createElement("div"); body.className="image-card-body"; body.innerHTML=`<div class="image-card-title">${img.label}</div><div class="image-card-caption">Tap to view larger</div>`;
+      card.appendChild(thumb); card.appendChild(body);
+      card.addEventListener("click",()=>openLightboxGroup(group,idx));
+      grid.appendChild(card);
+    });
+    container.appendChild(grid);
+  }
+
+  function renderLinks(container){
+    const p=document.createElement("p");
+    p.textContent="Stay in touch with Macquarie Point Development Corporation and access further information about the project.";
+    p.style.fontSize=".9rem"; p.style.color="var(--text-muted)"; container.appendChild(p);
+
+    const webHeading=document.createElement("div"); webHeading.className="links-heading"; webHeading.textContent="Websites & email"; container.appendChild(webHeading);
+    const webList=document.createElement("div"); webList.className="links-list";
+    const webItems=[
+      {title:"macpoint.com",url:"https://www.macpoint.com"},
+      {title:"macpoint.com/stadium",url:"https://www.macpoint.com/stadium"},
+      {title:"Subscribe for stadium updates",url:"https://forms.office.com/Pages/ResponsePage.aspx?id=iqvrZPTMXEui0ytOly2Wsrl40AF9vslDorV-Toe-MB5URTNCUVYxR0JXRFVFVk1RM0lCRFlGU0U0RS4u"},
+      {title:"Contact the project team (contact@macpoint.com)",url:"mailto:contact@macpoint.com"}
+    ];
+    webItems.forEach(item=>{
+      const a=document.createElement("a"); a.className="link-row"; a.href=item.url; a.target=item.url.startsWith("mailto:")?"_self":"_blank"; if(!item.url.startsWith("mailto:")) a.rel="noopener";
+      const main=document.createElement("div"); main.className="link-row-main";
+      const title=document.createElement("div"); title.className="link-row-title"; title.textContent=item.title;
+      main.appendChild(title);
+      const arrow=document.createElement("div"); arrow.className="link-row-arrow"; arrow.textContent="↗";
+      a.appendChild(main); a.appendChild(arrow); webList.appendChild(a);
+    });
+    container.appendChild(webList);
+
+    const socialHeading=document.createElement("div"); socialHeading.className="links-heading"; socialHeading.textContent="Social media"; container.appendChild(socialHeading);
+    const socialList=document.createElement("div"); socialList.className="links-list";
+    const socialItems=[
+      {title:"LinkedIn",url:"https://www.linkedin.com/company/macquarie-point-development-corporation/",badge:"in",color:"#0a66c2"},
+      {title:"Facebook",url:"https://www.facebook.com/macpointtas/",badge:"f",color:"#1877f2"},
+      {title:"Instagram",url:"https://www.instagram.com/macpointtas/",badge:"IG",color:"#d62976"}
+    ];
+    socialItems.forEach(item=>{
+      const a=document.createElement("a"); a.className="link-row"; a.href=item.url; a.target="_blank"; a.rel="noopener";
+      const badge=document.createElement("div"); badge.className="link-row-badge"; badge.textContent=item.badge||""; badge.style.background=item.color||"var(--mpdc-blue)";
+      const main=document.createElement("div"); main.className="link-row-main";
+      const title=document.createElement("div"); title.className="link-row-title"; title.textContent=item.title;
+      const arrow=document.createElement("div"); arrow.className="link-row-arrow"; arrow.textContent="↗";
+      a.appendChild(badge); a.appendChild(main); main.appendChild(title); a.appendChild(arrow); socialList.appendChild(a);
+    });
+    container.appendChild(socialList);
+  }
+
+  // --------------- LIGHTBOX (with prev/next + zoom/drag) ---------------
+  const lightbox=document.getElementById("lightbox");
+  const lightboxImg=document.getElementById("lightboxImg");
+  const lightboxTitle=document.getElementById("lightboxTitle");
+  const lbPrevBtn=document.getElementById("lightboxPrev");
+  const lbNextBtn=document.getElementById("lightboxNext");
+  const lbCloseBtn=document.getElementById("lightboxClose");
+
+  let lightboxGroup=[], lightboxIndex=0, scale=1, originX=0, originY=0;
+
+  function showLightboxItem(){
+    if(!lightboxGroup.length) return;
+    const item=lightboxGroup[lightboxIndex];
+    lightboxImg.src=item.src; lightboxImg.alt=item.title||""; lightboxTitle.textContent=item.title||"";
+    resetZoom();
+  }
+  function openLightboxGroup(group,startIndex){
+    if(!group||!group.length) return;
+    lightboxGroup=group; lightboxIndex=startIndex||0; showLightboxItem(); lightbox.classList.add("open");
+  }
+  function lightboxPrev(){ if(!lightboxGroup.length) return; lightboxIndex=(lightboxIndex-1+lightboxGroup.length)%lightboxGroup.length; showLightboxItem(); }
+  function lightboxNext(){ if(!lightboxGroup.length) return; lightboxIndex=(lightboxIndex+1)%lightboxGroup.length; showLightboxItem(); }
+  function closeLightbox(){ lightbox.classList.remove("open"); lightboxImg.src=""; lightboxGroup=[]; }
+
+  function resetZoom(){ scale=1; originX=0; originY=0; updateTransform(); }
+  function updateTransform(){ lightboxImg.style.transform=`translate(${originX}px, ${originY}px) scale(${scale})`; }
+
+  // mouse wheel zoom
+  lightboxImg.addEventListener("wheel",(e)=>{
+    e.preventDefault();
+    const delta = e.deltaY<0 ? 1.1 : 0.9;
+    const rect=lightboxImg.getBoundingClientRect();
+    const cx=e.clientX-rect.left, cy=e.clientY-rect.top;
+    const prevScale=scale; scale=Math.min(6,Math.max(1,scale*delta));
+    originX = cx - (cx - originX) * (scale/prevScale);
+    originY = cy - (cy - originY) * (scale/prevScale);
+    updateTransform();
+  },{passive:false});
+
+  // drag
+  let dragging=false, startX=0, startY=0;
+  lightboxImg.addEventListener("mousedown",(e)=>{ if(scale<=1) return; dragging=true; startX=e.clientX-originX; startY=e.clientY-originY; });
+  window.addEventListener("mousemove",(e)=>{ if(!dragging) return; originX=e.clientX-startX; originY=e.clientY-startY; updateTransform(); });
+  window.addEventListener("mouseup",()=>dragging=false);
+
+  lbPrevBtn.addEventListener("click",lightboxPrev);
+  lbNextBtn.addEventListener("click",lightboxNext);
+  lbCloseBtn.addEventListener("click",closeLightbox);
+  lightbox.addEventListener("click",(e)=>{ if(e.target===lightbox) closeLightbox(); });
+
+  // --------------- NAV ---------------
+  const navToggle=document.getElementById("navToggle");
+  const appRoot=document.getElementById("appRoot");
+  navToggle.addEventListener("click",()=>{ appRoot.classList.toggle("nav-open"); });
+  document.getElementById("homeLink").addEventListener("click",()=>{ renderPage("cover"); appRoot.classList.remove("nav-open"); });
+
+  document.querySelectorAll(".nav-btn[data-page]").forEach(btn=>{
+    btn.addEventListener("click",()=>{ const pageId=btn.dataset.page; renderPage(pageId); appRoot.classList.remove("nav-open"); closeAllMenus(); });
   });
-}
-
-// --- INIT NAV LOGIC ---
-
-document.querySelectorAll(".nav-btn").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    setActive(btn);
-    const p=btn.dataset.page;
-    if(p==="cover")renderCover();
-    if(p==="infoSheets")renderInfoSheets();
-    if(p==="links")renderLinks();
+  function closeAllMenus(){ document.querySelectorAll(".nav-menu").forEach(m=>m.classList.remove("open")); }
+  document.querySelectorAll(".nav-has-menu").forEach(btn=>{
+    btn.addEventListener("click",(e)=>{ const menu=document.getElementById(btn.dataset.menu); const already=menu.classList.contains("open"); closeAllMenus(); if(!already) menu.classList.add("open"); e.stopPropagation(); });
   });
-});
+  document.addEventListener("click",()=>closeAllMenus());
 
-document.querySelectorAll(".nav-has-menu").forEach(b=>{
-  b.addEventListener("click",(e)=>{
-    const menu=document.getElementById(b.dataset.menu);
-    const open=!menu.classList.contains("open");
-    document.querySelectorAll(".nav-menu").forEach(m=>m.classList.remove("open"));
-    if(open)menu.classList.add("open");
-    e.stopPropagation();
+  function buildMenus(){
+    const boardsMenu=document.getElementById("boardsMenu");
+    const videosMenu=document.getElementById("videosMenu");
+    const plansMenu=document.getElementById("plansMenu");
+
+    // Boards
+    boardsMenu.innerHTML="";
+    const boardsAll=document.createElement("button"); boardsAll.textContent="All display boards"; boardsAll.classList.add("menu-all");
+    boardsAll.addEventListener("click",()=>{ renderPage("display-overview"); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+    boardsMenu.appendChild(boardsAll);
+    const bHead=document.createElement("h4"); bHead.textContent="Individual boards"; boardsMenu.appendChild(bHead);
+    DISPLAY_BOARD_FILES.forEach((file,idx)=>{
+      const pageId=`display-board-${idx+1}`;
+      const btn=document.createElement("button");
+      btn.innerHTML=`${boardLabelFromFile(file,idx)} <span>${idx+1}</span>`;
+      btn.addEventListener("click",()=>{ renderPage(pageId); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+      boardsMenu.appendChild(btn);
+    });
+
+    // Videos
+    videosMenu.innerHTML="";
+    const videosAll=document.createElement("button"); videosAll.textContent="All videos & animations"; videosAll.classList.add("menu-all");
+    videosAll.addEventListener("click",()=>{ renderPage("videos"); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+    videosMenu.appendChild(videosAll);
+    const vHead=document.createElement("h4"); vHead.textContent="Individual videos"; videosMenu.appendChild(vHead);
+    VIDEO_ITEMS.forEach((v,idx)=>{
+      const btn=document.createElement("button"); btn.innerHTML=`${v.title} <span>${idx+1}</span>`;
+      btn.addEventListener("click",()=>{ renderPage(v.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+      videosMenu.appendChild(btn);
+    });
+
+    // Plans
+    plansMenu.innerHTML="";
+    const layoutsHead=document.createElement("h4"); layoutsHead.textContent="Stadium layouts"; plansMenu.appendChild(layoutsHead);
+    [{id:"plans-layouts-1",label:"Field sports layouts"},{id:"plans-layouts-2",label:"Event modes"}].forEach(item=>{
+      const btn=document.createElement("button"); btn.textContent=item.label;
+      btn.addEventListener("click",()=>{ renderPage(item.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+      plansMenu.appendChild(btn);
+    });
+
+    const archHead=document.createElement("h4"); archHead.textContent="Architectural plans"; plansMenu.appendChild(archHead);
+    [
+      {id:"plans-ga",label:"General arrangement"},
+      {id:"plans-egress",label:"Egress plans"},              // NEW
+      {id:"plans-sections",label:"Building & site sections"},
+      {id:"plans-elevations",label:"Building elevations"},   // NEW
+      {id:"plans-facades",label:"Facade sections"},
+      {id:"views",label:"Context views"}
+    ].forEach(item=>{
+      const btn=document.createElement("button"); btn.textContent=item.label;
+      btn.addEventListener("click",()=>{ renderPage(item.id); appRoot.classList.remove("nav-open"); closeAllMenus(); });
+      plansMenu.appendChild(btn);
+    });
+  }
+  buildMenus();
+
+  document.addEventListener("keydown",(e)=>{
+    if(lightbox.classList.contains("open")){
+      if(e.key==="ArrowLeft") lightboxPrev();
+      else if(e.key==="ArrowRight") lightboxNext();
+      else if(e.key==="Escape") closeLightbox();
+      return;
+    }
+    if(e.key==="ArrowLeft") goPrevPage();
+    else if(e.key==="ArrowRight") goNextPage();
   });
-});
 
-document.addEventListener("click",()=>document.querySelectorAll(".nav-menu").forEach(m=>m.classList.remove("open")));
-document.querySelectorAll(".nav-menu button").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const p=btn.dataset.page;
-    if(p==="allBoards")renderBoardsList();
-    if(p.startsWith("board-"))renderBoard(p.split("-")[1]);
-    if(p==="allVideos")renderAllVideos();
-    if(p.startsWith("video-"))renderVideo(p.split("-")[1]);
-    if(p==="allPlans")renderAllPlans();
-    if(p.startsWith("plan-"))renderPlan(p.split("-")[1]);
-  });
-});
-
-renderCover();
+  renderPage("cover");
 </script>
 </body>
 </html>
