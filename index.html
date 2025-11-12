@@ -120,7 +120,7 @@
       align-items:center;
       gap:0;
       border-radius:999px;
-      overflow:hidden;
+      overflow:visible;              /* was hidden – now allows dropdown to show */
       border:1px solid rgba(255,255,255,.65);
       background:rgba(255,255,255,.08);
     }
@@ -154,7 +154,7 @@
       background:#f5f7fb;
     }
 
-    /* when in that “zone”, soften but highlight the whole capsule */
+    /* when in that “zone”, highlight the whole capsule */
     .nav-group.active{
       border-color:rgba(255,255,255,.95);
       background:rgba(255,255,255,.16);
