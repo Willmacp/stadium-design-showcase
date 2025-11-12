@@ -120,7 +120,7 @@
       align-items:center;
       gap:0;
       border-radius:999px;
-      overflow:visible;              /* was hidden – now allows dropdown to show */
+      overflow:visible;              /* allows dropdown to show */
       border:1px solid rgba(255,255,255,.65);
       background:rgba(255,255,255,.08);
     }
@@ -1057,7 +1057,7 @@
       id:"info-sheets",
       type:"info",
       title:"Information Sheets",
-      subtitle:"Design development · capacity · cricket",
+      subtitle:"",
       category:"Info"
     });
 
@@ -1066,7 +1066,7 @@
       id:"plans-overview",
       type:"plans-overview",
       title:"Architectural plans — Overview",
-      subtitle:"Tap a section to view",
+      subtitle:"",
       category:"Plans"
     });
 
@@ -1631,12 +1631,6 @@
   }
 
   function renderBoardsOverview(container){
-    const p=document.createElement("p");
-    p.textContent="All display boards from the Goods Shed showcase. Tap a tile to open its page.";
-    p.style.fontSize="0.92rem";
-    p.style.color="var(--text-muted)";
-    container.appendChild(p);
-
     const grid=document.createElement("div");
     grid.className="image-grid";
 
@@ -1669,12 +1663,6 @@
   }
 
   function renderPlansOverview(container){
-    const p=document.createElement("p");
-    p.textContent="Browse all plan sets. Tap a section to view the drawings.";
-    p.style.fontSize="0.92rem";
-    p.style.color="var(--text-muted)";
-    container.appendChild(p);
-
     const items=[
       {id:"plans-layouts-1",title:"Stadium layouts — Sports",thumb:`assets/plans/${STADIUM_LAYOUT_IMAGES[0].file}`},
       {id:"plans-layouts-2",title:"Stadium layouts — Event modes",thumb:`assets/plans/${STADIUM_LAYOUT_IMAGES[6].file}`},
@@ -1739,12 +1727,6 @@
   }
 
   function renderVideos(container){
-    const intro=document.createElement("p");
-    intro.textContent="Short films and animations that unpack the experience, technical design and remediation work behind the Macquarie Point Multipurpose Stadium.";
-    intro.style.fontSize="0.92rem";
-    intro.style.color="var(--text-muted)";
-    container.appendChild(intro);
-
     const list=document.createElement("div");
     list.className="video-list";
 
@@ -1873,12 +1855,6 @@
   }
 
   function renderInfoPage(container){
-    const p=document.createElement("p");
-    p.textContent="Supporting information sheets grouped by topic. Tap a tile to open its pages; use left/right to step through.";
-    p.style.fontSize="0.92rem";
-    p.style.color="var(--text-muted)";
-    container.appendChild(p);
-
     const grid=document.createElement("div");
     grid.className="image-grid";
 
@@ -1930,12 +1906,6 @@
   }
 
   function renderLinks(container){
-    const p=document.createElement("p");
-    p.textContent="Stay in touch with Macquarie Point Development Corporation and access further information about the project.";
-    p.style.fontSize="0.92rem";
-    p.style.color="var(--text-muted)";
-    container.appendChild(p);
-
     const webHeading=document.createElement("div");
     webHeading.className="links-heading";
     webHeading.textContent="Websites & email";
@@ -1988,8 +1958,8 @@
 
     const socialItems=[
       {title:"LinkedIn",url:"https://www.linkedin.com/company/macquarie-point-development-corporation/",badge:"in",color:"#0a66c2"},
-      {title:"Facebook",url:"https://www.facebook.com/macquariepoint/",badge:"f",color:"#1877f2"},
-      {title:"Instagram",url:"https://www.instagram.com/macquariepoint/",badge:"IG",color:"#d62976"}
+      {title:"Facebook",url:"https://www.facebook.com/macpointtas/",badge:"f",color:"#1877f2"},
+      {title:"Instagram",url:"https://www.instagram.com/macpointtas/",badge:"IG",color:"#d62976"}
     ];
 
     socialItems.forEach(item=>{
