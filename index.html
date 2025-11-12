@@ -112,38 +112,6 @@
       border-color:var(--mpdc-blue);
       box-shadow:0 3px 8px rgba(0,0,0,.22);
     }
-/* LINK / SECONDARY BUTTON STYLING - matches main pills but inverted */
-.btn-ghost,
-.link-row {
-  border-radius: 999px;
-  border: 1px solid var(--mpdc-blue);
-  background: rgba(95,128,155,0.08);
-  color: var(--mpdc-blue);
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-
-.btn-ghost:hover,
-.link-row:hover {
-  background: var(--mpdc-blue);
-  color: #fff;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-  border-color: var(--mpdc-blue);
-}
-
-/* Optional: unify pill sizing and spacing for link rows */
-.link-row {
-  padding: 10px 14px;
-  border-radius: 20px;
-  font-weight: 500;
-  font-size: 0.9rem;
-}
-.link-row-title {
-  color: inherit;
-}
-.link-row-arrow {
-  color: inherit;
-}
 
     /* pill + arrow combined capsule (softened) */
     .nav-group{
@@ -347,7 +315,7 @@
       align-items:center;
       gap:6px;
       text-decoration:none;
-      transition:background .15s,color .15s,border-color .15s;
+      transition:background .15s,color .15s,border-color .15s,box-shadow .15s;
     }
     .btn-primary{
       background:var(--mpdc-blue);
@@ -357,12 +325,18 @@
       background:#254766;
       border-color:#254766;
     }
+
+    /* INVERSE PILLS (match nav feel, inverted) */
     .btn-ghost{
-      background:transparent;
+      background:rgba(53,85,122,.08);
       color:var(--mpdc-blue);
+      box-shadow:0 1px 4px rgba(0,0,0,.05);
     }
     .btn-ghost:hover{
-      background:rgba(53,85,122,.08);
+      background:var(--mpdc-blue);
+      color:#fff;
+      border-color:var(--mpdc-blue);
+      box-shadow:0 3px 8px rgba(0,0,0,.12);
     }
 
     /* IMAGE GRID */
@@ -533,39 +507,31 @@
       margin-left:auto;
       margin-right:auto;
     }
+
+    /* Inverse, menu-like link rows */
     .link-row{
       display:flex;
       align-items:center;
       gap:10px;
-      padding:6px 8px;
-      border-radius:12px;
-      border:1px solid var(--border-soft);
-      background:#f5efe4;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--mpdc-blue);
+      background:rgba(53,85,122,.08);
       text-decoration:none;
-      color:var(--text-main);
-      transition:border-color .15s,box-shadow .15s,background .15s,transform .1s;
+      color:var(--mpdc-blue);
+      transition:background .15s,color .15s,border-color .15s,box-shadow .15s,transform .1s;
+      box-shadow:0 1px 4px rgba(0,0,0,.05);
     }
     .link-row:hover{
-      border-color:rgba(53,85,122,.7);
-      box-shadow:0 4px 10px rgba(0,0,0,.1);
-      background:#fff8ed;
+      background:var(--mpdc-blue);
+      color:#fff;
+      border-color:var(--mpdc-blue);
+      box-shadow:0 3px 8px rgba(0,0,0,.12);
       transform:translateY(-1px);
     }
-    .link-row-main{
-      flex:1 1 auto;
-      min-width:0;
-    }
-    .link-row-title{
-      font-size:.9rem;
-      font-weight:400;
-      color:var(--text-main);
-      margin-bottom:0;
-    }
-    .link-row-arrow{
-      font-size:.9rem;
-      color:var(--mpdc-blue);
-      flex-shrink:0;
-    }
+    .link-row-main{flex:1 1 auto;min-width:0;}
+    .link-row-title{font-size:.9rem;font-weight:500;color:inherit;margin-bottom:0;}
+    .link-row-arrow{font-size:.9rem;color:inherit;flex-shrink:0;}
     .link-row-badge{
       width:26px;
       height:26px;
@@ -678,10 +644,14 @@
       cursor:pointer;
       white-space:nowrap;
       font-weight:600;
+      transition:background .15s,color .15s,border-color .15s,box-shadow .15s;
+      box-shadow:0 1px 3px rgba(0,0,0,.04);
     }
     .related-pill:hover{
       background:var(--mpdc-blue);
       color:#fff;
+      border-color:var(--mpdc-blue);
+      box-shadow:0 3px 8px rgba(0,0,0,.12);
     }
 
     /* FOOTER */
