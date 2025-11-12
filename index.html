@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root{
-      --mpdc-blue:#35557a;          /* tiny nudge lighter than before */
+      --mpdc-blue:#35557a;
       --mpdc-grey:#384454;
       --mpdc-green:#35557a;
       --accent-warm:#f3e0c5;
@@ -113,21 +113,22 @@
       box-shadow:0 3px 8px rgba(0,0,0,.22);
     }
 
-    /* pill + arrow combined capsule */
+    /* pill + arrow combined capsule (softened) */
     .nav-group{
       position:relative;
       display:flex;
       align-items:center;
       gap:0;
       border-radius:999px;
-      overflow:visible;              /* allows dropdown to show */
-      border:1px solid rgba(255,255,255,.65);
+      overflow:visible;
+      border:1px solid rgba(255,255,255,.45);
       background:rgba(255,255,255,.08);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
     }
     .nav-group .nav-btn{
       border:none;
       border-radius:999px 0 0 999px;
-      border-right:1px solid rgba(255,255,255,.55);
+      border-right:1px solid rgba(255,255,255,.38);
       box-shadow:none;
     }
     .nav-group .nav-btn.active{
@@ -140,24 +141,26 @@
       border:none;
       background:#fff;
       color:var(--mpdc-blue);
-      padding:7px 9px;
+      padding:7px 10px;
       border-radius:0 999px 999px 0;
       cursor:pointer;
       font-size:.86rem;
       line-height:1;
       display:inline-flex;
       align-items:center;
-      border-left:1px solid rgba(255,255,255,.55);
-      transition:background .15s,color .15s,border-color .15s;
+      border-left:1px solid rgba(255,255,255,.38);
+      transition:background .15s,color .15s,border-color .15s,box-shadow .15s;
     }
     .nav-caret:hover{
       background:#f5f7fb;
+      box-shadow:0 2px 6px rgba(0,0,0,.12);
     }
 
-    /* when in that “zone”, highlight the whole capsule */
+    /* when in that “zone”, highlight the whole capsule + blue caret */
     .nav-group.active{
       border-color:rgba(255,255,255,.95);
       background:rgba(255,255,255,.16);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);
     }
     .nav-group.active .nav-caret{
       background:var(--mpdc-blue);
@@ -471,10 +474,6 @@
       font-weight:600;
       color:var(--text-main);
     }
-    .video-meta{
-      font-size:.78rem;
-      color:var(--text-muted);
-    }
     .video-single-frame{
       width:100%;
       max-width:720px;
@@ -687,9 +686,7 @@
       }
       .app.nav-open .nav{display:flex}
       .nav-toggle{display:block}
-      .nav-group{
-        width:100%;
-      }
+      .nav-group{width:100%;}
       .nav-menu{
         position:static;
         max-height:220px;
@@ -699,12 +696,8 @@
         margin-top:4px;
         background:#fff;
       }
-      #pageContainer{
-        padding:14px 14px 12px;
-      }
-      .page-shell{
-        padding:16px 14px 18px;
-      }
+      #pageContainer{padding:14px 14px 12px;}
+      .page-shell{padding:16px 14px 18px;}
     }
 
     .nav-menu{
@@ -893,67 +886,21 @@
     return customNames[idx] || `Display board ${String(idx+1).padStart(2,"0")}`;
   }
 
-      const VIDEO_ITEMS = [
-    // Stadium design & experience (top section)
-    {
-      id: "video-5",
-      title: "Entering the Macquarie Point Multipurpose Stadium",
-      url: "https://youtu.be/NSc6u8vX-cQ",
-      note: "Approach, thresholds and first impressions as you enter the Macquarie Point Multipurpose Stadium."
-    },
-    {
-      id: "video-6",
-      title: "Inside the Macquarie Point Multipurpose Stadium",
-      url: "https://youtu.be/zM63SF3_8fI",
-      note: "Concourse, seating tiers and interior spectator experience within the Macquarie Point Multipurpose Stadium."
-    },
-    {
-      id: "video-2",
-      title: "Gate 2, featuring our Function Room",
-      url: "https://youtu.be/KcSXlcSaL_8",
-      note: "Arrival experience via Gate 2 and integrated function / events spaces."
-    },
-    {
-      id: "video-1",
-      title: "Back of House, Secure Zone and Player Facilities",
-      url: "https://youtu.be/Zx76BnLkNlY",
-      note: "Back-of-house amenities, secure player circulation and player facilities."
-    },
-    {
-      id: "video-8",
-      title: "Multipurpose stadium – sun and shadowing study",
-      url: "https://youtu.be/zskCZeWZ-xo",
-      note: "How the stadium responds to sun and shade across seasons, events and times of day."
-    },
-    {
-      id: "video-9",
-      title: "Meet some of the design team",
-      url: "https://youtu.be/nJqy5tg7z_o",
-      note: "Members of the design team talk through key project drivers and design intent."
-    },
+  /* Stadium first; remediation group reordered so previous bottom item goes to top: 3, 4, 7 */
+  const VIDEO_ITEMS = [
+    // Stadium design & experience
+    { id:"video-5", title:"Entering the Macquarie Point Multipurpose Stadium", url:"https://youtu.be/NSc6u8vX-cQ", note:"Approach, thresholds and first impressions as you enter the Macquarie Point Multipurpose Stadium." },
+    { id:"video-6", title:"Inside the Macquarie Point Multipurpose Stadium",   url:"https://youtu.be/zM63SF3_8fI", note:"Concourse, seating tiers and interior spectator experience within the Macquarie Point Multipurpose Stadium." },
+    { id:"video-2", title:"Gate 2, featuring our Function Room",                url:"https://youtu.be/KcSXlcSaL_8", note:"Arrival experience via Gate 2 and integrated function / events spaces." },
+    { id:"video-1", title:"Back of House, Secure Zone and Player Facilities",   url:"https://youtu.be/Zx76BnLkNlY", note:"Back-of-house amenities, secure player circulation and player facilities." },
+    { id:"video-8", title:"Multipurpose stadium – sun and shadowing study",     url:"https://youtu.be/zskCZeWZ-xo", note:"How the stadium responds to sun and shade across seasons, events and times of day." },
+    { id:"video-9", title:"Meet some of the design team",                       url:"https://youtu.be/nJqy5tg7z_o", note:"Members of the design team talk through key project drivers and design intent." },
 
-    // Remediation & technical works (bottom section)
-    {
-      id: "video-4",
-      title: "Mac Point remediation work",
-      url: "https://youtu.be/mJzHTXnSrb8",
-      note: "Overview of remediation works at Mac Point and how they support the stadium."
-    },
-    {
-      id: "video-7",
-      title: "Remediation: In situ-solidification",
-      url: "https://youtu.be/84pkAhplxIY",
-      note: "In situ-solidification methodology used to treat ground conditions at Macquarie Point."
-    },
-    {
-      id: "video-3",
-      title: "The complexities of remediating contaminated sites",
-      url: "https://youtu.be/waWApjh_snA",
-      note: "Challenges and considerations in delivering remediation on complex sites."
-    }
+    // Remediation (reordered)
+    { id:"video-3", title:"The complexities of remediating contaminated sites", url:"https://youtu.be/waWApjh_snA", note:"Challenges and considerations in delivering remediation on complex sites." },
+    { id:"video-4", title:"Mac Point remediation work",                         url:"https://youtu.be/mJzHTXnSrb8", note:"Overview of remediation works at Mac Point and how they support the stadium." },
+    { id:"video-7", title:"Remediation: In situ-solidification",                url:"https://youtu.be/84pkAhplxIY", note:"In situ-solidification methodology used to treat ground conditions at Macquarie Point." }
   ];
-
-
 
   const STADIUM_LAYOUT_IMAGES=[
     {file:"stadium-layout-afl.jpg",label:"AFL"},
@@ -1023,7 +970,6 @@
   ];
 
   /* INFO SHEETS */
-
   const INFO_DESIGN_IMAGES=[
     {file:"info-design-development-1.jpg",label:"Design development – overview"},
     {file:"info-design-development-2.jpg",label:"Design development – process"},
@@ -1776,6 +1722,7 @@
     container.appendChild(cap);
   }
 
+  /* --- VIDEOS: grid = title only, no notes/buttons --- */
   function renderVideos(container){
     const list=document.createElement("div");
     list.className="video-list";
@@ -1802,27 +1749,8 @@
       title.className="video-title";
       title.textContent=v.title;
 
-      const meta=document.createElement("div");
-      meta.className="video-meta";
-      meta.textContent=v.note || "";
-
-      const btnRow=document.createElement("div");
-      btnRow.style.marginTop="4px";
-
-      const btn=document.createElement("a");
-      btn.className="btn-ghost";
-      btn.href=v.url;
-      btn.target="_blank";
-      btn.rel="noopener";
-      btn.textContent="Open on YouTube";
-      btn.addEventListener("click",(e)=>e.stopPropagation());
-
-      btnRow.appendChild(btn);
-
       card.appendChild(thumb);
       card.appendChild(title);
-      card.appendChild(meta);
-      card.appendChild(btnRow);
 
       list.appendChild(card);
     });
@@ -1830,16 +1758,15 @@
     container.appendChild(list);
   }
 
+  /* --- Single video page: title + embed only (no note/button) --- */
   function renderVideoSingle(container,page){
     const v=VIDEO_ITEMS.find(x=>x.id===page.videoId) || VIDEO_ITEMS[0];
 
-    if(v.note){
-      const intro=document.createElement("p");
-      intro.style.fontSize="0.92rem";
-      intro.style.color="var(--text-muted)";
-      intro.textContent=v.note;
-      container.appendChild(intro);
-    }
+    const h=document.createElement("div");
+    h.className="video-title";
+    h.style.margin="2px 0 6px";
+    h.textContent=v.title;
+    container.appendChild(h);
 
     const iframe=document.createElement("iframe");
     iframe.className="video-single-frame";
@@ -1847,19 +1774,6 @@
     iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
     iframe.allowFullscreen=true;
     container.appendChild(iframe);
-
-    const btnRow=document.createElement("div");
-    btnRow.style.marginTop="4px";
-
-    const btn=document.createElement("a");
-    btn.className="btn-ghost";
-    btn.href=v.url;
-    btn.target="_blank";
-    btn.rel="noopener";
-    btn.textContent="Open this video on YouTube";
-
-    btnRow.appendChild(btn);
-    container.appendChild(btnRow);
   }
 
   function renderImageGrid(container,page){
@@ -2113,7 +2027,7 @@
     const videosMenu=document.getElementById("videosMenu");
     const plansMenu=document.getElementById("plansMenu");
 
-    // Display boards: individual only
+    // Display boards
     boardsMenu.innerHTML="";
     const boardsHeader=document.createElement("h4");
     boardsHeader.textContent="Individual boards";
