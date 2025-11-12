@@ -112,6 +112,38 @@
       border-color:var(--mpdc-blue);
       box-shadow:0 3px 8px rgba(0,0,0,.22);
     }
+/* LINK / SECONDARY BUTTON STYLING - matches main pills but inverted */
+.btn-ghost,
+.link-row {
+  border-radius: 999px;
+  border: 1px solid var(--mpdc-blue);
+  background: rgba(95,128,155,0.08);
+  color: var(--mpdc-blue);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.btn-ghost:hover,
+.link-row:hover {
+  background: var(--mpdc-blue);
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  border-color: var(--mpdc-blue);
+}
+
+/* Optional: unify pill sizing and spacing for link rows */
+.link-row {
+  padding: 10px 14px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.link-row-title {
+  color: inherit;
+}
+.link-row-arrow {
+  color: inherit;
+}
 
     /* pill + arrow combined capsule (softened) */
     .nav-group{
