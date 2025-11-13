@@ -315,7 +315,7 @@
       align-items:center;
       gap:6px;
       text-decoration:none;
-      transition:background .15s,color .15s,border-color .15s,box-shadow .15s;
+      transition:background .15s,color .15s,border-color .15s;
     }
     .btn-primary{
       background:var(--mpdc-blue);
@@ -325,18 +325,12 @@
       background:#254766;
       border-color:#254766;
     }
-
-    /* INVERSE PILLS (match nav feel, inverted) */
     .btn-ghost{
-      background:rgba(53,85,122,.08);
+      background:transparent;
       color:var(--mpdc-blue);
-      box-shadow:0 1px 4px rgba(0,0,0,.05);
     }
     .btn-ghost:hover{
-      background:var(--mpdc-blue);
-      color:#fff;
-      border-color:var(--mpdc-blue);
-      box-shadow:0 3px 8px rgba(0,0,0,.12);
+      background:rgba(53,85,122,.08);
     }
 
     /* IMAGE GRID */
@@ -507,31 +501,39 @@
       margin-left:auto;
       margin-right:auto;
     }
-
-    /* Inverse, menu-like link rows */
     .link-row{
       display:flex;
       align-items:center;
       gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--mpdc-blue);
-      background:rgba(53,85,122,.08);
+      padding:6px 8px;
+      border-radius:12px;
+      border:1px solid var(--border-soft);
+      background:#f5efe4;
       text-decoration:none;
-      color:var(--mpdc-blue);
-      transition:background .15s,color .15s,border-color .15s,box-shadow .15s,transform .1s;
-      box-shadow:0 1px 4px rgba(0,0,0,.05);
+      color:var(--text-main);
+      transition:border-color .15s,box-shadow .15s,background .15s,transform .1s;
     }
     .link-row:hover{
-      background:var(--mpdc-blue);
-      color:#fff;
-      border-color:var(--mpdc-blue);
-      box-shadow:0 3px 8px rgba(0,0,0,.12);
+      border-color:rgba(53,85,122,.7);
+      box-shadow:0 4px 10px rgba(0,0,0,.1);
+      background:#fff8ed;
       transform:translateY(-1px);
     }
-    .link-row-main{flex:1 1 auto;min-width:0;}
-    .link-row-title{font-size:.9rem;font-weight:500;color:inherit;margin-bottom:0;}
-    .link-row-arrow{font-size:.9rem;color:inherit;flex-shrink:0;}
+    .link-row-main{
+      flex:1 1 auto;
+      min-width:0;
+    }
+    .link-row-title{
+      font-size:.9rem;
+      font-weight:400;
+      color:var(--text-main);
+      margin-bottom:0;
+    }
+    .link-row-arrow{
+      font-size:.9rem;
+      color:var(--mpdc-blue);
+      flex-shrink:0;
+    }
     .link-row-badge{
       width:26px;
       height:26px;
@@ -644,14 +646,10 @@
       cursor:pointer;
       white-space:nowrap;
       font-weight:600;
-      transition:background .15s,color .15s,border-color .15s,box-shadow .15s;
-      box-shadow:0 1px 3px rgba(0,0,0,.04);
     }
     .related-pill:hover{
       background:var(--mpdc-blue);
       color:#fff;
-      border-color:var(--mpdc-blue);
-      box-shadow:0 3px 8px rgba(0,0,0,.12);
     }
 
     /* FOOTER */
@@ -846,7 +844,7 @@
     return "";
   }
 
-  /* ------------ DATA ------------ */
+  /* ------------ DATA (boards with preserved original IDs, reordered display) ------------ */
 
   const DISPLAY_BOARD_FILES=[
     "boards1_01.jpg","boards1_02.jpg","boards1_03.jpg","boards1_04.jpg","boards1_05.jpg",
@@ -857,40 +855,81 @@
     "boards3_06.jpg","boards3_07.jpg","boards3_08.jpg","boards3_09.jpg"
   ];
 
-  function boardLabelFromFile(file,idx){
-    const customNames=[
-      "Seating Bowl",
-      "User Experience",
-      "Roof Design",
-      "A Multipurpose Venue",
-      "Reflecting Tasmania",
-      "Business Events",
-      "The Goods Shed",
-      "Precinct Plan",
-      "Site Master Plan",
-      "Remediation",
-      "Geotechnical Investigations",
-      "Transport",
-      "Accessibility",
-      "Site Archaeology",
-      "Investment Opportunity",
-      "Permit Conditions",
-      "Media Spaces",
-      "Continuous Concourse",
-      "The Goods Shed",
-      "Sports Bar",
-      "The Restaurant",
-      "The Chair's Club / Event Space",
-      "Function Space",
-      "Corporate Suits",
-      "Field Club"
-    ];
-    return customNames[idx] || `Display board ${String(idx+1).padStart(2,"0")}`;
-  }
+  const DISPLAY_BOARD_LABELS=[
+    "Seating Bowl",                       // 1
+    "User Experience",                    // 2
+    "Roof Design",                        // 3  (Roof board)
+    "A Multipurpose Venue",               // 4
+    "Reflecting Tasmania",                // 5
+    "Business Events",                    // 6
+    "The Goods Shed",                     // 7  (precinct)
+    "Precinct Plan",                      // 8  (precinct)
+    "Site Master Plan",                   // 9  (precinct)
+    "Remediation",                        // 10 (precinct)
+    "Geotechnical Investigations",        // 11 (precinct)
+    "Transport",                          // 12
+    "Accessibility",                      // 13
+    "Site Archaeology",                   // 14 (precinct)
+    "Investment Opportunity",             // 15 (stadium but to be last of stadium)
+    "Permit Conditions",                  // 16 (stadium but to be last of stadium)
+    "Media Spaces",                       // 17
+    "Continuous Concourse",               // 18
+    "The Goods Shed",                     // 19 (precinct, second Goods Shed board)
+    "Sports Bar",                         // 20
+    "The Restaurant",                     // 21
+    "The Chair's Club / Event Space",     // 22
+    "Function Space",                     // 23
+    "Corporate Suits",                    // 24
+    "Field Club"                          // 25
+  ];
 
-  /* Stadium first; remediation group reordered so previous bottom item goes to top: 3, 4, 7 */
+  // Build objects with original index preserved
+  const ALL_BOARD_ITEMS = DISPLAY_BOARD_FILES.map((file, idx) => ({
+    file,
+    label: DISPLAY_BOARD_LABELS[idx],
+    originalIndex: idx + 1
+  }));
+
+  // Which labels are precinct boards (bundle second, with custom order)
+  const PRECINCT_SET = new Set([
+    "The Goods Shed",
+    "Geotechnical Investigations",
+    "Remediation",
+    "Precinct Plan",
+    "Site Master Plan",
+    "Site Archaeology"
+  ]);
+
+  // Stadium special to go last (just before precinct bundle)
+  const STADIUM_LAST = new Set(["Investment Opportunity","Permit Conditions"]);
+
+  const precinctDesiredOrder = [
+    "The Goods Shed",
+    "Geotechnical Investigations",
+    "Remediation",
+    "Precinct Plan",
+    "Site Master Plan",
+    "Site Archaeology"
+  ];
+
+  // Partition
+  const precinctBoards = ALL_BOARD_ITEMS.filter(it => PRECINCT_SET.has(it.label));
+  const stadiumBoards  = ALL_BOARD_ITEMS.filter(it => !PRECINCT_SET.has(it.label));
+
+  // Stadium order: all (excluding the two) then the two
+  const stadiumCore = stadiumBoards.filter(it => !STADIUM_LAST.has(it.label));
+  const stadiumTail = stadiumBoards.filter(it => STADIUM_LAST.has(it.label));
+
+  // Precinct order: follow desired sequence, preserving duplicates order where label repeats (two "The Goods Shed")
+  const precinctOrdered = precinctDesiredOrder.flatMap(name =>
+    precinctBoards.filter(it => it.label === name)
+  );
+
+  // Final ordered list for menus/overview/buildPages
+  const DISPLAY_BOARD_ITEMS_ORDERED = [...stadiumCore, ...stadiumTail, ...precinctOrdered];
+
+  /* Stadium videos */
   const VIDEO_ITEMS = [
-    // Stadium design & experience
     { id:"video-5", title:"Entering the Macquarie Point Multipurpose Stadium", url:"https://youtu.be/NSc6u8vX-cQ", note:"Approach, thresholds and first impressions as you enter the Macquarie Point Multipurpose Stadium." },
     { id:"video-6", title:"Inside the Macquarie Point Multipurpose Stadium",   url:"https://youtu.be/zM63SF3_8fI", note:"Concourse, seating tiers and interior spectator experience within the Macquarie Point Multipurpose Stadium." },
     { id:"video-2", title:"Gate 2, featuring our Function Room",                url:"https://youtu.be/KcSXlcSaL_8", note:"Arrival experience via Gate 2 and integrated function / events spaces." },
@@ -899,9 +938,8 @@
     { id:"video-9", title:"Meet some of the design team",                       url:"https://youtu.be/nJqy5tg7z_o", note:"Members of the design team talk through key project drivers and design intent." },
 
     // Remediation (reordered)
-        { id:"video-4", title:"Mac Point remediation work",                         url:"https://youtu.be/mJzHTXnSrb8", note:"Overview of remediation works at Mac Point and how they support the stadium." },
-
     { id:"video-3", title:"The complexities of remediating contaminated sites", url:"https://youtu.be/waWApjh_snA", note:"Challenges and considerations in delivering remediation on complex sites." },
+    { id:"video-4", title:"Mac Point remediation work",                         url:"https://youtu.be/mJzHTXnSrb8", note:"Overview of remediation works at Mac Point and how they support the stadium." },
     { id:"video-7", title:"Remediation: In situ-solidification",                url:"https://youtu.be/84pkAhplxIY", note:"In situ-solidification methodology used to treat ground conditions at Macquarie Point." }
   ];
 
@@ -918,7 +956,7 @@
 
   const STADIUM_VIEW_IMAGES=[
     {file:"stadium-view-waterfront.jpeg",label:"View · Waterfront"},
-    {file:"stadium-view-city-bay.png",label:"View · Mt. Nelson"},
+    {file:"stadium-view-city-bay.png",label:"View · City & bay"},
     {file:"stadium-view-memorial.jpeg",label:"View · Cenotaph"},
     {file:"stadium-view-street.jpeg",label:"View · Evans Street"}
   ];
@@ -992,7 +1030,8 @@
   const INFO_DOCS=[
     {key:"design",title:"Design development",images:INFO_DESIGN_IMAGES,thumb:"info-design-development-1.jpg"},
     {key:"capacity",title:"Stadium capacity",images:INFO_CAPACITY_IMAGES,thumb:"info-stadium-capacity-1.jpg"},
-    {key:"cricket",title:"A stadium designed for cricket",images:INFO_CRICKET_IMAGES,thumb:"info-stadium-cricket-1.jpg",linkBack:{id:"display-board-4",label:"Board: A Multipurpose Venue"}}
+    // Link back changed to ROOF DESIGN board per request
+    {key:"cricket",title:"A stadium designed for cricket",images:INFO_CRICKET_IMAGES,thumb:"info-stadium-cricket-1.jpg",linkBack:{id:"display-board-3",label:"Board: Roof Design"}}
   ];
 
   const INFO_DOC_INDEX={design:0,capacity:1,cricket:2};
@@ -1020,12 +1059,13 @@
       category:"Display boards"
     });
 
-    DISPLAY_BOARD_FILES.forEach((file,idx)=>{
+    // DISPLAY BOARDS (ordered by stadium first, then precinct bundle) but keep original IDs
+    DISPLAY_BOARD_ITEMS_ORDERED.forEach((item)=>{
       PAGES.push({
-        id:`display-board-${idx+1}`,
+        id:`display-board-${item.originalIndex}`,   // preserve stable IDs
         type:"single-image",
-        image:`assets/boards/${file}`,
-        title:boardLabelFromFile(file,idx),
+        image:`assets/boards/${item.file}`,
+        title:item.label,
         subtitle:"",
         category:"Display boards"
       });
@@ -1086,6 +1126,7 @@
       title:"Stadium layouts · Event modes",
       subtitle:"",
       category:"Plans",
+      images:STADIIUM_LAYOUT_IMAGES = STADIUM_LAYOUT_IMAGES, // prevent accidental typo
       images:STADIUM_LAYOUT_IMAGES.slice(6),
       intro:"Alternate staging for concerts and smaller live events."
     });
@@ -1118,7 +1159,7 @@
       subtitle:"Site and stadium sections",
       category:"Plans",
       images:SECTION_IMAGES,
-      intro:"Sections cutting through the site and stadium."
+      intro:"Sections cutting through the site and stadium, describing scale, roof profile and relationships to the surrounding city."
     });
 
     PAGES.push({
@@ -1158,7 +1199,7 @@
       subtitle:"",
       category:"Plans",
       images:STADIUM_VIEW_IMAGES,
-      intro:"Key view lines from the waterfront, Cenotaph, Evans street and Mt. Nelson."
+      intro:"Key view lines from the waterfront, memorial, street network and city hillsides."
     });
 
     // LINKS
@@ -1302,11 +1343,12 @@
   }
 
   /* ------------ RELATED LINKS ------------ */
-
   const RELATED={
     "display-board-3":[
       {id:"plans-sections",label:"Architectural sections",type:"Plan"},
-      {id:"plans-facades",label:"Facade sections",type:"Plan"}
+      {id:"plans-facades",label:"Facade sections",type:"Plan"},
+      // ADD: link to Cricket info sheet (vice-versa below)
+      {id:"info-sheets",label:"Info: Cricket (open)",type:"Info",infoKey:"cricket"}
     ],
     "plans-sections":[
       {id:"display-board-3",label:"Roof design display board",type:"Board"}
@@ -1601,10 +1643,10 @@
     inner.innerHTML=`
       <div class="hero-callout">
         <div style="flex:2 1 220px;">
-          <h2>The Stadium Design Showcase Digital Handbook</h2>
+          <h2>Welcome to the Stadium Design Showcase digital handbook</h2>
           <p>
-            This handbook captures the key content from the recent Stadium Design Showcase at the Goods Shed in Hobart,
-            including display boards, plans and videos of the
+            This handbook captures the key content from the physical exhibition at the Goods Shed,
+            including display boards, plans, sections, videos and context views of the
             Macquarie Point Multipurpose Stadium.
           </p>
         </div>
@@ -1616,6 +1658,7 @@
             <li>Display boards</li>
             <li>Videos and animations</li>
             <li>Stadium layouts & architectural plans</li>
+            <li>City views, information sheets and links</li>
           </ul>
         </div>
       </div>
@@ -1632,18 +1675,19 @@
     const grid=document.createElement("div");
     grid.className="image-grid";
 
-    DISPLAY_BOARD_FILES.forEach((file,idx)=>{
+    DISPLAY_BOARD_ITEMS_ORDERED.forEach((item)=>{
+      const pageId=`display-board-${item.originalIndex}`;
       const card=document.createElement("div");
       card.className="image-card";
 
       const thumbWrap=document.createElement("div");
       thumbWrap.className="image-card-thumb";
-      thumbWrap.innerHTML=`<img src="assets/boards/${file}" alt="${boardLabelFromFile(file,idx)}">`;
+      thumbWrap.innerHTML=`<img src="assets/boards/${item.file}" alt="${item.label}">`;
 
       const body=document.createElement("div");
       body.className="image-card-body";
       body.innerHTML=`
-        <div class="image-card-title">${boardLabelFromFile(file,idx)}</div>
+        <div class="image-card-title">${item.label}</div>
         <div class="image-card-caption">Tap to open board</div>
       `;
 
@@ -1651,7 +1695,7 @@
       card.appendChild(body);
 
       card.addEventListener("click",()=>{
-        renderPage(`display-board-${idx+1}`);
+        renderPage(pageId);
       });
 
       grid.appendChild(card);
@@ -1724,7 +1768,7 @@
     container.appendChild(cap);
   }
 
-  /* --- VIDEOS: grid = title only, no notes/buttons --- */
+  /* --- VIDEOS: grid = title only --- */
   function renderVideos(container){
     const list=document.createElement("div");
     list.className="video-list";
@@ -1760,7 +1804,7 @@
     container.appendChild(list);
   }
 
-  /* --- Single video page: title + embed only (no note/button) --- */
+  /* --- Single video page --- */
   function renderVideoSingle(container,page){
     const v=VIDEO_ITEMS.find(x=>x.id===page.videoId) || VIDEO_ITEMS[0];
 
@@ -1924,8 +1968,8 @@
 
     const socialItems=[
       {title:"LinkedIn",url:"https://www.linkedin.com/company/macquarie-point-development-corporation/",badge:"in",color:"#0a66c2"},
-      {title:"Facebook",url:"https://www.facebook.com/macquariepoint/",badge:"f",color:"#1877f2"},
-      {title:"Instagram",url:"https://www.instagram.com/macquariepoint/",badge:"IG",color:"#d62976"}
+      {title:"Facebook",url:"https://www.facebook.com/macpointtas/",badge:"f",color:"#1877f2"},
+      {title:"Instagram",url:"https://www.instagram.com/macpointtas/",badge:"IG",color:"#d62976"}
     ];
 
     socialItems.forEach(item=>{
@@ -2029,16 +2073,16 @@
     const videosMenu=document.getElementById("videosMenu");
     const plansMenu=document.getElementById("plansMenu");
 
-    // Display boards
+    // Display boards (ordered grouping)
     boardsMenu.innerHTML="";
     const boardsHeader=document.createElement("h4");
     boardsHeader.textContent="Individual boards";
     boardsMenu.appendChild(boardsHeader);
 
-    DISPLAY_BOARD_FILES.forEach((file,idx)=>{
-      const pageId=`display-board-${idx+1}`;
+    DISPLAY_BOARD_ITEMS_ORDERED.forEach((item)=>{
+      const pageId=`display-board-${item.originalIndex}`;
       const btn=document.createElement("button");
-      btn.innerHTML=`${boardLabelFromFile(file,idx)} <span>${idx+1}</span>`;
+      btn.innerHTML=`${item.label} <span>${item.originalIndex}</span>`;
       btn.addEventListener("click",()=>{
         renderPage(pageId);
         appRoot.classList.remove("nav-open");
