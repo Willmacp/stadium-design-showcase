@@ -1028,11 +1028,20 @@
   ];
 
   const INFO_DOCS=[
-    {key:"design",title:"Design development",images:INFO_DESIGN_IMAGES,thumb:"info-design-development-1.jpg"},
-    {key:"capacity",title:"Stadium capacity",images:INFO_CAPACITY_IMAGES,thumb:"info-stadium-capacity-1.jpg"},
-    // Link back changed to ROOF DESIGN board per request
-    {key:"cricket",title:"A stadium designed for cricket",images:INFO_CRICKET_IMAGES,thumb:"info-stadium-cricket-1.jpg",linkBack:{id:"display-board-3",label:"Board: Roof Design"}}
-  ];
+  {key:"design",title:"Design development",images:INFO_DESIGN_IMAGES,thumb:"info-design-development-1.jpg"},
+  {key:"capacity",title:"Stadium capacity",images:INFO_CAPACITY_IMAGES,thumb:"info-stadium-capacity-1.jpg"},
+  {
+    key:"cricket",
+    title:"A stadium designed for cricket",
+    images:INFO_CRICKET_IMAGES,
+    thumb:"info-stadium-cricket-1.jpg",
+    linkBack:[
+      {id:"display-board-4", label:"Board: A Multipurpose Venue"},
+      {id:"display-board-3", label:"Board: Roof Design"}
+    ]
+  }
+];
+
 
   const INFO_DOC_INDEX={design:0,capacity:1,cricket:2};
 
@@ -1891,21 +1900,28 @@
         <div class="image-card-caption">${pagesCount} ${pagesCount===1 ? "page" : "pages"}</div>
       `;
 
-      if(doc.linkBack){
-        const inline=document.createElement("div");
-        inline.style.marginTop="6px";
-        inline.innerHTML=`<span style="font-size:0.82rem;color:var(--text-muted);margin-right:6px;">Related:</span>`;
-        const btn=document.createElement("button");
-        btn.type="button";
-        btn.className="related-pill";
-        btn.textContent=doc.linkBack.label;
-        btn.addEventListener("click",(e)=>{
-          e.stopPropagation();
-          renderPage(doc.linkBack.id);
-        });
-        inline.appendChild(btn);
-        body.appendChild(inline);
-      }
+    if (doc.linkBack) {
+  const inline = document.createElement("div");
+  inline.style.marginTop = "6px";
+  inline.innerHTML = `<span style="font-size:0.82rem;color:var(--text-muted);margin-right:6px;">Related:</span>`;
+
+  const links = Array.isArray(doc.linkBack) ? doc.linkBack : [doc.linkBack];
+
+  links.forEach(link => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "related-pill";
+    btn.textContent = link.label;
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      renderPage(link.id);
+    });
+    inline.appendChild(btn);
+  });
+
+  body.appendChild(inline);
+}
+
 
       card.appendChild(thumb);
       card.appendChild(body);
