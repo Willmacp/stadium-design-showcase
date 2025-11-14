@@ -302,7 +302,7 @@
       margin-top:16px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:flex-end; /* everything to the right */
       gap:8px;
       flex-wrap:wrap;
     }
@@ -323,6 +323,9 @@
       cursor:pointer;
       font-weight:600;
       white-space:nowrap;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
     }
     .page-nav-btn:hover{
       background:var(--mpdc-blue);
@@ -529,6 +532,10 @@
       font-size:.9rem;
       color:var(--mpdc-blue);
       flex-shrink:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:20px;
     }
     .link-row-badge{
       width:26px;
@@ -556,9 +563,9 @@
     }
     .lightbox.open{display:flex}
     .lightbox-inner{
-      max-width:1100px;
+      max-width:min(95vw,1400px);
       width:100%;
-      max-height:100%;
+      max-height:95vh;
       background:#111827;
       border-radius:16px;
       padding:10px 10px 12px;
@@ -566,20 +573,23 @@
       flex-direction:column;
       gap:8px;
     }
-    .lightbox-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+
+    .lightbox-title-row{
       color:#e5e7eb;
       font-size:.9rem;
-    }
-    .lightbox-controls{
-      display:flex;
-      gap:8px;
-      align-items:center;
+      padding:0 2px;
+      min-height:1.1em;
     }
 
-    .lightbox-header button{
+    .lightbox-controls-row{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+
+    .lightbox-controls-row button{
       border:none;
       background:rgba(31,41,55,.95);
       color:#e5e7eb;
@@ -589,27 +599,38 @@
       border-radius:999px;
       min-width:40px;
       box-shadow:0 1px 4px rgba(0,0,0,.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    .lightbox-header button:hover{
+    .lightbox-controls-row button:hover{
       background:rgba(55,65,81,1);
       box-shadow:0 2px 6px rgba(0,0,0,.45);
     }
+    #lightboxZoomReset{
+      font-size:.78rem; /* smaller 100% */
+      padding:5px 10px;
+    }
+
     .lightbox-img-wrap{
       flex:1 1 auto;
       display:flex;
       justify-content:flex-start;
       align-items:flex-start;
       overflow:auto;
+      background:#111827;
+      border-radius:10px;
+      padding:4px;
     }
     .lightbox-img-wrap img{
       max-width:100%;
-      max-height:80vh;
+      max-height:90vh;
       border-radius:10px;
       display:block;
       transform-origin:top left;
     }
     .lightbox.info-lightbox .lightbox-inner{
-      max-width:1300px;
+      max-width:min(95vw,1400px);
       max-height:95vh;
     }
     .lightbox.info-lightbox .lightbox-img-wrap img{
@@ -736,6 +757,12 @@
         padding:5px 14px;
         font-size:.86rem;
       }
+      .link-row{
+        padding:10px 14px;   /* bigger buttons on links page */
+      }
+      .link-row-title{
+        font-size:.95rem;
+      }
       .link-row-badge{
         width:30px;
         height:30px;
@@ -846,19 +873,19 @@
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <div class="lightbox-inner">
-    <div class="lightbox-header">
+    <div class="lightbox-title-row">
       <div id="lightboxTitle"></div>
-      <div class="lightbox-controls">
-        <button type="button" id="lightboxPrev" aria-label="Previous image">‹</button>
-        <button type="button" id="lightboxNext" aria-label="Next image">›</button>
-        <button type="button" id="lightboxZoomOut" aria-label="Zoom out">−</button>
-        <button type="button" id="lightboxZoomIn" aria-label="Zoom in">+</button>
-        <button type="button" id="lightboxZoomReset" aria-label="Reset zoom">100%</button>
-        <button type="button" id="lightboxClose" aria-label="Close image">✕</button>
-      </div>
     </div>
     <div class="lightbox-img-wrap">
       <img id="lightboxImg" src="" alt="">
+    </div>
+    <div class="lightbox-controls-row">
+      <button type="button" id="lightboxPrev" aria-label="Previous image">‹</button>
+      <button type="button" id="lightboxNext" aria-label="Next image">›</button>
+      <button type="button" id="lightboxZoomOut" aria-label="Zoom out">−</button>
+      <button type="button" id="lightboxZoomIn" aria-label="Zoom in">+</button>
+      <button type="button" id="lightboxZoomReset" aria-label="Reset zoom">100%</button>
+      <button type="button" id="lightboxClose" aria-label="Close image">✕</button>
     </div>
   </div>
 </div>
@@ -1668,11 +1695,11 @@
       navInline.appendChild(nextBtn);
     }
 
-    bottomRow.appendChild(navInline);
-
     const logoRow=document.createElement("div");
     logoRow.className="logo-row";
     logoRow.innerHTML=`<img src="assets/mpdc-logo.png" alt="MPDC logo" onerror="this.style.display='none'">`;
+
+    bottomRow.appendChild(navInline);
     bottomRow.appendChild(logoRow);
 
     shell.appendChild(bottomRow);
