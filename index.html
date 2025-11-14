@@ -113,7 +113,6 @@
       box-shadow:0 3px 8px rgba(0,0,0,.22);
     }
 
-    /* pill + arrow combined capsule (softened) */
     .nav-group{
       position:relative;
       display:flex;
@@ -156,7 +155,6 @@
       box-shadow:0 2px 6px rgba(0,0,0,.12);
     }
 
-    /* when in that “zone”, highlight the whole capsule + blue caret */
     .nav-group.active{
       border-color:rgba(255,255,255,.95);
       background:rgba(255,255,255,.16);
@@ -302,7 +300,7 @@
       margin-top:16px;
       display:flex;
       align-items:center;
-      justify-content:flex-end; /* everything to the right */
+      justify-content:flex-end;
       gap:8px;
       flex-wrap:wrap;
     }
@@ -316,7 +314,7 @@
     .page-nav-btn{
       border-radius:999px;
       padding:4px 10px;
-      border:1px solid var(--mpdc-blue);
+      border:1px solid(var(--mpdc-blue));
       background:#fff;
       color:var(--mpdc-blue);
       font-size:.8rem;
@@ -565,18 +563,21 @@
     .lightbox-inner{
       max-width:min(95vw,1400px);
       width:100%;
-      max-height:95vh;
+      max-height:92vh;
       background:#111827;
       border-radius:16px;
-      padding:10px 10px 12px;
+      padding:8px 10px 10px;
       display:flex;
       flex-direction:column;
-      gap:8px;
+      gap:6px;
+    }
+    .lightbox.tall-lightbox .lightbox-inner{
+      max-height:98vh;
     }
 
     .lightbox-title-row{
       color:#e5e7eb;
-      font-size:.9rem;
+      font-size:.86rem;
       padding:0 2px;
       min-height:1.1em;
     }
@@ -585,19 +586,19 @@
       display:flex;
       justify-content:flex-end;
       align-items:center;
-      flex-wrap:wrap;
-      gap:6px;
+      flex-wrap:nowrap; /* keep on one line */
+      gap:4px;
     }
 
     .lightbox-controls-row button{
       border:none;
       background:rgba(31,41,55,.95);
       color:#e5e7eb;
-      font-size:.96rem;
+      font-size:.8rem;
       cursor:pointer;
-      padding:6px 12px;
+      padding:4px 8px;
       border-radius:999px;
-      min-width:40px;
+      min-width:32px;
       box-shadow:0 1px 4px rgba(0,0,0,.35);
       display:flex;
       align-items:center;
@@ -608,8 +609,8 @@
       box-shadow:0 2px 6px rgba(0,0,0,.45);
     }
     #lightboxZoomReset{
-      font-size:.78rem; /* smaller 100% */
-      padding:5px 10px;
+      font-size:.72rem;
+      padding:3px 8px;
     }
 
     .lightbox-img-wrap{
@@ -629,12 +630,17 @@
       display:block;
       transform-origin:top left;
     }
+
     .lightbox.info-lightbox .lightbox-inner{
       max-width:min(95vw,1400px);
       max-height:95vh;
     }
     .lightbox.info-lightbox .lightbox-img-wrap img{
       max-height:none;
+    }
+
+    .lightbox.tall-lightbox .lightbox-img-wrap img{
+      max-height:96vh;
     }
 
     /* RELATED PANEL */
@@ -751,6 +757,21 @@
       }
     }
 
+    @media (max-width:480px){
+      .lightbox-inner{
+        padding:6px 8px 8px;
+      }
+      .lightbox-controls-row button{
+        font-size:.72rem;
+        padding:3px 6px;
+        min-width:28px;
+      }
+      #lightboxZoomReset{
+        font-size:.68rem;
+        padding:2px 6px;
+      }
+    }
+
     /* Desktop-only tweaks */
     @media (min-width:821px){
       .page-nav-btn{
@@ -758,7 +779,7 @@
         font-size:.86rem;
       }
       .link-row{
-        padding:10px 14px;   /* bigger buttons on links page */
+        padding:10px 14px;
       }
       .link-row-title{
         font-size:.95rem;
@@ -833,7 +854,7 @@
       <!-- Home -->
       <button class="nav-btn" data-page="cover">Home</button>
 
-      <!-- Display boards: pill + arrow capsule -->
+      <!-- Display boards -->
       <div class="nav-group" data-group="boards">
         <button class="nav-btn" id="boardsRoot">Display boards</button>
         <button class="nav-caret" type="button" data-menu="boardsMenu" aria-label="Open display boards menu">▾</button>
@@ -914,7 +935,7 @@
     return "";
   }
 
-  /* ------------ DATA (boards with preserved original IDs, reordered display) ------------ */
+  /* ------------ DATA ------------ */
 
   const DISPLAY_BOARD_FILES=[
     "boards1_01.jpg","boards1_02.jpg","boards1_03.jpg","boards1_04.jpg","boards1_05.jpg",
@@ -953,14 +974,12 @@
     "Field Club"
   ];
 
-  // Build objects with original index preserved
   const ALL_BOARD_ITEMS = DISPLAY_BOARD_FILES.map((file, idx) => ({
     file,
     label: DISPLAY_BOARD_LABELS[idx],
     originalIndex: idx + 1
   }));
 
-  // Which labels are precinct boards (bundle second, with custom order)
   const PRECINCT_SET = new Set([
     "The Goods Shed",
     "Geotechnical Investigations",
@@ -970,7 +989,6 @@
     "Site Archaeology"
   ]);
 
-  // Stadium special to go last (just before precinct bundle)
   const STADIUM_LAST = new Set(["Investment Opportunity","Permit Conditions"]);
 
   const precinctDesiredOrder = [
@@ -982,23 +1000,18 @@
     "Site Archaeology"
   ];
 
-  // Partition
   const precinctBoards = ALL_BOARD_ITEMS.filter(it => PRECINCT_SET.has(it.label));
   const stadiumBoards  = ALL_BOARD_ITEMS.filter(it => !PRECINCT_SET.has(it.label));
 
-  // Stadium order: all (excluding the two) then the two
   const stadiumCore = stadiumBoards.filter(it => !STADIUM_LAST.has(it.label));
   const stadiumTail = stadiumBoards.filter(it => STADIUM_LAST.has(it.label));
 
-  // Precinct order: follow desired sequence, preserving duplicates order
   const precinctOrdered = precinctDesiredOrder.flatMap(name =>
     precinctBoards.filter(it => it.label === name)
   );
 
-  // Final ordered list for menus/overview/buildPages
   const DISPLAY_BOARD_ITEMS_ORDERED = [...stadiumCore, ...stadiumTail, ...precinctOrdered];
 
-  /* Stadium videos */
   const VIDEO_ITEMS = [
     { id:"video-5", title:"Entering the Macquarie Point Multipurpose Stadium", url:"https://youtu.be/NSc6u8vX-cQ", note:"Approach, thresholds and first impressions as you enter the Macquarie Point Multipurpose Stadium." },
     { id:"video-6", title:"Inside the Macquarie Point Multipurpose Stadium",   url:"https://youtu.be/zM63SF3_8fI", note:"Concourse, seating tiers and interior spectator experience within the Macquarie Point Multipurpose Stadium." },
@@ -1006,8 +1019,6 @@
     { id:"video-1", title:"Back of House, Secure Zone and Player Facilities",   url:"https://youtu.be/Zx76BnLkNlY", note:"Back-of-house amenities, secure player circulation and player facilities." },
     { id:"video-8", title:"Multipurpose stadium – sun and shadowing study",     url:"https://youtu.be/zskCZeWZ-xo", note:"How the stadium responds to sun and shade across seasons, events and times of day." },
     { id:"video-9", title:"Meet some of the design team",                       url:"https://youtu.be/nJqy5tg7z_o", note:"Members of the design team talk through key project drivers and design intent." },
-
-    // Remediation (reordered)
     { id:"video-3", title:"The complexities of remediating contaminated sites", url:"https://youtu.be/waWApjh_snA", note:"Challenges and considerations in delivering remediation on complex sites." },
     { id:"video-4", title:"Mac Point remediation work",                         url:"https://youtu.be/mJzHTXnSrb8", note:"Overview of remediation works at Mac Point and how they support the stadium." },
     { id:"video-7", title:"Remediation: In situ-solidification",                url:"https://youtu.be/84pkAhplxIY", note:"In situ-solidification methodology used to treat ground conditions at Macquarie Point." }
@@ -1080,7 +1091,6 @@
     {file:"External.pdf.jpg",label:"Perforated facade cladding detail"}
   ];
 
-  /* INFO SHEETS */
   const INFO_DESIGN_IMAGES=[
     {file:"info-design-development-1.jpg",label:"Design development – overview"},
     {file:"info-design-development-2.jpg",label:"Design development – process"},
@@ -1114,12 +1124,9 @@
 
   const INFO_DOC_INDEX={design:0,capacity:1,cricket:2};
 
-  /* ------------ PAGES ARRAY ------------ */
-
   const PAGES=[];
 
   function buildPages(){
-    // COVER
     PAGES.push({
       id:"cover",
       type:"cover",
@@ -1128,7 +1135,6 @@
       category:"Overview"
     });
 
-    // DISPLAY BOARDS OVERVIEW
     PAGES.push({
       id:"display-overview",
       type:"boards-overview",
@@ -1137,7 +1143,6 @@
       category:"Display boards"
     });
 
-    // DISPLAY BOARDS
     DISPLAY_BOARD_ITEMS_ORDERED.forEach((item)=>{
       PAGES.push({
         id:`display-board-${item.originalIndex}`,
@@ -1149,7 +1154,6 @@
       });
     });
 
-    // VIDEOS
     PAGES.push({
       id:"videos",
       type:"videos",
@@ -1169,7 +1173,6 @@
       });
     });
 
-    // INFO SHEETS
     PAGES.push({
       id:"info-sheets",
       type:"info",
@@ -1178,7 +1181,6 @@
       category:"Info"
     });
 
-    // PLANS OVERVIEW
     PAGES.push({
       id:"plans-overview",
       type:"plans-overview",
@@ -1187,7 +1189,6 @@
       category:"Plans"
     });
 
-    // PLANS: LAYOUTS
     PAGES.push({
       id:"plans-layouts-1",
       type:"image-grid",
@@ -1208,7 +1209,6 @@
       intro:"Alternate staging for concerts and smaller live events."
     });
 
-    // PLANS: GA, EGRESS, SECTIONS, ELEVATIONS, FACADES, VIEWS, DETAILS
     PAGES.push({
       id:"plans-ga",
       type:"image-grid",
@@ -1279,7 +1279,6 @@
       intro:"Key view lines from the waterfront, memorial, street network and city hillsides."
     });
 
-    // LINKS
     PAGES.push({
       id:"links",
       type:"links",
@@ -1327,15 +1326,17 @@
     applyLightboxZoom();
   }
 
-  function openLightboxGroup(group,startIndex,isInfo){
+  function openLightboxGroup(group,startIndex,isInfo,tall){
     if(!group || !group.length) return;
     lightboxGroup=group;
     lightboxIndex=startIndex || 0;
 
+    lightbox.classList.remove("info-lightbox","tall-lightbox");
     if(isInfo){
       lightbox.classList.add("info-lightbox");
-    }else{
-      lightbox.classList.remove("info-lightbox");
+    }
+    if(tall){
+      lightbox.classList.add("tall-lightbox");
     }
 
     showLightboxItem();
@@ -1355,8 +1356,7 @@
   }
 
   function closeLightbox(){
-    lightbox.classList.remove("open");
-    lightbox.classList.remove("info-lightbox");
+    lightbox.classList.remove("open","info-lightbox","tall-lightbox");
     lightboxImg.src="";
     lightboxGroup=[];
   }
@@ -1375,7 +1375,7 @@
   });
 
   lbZoomOutBtn.addEventListener("click",()=>{
-    lightboxZoom=Math.max(lightboxZoom/1.25,0.5);
+    lightboxZoom=Math.max(lightboxZoom/1.25,1); // do not go below 100%
     applyLightboxZoom();
   });
 
@@ -1384,14 +1384,13 @@
     applyLightboxZoom();
   });
 
-  // Scroll-wheel zoom
   lightboxImgWrap.addEventListener("wheel",(e)=>{
     if(!lightbox.classList.contains("open")) return;
     e.preventDefault();
     if(e.deltaY<0){
       lightboxZoom=Math.min(lightboxZoom*1.1,3);
     }else{
-      lightboxZoom=Math.max(lightboxZoom/1.1,0.5);
+      lightboxZoom=Math.max(lightboxZoom/1.1,1); // min 100%
     }
     applyLightboxZoom();
   },{passive:false});
@@ -1404,7 +1403,7 @@
       src:`assets/plans/${img.file}`,
       title:img.label
     }));
-    openLightboxGroup(group,planIdx,false);
+    openLightboxGroup(group,planIdx,false,false);
   }
 
   function openInfoDoc(key){
@@ -1416,7 +1415,7 @@
       src:`assets/info/${img.file}`,
       title:img.label
     }));
-    openLightboxGroup(group,0,true);
+    openLightboxGroup(group,0,true,false);
   }
 
   /* ------------ RELATED LINKS ------------ */
@@ -1604,7 +1603,6 @@
     const idx=getPageIndex(page.id);
     const total=PAGES.length;
 
-    // TOP NAV ACTIVE STATE
     document.querySelectorAll(".nav-btn[data-page]").forEach(btn=>{
       btn.classList.toggle("active",btn.dataset.page===page.id);
     });
@@ -1672,7 +1670,6 @@
       appendRelatedPanel(body,page.id);
     }
 
-    // PAGE NAV + LOGO ROW
     const bottomRow=document.createElement("div");
     bottomRow.className="page-bottom-row";
 
@@ -1704,11 +1701,9 @@
 
     shell.appendChild(bottomRow);
 
-    // Replace content
     pageContainer.innerHTML="";
     pageContainer.appendChild(shell);
 
-    // Ensure we jump to the top of the new page
     pageContainer.scrollTop = 0;
     if (typeof window !== "undefined") {
       try { window.scrollTo(0,0); } catch(e) {}
@@ -1845,7 +1840,7 @@
 
     const group=[{src:page.image,title:page.title}];
 
-    wrap.addEventListener("click",()=>openLightboxGroup(group,0,false));
+    wrap.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
 
     container.appendChild(wrap);
     container.appendChild(cap);
@@ -1920,6 +1915,8 @@
       title:img.label
     }));
 
+    const isTallGroup = page.id === "plans-details";
+
     images.forEach((img,idx)=>{
       const card=document.createElement("div");
       card.className="image-card";
@@ -1937,7 +1934,7 @@
 
       card.appendChild(thumb);
       card.appendChild(body);
-      card.addEventListener("click",()=>openLightboxGroup(group,idx,false));
+      card.addEventListener("click",()=>openLightboxGroup(group,idx,false,isTallGroup));
 
       grid.appendChild(card);
     });
@@ -1957,7 +1954,7 @@
 
       const card=document.createElement("div");
       card.className="image-card";
-      card.addEventListener("click",()=>openLightboxGroup(group,0,true));
+      card.addEventListener("click",()=>openLightboxGroup(group,0,true,false));
 
       const thumb=document.createElement("div");
       thumb.className="image-card-thumb";
@@ -2116,7 +2113,6 @@
     });
   });
 
-  // Root pills → overview pages
   document.getElementById("boardsRoot").addEventListener("click",()=>{
     renderPage("display-overview");
     appRoot.classList.remove("nav-open");
@@ -2139,7 +2135,6 @@
     document.querySelectorAll(".nav-menu").forEach(menu=>menu.classList.remove("open"));
   }
 
-  // Carets toggle menus
   document.querySelectorAll(".nav-caret").forEach(btn=>{
     btn.addEventListener("click",(e)=>{
       const menuId=btn.dataset.menu;
@@ -2160,7 +2155,6 @@
     const videosMenu=document.getElementById("videosMenu");
     const plansMenu=document.getElementById("plansMenu");
 
-    // Display boards (ordered grouping)
     boardsMenu.innerHTML="";
     const boardsHeader=document.createElement("h4");
     boardsHeader.textContent="Individual boards";
@@ -2178,7 +2172,6 @@
       boardsMenu.appendChild(btn);
     });
 
-    // Videos
     videosMenu.innerHTML="";
     const videosHeader=document.createElement("h4");
     videosHeader.textContent="Individual videos";
@@ -2195,7 +2188,6 @@
       videosMenu.appendChild(btn);
     });
 
-    // Plans
     plansMenu.innerHTML="";
 
     const layoutsHeader=document.createElement("h4");
@@ -2242,7 +2234,6 @@
 
   buildMenus();
 
-  // Keyboard shortcuts
   document.addEventListener("keydown",(e)=>{
     if(lightbox.classList.contains("open")){
       if(e.key==="ArrowLeft")      lightboxPrev();
@@ -2255,7 +2246,6 @@
     else if(e.key==="ArrowRight") goNextPage();
   });
 
-  // Initial
   renderPage("cover");
 </script>
 </body>
