@@ -829,6 +829,14 @@
       background:rgba(53,85,122,.07);
       transform:translateX(1px);
     }
+
+    /* 📌 Mobile tweak: open Plans menu upwards so it sits higher and scrolls properly */
+    @media (max-width:820px){
+      .nav-group[data-group="plans"] .nav-menu{
+        top:auto;
+        bottom:calc(100% + 4px);
+      }
+    }
   </style>
 </head>
 <body>
