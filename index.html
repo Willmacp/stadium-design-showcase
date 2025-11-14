@@ -739,13 +739,14 @@
       .app.nav-open .nav{display:flex}
       .nav-group{width:100%;}
       .nav-menu{
-        position:static;
-        max-height:220px;
-        box-shadow:none;
-        border-radius:12px;
-        border:1px solid var(--border-soft);
-        margin-top:4px;
-        background:#fff;
+    position:static;
+    max-height:60vh;        /* taller, relative to screen height */
+    overflow-y:auto;        /* enable scrolling */
+    box-shadow:none;
+    border-radius:12px;
+    border:1px solid var(--border-soft);
+    margin-top:4px;
+    background:#fff;
       }
       #pageContainer{padding:14px 14px 12px;}
       .page-shell{padding:16px 14px 18px;}
@@ -1037,10 +1038,11 @@
 
   const STADIUM_VIEW_IMAGES=[
     {file:"stadium-view-waterfront.jpeg",label:"View · Waterfront"},
-    {file:"stadium-view-city-bay.png",label:"View · City & bay"},
+    {file:"stadium-view-city-bay.png",label:"View · Mt. Nelson"},
     {file:"stadium-view-memorial.jpeg",label:"View · Cenotaph"},
     {file:"stadium-view-street.jpeg",label:"View · Evans Street"}
   ];
+
 
   const GA_PLAN_IMAGES=[
     {file:"plan-ga-ground-plane-external-concourse.jpg",label:"Ground plane – external concourse"},
@@ -1236,7 +1238,7 @@
       subtitle:"Site and stadium sections",
       category:"Plans",
       images:SECTION_IMAGES,
-      intro:"Sections cutting through the site and stadium, describing scale, roof profile and relationships to the surrounding city."
+      intro:"Sections cutting through the site and stadium, describing scale and roof profile."
     });
 
     PAGES.push({
@@ -1256,7 +1258,7 @@
       subtitle:"Layering, structure and entries",
       category:"Plans",
       images:FACADE_IMAGES,
-      intro:"Combined facade section sheets illustrating entry sequences, concourse edges and stadium skin."
+      intro:"Combined facade section sheets."
     });
 
     PAGES.push({
@@ -1276,7 +1278,7 @@
       subtitle:"",
       category:"Plans",
       images:STADIUM_VIEW_IMAGES,
-      intro:"Key view lines from the waterfront, memorial, street network and city hillsides."
+      intro:"Key view lines from the waterfront, Cenotaph, Evans St and Mt. Nelson."
     });
 
     PAGES.push({
