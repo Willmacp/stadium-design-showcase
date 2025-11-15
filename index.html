@@ -831,13 +831,14 @@
       transform:translateX(1px);
     }
 
-    /* 📌 Mobile tweak: open Plans menu upwards but a bit lower so it doesn't cut off top rows */
-    @media (max-width:820px){
-      .nav-group[data-group="plans"] .nav-menu{
-        top:auto;
-        bottom:calc(100% - 65px);
-      }
-    }
+   /* 📌 Mobile tweak: open Plans + Videos menus upwards */
+@media (max-width:820px){
+  .nav-group[data-group="plans"] .nav-menu,
+  .nav-group[data-group="videos"] .nav-menu{
+    top:auto;
+    bottom:calc(100% - 65px);  /* adjust this number to fine-tune */
+  }
+}
   </style>
 </head>
 <body>
