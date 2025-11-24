@@ -2420,6 +2420,7 @@
         const links = Array.isArray(doc.linkBack) ? doc.linkBack : [doc.linkBack];
 
         links.forEach(link => {
+        if (link.id === pageId) return;
           const btn = document.createElement("button");
           btn.type = "button";
           btn.className = "related-pill";
