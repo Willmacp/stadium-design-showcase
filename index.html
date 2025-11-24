@@ -1713,66 +1713,7 @@
           }
         }
       })();
-
-      
-
-      // injected physical board image with unified object-group lightbox
-      (function(){
-        const map = {
-          "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
-          "Function Space": "assets/boards/photo Function Space.JPG",
-          "Media Spaces": "assets/boards/photo Media Suites.JPG",
-          "Corporate Suites": "assets/boards/photo Corporate Suites.JPG",
-          "The Restaurant": "assets/boards/photo The Restaurant.JPG",
-          "The Chair's Club / Event Space": "assets/boards/photo%20The%20Chair%27s%20Club%20%20Event%20Space.JPG",
-          "Sports Bar": "assets/boards/photo Sports Bar.JPG",
-          "The Goods Shed": "assets/boards/photo Goods Shed.JPG",
-          "Field Club": "assets/boards/photo%20Field%20Club.JPG"
-        };
-        const label = page.title.replace(" board","");
-        const sampleSrc = map[label] || "";
-        if(sampleSrc){
-          const cap=document.createElement("div");
-          cap.style.marginTop="20px";
-          cap.style.fontWeight="bold";
-          cap.textContent="Physical material samples:";
-          body.appendChild(cap);
-
-          const group=[
-            {src: page.image, title: page.title},
-            {src: sampleSrc, title:"Physical material samples"}
-          ];
-
-          const img=document.createElement("img");
-          img.src=sampleSrc;
-          img.style.maxWidth="100%";
-          img.style.maxHeight="90vh";
-          img.style.marginTop="10px";
-          img.style.cursor="pointer";
-          img.style.borderRadius="12px";
-          img.style.border="1px solid rgba(0,0,0,0.1)";
-          img.style.boxShadow="0 2px 8px rgba(0,0,0,0.12)";
-          img.addEventListener("click",()=>openLightboxGroup(group,1,false,false));
-          body.appendChild(img);
-
-          let mainImg = body.querySelector('.image-full-wrap img');
-          if(mainImg){
-            let clone = mainImg.cloneNode(true);
-            mainImg.parentNode.replaceChild(clone, mainImg);
-            clone.style.cursor="pointer";
-            clone.onclick=null;
-            clone.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
-          }
-        }
-      })();
-
-      
-
-      
-
-      
-
-    }else if(page.type==="videos"){
+}else if(page.type==="videos"){
       renderVideos(body);
     }else if(page.type==="video-single"){
       renderVideoSingle(body,page);
@@ -1829,66 +1770,7 @@
           }
         }
       })();
-
-      
-
-      // injected physical board image with unified object-group lightbox
-      (function(){
-        const map = {
-          "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
-          "Function Space": "assets/boards/photo Function Space.JPG",
-          "Media Spaces": "assets/boards/photo Media Suites.JPG",
-          "Corporate Suites": "assets/boards/photo Corporate Suites.JPG",
-          "The Restaurant": "assets/boards/photo The Restaurant.JPG",
-          "The Chair's Club / Event Space": "assets/boards/photo%20The%20Chair%27s%20Club%20%20Event%20Space.JPG",
-          "Sports Bar": "assets/boards/photo Sports Bar.JPG",
-          "The Goods Shed": "assets/boards/photo Goods Shed.JPG",
-          "Field Club": "assets/boards/photo%20Field%20Club.JPG"
-        };
-        const label = page.title.replace(" board","");
-        const sampleSrc = map[label] || "";
-        if(sampleSrc){
-          const cap=document.createElement("div");
-          cap.style.marginTop="20px";
-          cap.style.fontWeight="bold";
-          cap.textContent="Physical material samples:";
-          body.appendChild(cap);
-
-          const group=[
-            {src: page.image, title: page.title},
-            {src: sampleSrc, title:"Physical material samples"}
-          ];
-
-          const img=document.createElement("img");
-          img.src=sampleSrc;
-          img.style.maxWidth="100%";
-          img.style.maxHeight="90vh";
-          img.style.marginTop="10px";
-          img.style.cursor="pointer";
-          img.style.borderRadius="12px";
-          img.style.border="1px solid rgba(0,0,0,0.1)";
-          img.style.boxShadow="0 2px 8px rgba(0,0,0,0.12)";
-          img.addEventListener("click",()=>openLightboxGroup(group,1,false,false));
-          body.appendChild(img);
-
-          let mainImg = body.querySelector('.image-full-wrap img');
-          if(mainImg){
-            let clone = mainImg.cloneNode(true);
-            mainImg.parentNode.replaceChild(clone, mainImg);
-            clone.style.cursor="pointer";
-            clone.onclick=null;
-            clone.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
-          }
-        }
-      })();
-
-      
-
-      
-
-      
-
-    }else if(page.type==="image-grid"){
+}else if(page.type==="image-grid"){
       renderImageGrid(body,page);
       appendRelatedPanel(body,page.id);
       // unified lightbox group injection
@@ -1943,66 +1825,7 @@
           }
         }
       })();
-
-      
-
-      // injected physical board image with unified object-group lightbox
-      (function(){
-        const map = {
-          "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
-          "Function Space": "assets/boards/photo Function Space.JPG",
-          "Media Spaces": "assets/boards/photo Media Suites.JPG",
-          "Corporate Suites": "assets/boards/photo Corporate Suites.JPG",
-          "The Restaurant": "assets/boards/photo The Restaurant.JPG",
-          "The Chair's Club / Event Space": "assets/boards/photo%20The%20Chair%27s%20Club%20%20Event%20Space.JPG",
-          "Sports Bar": "assets/boards/photo Sports Bar.JPG",
-          "The Goods Shed": "assets/boards/photo Goods Shed.JPG",
-          "Field Club": "assets/boards/photo%20Field%20Club.JPG"
-        };
-        const label = page.title.replace(" board","");
-        const sampleSrc = map[label] || "";
-        if(sampleSrc){
-          const cap=document.createElement("div");
-          cap.style.marginTop="20px";
-          cap.style.fontWeight="bold";
-          cap.textContent="Physical material samples:";
-          body.appendChild(cap);
-
-          const group=[
-            {src: page.image, title: page.title},
-            {src: sampleSrc, title:"Physical material samples"}
-          ];
-
-          const img=document.createElement("img");
-          img.src=sampleSrc;
-          img.style.maxWidth="100%";
-          img.style.maxHeight="90vh";
-          img.style.marginTop="10px";
-          img.style.cursor="pointer";
-          img.style.borderRadius="12px";
-          img.style.border="1px solid rgba(0,0,0,0.1)";
-          img.style.boxShadow="0 2px 8px rgba(0,0,0,0.12)";
-          img.addEventListener("click",()=>openLightboxGroup(group,1,false,false));
-          body.appendChild(img);
-
-          let mainImg = body.querySelector('.image-full-wrap img');
-          if(mainImg){
-            let clone = mainImg.cloneNode(true);
-            mainImg.parentNode.replaceChild(clone, mainImg);
-            clone.style.cursor="pointer";
-            clone.onclick=null;
-            clone.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
-          }
-        }
-      })();
-
-      
-
-      
-
-      
-
-    }else if(page.type==="links"){
+}else if(page.type==="links"){
       renderLinks(body);
     }else if(page.type==="info"){
       renderInfoPage(body);
@@ -2059,66 +1882,7 @@
           }
         }
       })();
-
-      
-
-      // injected physical board image with unified object-group lightbox
-      (function(){
-        const map = {
-          "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
-          "Function Space": "assets/boards/photo Function Space.JPG",
-          "Media Spaces": "assets/boards/photo Media Suites.JPG",
-          "Corporate Suites": "assets/boards/photo Corporate Suites.JPG",
-          "The Restaurant": "assets/boards/photo The Restaurant.JPG",
-          "The Chair's Club / Event Space": "assets/boards/photo%20The%20Chair%27s%20Club%20%20Event%20Space.JPG",
-          "Sports Bar": "assets/boards/photo Sports Bar.JPG",
-          "The Goods Shed": "assets/boards/photo Goods Shed.JPG",
-          "Field Club": "assets/boards/photo%20Field%20Club.JPG"
-        };
-        const label = page.title.replace(" board","");
-        const sampleSrc = map[label] || "";
-        if(sampleSrc){
-          const cap=document.createElement("div");
-          cap.style.marginTop="20px";
-          cap.style.fontWeight="bold";
-          cap.textContent="Physical material samples:";
-          body.appendChild(cap);
-
-          const group=[
-            {src: page.image, title: page.title},
-            {src: sampleSrc, title:"Physical material samples"}
-          ];
-
-          const img=document.createElement("img");
-          img.src=sampleSrc;
-          img.style.maxWidth="100%";
-          img.style.maxHeight="90vh";
-          img.style.marginTop="10px";
-          img.style.cursor="pointer";
-          img.style.borderRadius="12px";
-          img.style.border="1px solid rgba(0,0,0,0.1)";
-          img.style.boxShadow="0 2px 8px rgba(0,0,0,0.12)";
-          img.addEventListener("click",()=>openLightboxGroup(group,1,false,false));
-          body.appendChild(img);
-
-          let mainImg = body.querySelector('.image-full-wrap img');
-          if(mainImg){
-            let clone = mainImg.cloneNode(true);
-            mainImg.parentNode.replaceChild(clone, mainImg);
-            clone.style.cursor="pointer";
-            clone.onclick=null;
-            clone.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
-          }
-        }
-      })();
-
-      
-
-      
-
-      
-
-    }
+}
 
     const bottomRow=document.createElement("div");
     bottomRow.className="page-bottom-row";
