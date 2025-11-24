@@ -1657,7 +1657,7 @@
     }else if(page.type==="single-image"){
       renderSingleImage(body,page);
       appendRelatedPanel(body,page.id);
-      // injected physical board image with simplified lightbox group
+      // injected physical board image with unified object-group lightbox
       (function(){
         const map = {
           "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
@@ -1673,14 +1673,16 @@
         const label = page.title.replace(" board","");
         const sampleSrc = map[label] || "";
         if(sampleSrc){
-
           const cap=document.createElement("div");
           cap.style.marginTop="20px";
           cap.style.fontWeight="bold";
           cap.textContent="Physical material samples:";
           body.appendChild(cap);
 
-          const group=[ page.image, sampleSrc ];
+          const group=[
+            {src: page.image, title: page.title},
+            {src: sampleSrc, title:"Physical material samples"}
+          ];
 
           const img=document.createElement("img");
           img.src=sampleSrc;
@@ -1696,7 +1698,7 @@
 
           let mainImg = body.querySelector('.image-full-wrap img');
           if(mainImg){
-            const clone = mainImg.cloneNode(true);
+            let clone = mainImg.cloneNode(true);
             mainImg.parentNode.replaceChild(clone, mainImg);
             clone.style.cursor="pointer";
             clone.onclick=null;
@@ -1704,6 +1706,8 @@
           }
         }
       })();
+
+      
 
       
 
@@ -1714,7 +1718,7 @@
     }else if(page.type==="video-single"){
       renderVideoSingle(body,page);
       appendRelatedPanel(body,page.id);
-      // injected physical board image with simplified lightbox group
+      // injected physical board image with unified object-group lightbox
       (function(){
         const map = {
           "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
@@ -1730,14 +1734,16 @@
         const label = page.title.replace(" board","");
         const sampleSrc = map[label] || "";
         if(sampleSrc){
-
           const cap=document.createElement("div");
           cap.style.marginTop="20px";
           cap.style.fontWeight="bold";
           cap.textContent="Physical material samples:";
           body.appendChild(cap);
 
-          const group=[ page.image, sampleSrc ];
+          const group=[
+            {src: page.image, title: page.title},
+            {src: sampleSrc, title:"Physical material samples"}
+          ];
 
           const img=document.createElement("img");
           img.src=sampleSrc;
@@ -1753,7 +1759,7 @@
 
           let mainImg = body.querySelector('.image-full-wrap img');
           if(mainImg){
-            const clone = mainImg.cloneNode(true);
+            let clone = mainImg.cloneNode(true);
             mainImg.parentNode.replaceChild(clone, mainImg);
             clone.style.cursor="pointer";
             clone.onclick=null;
@@ -1761,6 +1767,8 @@
           }
         }
       })();
+
+      
 
       
 
@@ -1769,7 +1777,7 @@
     }else if(page.type==="image-grid"){
       renderImageGrid(body,page);
       appendRelatedPanel(body,page.id);
-      // injected physical board image with simplified lightbox group
+      // injected physical board image with unified object-group lightbox
       (function(){
         const map = {
           "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
@@ -1785,14 +1793,16 @@
         const label = page.title.replace(" board","");
         const sampleSrc = map[label] || "";
         if(sampleSrc){
-
           const cap=document.createElement("div");
           cap.style.marginTop="20px";
           cap.style.fontWeight="bold";
           cap.textContent="Physical material samples:";
           body.appendChild(cap);
 
-          const group=[ page.image, sampleSrc ];
+          const group=[
+            {src: page.image, title: page.title},
+            {src: sampleSrc, title:"Physical material samples"}
+          ];
 
           const img=document.createElement("img");
           img.src=sampleSrc;
@@ -1808,7 +1818,7 @@
 
           let mainImg = body.querySelector('.image-full-wrap img');
           if(mainImg){
-            const clone = mainImg.cloneNode(true);
+            let clone = mainImg.cloneNode(true);
             mainImg.parentNode.replaceChild(clone, mainImg);
             clone.style.cursor="pointer";
             clone.onclick=null;
@@ -1816,6 +1826,8 @@
           }
         }
       })();
+
+      
 
       
 
@@ -1826,7 +1838,7 @@
     }else if(page.type==="info"){
       renderInfoPage(body);
       appendRelatedPanel(body,page.id);
-      // injected physical board image with simplified lightbox group
+      // injected physical board image with unified object-group lightbox
       (function(){
         const map = {
           "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
@@ -1842,14 +1854,16 @@
         const label = page.title.replace(" board","");
         const sampleSrc = map[label] || "";
         if(sampleSrc){
-
           const cap=document.createElement("div");
           cap.style.marginTop="20px";
           cap.style.fontWeight="bold";
           cap.textContent="Physical material samples:";
           body.appendChild(cap);
 
-          const group=[ page.image, sampleSrc ];
+          const group=[
+            {src: page.image, title: page.title},
+            {src: sampleSrc, title:"Physical material samples"}
+          ];
 
           const img=document.createElement("img");
           img.src=sampleSrc;
@@ -1865,7 +1879,7 @@
 
           let mainImg = body.querySelector('.image-full-wrap img');
           if(mainImg){
-            const clone = mainImg.cloneNode(true);
+            let clone = mainImg.cloneNode(true);
             mainImg.parentNode.replaceChild(clone, mainImg);
             clone.style.cursor="pointer";
             clone.onclick=null;
@@ -1873,6 +1887,8 @@
           }
         }
       })();
+
+      
 
       
 
