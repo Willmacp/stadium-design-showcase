@@ -1011,7 +1011,11 @@
     precinctBoards.filter(it => it.label === name)
   );
 
-  const DISPLAY_BOARD_ITEMS_ORDERED = [...stadiumCore, ...stadiumTail, ...precinctOrdered];
+  const DISPLAY_BOARD_ITEMS_ORDERED = (
+  [...stadiumCore, ...stadiumTail, ...precinctOrdered]
+).filter((item, index, arr) =>
+  index === arr.findIndex(i => i.originalIndex === item.originalIndex)
+);
 
   const VIDEO_ITEMS = [
     { id:"video-5", title:"Entering the Macquarie Point Multipurpose Stadium", url:"https://youtu.be/NSc6u8vX-cQ", note:"Approach, thresholds and first impressions as you enter the Macquarie Point Multipurpose Stadium." },
