@@ -2464,5 +2464,48 @@
 
   renderPage("cover");
 </script>
+
+<script>
+// ---------------------------
+// Global Swipe Navigation
+// ---------------------------
+document.addEventListener('DOMContentLoaded', function () {
+
+  let startX = 0;
+  let isLightbox = () => document.querySelector('.lightbox.open') !== null;
+
+  document.addEventListener('touchstart', e => {
+    if (!e.touches || e.touches.length === 0) return;
+    startX = e.touches[0].clientX;
+  });
+
+  document.addEventListener('touchend', e => {
+    if (!e.changedTouches || e.changedTouches.length === 0) return;
+    const endX = e.changedTouches[0].clientX;
+    const delta = startX - endX;
+
+    if (Math.abs(delta) < 55) return;
+
+    // Lightbox swipe
+    if (isLightbox()) {
+      const next = document.getElementById('lbNextBtn');
+      const prev = document.getElementById('lbPrevBtn');
+      if (delta > 0) next?.click();
+      else prev?.click();
+      return;
+    }
+
+    // Handbook page swipe (49 pages)
+    const nextPage = document.querySelector('.nav-next');
+    const prevPage = document.querySelector('.nav-prev');
+
+    if (nextPage || prevPage) {
+      if (delta > 0) nextPage?.click();
+      else prevPage?.click();
+    }
+  });
+});
+</script>
+
 </body>
 </html>
