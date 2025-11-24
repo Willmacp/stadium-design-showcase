@@ -1657,7 +1657,7 @@
     }else if(page.type==="single-image"){
       renderSingleImage(body,page);
       appendRelatedPanel(body,page.id);
-      // injected physical board image with lightbox and styling
+      // injected physical board image with unified lightbox and styling
       (function(){
         const map = {
           "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
@@ -1673,36 +1673,41 @@
         const label = page.title.replace(" board","");
         const sampleSrc = map[label] || "";
         if(sampleSrc){
-          const cap = document.createElement("div");
-          cap.style.marginTop = "20px";
-          cap.style.fontWeight = "bold";
-          cap.textContent = "Physical material samples:";
+          const cap=document.createElement("div");
+          cap.style.marginTop="20px";
+          cap.style.fontWeight="bold";
+          cap.textContent="Physical material samples:";
           body.appendChild(cap);
 
-          const group = [
+          const group=[
             {src: page.image, title: page.title},
-            {src: sampleSrc, title: "Physical material samples"}
+            {src: sampleSrc, title:"Physical material samples"}
           ];
 
-          const img = document.createElement("img");
-          img.src = sampleSrc;
-          img.style.maxWidth = "100%";
-          img.style.maxHeight = "90vh";
-          img.style.marginTop = "10px";
-          img.style.cursor = "pointer";
-          img.style.borderRadius = "12px";
-          img.style.border = "1px solid rgba(0,0,0,0.1)";
-          img.style.boxShadow = "0 2px 8px rgba(0,0,0,0.12)";
+          const img=document.createElement("img");
+          img.src=sampleSrc;
+          img.style.maxWidth="100%";
+          img.style.maxHeight="90vh";
+          img.style.marginTop="10px";
+          img.style.cursor="pointer";
+          img.style.borderRadius="12px";
+          img.style.border="1px solid rgba(0,0,0,0.1)";
+          img.style.boxShadow="0 2px 8px rgba(0,0,0,0.12)";
           img.addEventListener("click",()=>openLightboxGroup(group,1,false,false));
           body.appendChild(img);
 
-          const mainImg = body.querySelector('.image-full-wrap img');
+          let mainImg = body.querySelector('.image-full-wrap img');
           if(mainImg){
-            mainImg.style.cursor="pointer";
-            mainImg.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
+            const clone = mainImg.cloneNode(true);
+            mainImg.parentNode.replaceChild(clone, mainImg);
+            clone.style.cursor="pointer";
+            clone.onclick=null;
+            clone.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
           }
         }
       })();
+
+      
 
       
 
@@ -1713,7 +1718,7 @@
     }else if(page.type==="video-single"){
       renderVideoSingle(body,page);
       appendRelatedPanel(body,page.id);
-      // injected physical board image with lightbox and styling
+      // injected physical board image with unified lightbox and styling
       (function(){
         const map = {
           "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
@@ -1729,36 +1734,41 @@
         const label = page.title.replace(" board","");
         const sampleSrc = map[label] || "";
         if(sampleSrc){
-          const cap = document.createElement("div");
-          cap.style.marginTop = "20px";
-          cap.style.fontWeight = "bold";
-          cap.textContent = "Physical material samples:";
+          const cap=document.createElement("div");
+          cap.style.marginTop="20px";
+          cap.style.fontWeight="bold";
+          cap.textContent="Physical material samples:";
           body.appendChild(cap);
 
-          const group = [
+          const group=[
             {src: page.image, title: page.title},
-            {src: sampleSrc, title: "Physical material samples"}
+            {src: sampleSrc, title:"Physical material samples"}
           ];
 
-          const img = document.createElement("img");
-          img.src = sampleSrc;
-          img.style.maxWidth = "100%";
-          img.style.maxHeight = "90vh";
-          img.style.marginTop = "10px";
-          img.style.cursor = "pointer";
-          img.style.borderRadius = "12px";
-          img.style.border = "1px solid rgba(0,0,0,0.1)";
-          img.style.boxShadow = "0 2px 8px rgba(0,0,0,0.12)";
+          const img=document.createElement("img");
+          img.src=sampleSrc;
+          img.style.maxWidth="100%";
+          img.style.maxHeight="90vh";
+          img.style.marginTop="10px";
+          img.style.cursor="pointer";
+          img.style.borderRadius="12px";
+          img.style.border="1px solid rgba(0,0,0,0.1)";
+          img.style.boxShadow="0 2px 8px rgba(0,0,0,0.12)";
           img.addEventListener("click",()=>openLightboxGroup(group,1,false,false));
           body.appendChild(img);
 
-          const mainImg = body.querySelector('.image-full-wrap img');
+          let mainImg = body.querySelector('.image-full-wrap img');
           if(mainImg){
-            mainImg.style.cursor="pointer";
-            mainImg.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
+            const clone = mainImg.cloneNode(true);
+            mainImg.parentNode.replaceChild(clone, mainImg);
+            clone.style.cursor="pointer";
+            clone.onclick=null;
+            clone.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
           }
         }
       })();
+
+      
 
       
 
@@ -1767,7 +1777,7 @@
     }else if(page.type==="image-grid"){
       renderImageGrid(body,page);
       appendRelatedPanel(body,page.id);
-      // injected physical board image with lightbox and styling
+      // injected physical board image with unified lightbox and styling
       (function(){
         const map = {
           "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
@@ -1783,36 +1793,41 @@
         const label = page.title.replace(" board","");
         const sampleSrc = map[label] || "";
         if(sampleSrc){
-          const cap = document.createElement("div");
-          cap.style.marginTop = "20px";
-          cap.style.fontWeight = "bold";
-          cap.textContent = "Physical material samples:";
+          const cap=document.createElement("div");
+          cap.style.marginTop="20px";
+          cap.style.fontWeight="bold";
+          cap.textContent="Physical material samples:";
           body.appendChild(cap);
 
-          const group = [
+          const group=[
             {src: page.image, title: page.title},
-            {src: sampleSrc, title: "Physical material samples"}
+            {src: sampleSrc, title:"Physical material samples"}
           ];
 
-          const img = document.createElement("img");
-          img.src = sampleSrc;
-          img.style.maxWidth = "100%";
-          img.style.maxHeight = "90vh";
-          img.style.marginTop = "10px";
-          img.style.cursor = "pointer";
-          img.style.borderRadius = "12px";
-          img.style.border = "1px solid rgba(0,0,0,0.1)";
-          img.style.boxShadow = "0 2px 8px rgba(0,0,0,0.12)";
+          const img=document.createElement("img");
+          img.src=sampleSrc;
+          img.style.maxWidth="100%";
+          img.style.maxHeight="90vh";
+          img.style.marginTop="10px";
+          img.style.cursor="pointer";
+          img.style.borderRadius="12px";
+          img.style.border="1px solid rgba(0,0,0,0.1)";
+          img.style.boxShadow="0 2px 8px rgba(0,0,0,0.12)";
           img.addEventListener("click",()=>openLightboxGroup(group,1,false,false));
           body.appendChild(img);
 
-          const mainImg = body.querySelector('.image-full-wrap img');
+          let mainImg = body.querySelector('.image-full-wrap img');
           if(mainImg){
-            mainImg.style.cursor="pointer";
-            mainImg.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
+            const clone = mainImg.cloneNode(true);
+            mainImg.parentNode.replaceChild(clone, mainImg);
+            clone.style.cursor="pointer";
+            clone.onclick=null;
+            clone.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
           }
         }
       })();
+
+      
 
       
 
@@ -1823,7 +1838,7 @@
     }else if(page.type==="info"){
       renderInfoPage(body);
       appendRelatedPanel(body,page.id);
-      // injected physical board image with lightbox and styling
+      // injected physical board image with unified lightbox and styling
       (function(){
         const map = {
           "Continuous Concourse": "assets/boards/photo Continuous Concourse (level 1).JPG",
@@ -1839,36 +1854,41 @@
         const label = page.title.replace(" board","");
         const sampleSrc = map[label] || "";
         if(sampleSrc){
-          const cap = document.createElement("div");
-          cap.style.marginTop = "20px";
-          cap.style.fontWeight = "bold";
-          cap.textContent = "Physical material samples:";
+          const cap=document.createElement("div");
+          cap.style.marginTop="20px";
+          cap.style.fontWeight="bold";
+          cap.textContent="Physical material samples:";
           body.appendChild(cap);
 
-          const group = [
+          const group=[
             {src: page.image, title: page.title},
-            {src: sampleSrc, title: "Physical material samples"}
+            {src: sampleSrc, title:"Physical material samples"}
           ];
 
-          const img = document.createElement("img");
-          img.src = sampleSrc;
-          img.style.maxWidth = "100%";
-          img.style.maxHeight = "90vh";
-          img.style.marginTop = "10px";
-          img.style.cursor = "pointer";
-          img.style.borderRadius = "12px";
-          img.style.border = "1px solid rgba(0,0,0,0.1)";
-          img.style.boxShadow = "0 2px 8px rgba(0,0,0,0.12)";
+          const img=document.createElement("img");
+          img.src=sampleSrc;
+          img.style.maxWidth="100%";
+          img.style.maxHeight="90vh";
+          img.style.marginTop="10px";
+          img.style.cursor="pointer";
+          img.style.borderRadius="12px";
+          img.style.border="1px solid rgba(0,0,0,0.1)";
+          img.style.boxShadow="0 2px 8px rgba(0,0,0,0.12)";
           img.addEventListener("click",()=>openLightboxGroup(group,1,false,false));
           body.appendChild(img);
 
-          const mainImg = body.querySelector('.image-full-wrap img');
+          let mainImg = body.querySelector('.image-full-wrap img');
           if(mainImg){
-            mainImg.style.cursor="pointer";
-            mainImg.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
+            const clone = mainImg.cloneNode(true);
+            mainImg.parentNode.replaceChild(clone, mainImg);
+            clone.style.cursor="pointer";
+            clone.onclick=null;
+            clone.addEventListener("click",()=>openLightboxGroup(group,0,false,false));
           }
         }
       })();
+
+      
 
       
 
