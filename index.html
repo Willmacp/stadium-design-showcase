@@ -2507,5 +2507,52 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+
+<script>
+// ---------------------------
+// Global Swipe Navigation (Handbook + Lightbox)
+// ---------------------------
+document.addEventListener('DOMContentLoaded', function () {
+
+  let startX = 0;
+
+  function isLightbox() {
+    return document.querySelector('.lightbox.open') !== null;
+  }
+
+  document.addEventListener('touchstart', function (e) {
+    if (!e.touches || e.touches.length === 0) return;
+    startX = e.touches[0].clientX;
+  });
+
+  document.addEventListener('touchend', function (e) {
+    if (!e.changedTouches || e.changedTouches.length === 0) return;
+    const endX = e.changedTouches[0].clientX;
+    const delta = startX - endX;
+
+    // Swipe threshold
+    if (Math.abs(delta) < 55) return;
+
+    // ---- LIGHTBOX SWIPE ----
+    if (isLightbox()) {
+      const next = document.getElementById('lbNextBtn');
+      const prev = document.getElementById('lbPrevBtn');
+      if (delta > 0) next?.click();       // swipe left
+      else prev?.click();                 // swipe right
+      return; 
+    }
+
+    // ---- PAGE-TO-PAGE SWIPE ----
+    const nextPage = document.querySelector('.nav-next');
+    const prevPage = document.querySelector('.nav-prev');
+
+    if (nextPage || prevPage) {
+      if (delta > 0) nextPage?.click();   // swipe left
+      else prevPage?.click();             // swipe right
+    }
+  });
+});
+</script>
+
 </body>
 </html>
